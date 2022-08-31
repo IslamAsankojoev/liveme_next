@@ -1,0 +1,15 @@
+.sticky-header {
+  position: fixed;
+}
+.button-add {
+  padding: 0px 10px;
+  line-height: 30px;
+  border-radius: 5px;
+  border: 0px;
+}
+.product_description {
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
