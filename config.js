@@ -3,4 +3,9 @@ export const token =
 
 export const headers = {
   Authorization: 'Bearer ' + token,
+  // 'Content-Type': 'application/json; charset=UTF-8',
 };
+
+// export const apiUrl = 'http://localhost:1337';
+// export const accessUrlBack = 'http://localhost:1337';
+// export const accessUrlFront = 'http://192.168.0.119:3000';

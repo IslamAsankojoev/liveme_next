@@ -1,20 +1,18 @@
 import React from 'react';
-import { Header, Footer } from '../components/index';
 
 function Contact() {
   return (
     <>
-      <Header />
       <section className="banner-area organic-breadcrumb">
         <div className="container">
           <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div className="col-first">
-              <h1>Contact Us</h1>
+              <h1>Контакты</h1>
               <nav className="d-flex align-items-center">
                 <a href="index.html">
                   Home<span className="lnr lnr-arrow-right"></span>
                 </a>
-                <a href="category.html">Contact</a>
+                <a href="category.html">Контакты</a>
               </nav>
             </div>
           </div>
@@ -45,22 +43,22 @@ function Contact() {
               <div className="contact_info">
                 <div className="info_item">
                   <i className="lnr lnr-home"></i>
-                  <h6>California, United States</h6>
-                  <p>Santa monica bullevard</p>
+                  <h6>Кыргызстан, Бишкек</h6>
+                  <p>Первомайский Район</p>
                 </div>
                 <div className="info_item">
                   <i className="lnr lnr-phone-handset"></i>
                   <h6>
-                    <a href="#">00 (440) 9865 562</a>
+                    <a href="#">+996 708 022 101</a>
                   </h6>
-                  <p>Mon to Fri 9am to 6 pm</p>
+                  <p>Пн по Сб, с 9 до 6</p>
                 </div>
                 <div className="info_item">
                   <i className="lnr lnr-envelope"></i>
                   <h6>
                     <a href="#">support@colorlib.com</a>
                   </h6>
-                  <p>Send us your query anytime!</p>
+                  <p>Тех. поддержка всегда подскажет!</p>
                 </div>
               </div>
             </div>
@@ -73,7 +71,7 @@ function Contact() {
                       className="form-control"
                       id="name"
                       name="name"
-                      placeholder="Enter your name"
+                      placeholder="Ваше имя"
                     />
                   </div>
                   <div className="form-group">
@@ -82,7 +80,7 @@ function Contact() {
                       className="form-control"
                       id="email"
                       name="email"
-                      placeholder="Enter email address"
+                      placeholder="Ваш email"
                     />
                   </div>
                   <div className="form-group">
@@ -91,7 +89,7 @@ function Contact() {
                       className="form-control"
                       id="subject"
                       name="subject"
-                      placeholder="Enter Subject"
+                      placeholder="Введите тему"
                     />
                   </div>
                 </div>
@@ -102,12 +100,12 @@ function Contact() {
                       name="message"
                       id="message"
                       rows="1"
-                      placeholder="Enter Message"></textarea>
+                      placeholder="Ваше сообщение"></textarea>
                   </div>
                 </div>
                 <div className="col-md-12 text-right">
                   <button type="submit" value="submit" className="primary-btn">
-                    Send Message
+                    Отправить
                   </button>
                 </div>
               </form>
@@ -143,9 +141,12 @@ function Contact() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
 
 export default Contact;
+
+export async function getStaticProps() {
+  return { props: {} };
+}

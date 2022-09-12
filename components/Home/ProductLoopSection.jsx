@@ -24,7 +24,7 @@ export default function ProductLoopSection() {
               items.map(({ id, attributes }) => {
                 return (
                   <ProductBlock
-                    className="col-lg-3 col-md-6 col-sm-6"
+                    className="col-lg-3 col-md-6 col-sm-6 col-6"
                     key={id}
                     {...attributes}
                     id={id}
@@ -54,7 +54,7 @@ export default function ProductLoopSection() {
                 .map(({ id, attributes }) => {
                   return (
                     <ProductBlock
-                      className="col-lg-3 col-md-6 col-sm-6"
+                      className="col-lg-3 col-md-6 col-sm-6 col-6"
                       key={id}
                       {...attributes}
                       id={id}

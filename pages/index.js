@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { headers } from '../config.js';
 import {
-  Header,
   BannerSection,
   FeaturesSection,
   CategorySection,
@@ -12,36 +10,35 @@ import {
   RelatedProductLoopSection,
 } from '../components/index';
 import { setProducts } from '../redux/slices/productSlice.js';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Home = ({ data }) => {
   const dispatch = useDispatch();
-  console.log(data);
-  const params = {
-    locale: 'ru',
-  };
   React.useEffect(() => {
     dispatch(setProducts(data));
+    console.log(data);
   }, []);
   return (
     <>
-      <Header />
       <BannerSection />
       <FeaturesSection />
       <CategorySection />
       <ProductLoopSection />
       <ExclusiveDealSection />
       <BrandSection />
-      <RelatedProductLoopSection />
+      {/* <RelatedProductLoopSection /> */}
     </>
   );
 };
 
-Home.getInitialProps = async (ctx) => {
-  const res = await axios.get(`http://localhost:1337/api/products`, {
-    headers,
-  });
-  return { data: res.data.data };
-};
-
 export default Home;
+
+export async function getStaticProps() {
+  let { data } = await axios.get(`${process.env.DOMAIN}/api/products`, {
+    headers: {
+      Authorization: 'Bearer ' + process.env.TOKEN,
+    },
+  });
+  console.log(data);
+  return { props: { data: data.data } };
+}

@@ -2,26 +2,33 @@ import React from 'react';
 import { Search } from '../components/index';
 import Link from 'next/link';
 import classNames from 'classnames';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+  const { totalItems } = useSelector((state) => state.cart);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [mobileMeniOpen, setMobileMeniOpen] = React.useState(false);
+  const searchRef = React.useRef();
+  const router = useRouter();
+  const user = useSelector((state) => state.user);
+  const toggleMenu = () => {
+    setMobileMeniOpen((prev) => !prev);
+  };
 
   return (
-    <header className="header_area sticky-header">
+    <header ref={searchRef} className="header_area sticky-header">
       <div className="main_menu">
         <nav className="navbar navbar-expand-lg navbar-light main_box">
           <div className="container">
             {/* <!-- Brand and toggle get grouped for better mobile display --> */}
             <Link href="/">
               <a className="navbar-brand logo_h">
-                <img src="/static/img/logo.png" alt="" />
+                <img src="/static/img/livemeLogo1.png" width={150} alt="Logo" />
               </a>
             </Link>
             <button
-              onClick={() => {
-                setMobileMeniOpen((prev) => !prev);
-              }}
+              onClick={toggleMenu}
               className="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -41,12 +48,12 @@ export default function Header() {
               })}
               id="navbarSupportedContent">
               <ul className="nav navbar-nav menu_nav ml-auto">
-                <li className="nav-item active">
+                <li onClick={toggleMenu} className="nav-item">
                   <Link href="/">
-                    <a className="nav-link">Home</a>
+                    <a className="nav-link">Главная</a>
                   </Link>
                 </li>
-                <li className="nav-item submenu dropdown">
+                <li onClick={toggleMenu} className="nav-item submenu dropdown">
                   <Link href="/shop">
                     <a
                       className="nav-link dropdown-toggle"
@@ -54,7 +61,7 @@ export default function Header() {
                       role="button"
                       aria-haspopup="true"
                       aria-expanded="false">
-                      Shop
+                      Каталог
                     </a>
                   </Link>
                   <ul className="dropdown-menu">
@@ -85,7 +92,7 @@ export default function Header() {
                     </li>
                   </ul>
                 </li>
-                <li className="nav-item submenu dropdown">
+                {/* <li className="nav-item submenu dropdown">
                   <a
                     href="#"
                     className="nav-link dropdown-toggle"
@@ -107,8 +114,8 @@ export default function Header() {
                       </a>
                     </li>
                   </ul>
-                </li>
-                <li className="nav-item submenu dropdown">
+                </li> */}
+                {/* <li className="nav-item submenu dropdown">
                   <a
                     href="#"
                     className="nav-link dropdown-toggle"
@@ -135,11 +142,27 @@ export default function Header() {
                       </a>
                     </li>
                   </ul>
-                </li>
-                <li className="nav-item">
+                </li> */}
+                <li onClick={toggleMenu} className="nav-item">
                   <Link href="/contact">
-                    <a className="nav-link">Contact</a>
+                    <a className="nav-link">Контакты</a>
                   </Link>
+                </li>
+                <li onClick={toggleMenu} className="nav-item">
+                  {user.loggedIn ? (
+                    <Link href="/profile">
+                      <a className="nav-link ">
+                        Профиль -{' '}
+                        <span style={{ color: '#15d015', fontWeight: 'bold' }}>
+                          {user.data.username}
+                        </span>
+                      </a>
+                    </Link>
+                  ) : (
+                    <Link href="/register">
+                      <a className="nav-link">Вход / Регистрация</a>
+                    </Link>
+                  )}
                 </li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
@@ -150,6 +173,16 @@ export default function Header() {
                     </a>
                   </Link>
                 </li>
+                {totalItems > 0 && (
+                  <i
+                    onClick={() => {
+                      router.push('/cart');
+                    }}
+                    className="count-bag">
+                    {totalItems}
+                  </i>
+                )}
+
                 <li className="nav-item">
                   <button
                     className="search"
@@ -166,7 +199,7 @@ export default function Header() {
           </div>
         </nav>
       </div>
-      {searchOpen && <Search setSearchOpen={setSearchOpen} />}
+      <Search setSearchOpen={setSearchOpen} searchOpen={searchOpen} searchRef={searchRef} />
     </header>
   );
 }

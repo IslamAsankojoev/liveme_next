@@ -1,0 +1,196 @@
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearCart } from '../redux/slices/cartSlice';
+import { useForm } from 'react-hook-form';
+import { headers } from '../config';
+import axios from 'axios';
+import Link from 'next/link';
+import sendMessage from '../bot';
+import lodash from 'lodash';
+import { accessUrlBack } from '../config';
+
+export default function Checkout() {
+  const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const itemsText = items
+    .map((item) => {
+      return `\n\n${item?.title}\n${item?.count} шт - ${item?.price * item?.count} сом`;
+    })
+    .toString();
+
+  const onSend = async (data) => {
+    const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${data?.email}\nАдрес - ${data?.address}\n\nТовары${itemsText}\n\nСумма: ${totalPrice}сом`;
+
+    try {
+      await axios.post(`/api/order`, {
+        clientName: data.username,
+        clientAddress: data.address,
+        clientPhone: data.phone,
+        clientEmail: data.email,
+        products: items,
+        user: user.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      await sendMessage(teletext);
+    } catch {
+      console.log(err);
+    }
+    dispatch(clearCart());
+    window.location.href = '/';
+  };
+  React.useEffect(() => {}, []);
+  return (
+    <>
+      <section className="banner-area organic-breadcrumb">
+        <div className="container">
+          <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div className="col-first">
+              <h1>Оформление заказа</h1>
+              <nav className="d-flex align-items-center">
+                <a href="index.html">
+                  Главная<span className="lnr lnr-arrow-right"></span>
+                </a>
+                <a href="single-product.html">Оформление</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="checkout_area section_gap">
+        <div className="container">
+          <div className="billing_details">
+            <div className="row">
+              <div className="col-lg-6">
+                <h3>Ваш заказ</h3>
+                <div className="col-md-12 order_box">
+                  {items &&
+                    items.map((item) => {
+                      return (
+                        <div key={item.id} className="order_box-product">
+                          <img src={item.imageUrl} alt={item.title} />
+                          <div className="order_box-info">
+                            <Link href={`products/${item.id}`}>
+                              <a className="title">{item.title}</a>
+                            </Link>
+                            <span>
+                              <p>{item.price} сом</p>
+                              <p>{item.count} шт.</p>
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <h3>Детали заказа</h3>
+                <form
+                  onSubmit={handleSubmit(onSend)}
+                  noValidate="novalidate"
+                  className="row contact_form">
+                  <div className="col-md-12 form-group p_star">
+                    <input
+                      {...register('username', {
+                        required: true,
+                      })}
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      placeholder="Ваше имя"
+                      defaultValue={user.data && user.data.username}
+                    />
+                  </div>
+                  <div className="col-md-12 form-group p_star">
+                    <input
+                      {...register('phone', {
+                        required: true,
+                      })}
+                      type="text"
+                      className="form-control phoneMask"
+                      name="phone"
+                      placeholder="Ваш номер"
+                    />
+                  </div>
+                  <div className="col-md-12 form-group p_star">
+                    <input
+                      {...register('address', {
+                        required: true,
+                      })}
+                      type="text"
+                      className="form-control"
+                      name="address"
+                      placeholder="Ваш адрес"
+                    />
+                  </div>
+                  <div className="col-md-12 form-group p_star">
+                    <input
+                      {...register('email', {
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: 'Неверный адрес электронной почты',
+                        },
+                      })}
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Ваш Email"
+                      defaultValue={user.data && user.data.email}
+                    />
+                    {errors.email && <p>{errors.email.message}</p>}
+                  </div>
+
+                  <div className="col-md-12 order_box">
+                    <ul className="list list_2">
+                      <li>
+                        <a href="#">
+                          Сумма <span>{totalPrice} сом</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          Доставка <span>200 сом</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          Итого <span>{totalPrice + 200} сом</span>
+                        </a>
+                      </li>
+                    </ul>
+                    <div className="creat_account">
+                      <input type="checkbox" defaultChecked id="f-option4" name="selector" />
+                      <label htmlFor="f-option4">Я прочитал </label>
+                      <a href="#"> terms & conditions*</a>
+                    </div>
+                    <button
+                      className="primary-btn"
+                      type="submit"
+                      style={{ width: '100%', border: '0px solid' }}>
+                      Заказть
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export async function getStaticProps() {
+  return { props: {} };
+}

@@ -1,13 +1,11 @@
 import React from 'react';
 import { Header, Footer, ProductBlock } from '../components/index';
-import { useSelector, useDispatch } from 'react-redux';
+import { headers } from '../config.js';
+import axios from 'axios';
 
-export default function Shop() {
-  const dispatch = useDispatch();
-  const items = useSelector((state) => state.products.items);
+export default function Shop({ items }) {
   return (
     <>
-      <Header />
       <section className="banner-area organic-breadcrumb">
         <div className="container">
           <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -477,31 +475,31 @@ export default function Shop() {
                   <ul>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="apple" name="brand" />
-                      <label for="apple">
+                      <label htmlFor="apple">
                         Apple<span>(29)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="asus" name="brand" />
-                      <label for="asus">
+                      <label htmlFor="asus">
                         Asus<span>(29)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="gionee" name="brand" />
-                      <label for="gionee">
+                      <label htmlFor="gionee">
                         Gionee<span>(19)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="micromax" name="brand" />
-                      <label for="micromax">
+                      <label htmlFor="micromax">
                         Micromax<span>(19)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="samsung" name="brand" />
-                      <label for="samsung">
+                      <label htmlFor="samsung">
                         Samsung<span>(19)</span>
                       </label>
                     </li>
@@ -514,31 +512,31 @@ export default function Shop() {
                   <ul>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="black" name="color" />
-                      <label for="black">
+                      <label htmlFor="black">
                         Black<span>(29)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="balckleather" name="color" />
-                      <label for="balckleather">
+                      <label htmlFor="balckleather">
                         Black Leather<span>(29)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="blackred" name="color" />
-                      <label for="blackred">
+                      <label htmlFor="blackred">
                         Black with red<span>(19)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="gold" name="color" />
-                      <label for="gold">
+                      <label htmlFor="gold">
                         Gold<span>(19)</span>
                       </label>
                     </li>
                     <li className="filter-list">
                       <input className="pixel-radio" type="radio" id="spacegrey" name="color" />
-                      <label for="spacegrey">
+                      <label htmlFor="spacegrey">
                         Spacegrey<span>(19)</span>
                       </label>
                     </li>
@@ -639,7 +637,7 @@ export default function Shop() {
           </div>
         </div>
       </div>
-
+      {/* 
       <section className="related-product-area section_gap">
         <div className="container">
           <div className="row justify-content-center">
@@ -815,8 +813,18 @@ export default function Shop() {
             </div>
           </div>
         </div>
-      </section>
-      <Footer />
+      </section> */}
     </>
   );
+}
+
+export async function getStaticProps() {
+  let items = await axios
+    .get(`${process.env.DOMAIN}/api/products`, {
+      headers,
+    })
+    .then((res) => {
+      return res.data.data;
+    });
+  return { props: { items } };
 }

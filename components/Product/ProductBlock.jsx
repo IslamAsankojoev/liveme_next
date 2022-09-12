@@ -1,7 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../redux/slices/cartSlice';
 
 export default function ProductBlock({ className, id, title, imageUrl, price }) {
+  const dispatch = useDispatch();
+  const addToCart = () => dispatch(addItem({ id, title, imageUrl, price }));
+
   return (
     <div className={className}>
       <div className="single-product">
@@ -21,7 +26,9 @@ export default function ProductBlock({ className, id, title, imageUrl, price }) 
             <h6 className="l-through">{250} сом</h6>
           </div>
           <div className="prd-bottom">
-            <button className="primary-btn button-add">В корзину</button>
+            <button onClick={addToCart} className="primary-btn button-add">
+              В корзину
+            </button>
           </div>
         </div>
       </div>

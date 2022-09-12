@@ -1,10 +1,9 @@
-const path = require('path');
-
 const nextConfig = {
   reactStrictMode: false,
-  // sassOptions: {
-  //   includePaths: [path.join(__dirname, 'styles')],
-  // },
+  env: {
+    DOMAIN: process.env.REACT_APP_DOMAIN_NAME,
+    TOKEN: process.env.REACT_APP_API_TOKEN,
+  },
 };
 
 module.exports = nextConfig;

@@ -3,11 +3,18 @@ import { Header, Footer } from '../index';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import store from '../../redux/store';
+import { addItem } from '../../redux/slices/cartSlice.js';
 
 export default function SingleProduct({ id, title, imageUrl, price, content }) {
+  const [count, setCount] = React.useState(1);
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    dispatch(addItem({ id, title, imageUrl, price, count }));
+    setCount(1);
+  };
+
   return (
     <>
-      <Header />
       <section className="banner-area organic-breadcrumb">
         <div className="container">
           <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -55,39 +62,51 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
                   </li>
                   <li>
                     <a href="#">
-                      <span>Availibility</span> : In Stock
+                      <span>Availibility</span> : В наличии
                     </a>
                   </li>
                 </ul>
                 <p className="product_description">{content}</p>
                 <div className="product_count">
-                  <label htmlFor="qty">Quantity:</label>
+                  <label htmlFor="qty">Количество:</label>
                   <input
-                    type="text"
+                    type="number"
                     name="qty"
                     id="sst"
                     maxLength="12"
-                    defaultValue="1"
+                    value={count}
+                    onChange={() => {}}
                     title="Quantity:"
                     className="input-text qty"
                   />
-                  <button className="increase items-count" type="button">
+                  <button
+                    onClick={() => {
+                      setCount((prev) => prev + 1);
+                    }}
+                    className="increase items-count"
+                    type="button">
                     <i className="lnr lnr-chevron-up"></i>
                   </button>
-                  <button className="reduced items-count" type="button">
+                  <button
+                    onClick={() => {
+                      setCount((prev) => prev - 1);
+                    }}
+                    disabled={count === 1 && 'disabled'}
+                    className="reduced items-count"
+                    type="button">
                     <i className="lnr lnr-chevron-down"></i>
                   </button>
                 </div>
                 <div className="card_area d-flex align-items-center">
-                  <a className="primary-btn" href="#">
+                  <button onClick={addToCart} className="primary-btn button-add" href="#">
                     В корзину
-                  </a>
-                  <a className="icon_btn" href="#">
+                  </button>
+                  {/* <a className="icon_btn" href="#">
                     <i className="lnr lnr lnr-diamond"></i>
                   </a>
                   <a className="icon_btn" href="#">
                     <i className="lnr lnr lnr-heart"></i>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
@@ -573,7 +592,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
                         </div>
                       </div>
                       <div className="col-md-12 text-right">
-                        <button type="submit" value="submit" className="primary-btn">
+                        <button type="submit" defaultValue="submit" className="primary-btn">
                           Submit Now
                         </button>
                       </div>
@@ -586,7 +605,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
         </div>
       </section>
 
-      <section className="related-product-area section_gap_bottom">
+      {/* <section className="related-product-area section_gap_bottom">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6 text-center">
@@ -761,8 +780,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
             </div>
           </div>
         </div>
-      </section>
-      <Footer />
+      </section> */}
     </>
   );
 }
