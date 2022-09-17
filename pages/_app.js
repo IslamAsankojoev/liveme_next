@@ -5,12 +5,14 @@ import store from '../redux/store';
 import getUser from '../helper/getUser.js';
 import React from 'react';
 import { AuthProvider } from '../components/index';
+import {parseCookies} from "nookies";
 
-export default function MyApp({ Component, pageProps, setAuth, token }) {
+export default function MyApp({ Component, pageProps, setAuth }) {
+
   return (
     <Provider store={store}>
-      <AuthProvider auth={setAuth} token={token}>
-        <Component {...pageProps} auth={setAuth} />
+      <AuthProvider auth={setAuth}>
+        <Component {...pageProps} />
       </AuthProvider>
     </Provider>
   );
@@ -18,6 +20,6 @@ export default function MyApp({ Component, pageProps, setAuth, token }) {
 
 MyApp.getInitialProps = async (ctx) => {
   const appProps = await App.getInitialProps(ctx);
-  const auth = await getUser(ctx.ctx);
-  return { ...appProps, setAuth: auth.props.user, token: auth.props.token };
+  const auth = await getUser();
+  return { ...appProps,  setAuth: auth.props.access_token};
 };

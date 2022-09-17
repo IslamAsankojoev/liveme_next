@@ -10,7 +10,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [mobileMeniOpen, setMobileMeniOpen] = React.useState(false);
   const searchRef = React.useRef();
-  const router = useRouter();
+  const { pathname, push } = useRouter();
   const user = useSelector((state) => state.user);
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
@@ -48,49 +48,15 @@ export default function Header() {
               })}
               id="navbarSupportedContent">
               <ul className="nav navbar-nav menu_nav ml-auto">
-                <li onClick={toggleMenu} className="nav-item">
+                <li onClick={toggleMenu} className={`nav-item ${pathname === '/' && 'active'}`}>
                   <Link href="/">
                     <a className="nav-link">Главная</a>
                   </Link>
                 </li>
-                <li onClick={toggleMenu} className="nav-item submenu dropdown">
+                <li onClick={toggleMenu} className={`nav-item ${pathname === '/shop' && 'active'}`}>
                   <Link href="/shop">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false">
-                      Каталог
-                    </a>
+                    <a className="nav-link dropdown-toggle">Каталог</a>
                   </Link>
-                  <ul className="dropdown-menu">
-                    <li className="nav-item">
-                      <a className="nav-link" href="category.html">
-                        Shop Category
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="single-product.html">
-                        Product Details
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="checkout.html">
-                        Product Checkout
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="cart.html">
-                        Shopping Cart
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="confirmation.html">
-                        Confirmation
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 {/* <li className="nav-item submenu dropdown">
                   <a
@@ -143,12 +109,18 @@ export default function Header() {
                     </li>
                   </ul>
                 </li> */}
-                <li onClick={toggleMenu} className="nav-item">
+                <li
+                  onClick={toggleMenu}
+                  className={`nav-item ${pathname === '/contact' && 'active'}`}>
                   <Link href="/contact">
                     <a className="nav-link">Контакты</a>
                   </Link>
                 </li>
-                <li onClick={toggleMenu} className="nav-item">
+                <li
+                  onClick={toggleMenu}
+                  className={`nav-item ${pathname === '/register' && 'active'} ${
+                    pathname === '/profile' && 'active'
+                  }`}>
                   {user.loggedIn ? (
                     <Link href="/profile">
                       <a className="nav-link ">
@@ -166,7 +138,7 @@ export default function Header() {
                 </li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <li className="nav-item">
+                <li className={`nav-item ${pathname === '/cart' && 'active'}`}>
                   <Link href="/cart">
                     <a className="cart">
                       <span className="ti-bag"></span>
@@ -176,7 +148,7 @@ export default function Header() {
                 {totalItems > 0 && (
                   <i
                     onClick={() => {
-                      router.push('/cart');
+                      push('/cart');
                     }}
                     className="count-bag">
                     {totalItems}

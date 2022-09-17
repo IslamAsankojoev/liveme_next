@@ -6,12 +6,18 @@ import store from '../../redux/store';
 import { addItem } from '../../redux/slices/cartSlice.js';
 
 export default function SingleProduct({ id, title, imageUrl, price, content }) {
+  const [activeTab, setActiveTab] = React.useState('');
+
   const [count, setCount] = React.useState(1);
   const dispatch = useDispatch();
   const addToCart = () => {
     dispatch(addItem({ id, title, imageUrl, price, count }));
     setCount(1);
   };
+
+  React.useEffect(() => {
+    setActiveTab('home');
+  }, []);
 
   return (
     <>
@@ -116,69 +122,57 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
 
       <section className="product_description_area">
         <div className="container">
-          <ul className="nav nav-tabs" id="myTab" role="tablist">
+          <ul className="nav nav-tabs" id="myTab">
             <li className="nav-item">
               <a
-                className="nav-link active"
+                className={`nav-link ${activeTab === 'home' && 'active'}`}
+                onClick={() => {
+                  setActiveTab('home');
+                }}
                 id="home-tab"
-                data-toggle="tab"
-                href="#home"
-                role="tab"
-                aria-controls="home"
-                aria-selected="true">
-                Description
+                href="#home">
+                Описание
               </a>
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className={`nav-link ${activeTab === 'profile' && 'active'}`}
+                onClick={() => {
+                  setActiveTab('profile');
+                }}
                 id="profile-tab"
-                data-toggle="tab"
-                href="#profile"
-                role="tab"
-                aria-controls="profile"
-                aria-selected="false">
-                Specification
+                href="#profile">
+                Характеристики
               </a>
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className={`nav-link ${activeTab === 'contact' && 'active'}`}
+                onClick={() => {
+                  setActiveTab('contact');
+                }}
                 id="contact-tab"
-                data-toggle="tab"
-                href="#contact"
-                role="tab"
-                aria-controls="contact"
-                aria-selected="false">
-                Comments
+                href="#contact">
+                Комментарии
               </a>
             </li>
             <li className="nav-item">
               <a
-                className="nav-link "
+                className={`nav-link ${activeTab === 'review' && 'active'}`}
+                onClick={() => {
+                  setActiveTab('review');
+                }}
                 id="review-tab"
-                data-toggle="tab"
-                href="#review"
-                role="tab"
-                aria-controls="review"
-                aria-selected="false">
-                Reviews
+                href="#review">
+                Отзывы
               </a>
             </li>
           </ul>
           <div className="tab-content" id="myTabContent">
-            <div
-              className="tab-pane fade show active"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab">
+            <div className={`tab-pane fade ${activeTab === 'home' && ' show active'}`}>
               <p>{content}</p>
             </div>
-            <div
-              className="tab-pane fade"
-              id="profile"
-              role="tabpanel"
-              aria-labelledby="profile-tab">
+            <div className={`tab-pane fade ${activeTab === 'profile' && ' show active'}`}>
               <div className="table-responsive">
                 <table className="table">
                   <tbody>
@@ -250,11 +244,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
                 </table>
               </div>
             </div>
-            <div
-              className="tab-pane fade"
-              id="contact"
-              role="tabpanel"
-              aria-labelledby="contact-tab">
+            <div className={`tab-pane fade ${activeTab === 'contact' && ' show active'}`}>
               <div className="row">
                 <div className="col-lg-6">
                   <div className="comment_list">
@@ -379,11 +369,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
                 </div>
               </div>
             </div>
-            <div
-              className="tab-pane fade "
-              id="review"
-              role="tabpanel"
-              aria-labelledby="review-tab">
+            <div className={`tab-pane fade ${activeTab === 'review' && ' show active'}`}>
               <div className="row">
                 <div className="col-lg-6">
                   <div className="row total_rate">

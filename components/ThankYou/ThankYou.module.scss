@@ -1,0 +1,52 @@
+.overlay {
+  transition: 0.3s;
+  opacity: 1;
+  visibility: visible;
+  z-index: 100000;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0000009d;
+  .wrapper {
+    width: 370px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    .title {
+      color: #15d015;
+      font-weight: 500;
+    }
+    .text {
+      color: rgb(113, 113, 113);
+      font-size: 1em;
+      font-weight: 500;
+    }
+    .close {
+      //display: none;
+      position: absolute;
+      cursor: pointer;
+      top: 15px;
+      right: 15px;
+      font-size: 2em;
+    }
+  }
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}

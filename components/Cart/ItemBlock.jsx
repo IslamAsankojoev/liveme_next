@@ -1,12 +1,26 @@
 import React from 'react';
 import { increment, decrement, removeItem } from '../../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
+import style from './itemBlock.module.scss'
 
 export default function ItemBlock({ id, title, imageUrl, price, count }) {
+  const [removing, setRemoving] = React.useState(false)
+  const [removed, setRemoved] = React.useState(false)
   const dispatch = useDispatch();
+
+
+  const removeProductFromCart = (index) => {
+    setRemoving(true)
+    setRemoved(true)
+    setTimeout(()=>{
+      dispatch(removeItem(index))
+      setRemoving(false)
+    }, 1000)
+
+  }
   return (
     <>
-      <tr className="cart-item">
+      <tr className={`cart-item  ${style.cartItem} ${removing ? style.removing : ''} ${removed ? style.removed:''}`}>
         <td>
           <div className="media">
             <div className="d-flex">
@@ -56,9 +70,8 @@ export default function ItemBlock({ id, title, imageUrl, price, count }) {
         </td>
         <td>
           <svg
-            onClick={() => {
-              dispatch(removeItem({ id }));
-            }}
+            onClick={() => {removeProductFromCart(id)}
+            }
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"

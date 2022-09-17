@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   let res = await axios.get(`${process.env.DOMAIN}/api/products/${ctx.params.id}`, { headers });
   return {
     props: { data: res.data },

@@ -2,17 +2,17 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../redux/slices/cartSlice';
 import { useForm } from 'react-hook-form';
-import { headers } from '../config';
 import axios from 'axios';
 import Link from 'next/link';
 import sendMessage from '../bot';
-import lodash from 'lodash';
-import { accessUrlBack } from '../config';
+import { setShow } from '../redux/slices/thankYouSlice.js';
+import { useRouter } from 'next/router.js';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const {
     register,
@@ -27,15 +27,18 @@ export default function Checkout() {
 
   const onSend = async (data) => {
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${data?.email}\nАдрес - ${data?.address}\n\nТовары${itemsText}\n\nСумма: ${totalPrice}сом`;
-
     try {
-      await axios.post(`/api/order`, {
-        clientName: data.username,
-        clientAddress: data.address,
-        clientPhone: data.phone,
-        clientEmail: data.email,
+      await axios.post(`http://192.168.0.100:8000/api/orders/`, {
+        client_name: data.username,
+        client_address: data.address,
+        client_phone: data.phone,
+        client_email: data.email,
         products: items,
-        user: user.data,
+        payment_method: 'Наличкой',
+      }, {
+        headers: {
+          Authorization: 'Bearer ' + user.data.token.access,
+        }
       });
     } catch (err) {
       console.log(err);
@@ -46,7 +49,7 @@ export default function Checkout() {
       console.log(err);
     }
     dispatch(clearCart());
-    window.location.href = '/';
+    dispatch(setShow());
   };
   React.useEffect(() => {}, []);
   return (
@@ -119,6 +122,7 @@ export default function Checkout() {
                       type="text"
                       className="form-control phoneMask"
                       name="phone"
+                      inputMode="tel"
                       placeholder="Ваш номер"
                     />
                   </div>
@@ -145,6 +149,7 @@ export default function Checkout() {
                       className="form-control"
                       id="email"
                       name="email"
+                      inputMode="email"
                       placeholder="Ваш Email"
                       defaultValue={user.data && user.data.email}
                     />
@@ -191,6 +196,6 @@ export default function Checkout() {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return { props: {} };
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProductBlock } from '../index';
 import { useSelector, useDispatch } from 'react-redux';
+import lodash from "lodash";
 
 export default function ProductLoopSection() {
   const items = useSelector((state) => state.products.items);
@@ -49,7 +50,7 @@ export default function ProductLoopSection() {
             </div>
           </div>
           <div className="row">
-            {items &&
+            {!lodash.isEmpty(items) &&
               items
                 .map(({ id, attributes }) => {
                   return (

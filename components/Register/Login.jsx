@@ -1,19 +1,23 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import {setCookie} from "nookies";
+import { DevTool } from "@hookform/devtools";
 
 export default function Login({ setToggle }) {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('/api/login', { identifier: data.email, ...data });
+      const res = await axios.post('http://192.168.0.100:8000/api/users/login/', { username: data.username, password: data.password });
+      setCookie(null, 'access_token', res.data.user.token.access, {
+        maxAge: 24 *  60 * 60,
+      })
       window.location.href = window.location.origin + '/profile';
     } catch (err) {
       console.log('login error' + err);
@@ -52,13 +56,13 @@ export default function Login({ setToggle }) {
                   noValidate="noValidate">
                   <div className="col-md-12 form-group">
                     <input
-                      {...register('email', {
+                      {...register('username', {
                         required: true,
                       })}
-                      type="email"
+                      type="text"
                       className="form-control"
-                      name="email"
-                      placeholder="Ваш Email"
+                      name="username"
+                      placeholder="Имя пользователя"
                     />
                   </div>
                   <div className="col-md-12 form-group">
@@ -69,7 +73,7 @@ export default function Login({ setToggle }) {
                       type="password"
                       className="form-control"
                       name="password"
-                      placeholder="Ваш пароль"
+                      placeholder="Пароль"
                     />
                   </div>
 
@@ -79,6 +83,7 @@ export default function Login({ setToggle }) {
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>
+                  <DevTool control={control}/>
                 </form>
               </div>
             </div>

@@ -37,8 +37,8 @@ const cartSlice = createSlice({
       }
     },
 
-    removeItem(state, { payload }) {
-      state.items = state.items.filter((item) => item.id !== payload.id);
+    removeItem(state, {payload}) {
+      state.items = state.items.filter((item) => item.id !== payload);
       countPriceItemsTotal(state);
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
@@ -56,14 +56,14 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    increment(state, { payload }) {
+    increment(state) {
       const item = state.items.find((item) => item.id === payload.id);
       item.count--;
       countPriceItemsTotal(state);
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    decrement(state, { payload }) {
+      decrement(state) {
       const item = state.items.find((item) => item.id === payload.id);
       item.count++;
       countPriceItemsTotal(state);

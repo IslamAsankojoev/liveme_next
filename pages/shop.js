@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, Footer, ProductBlock } from '../components/index';
 import { headers } from '../config.js';
 import axios from 'axios';
+import lodash from "lodash";
 
 export default function Shop({ items }) {
   return (
@@ -595,14 +596,13 @@ export default function Shop({ items }) {
             </div>
             <section className="lattest-product-area pb-40 category-list">
               <div className="row">
-                {items &&
-                  items.map(({ id, attributes }) => {
+                {!lodash.isEmpty(items) &&
+                  items.map(({ item }) => {
                     return (
                       <ProductBlock
                         className="col-lg-4 col-md-6"
-                        key={id}
-                        {...attributes}
-                        id={id}
+                        key={item.id}
+                        {...item}
                       />
                     );
                   })}
@@ -818,11 +818,9 @@ export default function Shop({ items }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   let items = await axios
-    .get(`${process.env.DOMAIN}/api/products`, {
-      headers,
-    })
+    .get(`http://192.168.0.100:8000/api/products`)
     .then((res) => {
       return res.data.data;
     });

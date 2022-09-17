@@ -1,22 +1,34 @@
 import React from 'react';
-import { useRouter } from 'next/router.js';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import {setCookie} from "nookies";
+import { DevTool } from "@hookform/devtools";
 
 export default function Register({ setToggle }) {
   const {
     register,
     handleSubmit,
+      control,
     formState: { errors },
   } = useForm();
-
   const onSubmit = async (data) => {
+    console.log(data)
+
     try {
-      await axios.post('/api/register', data);
-      console.log(data);
-      window.location.href = window.location.origin + '/profile';
+      const res = await axios.post( 'http://192.168.0.100:8000/api/users/', {...data}, {
+        headers:{
+          'Content-Type': 'application/json',
+        }
+      })
+      console.log(res)
+      setCookie(null, 'access_token', res.data.token.access, {
+        maxAge: 24 *  60 * 60,
+      })
+      window.location.href = '/'
+
+
     } catch (err) {
-      console.log(err);
+      console.warn(err);
     }
   };
   console.log(errors);
@@ -75,6 +87,7 @@ export default function Register({ setToggle }) {
                       className="form-control"
                       id="email"
                       name="email"
+                      inputMode="email"
                       placeholder={`Ваш Email ${
                         errors?.email?.type === 'required' ? '- обязательно' : ''
                       }`}
@@ -124,6 +137,7 @@ export default function Register({ setToggle }) {
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>
+                  <DevTool control={control}/>
                 </form>
               </div>
             </div>

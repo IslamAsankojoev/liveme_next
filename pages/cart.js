@@ -1,9 +1,6 @@
 import React from 'react';
-import { Header, Footer } from '../components/index';
 import Link from 'next/link.js';
-import getUser from '../helper/getUser.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoggedIn } from '../redux/slices/userSlice';
 import { ItemBlock } from '../components/index';
 
 export default function Cart() {
@@ -94,6 +91,6 @@ export default function Cart() {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return { props: {} };
 }
