@@ -146,7 +146,3 @@ function Contact() {
 }
 
 export default Contact;
-
-export async function getServerSideProps() {
-  return { props: {} };
-}

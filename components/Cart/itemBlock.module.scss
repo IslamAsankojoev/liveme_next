@@ -2,17 +2,17 @@
   position: relative;
   opacity: 1;
   visibility: visible;
-  transition: all 1s;
+  transition: all .4s;
   //display: block;
   width: 100%;
   background: white;
 }
 
-.removing:after{
+.removing:after {
   content: '';
   transition: all 1s;
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;

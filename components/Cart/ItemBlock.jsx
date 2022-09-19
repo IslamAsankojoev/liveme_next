@@ -15,7 +15,7 @@ export default function ItemBlock({ id, title, imageUrl, price, count }) {
     setTimeout(()=>{
       dispatch(removeItem(index))
       setRemoving(false)
-    }, 1000)
+    }, 400)
 
   }
   return (
