@@ -7,12 +7,14 @@ import Link from 'next/link';
 import sendMessage from '../bot';
 import { setShow } from '../redux/slices/thankYouSlice.js';
 import { useRouter } from 'next/router.js';
+import lodash from 'lodash';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
+  const delivery_price = 200;
 
   const {
     register,
@@ -26,19 +28,28 @@ export default function Checkout() {
     .toString();
 
   const onSend = async (data) => {
-    const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${data?.email}\nАдрес - ${data?.address}\n\nТовары${itemsText}\n\nСумма: ${totalPrice}сом`;
+    const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${
+      data?.email
+    }\nАдрес - ${data?.address}\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
     try {
-      await axios.post(`http://localhost:8000/api/orders/`, {client_name: data.username,
-        client_address: data.address,
-        client_phone: data.phone,
-        client_email: data.email,
-        products: items,
-        payment_method: 'Наличкой',
-      }, {
-        headers: {
-          Authorization: 'Bearer ' + user.data.token.access,
-        }
-      });
+      await axios.post(
+        `${process.env.SERVER_DOMAIN}/api/orders/`,
+        {
+          client_name: data.username,
+          client_address: data.address,
+          client_phone: data.phone,
+          client_email: data.email,
+          products: items,
+          payment_method: 'Наличкой',
+        },
+        {
+          headers: !lodash.isEmpty(user)
+            ? {
+                Authorization: 'Bearer ' + user.data.token.access,
+              }
+            : {},
+        },
+      );
     } catch (err) {
       console.log(err);
     }
@@ -80,13 +91,13 @@ export default function Checkout() {
                     items.map((item) => {
                       return (
                         <div key={item.id} className="order_box-product">
-                          <img src={item.imageUrl} alt={item.title} />
+                          <img src={item.images[0].image} alt={item.title} />
                           <div className="order_box-info">
                             <Link href={`products/${item.id}`}>
                               <a className="title">{item.title}</a>
                             </Link>
                             <span>
-                              <p>{item.price} сом</p>
+                              <p>{item.price * item.count} сом</p>
                               <p>{item.count} шт.</p>
                             </span>
                           </div>
@@ -169,7 +180,7 @@ export default function Checkout() {
                       </li>
                       <li>
                         <a href="#">
-                          Итого <span>{totalPrice + 200} сом</span>
+                          Итого <span>{totalPrice + delivery_price} сом</span>
                         </a>
                       </li>
                     </ul>
@@ -194,4 +205,3 @@ export default function Checkout() {
     </>
   );
 }
-

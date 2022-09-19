@@ -1,23 +1,27 @@
 import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import {setCookie} from "nookies";
-import { DevTool } from "@hookform/devtools";
+import { setCookie } from 'nookies';
+import { DevTool } from '@hookform/devtools';
 
 export default function Login({ setToggle }) {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },git
+    formState: { errors },
+    git,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post('http://192.168.0.105:8000/api/users/login/', { username: data.username, password: data.password });
+      const res = await axios.post(`${process.env.SERVER_DOMAIN}/api/users/login/`, {
+        username: data.username,
+        password: data.password,
+      });
       setCookie(null, 'access_token', res.data.user.token.access, {
-        maxAge: 24 *  60 * 60,
-      })
+        maxAge: 24 * 60 * 60,
+      });
       window.location.href = window.location.origin + '/profile';
     } catch (err) {
       console.log('login error' + err);
@@ -83,7 +87,7 @@ export default function Login({ setToggle }) {
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>
-                  <DevTool control={control}/>
+                  <DevTool control={control} />
                 </form>
               </div>
             </div>

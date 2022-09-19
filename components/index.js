@@ -19,3 +19,6 @@ export { default as ItemBlock } from './Cart/ItemBlock';
 export { default as MobileCart } from './Cart/MobileCart';
 export { default as OrderBlock } from './Product/OrderBlock';
 export { default as ThankYou } from './ThankYou/ThankYou';
+export { default as AccountOrder } from './Profile/AccountOrder';
+export { default as AccountDetail } from './Profile/AccountDetail';
+export { default as AccountTabs } from './Profile/AccountTabs';
