@@ -820,9 +820,9 @@ export default function Shop({ items }) {
 
 export async function getServerSideProps() {
   let items = await axios
-    .get(`http://192.168.0.100:8000/api/products`)
+    .get(`http://localhost:8000/api/products/`)
     .then((res) => {
-      return res.data.data;
+      return res;
     });
   return { props: { items } };
 }

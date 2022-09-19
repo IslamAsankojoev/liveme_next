@@ -28,8 +28,7 @@ export default function Checkout() {
   const onSend = async (data) => {
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${data?.email}\nАдрес - ${data?.address}\n\nТовары${itemsText}\n\nСумма: ${totalPrice}сом`;
     try {
-      await axios.post(`http://192.168.0.100:8000/api/orders/`, {
-        client_name: data.username,
+      await axios.post(`http://localhost:8000/api/orders/`, {client_name: data.username,
         client_address: data.address,
         client_phone: data.phone,
         client_email: data.email,

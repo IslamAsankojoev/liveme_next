@@ -5,13 +5,14 @@ import { useRouter } from 'next/router';
 import store from '../../redux/store';
 import { addItem } from '../../redux/slices/cartSlice.js';
 
-export default function SingleProduct({ id, title, imageUrl, price, content }) {
+let key = 0
+export default function SingleProduct({ id, title, images, price, description,category }) {
   const [activeTab, setActiveTab] = React.useState('');
 
   const [count, setCount] = React.useState(1);
   const dispatch = useDispatch();
   const addToCart = () => {
-    dispatch(addItem({ id, title, imageUrl, price, count }));
+    dispatch(addItem({ id, title, images, price, count }));
     setCount(1);
   };
 
@@ -45,9 +46,15 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
           <div className="row s_product_inner">
             <div className="col-lg-6">
               <div className="s_Product_carousel">
-                <div className="single-prd-item">
-                  <img className="img-fluid" src={imageUrl} alt={title} />
-                </div>
+                  {images?.map(({image}) => {
+                      key = key+1
+                          return (
+                              <div key={key} className="single-prd-item">
+                              <img  className="img-fluid" src={image} alt=""/>
+                              </div>
+                          )
+                      }
+                  )}
                 {/* <div className="single-prd-item">
                   <img className="img-fluid" src="/static/img/category/s-p1.jpg" alt="" />
                 </div>
@@ -63,7 +70,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
                 <ul className="list">
                   <li>
                     <a className="active" href="#">
-                      <span>Category</span> : Household
+                      <span>Category</span> : {category?.title}
                     </a>
                   </li>
                   <li>
@@ -72,7 +79,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
                     </a>
                   </li>
                 </ul>
-                <p className="product_description">{content}</p>
+                <p className="product_description">{description}</p>
                 <div className="product_count">
                   <label htmlFor="qty">Количество:</label>
                   <input
@@ -170,7 +177,7 @@ export default function SingleProduct({ id, title, imageUrl, price, content }) {
           </ul>
           <div className="tab-content" id="myTabContent">
             <div className={`tab-pane fade ${activeTab === 'home' && ' show active'}`}>
-              <p>{content}</p>
+              <p>{description}</p>
             </div>
             <div className={`tab-pane fade ${activeTab === 'profile' && ' show active'}`}>
               <div className="table-responsive">

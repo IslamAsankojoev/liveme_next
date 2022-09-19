@@ -15,7 +15,7 @@ export default function AuthProvider({ children, token }) {
   React.useEffect(() => {
       let { access_token, refresh_token} = parseCookies()
       async function getAccess(){
-          axios.get('http://192.168.0.100:8000/api/users/me', {headers: {
+          axios.get('http://localhost:8000/api/users/me', {headers: {
                   Authorization: 'Bearer ' + access_token,
               }}).then((res)=>{
               dispatch(setLoggedIn(res.data));

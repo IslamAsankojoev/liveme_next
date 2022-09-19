@@ -15,7 +15,7 @@ export default function Register({ setToggle }) {
     console.log(data)
 
     try {
-      const res = await axios.post( 'http://192.168.0.100:8000/api/users/', {...data}, {
+      const res = await axios.post( 'http://localhost:8000/api/users/', {...data}, {
         headers:{
           'Content-Type': 'application/json',
         }

@@ -18,8 +18,6 @@ const Home = ({ data }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(setProducts(data));
-
-
   }, []);
   return (
     <>
@@ -37,10 +35,6 @@ const Home = ({ data }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  let { data } = await axios.get(`${process.env.DOMAIN}/api/products?populate=*`, {
-    headers: {
-      Authorization: 'Bearer ' + process.env.TOKEN,
-    },
+  let data = await axios.get(`http://localhost:8000/api/products/`, {
   });
-  return { props: { data: data?.data } };
-}
+  return { props: { data: data.data } };}

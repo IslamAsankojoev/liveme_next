@@ -22,7 +22,7 @@ export default function ProductLoopSection() {
           </div>
           <div className="row">
             {items &&
-              items.map(({ id, attributes }) => {
+              items.map(({ id, ...attributes }) => {
                 return (
                   <ProductBlock
                     className="col-lg-3 col-md-6 col-sm-6 col-6"

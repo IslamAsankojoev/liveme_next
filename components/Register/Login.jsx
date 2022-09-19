@@ -14,7 +14,7 @@ export default function Login({ setToggle }) {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post('http://192.168.0.100:8000/api/users/login/', { username: data.username, password: data.password });
+      const res = await axios.post('http://localhost:8000/api/users/login/', { username: data.username, password: data.password });
       setCookie(null, 'access_token', res.data.user.token.access, {
         maxAge: 24 *  60 * 60,
       })
