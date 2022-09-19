@@ -6,20 +6,21 @@ import getUser from '../helper/getUser.js';
 import React from 'react';
 import { AuthProvider } from '../components/index';
 import {parseCookies} from "nookies";
+import {Router} from "next/router";
 
-export default function MyApp({ Component, pageProps, setAuth }) {
+export default function MyApp({ Component, pageProps }) {
+
 
   return (
     <Provider store={store}>
-      <AuthProvider auth={setAuth}>
-        <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps}/>
       </AuthProvider>
     </Provider>
   );
 }
 
-MyApp.getInitialProps = async (ctx) => {
-  const appProps = await App.getInitialProps(ctx);
-  const auth = await getUser();
-  return { ...appProps,  setAuth: auth.props.access_token};
-};
+// MyApp.getInitialProps = async (ctx) => {
+//   const appProps = await App.getInitialProps(ctx);
+//   return { ...appProps};
+// };

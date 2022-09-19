@@ -18,8 +18,6 @@ const Home = ({ data }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(setProducts(data));
-
-
   }, []);
   return (
     <>

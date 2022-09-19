@@ -29,6 +29,3 @@ export default function profile() {
     </>
   );
 }
-export async function getServerSideProps() {
-  return { props: {} };
-}
