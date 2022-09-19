@@ -3,7 +3,7 @@ import { increment, decrement, removeItem } from '../../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import style from './itemBlock.module.scss'
 
-export default function ItemBlock({ id, title, imageUrl, price, count }) {
+export default function ItemBlock({ id, title, images, price, count }) {
   const [removing, setRemoving] = React.useState(false)
   const [removed, setRemoved] = React.useState(false)
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function ItemBlock({ id, title, imageUrl, price, count }) {
         <td>
           <div className="media">
             <div className="d-flex">
-              <img src={imageUrl} alt="" />
+              <img src={images[0].image} alt="" />
             </div>
             <div className="media-body">
               <p>{title}</p>
@@ -66,7 +66,7 @@ export default function ItemBlock({ id, title, imageUrl, price, count }) {
         </td>
 
         <td>
-          <h5>{price * count} сом</h5>
+          <h5>{(price * count).toFixed(2)} сом</h5>
         </td>
         <td>
           <svg

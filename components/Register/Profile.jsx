@@ -3,9 +3,12 @@ import axios from 'axios';
 import { setLoggedIn } from '../../redux/slices/userSlice';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { OrderBlock } from '../../components/index';
+import { OrderBlock, AccountOrder, AccountTabs, AccountDetail } from '../../components/index';
+import lodash from 'lodash';
 
 const Profile = () => {
+  const [activeTab, setActiveTab] = React.useState('profile');
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const router = useRouter();
@@ -21,24 +24,16 @@ const Profile = () => {
 
   return (
     <div className="container profile">
-      <div className="profile-block-logout">
-        <h2>Профиль</h2>
-        <button onClick={logout} className="genric-btn danger radius" style={{ fontSize: '1.4em' }}>
-          Выйти
-        </button>
-      </div>
-      <div className="profile-block">
-        <div className="profile-block-info">
-          <h3 className="username">{user.username}</h3>
-          <h3>Email: {user.email}</h3>
+      <br />
+      <div className="row">
+        <div className="col-xl-3 col-lg-4 col-md-5">
+          <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
-      </div>
-      <br />
-      <br />
-      <br />
-      <h2>Заказы</h2>
-      <div className="profile-orders">
-        {user?.orders?.map((item) => <OrderBlock {...item} />).reverse()}
+        <div className="col-xl-9 col-lg-8 col-md-7">
+          <div className="profile-orders">
+            {activeTab === 'profile' ? <AccountDetail /> : <AccountOrder user={user} />}
+          </div>
+        </div>
       </div>
       <br />
       <br />

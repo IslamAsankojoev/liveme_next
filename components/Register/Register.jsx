@@ -1,34 +1,49 @@
 import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import {setCookie} from "nookies";
-import { DevTool } from "@hookform/devtools";
+import { setCookie } from 'nookies';
+import { DevTool } from '@hookform/devtools';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 export default function Register({ setToggle }) {
+  const [usernameIsAlreadyExist, setUsernameIsAlreadyExist] = React.useState('');
+  const user = useSelector((state) => state.user.data);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-      control,
+    control,
     formState: { errors },
   } = useForm();
+
+  const handleChangeUsername = () => {
+    setUsernameIsAlreadyExist('');
+  };
+
   const onSubmit = async (data) => {
-    console.log(data)
-
     try {
-      const res = await axios.post( 'http://192.168.0.105:8000/api/users/', {...data}, {
-        headers:{
-          'Content-Type': 'application/json',
-        }
-      })
-      console.log(res)
+      setUsernameIsAlreadyExist('');
+
+      const res = await axios.post(
+        `${process.env.SERVER_DOMAIN}/api/users/`,
+        { ...data },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      console.log(res);
       setCookie(null, 'access_token', res.data.token.access, {
-        maxAge: 24 *  60 * 60,
-      })
-      window.location.href = '/'
-
-
+        maxAge: 24 * 60 * 60,
+      });
+      window.location.href = '/';
     } catch (err) {
-      console.warn(err);
+      console.log(err);
+      if (err.response.data.username) {
+        setUsernameIsAlreadyExist(err.response.data.username[0]);
+      }
     }
   };
   console.log(errors);
@@ -66,6 +81,7 @@ export default function Register({ setToggle }) {
                     <input
                       {...register('username', { required: true })}
                       type="text"
+                      onChange={handleChangeUsername}
                       className="form-control"
                       id="username"
                       name="username"
@@ -73,6 +89,9 @@ export default function Register({ setToggle }) {
                         errors?.username?.type === 'required' ? '- обязательно' : ''
                       }`}
                     />
+                    {usernameIsAlreadyExist && (
+                      <p className="form-errors">Пользователь с таким именем уже существует</p>
+                    )}
                   </div>
                   <div className="col-md-12 form-group">
                     <input
@@ -137,7 +156,7 @@ export default function Register({ setToggle }) {
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>
-                  <DevTool control={control}/>
+                  <DevTool control={control} />
                 </form>
               </div>
             </div>

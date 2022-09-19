@@ -1,8 +1,7 @@
 import React from 'react';
-import { Header, Footer, ProductBlock } from '../components/index';
-import { headers } from '../config.js';
+import { ProductBlock } from '../components/index';
 import axios from 'axios';
-import lodash from "lodash";
+import lodash from 'lodash';
 
 export default function Shop({ items }) {
   return (
@@ -597,14 +596,8 @@ export default function Shop({ items }) {
             <section className="lattest-product-area pb-40 category-list">
               <div className="row">
                 {!lodash.isEmpty(items) &&
-                  items.map(({ item }) => {
-                    return (
-                      <ProductBlock
-                        className="col-lg-4 col-md-6"
-                        key={item.id}
-                        {...item}
-                      />
-                    );
+                  items.map((item) => {
+                    return <ProductBlock className="col-lg-4 col-md-6" key={item.id} {...item} />;
                   })}
               </div>
             </section>
@@ -819,10 +812,8 @@ export default function Shop({ items }) {
 }
 
 export async function getServerSideProps() {
-  let items = await axios
-    .get(`http://192.168.0.100:8000/api/products`)
-    .then((res) => {
-      return res.data.data;
-    });
-  return { props: { items } };
+  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`).then((res) => {
+    return res;
+  });
+  return { props: { items: res.data } };
 }

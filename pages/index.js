@@ -12,7 +12,6 @@ import {
 } from '../components/index';
 import { setProducts } from '../redux/slices/productSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { setHide } from '../redux/slices/thankYouSlice.js';
 
 const Home = ({ data }) => {
   const dispatch = useDispatch();
@@ -35,10 +34,6 @@ const Home = ({ data }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  let { data } = await axios.get(`${process.env.DOMAIN}/api/products?populate=*`, {
-    headers: {
-      Authorization: 'Bearer ' + process.env.TOKEN,
-    },
-  });
-  return { props: { data: data?.data } };
+  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`);
+  return { props: { data: res.data } };
 }
