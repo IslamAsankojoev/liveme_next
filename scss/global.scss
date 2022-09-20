@@ -66,9 +66,14 @@
 }
 .form-errors {
   color: #f36969;
-  position: absolute;
-  bottom: -40px;
+  // position: absolute;
+  // bottom: -40px;
+  margin: 0;
   font-size: 12px;
+}
+.form-success {
+  color: #33c21d;
+  text-align: center;
 }
 
 .form-group {

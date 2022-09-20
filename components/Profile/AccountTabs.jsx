@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import style from './AccountTabs.module.scss';
 
@@ -6,6 +7,10 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
     { title: 'Профиль', value: 'profile' },
     { title: 'Заказы', value: 'orders' },
   ];
+  const logout = async () => {
+    await axios.get('/api/logout');
+    window.location.href = '/register';
+  };
   return (
     <div className={style.tabs}>
       {tabs.map((tab) => {
@@ -17,7 +22,9 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
           </div>
         );
       })}
-      <div className={style.tab}>Выйти</div>
+      <div className={style.tab} onClick={logout}>
+        Выйти
+      </div>
     </div>
   );
 }

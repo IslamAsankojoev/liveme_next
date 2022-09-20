@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { setCookie } from 'nookies';
 import { DevTool } from '@hookform/devtools';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { setLoggedIn } from '../../redux/slices/userSlice.js';
 
 export default function Register({ setToggle }) {
   const [usernameIsAlreadyExist, setUsernameIsAlreadyExist] = React.useState('');
   const user = useSelector((state) => state.user.data);
   const router = useRouter();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -38,7 +40,8 @@ export default function Register({ setToggle }) {
       setCookie(null, 'access_token', res.data.token.access, {
         maxAge: 24 * 60 * 60,
       });
-      window.location.href = '/';
+      dispatch(setLoggedIn(res.data));
+      // router.push('/profile');
     } catch (err) {
       console.log(err);
       if (err.response.data.username) {

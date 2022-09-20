@@ -1,10 +1,19 @@
 import React from 'react';
 import { Header, Footer, Profile } from '../components/index';
-import getUser from '../helper/getUser';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../redux/slices/userSlice.js';
+import { useRouter } from 'next/router';
 
 export default function profile() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!user.loggedIn) {
+      router.push('/register');
+    }
+  }, [user]);
   return (
     <>
       <section className="banner-area organic-breadcrumb">
