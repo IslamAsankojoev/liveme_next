@@ -26,7 +26,10 @@ export default function OrderBlock({
         </p>
         <p className="price">
           <span>Сумма </span>
-          {products.reduce((totalPrice, item) => totalPrice + item.price * item.count, 0)} сом
+          {products
+            .reduce((totalPrice, item) => totalPrice + item.price * item.count, 0)
+            .toFixed(2)}{' '}
+          сом
         </p>
         <p className="payment_method">
           <span>Метод оплаты </span>

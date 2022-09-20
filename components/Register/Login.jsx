@@ -3,8 +3,13 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { setCookie } from 'nookies';
 import { DevTool } from '@hookform/devtools';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn } from '../../redux/slices/userSlice.js';
+import { useRouter } from 'next/router.js';
 
 export default function Login({ setToggle }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -22,13 +27,13 @@ export default function Login({ setToggle }) {
       setCookie(null, 'access_token', res.data.user.token.access, {
         maxAge: 24 * 60 * 60,
       });
-      window.location.href = window.location.origin + '/profile';
+      dispatch(setLoggedIn(res.data.user));
+      router.push('/profile');
     } catch (err) {
       console.log('login error' + err);
     }
   };
 
-  console.log(errors);
   return (
     <>
       <section className="login_box_area section_gap">

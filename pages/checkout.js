@@ -8,6 +8,7 @@ import sendMessage from '../bot';
 import { setShow } from '../redux/slices/thankYouSlice.js';
 import { useRouter } from 'next/router.js';
 import lodash from 'lodash';
+import { DevTool } from '@hookform/devtools';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
@@ -19,6 +20,7 @@ export default function Checkout() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
   const itemsText = items
@@ -28,9 +30,12 @@ export default function Checkout() {
     .toString();
 
   const onSend = async (data) => {
+    console.log(data);
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${
       data?.email
-    }\nАдрес - ${data?.address}\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
+    }\nАдрес - ${data?.address}\nМетод оплаты - ${
+      data?.payment_method
+    }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
     try {
       await axios.post(
         `${process.env.SERVER_DOMAIN}/api/orders/`,
@@ -40,7 +45,7 @@ export default function Checkout() {
           client_phone: data.phone,
           client_email: data.email,
           products: items,
-          payment_method: 'Наличкой',
+          payment_method: data.payment_method,
         },
         {
           headers: !lodash.isEmpty(user)
@@ -58,7 +63,7 @@ export default function Checkout() {
     } catch {
       console.log(err);
     }
-    dispatch(clearCart());
+    await dispatch(clearCart());
     dispatch(setShow());
   };
   React.useEffect(() => {}, []);
@@ -145,6 +150,7 @@ export default function Checkout() {
                       className="form-control"
                       name="address"
                       placeholder="Ваш адрес"
+                      defaultValue={user.data?.adress && user.data.adress}
                     />
                   </div>
                   <div className="col-md-12 form-group p_star">
@@ -184,6 +190,49 @@ export default function Checkout() {
                         </a>
                       </li>
                     </ul>
+                    <br />
+                    <p>Метод оплаты</p>
+                    <div class="payment_item">
+                      <div class="radion_btn">
+                        <input
+                          {...register('payment_method')}
+                          type="radio"
+                          id="radio1"
+                          defaultChecked
+                          value="Банковский счет"
+                        />
+                        <label htmlFor="radio1">Банковский счет</label>
+                        <div class="check"></div>
+                      </div>
+                    </div>
+                    <div class="payment_item">
+                      <div class="radion_btn">
+                        <input
+                          {...register('payment_method')}
+                          type="radio"
+                          id="radio2"
+                          value="Наличкой"
+                        />
+                        <label htmlFor="radio2">Наличкой</label>
+                        <div class="check"></div>
+                      </div>
+                    </div>
+                    <div class="payment_item active">
+                      <div class="radion_btn">
+                        <input
+                          {...register('payment_method')}
+                          type="radio"
+                          id="radio3"
+                          value="Картой"
+                        />
+                        <label htmlFor="radio3">Картой </label>
+                        <div class="check"></div>
+                      </div>
+                      <p>
+                        После оплаты картой или банковским переводом, в переводе добавьте номер
+                        заказа чтобы мы могли быстрее найти ваш заказ.
+                      </p>
+                    </div>
                     <div className="creat_account">
                       <input type="checkbox" defaultChecked id="f-option4" name="selector" />
                       <label htmlFor="f-option4">Я прочитал </label>
@@ -196,6 +245,8 @@ export default function Checkout() {
                       Заказть
                     </button>
                   </div>
+
+                  <DevTool control={control} />
                 </form>
               </div>
             </div>

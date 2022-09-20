@@ -1,0 +1,9 @@
+.items {
+  padding: 20px;
+  .empty {
+    color: white;
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+  }
+}
