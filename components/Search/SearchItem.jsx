@@ -1,23 +1,21 @@
 import Link from 'next/link.js';
 import React from 'react';
 import style from './SearchItem.module.scss';
+import { useRouter } from 'next/router.js';
 
-export default function SearchItem({ id, images, title, description, searchValue }) {
-  // const pos = description.search(searchValue);
-  // const contentArray = description.split('');
-
-  // React.useEffect(() => {
-  //   console.log(contentArray[pos]);
-  // }, []);
+export default function SearchItem({ id, images, title, description, searchValue, setSearchOpen }) {
+  const router = useRouter();
+  const handleLink = () => {
+    setSearchOpen((prev) => !prev);
+    router.push(`/products/${id}`);
+  };
   return (
-    <Link href={`/products/${id}`}>
-      <a className={style.item} key={id}>
-        <img src={images[0]?.image} className={style.img} alt="" />
-        <div className={style.info}>
-          <div className={style.title}>{title}</div>
-          {/* <div className={style.content}>{description}</div> */}
-        </div>
-      </a>
-    </Link>
+    <a className={style.item} key={id} onClick={handleLink}>
+      <img src={images[0]?.image} className={style.img} alt="" />
+      <div className={style.info}>
+        <div className={style.title}>{title}</div>
+        {/* <div className={style.content}>{description}</div> */}
+      </div>
+    </a>
   );
 }

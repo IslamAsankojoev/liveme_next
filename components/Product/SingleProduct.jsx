@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import store from '../../redux/store';
 import { addItem } from '../../redux/slices/cartSlice.js';
-import ProductCorusel from "./ProductCorusel";
+import ProductCorusel from './ProductCorusel';
 
 export default function SingleProduct({
   id,
@@ -55,25 +55,7 @@ export default function SingleProduct({
           <div className="row s_product_inner">
             <div className="col-lg-6">
               <div className="s_Product_carousel">
-
-
-                <ProductCorusel images={images}/>
-
-                {images?.map(({ image }) => {
-                  return (
-                    <div key={image} className="single-prd-item">
-                      <img className="img-fluid" src={image} alt="" />
-                    </div>
-                  );
-                })}
-
-
-                {/* <div className="single-prd-item">
-                  <img className="img-fluid" src="/static/img/category/s-p1.jpg" alt="" />
-                </div>
-                <div className="single-prd-item">
-                  <img className="img-fluid" src="/static/img/category/s-p1.jpg" alt="" />
-                </div> */}
+                <ProductCorusel images={images} />
               </div>
             </div>
             <div className="col-lg-5 offset-lg-1">
@@ -83,12 +65,12 @@ export default function SingleProduct({
                 <ul className="list">
                   <li>
                     <a className="active" href="#">
-                      <span>Category</span> : {category?.title}
+                      <span>Категория</span> : {category?.title}
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <span>Availibility</span> : В наличии
+                      <span>В складе</span> : В наличии
                     </a>
                   </li>
                 </ul>
@@ -99,7 +81,6 @@ export default function SingleProduct({
                     type="number"
                     name="qty"
                     id="sst"
-                    maxLength="12"
                     value={count}
                     onChange={() => {}}
                     title="Quantity:"

@@ -76,7 +76,12 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
             <div className={style.empty}>Ничего не найдено</div>
           ) : (
             searchResult.map((item) => (
-              <SearchItem key={item.id} {...item} searchValue={searchValue} />
+              <SearchItem
+                setSearchOpen={setSearchOpen}
+                key={item.id}
+                {...item}
+                searchValue={searchValue}
+              />
             ))
           )}
         </div>

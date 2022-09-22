@@ -5,10 +5,7 @@ import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 
-
 const page_size = 2;
-
-
 
 export default function Shop({ data }) {
   const products = useSelector((state) => state.products.items);
@@ -17,6 +14,7 @@ export default function Shop({ data }) {
   const [next, setNext] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [page, setPage] = React.useState(1);
+  const [category, setCategory] = React.useState('');
 
   React.useEffect(() => {
     dispatch(setProducts(data.results));
@@ -52,7 +50,9 @@ export default function Shop({ data }) {
 
   const handlePage = async (page_n) => {
     await axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/?page=${page_n}&page_size=${page_size}`)
+      .get(
+        `${process.env.SERVER_DOMAIN}/api/products/?category=${category}&page=${page_n}&page_size=${page_size}`,
+      )
       .then((res) => {
         dispatch(setProducts(res.data.results));
         setNext(res.data.next);
@@ -63,8 +63,19 @@ export default function Shop({ data }) {
   };
 
   React.useEffect(() => {
-    console.log(products);
-  }, [products]);
+    axios
+      .get(
+        `${
+          process.env.SERVER_DOMAIN
+        }/api/products/?category=${category}&page=${1}&page_size=${page_size}`,
+      )
+      .then((res) => {
+        dispatch(setProducts(res.data.results));
+        setNext(res.data.next);
+        setPrevious(res.data.previous);
+        setCount(res.data.count);
+      });
+  }, [category]);
   return (
     <>
       <section className="banner-area organic-breadcrumb">
@@ -91,7 +102,7 @@ export default function Shop({ data }) {
       <div className="container">
         <div className="row">
           <div className="col-xl-3 col-lg-4 col-md-5">
-            <SidebarCategory />
+            <SidebarCategory setCategory={setCategory} setPage={setPage} />
           </div>
           <div className="col-xl-9 col-lg-8 col-md-7">
             <div className="filter-bar d-flex flex-wrap align-items-center">
@@ -115,6 +126,25 @@ export default function Shop({ data }) {
                       <ProductBlock className="col-lg-4 col-md-6 col-6" key={item.id} {...item} />
                     );
                   })}
+
+                {lodash.isEmpty(products) && (
+                  <div className="col-12">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h2 align="center">Пока товаров нету</h2>
+                    <p align="center">Поищите что нибудь для себя в других категориях.</p>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                  </div>
+                )}
               </div>
               <br />
             </section>

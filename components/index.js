@@ -26,3 +26,4 @@ export { default as SearchItem } from './Search/SearchItem';
 export { default as SidebarCategory } from './Shop/SidebarCategory';
 export { default as CategiryItem } from './Shop/CategiryItem';
 export { default as Pagination } from './Shop/Pagination';
+export { default as ProductCorusel } from './Product/ProductCorusel';

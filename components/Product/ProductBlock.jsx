@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import axios from 'axios';
 import style from './ProductBlock.module.scss';
+import { ProductCorusel } from '../index';
 
-let key = 0;
 export default function ProductBlock({ className, id, title, images, regular_price, sale_price }) {
   const price = sale_price ? sale_price : regular_price;
   const dispatch = useDispatch();
