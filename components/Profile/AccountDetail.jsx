@@ -86,9 +86,9 @@ export default function AccountDetail() {
             defaultValue={user.email}
             placeholder={`Ваш Email ${errors?.email?.type === 'required' ? '- обязательно' : ''}`}
           />
-          {errors?.email?.type === 'pattern' && (
-            <p className="form-errors">{errors?.email?.message}</p>
-          )}
+          <p className="form-errors">
+            {errors?.email?.type === 'pattern' && errors?.email?.message}
+          </p>
           {serverErrors?.email && <p className="form-errors">Этот Email уже занят</p>}
         </div>
         <div className="col-md-12 form-group">

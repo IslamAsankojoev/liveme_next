@@ -3,14 +3,25 @@ import className from 'classnames';
 import style from './Search.module.scss';
 import lodash from 'lodash';
 import axios from 'axios';
+import Link from 'next/link.js';
+import SearchItem from './SearchItem.jsx';
 
 export default function Search({ setSearchOpen, searchOpen, searchRef }) {
   const [searchValue, setSearchValue] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
+  const [value, setValue] = React.useState('');
 
   const handleSearch = (e) => {
-    setSearchValue(e.target.value);
+    handleSearchResult(e.target.value);
+    setValue(e.target.value);
   };
+
+  const handleSearchResult = React.useCallback(
+    lodash.debounce((str) => {
+      setSearchValue(str);
+    }, 300),
+    [],
+  );
 
   React.useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -23,9 +34,13 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
   }, []);
 
   React.useEffect(() => {
-    axios.get(`${process.env.SERVER_DOMAIN}/api/products/?search=${searchValue}`).then((res) => {
-      console.log(res.data);
-    });
+    if (searchValue) {
+      axios.get(`${process.env.SERVER_DOMAIN}/api/products/?title=${searchValue}`).then((res) => {
+        setSearchResult((prev) => res.data);
+      });
+    } else {
+      setSearchResult([]);
+    }
   }, [searchValue]);
 
   return (
@@ -35,28 +50,15 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
         show: searchOpen,
       })}
       id="search_input_box">
-      <div className={style.items}>
-        {lodash.isEmpty(searchResult) ? (
-          <div className={style.empty}>Ничего не найдено</div>
-        ) : (
-          searchResult.map((item) => (
-            <div className={style.item} key={item.id}>
-              <img src={item.image} alt="" />
-              <div className={style.info}>
-                <div className={style.title}>{item.title}</div>
-                <div className={style.price}>{item.price} сом</div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-      <div className="container">
+      <br />
+      <br />
+      <div className="">
         <form className="d-flex justify-content-between">
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${style.searchInput}`}
             id="search_input"
-            value={searchValue}
+            value={value}
             onChange={handleSearch}
             placeholder="Поиск товаров..."
           />
@@ -69,6 +71,15 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
             id="close_search"
             title="Close Search"></span>
         </form>
+        <div className={style.items}>
+          {lodash.isEmpty(searchResult) ? (
+            <div className={style.empty}>Ничего не найдено</div>
+          ) : (
+            searchResult.map((item) => (
+              <SearchItem key={item.id} {...item} searchValue={searchValue} />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
