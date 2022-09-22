@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import store from '../../redux/store';
 import { addItem } from '../../redux/slices/cartSlice.js';
+import ProductCorusel from "./ProductCorusel";
 
 export default function SingleProduct({
   id,
@@ -54,6 +55,10 @@ export default function SingleProduct({
           <div className="row s_product_inner">
             <div className="col-lg-6">
               <div className="s_Product_carousel">
+
+
+                <ProductCorusel images={images}/>
+
                 {images?.map(({ image }) => {
                   return (
                     <div key={image} className="single-prd-item">
@@ -61,6 +66,7 @@ export default function SingleProduct({
                     </div>
                   );
                 })}
+
 
                 {/* <div className="single-prd-item">
                   <img className="img-fluid" src="/static/img/category/s-p1.jpg" alt="" />
