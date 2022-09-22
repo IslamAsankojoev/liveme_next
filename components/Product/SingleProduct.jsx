@@ -56,7 +56,17 @@ export default function SingleProduct({
             <div className="col-lg-6">
               <div className="s_Product_carousel">
 
+
                 <ProductCorusel images={images}/>
+
+                {images?.map(({ image }) => {
+                  return (
+                    <div key={image} className="single-prd-item">
+                      <img className="img-fluid" src={image} alt="" />
+                    </div>
+                  );
+                })}
+
 
                 {/* <div className="single-prd-item">
                   <img className="img-fluid" src="/static/img/category/s-p1.jpg" alt="" />
