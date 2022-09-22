@@ -8,6 +8,7 @@ import { setLoggedIn } from '../../redux/slices/userSlice.js';
 import { useRouter } from 'next/router.js';
 
 export default function Login({ setToggle }) {
+  const [serverErrors, setServerErrors] = React.useState({});
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -15,7 +16,6 @@ export default function Login({ setToggle }) {
     handleSubmit,
     control,
     formState: { errors },
-    git,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -30,7 +30,9 @@ export default function Login({ setToggle }) {
       dispatch(setLoggedIn(res.data.user));
       router.push('/profile');
     } catch (err) {
-      console.log('login error' + err);
+      if (err.response.data) {
+        setServerErrors(err.response.data);
+      }
     }
   };
 
@@ -58,11 +60,7 @@ export default function Login({ setToggle }) {
             <div className="col-lg-6">
               <div className="login_form_inner">
                 <h3>Вход</h3>
-                <form
-                  className="row login_form"
-                  onSubmit={handleSubmit(onSubmit)}
-                  id="contactForm"
-                  noValidate="noValidate">
+                <form className="row login_form" onSubmit={handleSubmit(onSubmit)} id="contactForm">
                   <div className="col-md-12 form-group">
                     <input
                       {...register('username', {
@@ -84,6 +82,9 @@ export default function Login({ setToggle }) {
                       name="password"
                       placeholder="Пароль"
                     />
+                    {serverErrors?.detail && (
+                      <p className="form-errors">Неверный пароль или логин</p>
+                    )}
                   </div>
 
                   <div className="col-md-12 form-group">

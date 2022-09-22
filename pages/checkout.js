@@ -60,7 +60,7 @@ export default function Checkout() {
     }
     try {
       await sendMessage(teletext);
-    } catch {
+    } catch (err) {
       console.log(err);
     }
     await dispatch(clearCart());
@@ -113,10 +113,7 @@ export default function Checkout() {
               </div>
               <div className="col-lg-6">
                 <h3>Детали заказа</h3>
-                <form
-                  onSubmit={handleSubmit(onSend)}
-                  noValidate="novalidate"
-                  className="row contact_form">
+                <form onSubmit={handleSubmit(onSend)} className="row contact_form">
                   <div className="col-md-12 form-group p_star">
                     <input
                       {...register('username', {
@@ -169,7 +166,7 @@ export default function Checkout() {
                       placeholder="Ваш Email"
                       defaultValue={user.data && user.data.email}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p>{errors.email?.message}</p>}
                   </div>
 
                   <div className="col-md-12 order_box">
@@ -192,8 +189,8 @@ export default function Checkout() {
                     </ul>
                     <br />
                     <p>Метод оплаты</p>
-                    <div class="payment_item">
-                      <div class="radion_btn">
+                    <div className="payment_item">
+                      <div className="radion_btn">
                         <input
                           {...register('payment_method')}
                           type="radio"
@@ -202,11 +199,11 @@ export default function Checkout() {
                           value="Банковский счет"
                         />
                         <label htmlFor="radio1">Банковский счет</label>
-                        <div class="check"></div>
+                        <div className="check"></div>
                       </div>
                     </div>
-                    <div class="payment_item">
-                      <div class="radion_btn">
+                    <div className="payment_item">
+                      <div className="radion_btn">
                         <input
                           {...register('payment_method')}
                           type="radio"
@@ -214,11 +211,11 @@ export default function Checkout() {
                           value="Наличкой"
                         />
                         <label htmlFor="radio2">Наличкой</label>
-                        <div class="check"></div>
+                        <div className="check"></div>
                       </div>
                     </div>
-                    <div class="payment_item active">
-                      <div class="radion_btn">
+                    <div className="payment_item active">
+                      <div className="radion_btn">
                         <input
                           {...register('payment_method')}
                           type="radio"
@@ -226,7 +223,7 @@ export default function Checkout() {
                           value="Картой"
                         />
                         <label htmlFor="radio3">Картой </label>
-                        <div class="check"></div>
+                        <div className="check"></div>
                       </div>
                       <p>
                         После оплаты картой или банковским переводом, в переводе добавьте номер

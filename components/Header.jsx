@@ -16,6 +16,11 @@ export default function Header() {
     setMobileMeniOpen((prev) => !prev);
   };
 
+  const onClickSearch = () => {
+    setSearchOpen((prev) => !prev);
+    setMobileMeniOpen((prev) => !prev);
+  };
+
   return (
     <header ref={searchRef} className="header_area sticky-header">
       <div className="main_menu">
@@ -156,13 +161,7 @@ export default function Header() {
                 )}
 
                 <li className="nav-item">
-                  <button
-                    className="search"
-                    onClick={() => {
-                      setSearchOpen((prev) => {
-                        return !prev;
-                      });
-                    }}>
+                  <button className="search" onClick={onClickSearch}>
                     <span className="lnr lnr-magnifier" id="search"></span>
                   </button>
                 </li>

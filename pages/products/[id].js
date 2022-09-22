@@ -8,7 +8,7 @@ export const Product = ({ data }) => {
 export default Product;
 
 export async function getServerSideProps(ctx) {
-  let res = await axios.get(`http://192.168.0.105:8000/api/products/${ctx.params.id}`);
+  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/${ctx.params.id}`);
   return {
     props: { data: res.data },
   };

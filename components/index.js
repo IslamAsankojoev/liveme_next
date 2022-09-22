@@ -22,3 +22,7 @@ export { default as ThankYou } from './ThankYou/ThankYou';
 export { default as AccountOrder } from './Profile/AccountOrder';
 export { default as AccountDetail } from './Profile/AccountDetail';
 export { default as AccountTabs } from './Profile/AccountTabs';
+export { default as SearchItem } from './Search/SearchItem';
+export { default as SidebarCategory } from './Shop/SidebarCategory';
+export { default as CategiryItem } from './Shop/CategiryItem';
+export { default as Pagination } from './Shop/Pagination';

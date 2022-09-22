@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const countPriceItemsTotal = (state) => {
   state.totalPrice = state.items.reduce(
-      (totalPrice, item) => totalPrice + item.price * item.count,
-      0,
+    (totalPrice, item) => totalPrice + item.price * item.count,
+    0,
   );
   state.totalItems = state.items?.reduce((totalItems, item) => totalItems + item.count, 0);
 };
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
       }
     },
 
-    removeItem(state, {payload}) {
+    removeItem(state, { payload }) {
       state.items = state.items.filter((item) => item.id !== payload);
       countPriceItemsTotal(state);
       localStorage.setItem('cart', JSON.stringify(state.items));
@@ -63,14 +63,14 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    increment(state, {payload}) {
+    increment(state, { payload }) {
       const item = state.items.find((item) => item.id === payload.id);
       item.count--;
       countPriceItemsTotal(state);
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    decrement(state, {payload}) {
+    decrement(state, { payload }) {
       const item = state.items.find((item) => item.id === payload.id);
       item.count++;
       countPriceItemsTotal(state);
@@ -78,8 +78,6 @@ const cartSlice = createSlice({
     },
   },
 });
-
-
 
 export const { addItem, removeItem, clearCart, increment, decrement, setCart } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -40,7 +40,7 @@ export default function ExclusiveDealSection() {
             <div className="active-exclusive-product-slider">
               {/* <!-- single exclusive carousel --> */}
               <div className="single-exclusive-slider">
-                <img className="img-fluid" src="static/img/product/e-p1.png" alt="" />
+                <img className="img-fluid" src="static/img/product/e-p1.png" width="100%" alt="" />
                 <div className="product-details">
                   <div className="price">
                     <h6>$150.00</h6>

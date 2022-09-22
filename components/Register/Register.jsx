@@ -75,11 +75,7 @@ export default function Register({ setToggle }) {
             <div className="col-lg-6">
               <div className="login_form_inner">
                 <h3>Регистрация</h3>
-                <form
-                  className="row login_form"
-                  onSubmit={handleSubmit(onSubmit)}
-                  id="contactForm"
-                  noValidate="novalidate">
+                <form className="row login_form" onSubmit={handleSubmit(onSubmit)} id="contactForm">
                   <div className="col-md-12 form-group">
                     <input
                       {...register('username', { required: true })}
@@ -114,9 +110,10 @@ export default function Register({ setToggle }) {
                         errors?.email?.type === 'required' ? '- обязательно' : ''
                       }`}
                     />
-                    {errors?.email?.type === 'pattern' && (
-                      <p className="form-errors">{errors.email.message}</p>
-                    )}
+
+                    <p className="form-errors">
+                      {errors?.email?.type === 'pattern' && errors.email.message}
+                    </p>
                   </div>
 
                   <div className="col-md-12 form-group">
@@ -135,7 +132,7 @@ export default function Register({ setToggle }) {
                         },
                       })}
                     />
-                    {errors.password && <p className="form-errors">{errors.password.message}</p>}
+                    {<p className="form-errors">{errors.password?.message}</p>}
                   </div>
 
                   {/* <div className="col-md-12 form-group">
