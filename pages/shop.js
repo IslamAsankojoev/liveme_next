@@ -5,7 +5,7 @@ import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 
-const page_size = 100;
+const page_size = 2;
 
 export default function Shop({ data }) {
   const products = useSelector((state) => state.products.items);
