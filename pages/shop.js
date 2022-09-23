@@ -1,14 +1,15 @@
 import React from 'react';
-import { ProductBlock, SidebarCategory, Pagination } from '../components/index';
+import { ProductBlock, SidebarCategory, Pagination, ProductBlockSkelet } from '../components/index';
 import axios from 'axios';
 import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 
-const page_size = 2;
+const page_size = 6;
 
 export default function Shop({ data }) {
   const products = useSelector((state) => state.products.items);
+  const status = useSelector((state) => state.products.status);
   const dispatch = useDispatch();
   const [previous, setPrevious] = React.useState(null);
   const [next, setNext] = React.useState(null);
@@ -17,11 +18,10 @@ export default function Shop({ data }) {
   const [category, setCategory] = React.useState('');
 
   React.useEffect(() => {
-    dispatch(setProducts(data.results));
-    setNext(data.next);
-    setPrevious(data.previous);
-    setCount(data.count);
-    console.log(data);
+    dispatch(setProducts(data?.results));
+    setNext(data?.next);
+    setPrevious(data?.previous);
+    setCount(data?.count);
   }, []);
 
   const handleNext = async () => {
@@ -31,6 +31,7 @@ export default function Shop({ data }) {
         setNext(res.data.next);
         setPrevious(res.data.previous);
         setCount(res.data.count);
+        window.location.href = '#top_catalog';
       });
       setPage((prev) => prev + 1);
     }
@@ -43,6 +44,7 @@ export default function Shop({ data }) {
         setNext(res.data.next);
         setPrevious(res.data.previous);
         setCount(res.data.count);
+        window.location.href = '#top_catalog';
       });
       setPage((prev) => prev - 1);
     }
@@ -58,6 +60,7 @@ export default function Shop({ data }) {
         setNext(res.data.next);
         setPrevious(res.data.previous);
         setCount(res.data.count);
+        window.location.href = '#top_catalog';
       });
     setPage(page_n);
   };
@@ -74,6 +77,7 @@ export default function Shop({ data }) {
         setNext(res.data.next);
         setPrevious(res.data.previous);
         setCount(res.data.count);
+        window.location.href = '#top_catalog';
       });
   }, [category]);
   return (
@@ -92,10 +96,12 @@ export default function Shop({ data }) {
                 </a>
                 <a href="category.html">Fashon Category</a>
               </nav>
+              <span id="top_catalog"></span>
             </div>
           </div>
         </div>
       </section>
+
       <br />
       <br />
       <br />
@@ -120,7 +126,26 @@ export default function Shop({ data }) {
             <section className="lattest-product-area pb-40 category-list">
               <br />
               <div className="row">
-                {!lodash.isEmpty(products) &&
+                {status === 'pending' && (
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '1000px',
+                    }}></div>
+                )}
+                {status === 'pending' &&
+                  Array(20)
+                    .fill(1)
+                    .map((item, index) => {
+                      return (
+                        <div className="col-md-4 col-sm-6" key={index}>
+                          <ProductBlockSkelet />
+                        </div>
+                      );
+                    })}
+
+                {status === 'success' &&
+                  !lodash.isEmpty(products) &&
                   products.map((item) => {
                     return (
                       <ProductBlock className="col-lg-4 col-md-6 col-6" key={item.id} {...item} />
@@ -180,5 +205,5 @@ Shop.getInitialProps = async () => {
     .then((res) => {
       return res;
     });
-  return { data: res.data };
+  return { data: res?.data };
 };

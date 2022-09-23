@@ -1,6 +1,10 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../../redux/slices/cartSlice.js';
 
 export default function ExclusiveDealSection() {
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.products.items);
   return (
     <section className="exclusive-deal-area">
       <div className="container-fluid">
@@ -40,18 +44,30 @@ export default function ExclusiveDealSection() {
             <div className="active-exclusive-product-slider">
               {/* <!-- single exclusive carousel --> */}
               <div className="single-exclusive-slider">
-                <img className="img-fluid" src="static/img/product/e-p1.png" width="100%" alt="" />
+                <img className="img-fluid" src={items[5]?.images[0]?.image} width="100%" alt="" />
                 <div className="product-details">
                   <div className="price">
-                    <h6>$150.00</h6>
-                    <h6 className="l-through">$210.00</h6>
+                    <h6>{items[5]?.regular_price} сом</h6>
+                    <h6 className="l-through">210.00</h6>
                   </div>
-                  <h4>addidas New Hammer sole for Sports person</h4>
-                  <div className="add-bag d-flex align-items-center justify-content-center">
+                  <h4>{items[5]?.title}</h4>
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      dispatch(
+                        addItem({
+                          id: items[5]?.id,
+                          title: items[5]?.title,
+                          images: items[5]?.images,
+                          price: items[5]?.regular_price,
+                        }),
+                      );
+                    }}
+                    className="add-bag d-flex align-items-center justify-content-center">
                     <a className="add-btn" href="">
                       <span className="ti-bag"></span>
                     </a>
-                    <span className="add-text text-uppercase">Add to Bag</span>
+                    <span className="add-text text-uppercase">Добавить в корзину</span>
                   </div>
                 </div>
               </div>

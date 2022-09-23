@@ -11,8 +11,8 @@ export default function FeaturesSection() {
               <div className="f-icon">
                 <img src="static/img/features/f-icon1.png" alt="" />
               </div>
-              <h6>Free Delivery</h6>
-              <p>Free Shipping on all order</p>
+              <h6>Secure Delivery</h6>
+              <p>Secure Shipping on all order</p>
             </div>
           </div>
           {/* <!-- single features --> */}

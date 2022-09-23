@@ -11,7 +11,7 @@ import axios from 'axios';
 
 const initialState = {
   items: [],
-  status: 'loading',
+  status: 'panding',
 };
 
 const productsSlice = createSlice({
@@ -20,6 +20,7 @@ const productsSlice = createSlice({
   reducers: {
     setProducts(state, action) {
       state.items = action.payload;
+      state.status = 'success';
     },
   },
   // extraReducers: {

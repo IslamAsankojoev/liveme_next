@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { headers } from '../../config';
 import lodash from 'lodash';
 export default async (req, res) => {
   const { clientName, clientAddress, clientPhone, clientEmail, products, user } = req.body;
