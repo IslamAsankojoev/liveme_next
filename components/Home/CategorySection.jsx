@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export default function CategorySection() {
+  const lang = useSelector((state) => state.lang.lang);
+
   return (
     <section className="category-area">
       <div className="container">
@@ -24,7 +27,12 @@ export default function CategorySection() {
                   <img className="img-fluid w-100" src="static/img/1 (1).png" alt="" />
                   <a href="static/img/1 (1).png" className="img-pop-up" target="_blank">
                     <div className="deal-details">
-                      <h6 className="deal-title">Sneaker for Sports</h6>
+                      <h6 className="deal-title">
+                        {lang === 'ru' && 'Спортивная обувь'}
+                        {lang === 'en' && 'Sneaker for Sports'}
+                        {lang === 'kg' && 'Спорттык ачык'}
+                        {lang === 'tr' && 'Sport ayollar'}
+                      </h6>
                     </div>
                   </a>
                 </div>

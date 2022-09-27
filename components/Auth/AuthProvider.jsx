@@ -1,29 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setLoggedIn, setToken } from '../../redux/slices/userSlice.js';
+import { setLoggedIn } from '../../redux/slices/userSlice.js';
 import { Header, Footer, MobileCart, ThankYou } from '../../components/index';
 import { setCart } from '../../redux/slices/cartSlice.js';
 import lodash from 'lodash';
 import { parseCookies } from 'nookies';
-import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
+import { setLang } from '../../redux/slices/langSlice.js';
 
 export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
-
-  // React.useEffect(() => {
-  //     const doMagic = () => {
-  //         console.log(12)
-  //     }
-  //     doMagic()
-  //
-  //     Router.events.on('routeChangeStart', doMagic); // add listener
-  //
-  //     return () => {
-  //         Router.events.off('routeChangeStart', doMagic); // remove listener
-  //     }
-  // }, []);
+  const { pathname, push, query } = useRouter();
 
   React.useEffect(() => {
     let { access_token } = parseCookies();
@@ -48,12 +36,21 @@ export default function AuthProvider({ children }) {
       }
     }
     setUser();
-
     const cart = JSON.parse(localStorage.getItem('cart'));
+    dispatch(setLang(localStorage.getItem('lang')));
+
     if (lodash.isArray(cart)) {
       dispatch(setCart(cart));
     }
+    push({
+      pathname,
+      query: {
+        ...query,
+        locale: localStorage.getItem('lang'),
+      },
+    });
   }, []);
+
   return (
     <>
       <Header />

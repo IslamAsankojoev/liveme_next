@@ -22,30 +22,40 @@ export default function Shop({ data }) {
     setNext(data?.next);
     setPrevious(data?.previous);
     setCount(data?.count);
-  }, []);
+  }, [data]);
 
   const handleNext = async () => {
     if (next) {
-      await axios.get(next).then((res) => {
-        dispatch(setProducts(res.data.results));
-        setNext(res.data.next);
-        setPrevious(res.data.previous);
-        setCount(res.data.count);
-        window.location.href = '#top_catalog';
-      });
+      await axios
+        .get(next, {
+          headers: {
+            'Accept-Language': localStorage.getItem('lang'),
+          },
+        })
+        .then((res) => {
+          dispatch(setProducts(res.data.results));
+          setNext(res.data.next);
+          setPrevious(res.data.previous);
+          setCount(res.data.count);
+        });
       setPage((prev) => prev + 1);
     }
   };
 
   const handlePrevious = async () => {
     if (previous) {
-      await axios.get(previous).then((res) => {
-        dispatch(setProducts(res.data.results));
-        setNext(res.data.next);
-        setPrevious(res.data.previous);
-        setCount(res.data.count);
-        window.location.href = '#top_catalog';
-      });
+      await axios
+        .get(previous, {
+          headers: {
+            'Accept-Language': localStorage.getItem('lang'),
+          },
+        })
+        .then((res) => {
+          dispatch(setProducts(res.data.results));
+          setNext(res.data.next);
+          setPrevious(res.data.previous);
+          setCount(res.data.count);
+        });
       setPage((prev) => prev - 1);
     }
   };
@@ -54,13 +64,17 @@ export default function Shop({ data }) {
     await axios
       .get(
         `${process.env.SERVER_DOMAIN}/api/products/?category=${category}&page=${page_n}&page_size=${page_size}`,
+        {
+          headers: {
+            'Accept-Language': localStorage.getItem('lang'),
+          },
+        },
       )
       .then((res) => {
         dispatch(setProducts(res.data.results));
         setNext(res.data.next);
         setPrevious(res.data.previous);
         setCount(res.data.count);
-        window.location.href = '#top_catalog';
       });
     setPage(page_n);
   };
@@ -71,13 +85,17 @@ export default function Shop({ data }) {
         `${
           process.env.SERVER_DOMAIN
         }/api/products/?category=${category}&page=${1}&page_size=${page_size}`,
+        {
+          headers: {
+            'Accept-Language': localStorage.getItem('lang'),
+          },
+        },
       )
       .then((res) => {
         dispatch(setProducts(res.data.results));
         setNext(res.data.next);
         setPrevious(res.data.previous);
         setCount(res.data.count);
-        window.location.href = '#top_catalog';
       });
   }, [category]);
   return (
@@ -160,8 +178,8 @@ export default function Shop({ data }) {
                     <br />
                     <br />
                     <br />
-                    <h2 align="center">Пока товаров нету</h2>
-                    <p align="center">Поищите что нибудь для себя в других категориях.</p>
+                    <h2>Пока товаров нету</h2>
+                    <p>Поищите что нибудь для себя в других категориях.</p>
                     <br />
                     <br />
                     <br />
@@ -196,14 +214,36 @@ export default function Shop({ data }) {
   );
 }
 
-// export async function getServerSideProps() {}
-
-// getInitialProps
-Shop.getInitialProps = async () => {
+Shop.getInitialProps = async (ctx) => {
+  const locale = ctx.query.locale || 'ru';
   let res = await axios
-    .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`)
-    .then((res) => {
-      return res;
-    });
+    .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
+      headers: {
+        'Accept-Language': locale,
+      },
+    })
+    .then((res) => res);
   return { data: res?.data };
 };
+
+// export async function getServerSideProps(ctx) {
+//   const locale = ctx.query.locale || 'ru';
+//   let res = await axios
+//     .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
+//       headers: {
+//         'Accept-Language': locale,
+//       },
+//     })
+//     .then((res) => res);
+//   return { props: { data: res?.data, n } };
+// }
+
+// Product.getInitialProps = async (ctx) => {
+//   const locale = ctx.query.locale || 'ru';
+//   let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/${ctx.query.id}`, {
+//     headers: {
+//       'Accept-Language': locale,
+//     },
+//   });
+//   return { data: res.data };
+// };

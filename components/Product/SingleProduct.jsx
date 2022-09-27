@@ -14,6 +14,8 @@ export default function SingleProduct({
   sale_price,
   description,
   category,
+  data,
+  title_ru,
 }) {
   const price = sale_price ? sale_price : regular_price;
   const [activeTab, setActiveTab] = React.useState('');
@@ -24,10 +26,6 @@ export default function SingleProduct({
     dispatch(addItem({ id, title, images, price, count }));
     setCount(1);
   };
-
-  React.useEffect(() => {
-    setActiveTab('home');
-  }, []);
 
   return (
     <>
@@ -60,7 +58,7 @@ export default function SingleProduct({
             </div>
             <div className="col-lg-5 offset-lg-1">
               <div className="s_product_text">
-                <h3>{title}</h3>
+                <h3>{title || title_ru}</h3>
                 <h2>{price} сом</h2>
                 <ul className="list">
                   <li>
@@ -98,7 +96,7 @@ export default function SingleProduct({
                     onClick={() => {
                       setCount((prev) => prev - 1);
                     }}
-                    disabled={count === 1 && 'disabled'}
+                    disabled={count === 1}
                     className="reduced items-count"
                     type="button">
                     <i className="lnr lnr-chevron-down"></i>

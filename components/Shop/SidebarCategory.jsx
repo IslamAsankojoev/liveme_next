@@ -3,18 +3,24 @@ import axios from 'axios';
 import { CategiryItem } from '../index';
 import style from './SidebarCategory.module.scss';
 import { useRouter } from 'next/router.js';
+import { useSelector } from 'react-redux';
 
 export default function SidebarCategory({ setCategory, setPage }) {
   const [categories, setCategories] = React.useState([]);
+  const lang = useSelector((state) => state.lang.lang);
 
   const onClickCategory = (category) => {
     setCategory(category);
   };
   React.useEffect(() => {
     axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/category/`)
+      .get(`${process.env.SERVER_DOMAIN}/api/products/category/`, {
+        headers: {
+          'Accept-Language': localStorage.getItem('lang'),
+        },
+      })
       .then((res) => setCategories(res.data));
-  }, []);
+  }, [lang]);
   return (
     <div className={`sidebar-categories ${style.sidebar_categories}`}>
       <div className="head">Категории</div>

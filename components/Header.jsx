@@ -4,13 +4,17 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { setLang } from '../redux/slices/langSlice.js';
 
 export default function Header() {
+  const languages = ['ru', 'en', 'kg', 'tr'];
+  const { lang } = useSelector((state) => state.lang);
   const { totalItems } = useSelector((state) => state.cart);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [mobileMeniOpen, setMobileMeniOpen] = React.useState(false);
   const searchRef = React.useRef();
-  const { pathname, push } = useRouter();
+  const { replace, pathname, query, push } = useRouter();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
@@ -21,6 +25,20 @@ export default function Header() {
     setMobileMeniOpen((prev) => !prev);
   };
 
+  const onChangeLang = (e) => {
+    dispatch(setLang(e.target.value));
+    push(
+      {
+        pathname,
+        query: {
+          ...query,
+          locale: e.target.value,
+        },
+      },
+      undefined,
+      { scroll: false },
+    );
+  };
   return (
     <header ref={searchRef} className="header_area sticky-header">
       <div className="main_menu">
@@ -32,38 +50,48 @@ export default function Header() {
                 <img src="/static/img/livemeLogo1.png" width={150} alt="Logo" />
               </a>
             </Link>
-            <button
-              onClick={toggleMenu}
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
-            <div
-              className={classNames({
-                'collapse navbar-collapse offset': true,
-                show: mobileMeniOpen,
-              })}
-              id="navbarSupportedContent">
-              <ul className="nav navbar-nav menu_nav ml-auto">
-                <li onClick={toggleMenu} className={`nav-item ${pathname === '/' && 'active'}`}>
-                  <Link href="/">
-                    <a className="nav-link">Главная</a>
-                  </Link>
-                </li>
-                <li onClick={toggleMenu} className={`nav-item ${pathname === '/shop' && 'active'}`}>
-                  <Link href="/shop">
-                    <a className="nav-link dropdown-toggle">Каталог</a>
-                  </Link>
-                </li>
-                {/* <li className="nav-item submenu dropdown">
+            <div className="header-right">
+              <select name="langs" onChange={onChangeLang} id="langs">
+                {languages.map((language, id) => (
+                  <option defaultValue={language} key={id} selected={language === lang}>
+                    {language}
+                  </option>
+                ))}
+              </select>
+              <button
+                onClick={toggleMenu}
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
+              <div
+                className={classNames({
+                  'collapse navbar-collapse offset': true,
+                  show: mobileMeniOpen,
+                })}
+                id="navbarSupportedContent">
+                <ul className="nav navbar-nav menu_nav ml-auto">
+                  <li onClick={toggleMenu} className={`nav-item ${pathname === '/' && 'active'}`}>
+                    <Link href="/">
+                      <a className="nav-link">Главная</a>
+                    </Link>
+                  </li>
+                  <li
+                    onClick={toggleMenu}
+                    className={`nav-item ${pathname === '/shop' && 'active'}`}>
+                    <Link href="/shop">
+                      <a className="nav-link dropdown-toggle">Каталог</a>
+                    </Link>
+                  </li>
+                  {/* <li className="nav-item submenu dropdown">
                   <a
                     href="#"
                     className="nav-link dropdown-toggle"
@@ -86,7 +114,7 @@ export default function Header() {
                     </li>
                   </ul>
                 </li> */}
-                {/* <li className="nav-item submenu dropdown">
+                  {/* <li className="nav-item submenu dropdown">
                   <a
                     href="#"
                     className="nav-link dropdown-toggle"
@@ -114,58 +142,59 @@ export default function Header() {
                     </li>
                   </ul>
                 </li> */}
-                <li
-                  onClick={toggleMenu}
-                  className={`nav-item ${pathname === '/contact' && 'active'}`}>
-                  <Link href="/contact">
-                    <a className="nav-link">Контакты</a>
-                  </Link>
-                </li>
-                <li
-                  onClick={toggleMenu}
-                  className={`nav-item ${pathname === '/register' && 'active'} ${
-                    pathname === '/profile' && 'active'
-                  }`}>
-                  {user.loggedIn ? (
-                    <Link href="/profile">
-                      <a className="nav-link ">
-                        Профиль -{' '}
-                        <span style={{ color: '#15d015', fontWeight: 'bold' }}>
-                          {user.data.username}
-                        </span>
+                  <li
+                    onClick={toggleMenu}
+                    className={`nav-item ${pathname === '/contact' && 'active'}`}>
+                    <Link href="/contact">
+                      <a className="nav-link">Контакты</a>
+                    </Link>
+                  </li>
+                  <li
+                    onClick={toggleMenu}
+                    className={`nav-item ${pathname === '/register' && 'active'} ${
+                      pathname === '/profile' && 'active'
+                    }`}>
+                    {user.loggedIn ? (
+                      <Link href="/profile">
+                        <a className="nav-link ">
+                          Профиль -{' '}
+                          <span style={{ color: '#15d015', fontWeight: 'bold' }}>
+                            {user.data.username}
+                          </span>
+                        </a>
+                      </Link>
+                    ) : (
+                      <Link href="/register">
+                        <a className="nav-link">Вход / Регистрация</a>
+                      </Link>
+                    )}
+                  </li>
+                </ul>
+                <ul className="nav navbar-nav navbar-right">
+                  <li className={`nav-item ${pathname === '/cart' && 'active'}`}>
+                    <Link href="/cart">
+                      <a className="cart">
+                        <span className="ti-bag"></span>
                       </a>
                     </Link>
-                  ) : (
-                    <Link href="/register">
-                      <a className="nav-link">Вход / Регистрация</a>
-                    </Link>
+                  </li>
+                  {totalItems > 0 && (
+                    <i
+                      onClick={() => {
+                        push('/cart');
+                      }}
+                      className="count-bag">
+                      {totalItems}
+                    </i>
                   )}
-                </li>
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li className={`nav-item ${pathname === '/cart' && 'active'}`}>
-                  <Link href="/cart">
-                    <a className="cart">
-                      <span className="ti-bag"></span>
-                    </a>
-                  </Link>
-                </li>
-                {totalItems > 0 && (
-                  <i
-                    onClick={() => {
-                      push('/cart');
-                    }}
-                    className="count-bag">
-                    {totalItems}
-                  </i>
-                )}
 
-                <li className="nav-item">
-                  <button className="search" onClick={onClickSearch}>
-                    <span className="lnr lnr-magnifier" id="search"></span>
-                  </button>
-                </li>
-              </ul>
+                  <li className="nav-item">
+                    <button className="search" onClick={onClickSearch}>
+                      <span className="lnr lnr-magnifier" id="search"></span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </nav>

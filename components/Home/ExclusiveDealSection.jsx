@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice.js';
 
 export default function ExclusiveDealSection() {
+  const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
   return (

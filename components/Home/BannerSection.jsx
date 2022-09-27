@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice.js';
 
 export default function BannerSection() {
+  const lang = useSelector((state) => state.lang.lang);
+
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
   return (
@@ -17,9 +19,15 @@ export default function BannerSection() {
                 <div className="col-lg-5 col-md-6">
                   <div className="banner-content">
                     <h1>
-                      Liveme new
+                      {lang === 'ru' && 'Самые лучшие'}
+                      {lang === 'en' && 'The best'}
+                      {lang === 'tr' && 'En iyi'}
+                      {lang === 'kg' && 'Ең жақсы'}
                       <br />
-                      Collection!
+                      {lang === 'ru' && 'Коллекции'}
+                      {lang === 'en' && 'Collections'}
+                      {lang === 'tr' && 'Koleksiyonlar'}
+                      {lang === 'kg' && 'Коллекциялар'}
                     </h1>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -42,7 +50,12 @@ export default function BannerSection() {
                       <a className="add-btn">
                         <span className="lnr lnr-cross"></span>
                       </a>
-                      <span className="add-text text-uppercase">Добавить в корзину</span>
+                      <span className="add-text text-uppercase">
+                        {lang === 'ru' && 'Добавить в корзину'}
+                        {lang === 'en' && 'Add to cart'}
+                        {lang === 'tr' && 'Sepete ekle'}
+                        {lang === 'kg' && 'Сепке кошуу'}
+                      </span>
                     </div>
                   </div>
                 </div>

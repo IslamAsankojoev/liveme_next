@@ -17,7 +17,7 @@ const Home = ({ data }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(setProducts(data));
-  }, []);
+  }, [data]);
   return (
     <>
       <BannerSection />
@@ -33,7 +33,12 @@ const Home = ({ data }) => {
 
 export default Home;
 
-export async function getServerSideProps() {
-  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`);
+export async function getServerSideProps(ctx) {
+  const locale = ctx.query.locale || 'ru';
+  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`, {
+    headers: {
+      'Accept-Language': locale,
+    },
+  });
   return { props: { data: res.data } };
 }

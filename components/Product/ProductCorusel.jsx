@@ -27,7 +27,6 @@ const ProductCorusel = ({ images }) => {
     <div style={{ width: '100%' }}>
       <div className={styles.corusel}>
         {images.map(({ image }, index) => {
-          console.log(index, active);
           return (
             <div
               key={image}
@@ -50,7 +49,6 @@ const ProductCorusel = ({ images }) => {
       </div>
       <div className={styles.productList}>
         {images.map(({ image }, index) => {
-          console.log(index, active);
           return (
             <div
               onClick={() => {
