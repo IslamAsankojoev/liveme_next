@@ -5,8 +5,8 @@ const nextConfig = {
   },
   images: {
     domains: ['179.61.188.39'],
+    formats: ['image/avif', 'image/webp'],
   },
-  formats: ['image/avif', 'image/webp'],
 };
 
 module.exports = nextConfig;
