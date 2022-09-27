@@ -10,14 +10,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%!important;
     z-index: 8;
     text-align: center;
     background: #e9e9e9;
   }
   .img {
     width: auto;
-    height: 100%;
+    height: 100% !important;
   }
   .show {
     opacity: 1;

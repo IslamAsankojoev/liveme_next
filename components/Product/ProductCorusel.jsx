@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ProductCorusel.module.scss';
 import classnames from 'classnames';
+import Image from 'next/image';
 
 const ProductCorusel = ({ images }) => {
   const [active, setActive] = React.useState(0);

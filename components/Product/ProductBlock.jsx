@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import style from './ProductBlock.module.scss';
 import Image from 'next/image';
-import StaticImage from '../../public/static/img/ıhlamur.webp';
+import StaticImage from '../../scss/static/img/ıhlamur.webp';
 
 export default function ProductBlock({ className, id, title, images, regular_price, sale_price }) {
   const { lang } = useSelector((state) => state.lang);

@@ -313,8 +313,7 @@ export default function SingleProduct({
                       className="row contact_form"
                       action="contact_process.php"
                       method="post"
-                      id="contactForm"
-                      noValidate="novalidate">
+                      id="contactForm">
                       <div className="col-md-12">
                         <div className="form-group">
                           <input

@@ -26,7 +26,7 @@ export default function ItemBlock({ id, title, images, price, count }) {
         <td>
           <div className="media">
             <div className="d-flex" style={{ position: 'relative' }}>
-              <Image src={images[0]?.image} layout="fill" />
+              <Image src={images[0]?.image} width={100} height={170} />
             </div>
             <div className="media-body">
               <p>{title}</p>

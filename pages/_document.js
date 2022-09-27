@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link rel="stylesheet" href="/static/css/linearicons.css" />
+        {/* <link rel="stylesheet" href="/static/css/linearicons.css" />
         <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
         <link rel="stylesheet" href="/static/css/themify-icons.css" />
         <link rel="stylesheet" href="/static/css/bootstrap.css" />
@@ -14,7 +14,7 @@ export default function Document() {
         <link rel="stylesheet" href="/static/css/ion.rangeSlider.css" />
         <link rel="stylesheet" href="/static/css/ion.rangeSlider.skinFlat.css" />
         <link rel="stylesheet" href="/static/css/magnific-popup.css" />
-        <link rel="stylesheet" href="/static/css/main.css" />
+        <link rel="stylesheet" href="/static/css/main.css" /> */}
       </Head>
       <body>
         <Main />
