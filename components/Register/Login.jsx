@@ -43,7 +43,7 @@ export default function Login({ setToggle }) {
           <div className="row">
             <div className="col-lg-6">
               <div className="login_box_img">
-                <img className="img-fluid" src="static/img/login.jpg" alt="" />
+                <img className="img-fluid" src="static/img/login.webp" alt="" />
                 <div className="hover">
                   <h4>Вы у нас впервые?</h4>
                   <p>Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов</p>

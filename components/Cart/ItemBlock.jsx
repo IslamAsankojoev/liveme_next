@@ -2,6 +2,7 @@ import React from 'react';
 import { increment, decrement, removeItem } from '../../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import style from './itemBlock.module.scss';
+import Image from 'next/image';
 
 export default function ItemBlock({ id, title, images, price, count }) {
   const [removing, setRemoving] = React.useState(false);
@@ -24,8 +25,8 @@ export default function ItemBlock({ id, title, images, price, count }) {
         }`}>
         <td>
           <div className="media">
-            <div className="d-flex">
-              <img src={images[0]?.image} alt="" />
+            <div className="d-flex" style={{ position: 'relative' }}>
+              <Image src={images[0]?.image} layout="fill" />
             </div>
             <div className="media-body">
               <p>{title}</p>

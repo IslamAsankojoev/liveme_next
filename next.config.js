@@ -3,10 +3,10 @@ const nextConfig = {
   env: {
     SERVER_DOMAIN: process.env.BACKEND_APP_DOMAIN_NAME,
   },
-  i18n: {
-    locales: ['en', 'tr', 'ru', 'kg'],
-    defaultLocale: 'ru',
+  images: {
+    domains: ['179.61.188.39'],
   },
+  formats: ['image/avif', 'image/webp'],
 };
 
 module.exports = nextConfig;

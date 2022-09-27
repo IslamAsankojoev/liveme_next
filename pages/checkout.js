@@ -9,6 +9,7 @@ import { setShow } from '../redux/slices/thankYouSlice.js';
 import { useRouter } from 'next/router.js';
 import lodash from 'lodash';
 import { DevTool } from '@hookform/devtools';
+import Image from 'next/image';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
@@ -96,7 +97,7 @@ export default function Checkout() {
                     items.map((item) => {
                       return (
                         <div key={item.id} className="order_box-product">
-                          <img src={item.images[0].image} alt={item.title} />
+                          <Image src={item.images[0].image} alt={item.title} layout="fill" />
                           <div className="order_box-info">
                             <Link href={`products/${item.id}`}>
                               <a className="title">{item.title}</a>

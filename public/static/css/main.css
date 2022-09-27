@@ -1672,7 +1672,7 @@ h6 {
 /* banner area css
 ============================================================================================ */
 .banner-area {
-  background: url('../img/969.png') center no-repeat;
+  background: url('../img/969.webp') center no-repeat;
   background-size: cover;
   position: relative;
   background-position: 100%;
@@ -1793,7 +1793,7 @@ h6 {
 }
 
 .organic-breadcrumb {
-  background: url(../img/banner/common-banner.jpg) center no-repeat;
+  background: url(../img/banner/common-banner.webp) center no-repeat;
   background-size: cover;
   padding-top: 130px;
 }
@@ -2305,7 +2305,7 @@ h6 {
 
 .exclusive-deal-area .exclusive-left {
   position: realtive;
-  background: url('../img/1 (1).png') center no-repeat;
+  background: url('../img/1 (1).webp') center no-repeat;
   background-size: cover;
   text-align: center;
   padding: 275px 0;

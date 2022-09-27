@@ -47,7 +47,7 @@ export default function Header() {
             {/* <!-- Brand and toggle get grouped for better mobile display --> */}
             <Link href="/">
               <a className="navbar-brand logo_h">
-                <img src="/static/img/livemeLogo1.png" width={150} alt="Logo" />
+                <img src="/static/img/livemeLogo1.webp" width={150} alt="Logo" />
               </a>
             </Link>
             <div className="header-right">

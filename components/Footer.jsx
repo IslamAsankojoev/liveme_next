@@ -50,37 +50,37 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 col-sm-6">
+          {/* <div className="col-lg-3 col-md-6 col-sm-6">
             <div className="single-footer-widget mail-chimp">
               <h6 className="mb-20">Наш инстаграм</h6>
               <ul className="instafeed d-flex flex-wrap">
                 <li>
-                  <img src="/static/img/i1.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i2.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i3.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i4.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i5.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i6.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i7.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
                 <li>
-                  <img src="/static/img/i8.jpg" alt="" />
+                  <img src="/static/img/ıhlamur.webp" alt="" />
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
           <div className="col-lg-2 col-md-6 col-sm-6">
             <div className="single-footer-widget">
               <h6>Присоединяйтесь</h6>

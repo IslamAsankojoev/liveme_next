@@ -13,8 +13,8 @@ export default function CategorySection() {
               <div className="col-lg-6 col-md-6">
                 <div className="single-deal">
                   <div className="overlay"></div>
-                  <img className="img-fluid w-100" src="static/img/3 (1).png" alt="" />
-                  <a href="static/img/3 (1).png" className="img-pop-up" target="_blank">
+                  <img className="img-fluid w-100" src="static/img/3 (1).webp" alt="" />
+                  <a href="static/img/3 (1).webp" className="img-pop-up" target="_blank">
                     <div className="deal-details">
                       <h6 className="deal-title">Sneaker for Sports</h6>
                     </div>
@@ -24,8 +24,8 @@ export default function CategorySection() {
               <div className="col-lg-6 col-md-6">
                 <div className="single-deal">
                   <div className="overlay"></div>
-                  <img className="img-fluid w-100" src="static/img/1 (1).png" alt="" />
-                  <a href="static/img/1 (1).png" className="img-pop-up" target="_blank">
+                  <img className="img-fluid w-100" src="static/img/1 (1).webp" alt="" />
+                  <a href="static/img/1 (1).webp" className="img-pop-up" target="_blank">
                     <div className="deal-details">
                       <h6 className="deal-title">
                         {lang === 'ru' && 'Спортивная обувь'}
@@ -40,8 +40,8 @@ export default function CategorySection() {
               <div className="col-lg-6 col-md-6">
                 <div className="single-deal">
                   <div className="overlay"></div>
-                  <img className="img-fluid w-100" src="static/img/5 (1).png" alt="" />
-                  <a href="static/img/5 (1).png" className="img-pop-up" target="_blank">
+                  <img className="img-fluid w-100" src="static/img/5 (1).webp" alt="" />
+                  <a href="static/img/5 (1).webp" className="img-pop-up" target="_blank">
                     <div className="deal-details">
                       <h6 className="deal-title">Product for Couple</h6>
                     </div>
@@ -51,8 +51,8 @@ export default function CategorySection() {
               <div className="col-lg-6 col-md-6">
                 <div className="single-deal">
                   <div className="overlay"></div>
-                  <img className="img-fluid w-100" src="static/img/4 (1).png" alt="" />
-                  <a href="static/img/4 (1).png" className="img-pop-up" target="_blank">
+                  <img className="img-fluid w-100" src="static/img/4 (1).webp" alt="" />
+                  <a href="static/img/4 (1).webp" className="img-pop-up" target="_blank">
                     <div className="deal-details">
                       <h6 className="deal-title">Sneaker for Sports</h6>
                     </div>
@@ -64,8 +64,8 @@ export default function CategorySection() {
           {/* <div className="col-lg-4 col-md-6">
             <div className="single-deal">
               <div className="overlay"></div>
-              <img className="img-fluid w-100" src="static/img/5 (1).png" alt="" />
-              <a href="static/img/5 (1).png" className="img-pop-up" target="_blank">
+              <img className="img-fluid w-100" src="static/img/5 (1).webp" alt="" />
+              <a href="static/img/5 (1).webp" className="img-pop-up" target="_blank">
                 <div className="deal-details">
                   <h6 className="deal-title">Sneaker for Sports</h6>
                 </div>

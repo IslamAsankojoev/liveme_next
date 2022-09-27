@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
-import axios from 'axios';
 import style from './ProductBlock.module.scss';
-import { ProductCorusel } from '../index';
+import Image from 'next/image';
+import StaticImage from '../../public/static/img/ıhlamur.webp';
 
 export default function ProductBlock({ className, id, title, images, regular_price, sale_price }) {
   const { lang } = useSelector((state) => state.lang);
@@ -24,14 +24,7 @@ export default function ProductBlock({ className, id, title, images, regular_pri
       <div className={`single-product ${style.product}`}>
         <Link href={`products/${id}`}>
           <a>
-            <img
-              className="img-fluid"
-              width="100%"
-              height={'330px'}
-              // src={status === 'success' ? images[0]?.image : 'static/img/demo-product.webp'}
-              src={'static/img/demo-product.webp'}
-              alt=""
-            />
+            <Image src={StaticImage} alt="Picture of the author" />
           </a>
         </Link>
         <div className={`product-details ${style.details}`}>

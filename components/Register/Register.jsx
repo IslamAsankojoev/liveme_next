@@ -58,7 +58,7 @@ export default function Register({ setToggle }) {
           <div className="row">
             <div className="col-lg-6">
               <div className="login_box_img">
-                <img className="img-fluid" src="static/img/login.jpg" alt="" />
+                <img className="img-fluid" src="static/img/login.webp" alt="" />
                 <div className="hover">
                   <h4>Уже есть аккаунт?</h4>
                   <p>Найслайждайтесь нашими ароматами и духами высшего качества</p>
