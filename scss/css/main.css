@@ -2213,7 +2213,7 @@ h6 {
 
 .single-product .product-details .price .l-through {
   text-decoration: line-through;
-  color: #cccccc;
+  color: rgb(140, 140, 140);
   margin-bottom: 0;
 }
 
@@ -6767,6 +6767,8 @@ label {
 .login_box_area .login_box_img {
   margin-right: -30px;
   position: relative;
+  width: 100%!important;
+  height: 100%!important;
 }
 
 .login_box_area .login_box_img img {
@@ -6774,6 +6776,7 @@ label {
 }
 
 .login_box_area .login_box_img:before {
+  z-index: 1;
   position: absolute;
   left: 0;
   top: 0;
@@ -6785,6 +6788,7 @@ label {
 }
 
 .login_box_area .login_box_img .hover {
+  z-index: 2;
   position: absolute;
   top: 50%;
   left: 0px;

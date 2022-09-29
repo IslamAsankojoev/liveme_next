@@ -1,8 +1,8 @@
-.cartItem{
+.cartItem {
   position: relative;
   opacity: 1;
   visibility: visible;
-  transition: all .4s;
+  transition: all 0.4s;
   //display: block;
   width: 100%;
   background: white;
@@ -19,7 +19,7 @@
   background: orangered;
   opacity: 0.8;
 }
-.removed{
+.removed {
   opacity: 0;
   visibility: hidden;
 }

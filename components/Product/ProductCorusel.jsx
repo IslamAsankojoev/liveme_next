@@ -27,17 +27,25 @@ const ProductCorusel = ({ images }) => {
   return (
     <div style={{ width: '100%' }}>
       <div className={styles.corusel}>
-        {images.map(({ image }, index) => {
+        {images?.map(({ image }, index) => {
           return (
             <div
               key={image}
               className={`single-prd-item ${active === index && styles.show} ${styles.singleProd}`}>
-              <img className={`${styles.img} img-fluid`} src={image} alt="" />
+              <span className="next-img">
+                <Image
+                  className={`${styles.img} img-fluid`}
+                  src={image}
+                  width={140}
+                  height={330}
+                  alt=""
+                />
+              </span>
             </div>
           );
         })}
         {}
-        {images.length > 1 && (
+        {images?.length > 1 && (
           <>
             <div
               className={`${styles.paginate} ${styles.next} ${styles.buttons} ${styles.right}`}
@@ -49,7 +57,7 @@ const ProductCorusel = ({ images }) => {
         )}
       </div>
       <div className={styles.productList}>
-        {images.map(({ image }, index) => {
+        {images?.map(({ image }, index) => {
           return (
             <div
               onClick={() => {
@@ -57,7 +65,7 @@ const ProductCorusel = ({ images }) => {
               }}
               key={image}
               className={`${active === index && styles.activeProduct} ${styles.product}`}>
-              <img className={'img-fluid'} src={image} alt="" />
+              <Image className={'img-fluid'} src={image} width={120} height={150} alt="" />
             </div>
           );
         })}

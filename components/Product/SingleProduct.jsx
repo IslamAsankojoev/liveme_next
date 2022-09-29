@@ -1,10 +1,11 @@
 import React from 'react';
-import { Header, Footer } from '../index';
+import { Header, Footer, WishButton } from '../index';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import store from '../../redux/store';
 import { addItem } from '../../redux/slices/cartSlice.js';
 import ProductCorusel from './ProductCorusel';
+import { toggleItem } from '../../redux/slices/wishSlice.js';
 
 export default function SingleProduct({
   id,
@@ -14,17 +15,23 @@ export default function SingleProduct({
   sale_price,
   description,
   category,
-  data,
+  cover,
   title_ru,
 }) {
+  const gallery = [{ image: cover }, ...images];
+
+  const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
   const price = sale_price ? sale_price : regular_price;
   const [activeTab, setActiveTab] = React.useState('');
 
   const [count, setCount] = React.useState(1);
   const dispatch = useDispatch();
   const addToCart = () => {
-    dispatch(addItem({ id, title, images, price, count }));
+    dispatch(addItem({ id, title, cover, price, count }));
     setCount(1);
+  };
+  const toggleWish = () => {
+    dispatch(toggleItem({ id, title, cover, price }));
   };
 
   return (
@@ -53,7 +60,8 @@ export default function SingleProduct({
           <div className="row s_product_inner">
             <div className="col-lg-6">
               <div className="s_Product_carousel">
-                <ProductCorusel images={images} />
+                <WishButton isWished={inWishtList} onClick={toggleWish} />
+                <ProductCorusel images={gallery} />
               </div>
             </div>
             <div className="col-lg-5 offset-lg-1">
@@ -103,15 +111,9 @@ export default function SingleProduct({
                   </button>
                 </div>
                 <div className="card_area d-flex align-items-center">
-                  <button onClick={addToCart} className="primary-btn button-add" href="#">
+                  <button onClick={addToCart} className="primary-btn button-add">
                     В корзину
                   </button>
-                  {/* <a className="icon_btn" href="#">
-                    <i className="lnr lnr lnr-diamond"></i>
-                  </a>
-                  <a className="icon_btn" href="#">
-                    <i className="lnr lnr lnr-heart"></i>
-                  </a> */}
                 </div>
               </div>
             </div>
@@ -530,8 +532,7 @@ export default function SingleProduct({
                       className="row contact_form"
                       action="contact_process.php"
                       method="post"
-                      id="contactForm"
-                      noValidate="novalidate">
+                      id="contactForm">
                       <div className="col-md-12">
                         <div className="form-group">
                           <input
@@ -588,183 +589,6 @@ export default function SingleProduct({
           </div>
         </div>
       </section>
-
-      {/* <section className="related-product-area section_gap_bottom">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 text-center">
-              <div className="section-title">
-                <h1>Deals of the Week</h1>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-9">
-              <div className="row">
-                <div className="col-lg-4 col-md-4 col-sm-6 mb-20">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r1.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6 mb-20">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r2.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6 mb-20">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r3.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6 mb-20">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r5.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6 mb-20">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r6.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6 mb-20">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r7.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r9.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r10.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-4 col-sm-6">
-                  <div className="single-related-product d-flex">
-                    <a href="#">
-                      <img src="/static/img/r11.jpg" alt="" />
-                    </a>
-                    <div className="desc">
-                      <a href="#" className="title">
-                        Black lace Heels
-                      </a>
-                      <div className="price">
-                        <h6>$189.00</h6>
-                        <h6 className="l-through">$210.00</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3">
-              <div className="ctg-right">
-                <a href="#" target="_blank">
-                  <img
-                    className="img-fluid d-block mx-auto"
-                    src="/static/img/category/c5.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </>
   );
 }

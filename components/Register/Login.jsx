@@ -6,6 +6,8 @@ import { DevTool } from '@hookform/devtools';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/userSlice.js';
 import { useRouter } from 'next/router.js';
+import Image from 'next/image';
+import loginImg from '../../scss/static/img/login.webp';
 
 export default function Login({ setToggle }) {
   const [serverErrors, setServerErrors] = React.useState({});
@@ -42,8 +44,9 @@ export default function Login({ setToggle }) {
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
-              <div className="login_box_img">
-                <img className="img-fluid" src="static/img/login.webp" alt="" />
+              <div className="login_box_img" style={{ minHeight: 500 }}>
+                {/* <img className="img-fluid" src="static/img/login.webp" alt="" /> */}
+                <Image className="img-fluid" src={loginImg} layout="fill" />
                 <div className="hover">
                   <h4>Вы у нас впервые?</h4>
                   <p>Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов</p>

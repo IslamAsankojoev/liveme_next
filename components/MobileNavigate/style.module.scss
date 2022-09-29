@@ -1,0 +1,40 @@
+.mobNav {
+  display: block;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 -2px 10px rgb(19 25 33 / 10%);
+  padding: 13px 0px;
+  background: white;
+  z-index: 50;
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    a {
+      transition: 0.1s;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.9em;
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  }
+  li.active {
+    a {
+      color: #fc6b27;
+    }
+  }
+}

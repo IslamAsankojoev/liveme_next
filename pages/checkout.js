@@ -167,7 +167,7 @@ export default function Checkout() {
                       placeholder="Ваш Email"
                       defaultValue={user.data && user.data.email}
                     />
-                    {<p>{errors?.email?.message}</p>}
+                    <p>{errors?.email?.message}</p>
                   </div>
 
                   <div className="col-md-12 order_box">

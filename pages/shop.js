@@ -5,7 +5,7 @@ import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 
-const page_size = 6;
+const page_size = 25;
 
 export default function Shop({ data }) {
   const products = useSelector((state) => state.products.items);
@@ -100,7 +100,7 @@ export default function Shop({ data }) {
   }, [category]);
   return (
     <>
-      <section className="banner-area organic-breadcrumb">
+      <section className="banner-area organic-breadcrumb shop-page">
         <div className="container">
           <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div className="col-first">
@@ -128,7 +128,7 @@ export default function Shop({ data }) {
           <div className="col-xl-3 col-lg-4 col-md-5">
             <SidebarCategory setCategory={setCategory} setPage={setPage} />
           </div>
-          <div className="col-xl-9 col-lg-8 col-md-7">
+          <div className="col-xl-9 col-lg-8 col-md-12">
             <div className="filter-bar d-flex flex-wrap align-items-center">
               <Pagination
                 page={page}
@@ -225,25 +225,3 @@ Shop.getInitialProps = async (ctx) => {
     .then((res) => res);
   return { data: res?.data };
 };
-
-// export async function getServerSideProps(ctx) {
-//   const locale = ctx.query.locale || 'ru';
-//   let res = await axios
-//     .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
-//       headers: {
-//         'Accept-Language': locale,
-//       },
-//     })
-//     .then((res) => res);
-//   return { props: { data: res?.data, n } };
-// }
-
-// Product.getInitialProps = async (ctx) => {
-//   const locale = ctx.query.locale || 'ru';
-//   let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/${ctx.query.id}`, {
-//     headers: {
-//       'Accept-Language': locale,
-//     },
-//   });
-//   return { data: res.data };
-// };

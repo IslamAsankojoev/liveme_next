@@ -5,39 +5,60 @@ import { addItem } from '../../redux/slices/cartSlice';
 import style from './ProductBlock.module.scss';
 import Image from 'next/image';
 import StaticImage from '../../scss/static/img/ıhlamur.webp';
+import { WishButton } from '../index';
+import { toggleItem } from '../../redux/slices/wishSlice.js';
+import { useRouter } from 'next/router.js';
 
-export default function ProductBlock({ className, id, title, images, regular_price, sale_price }) {
-  const { lang } = useSelector((state) => state.lang);
-  const price = sale_price ? sale_price : regular_price;
+export default function ProductBlock({ className, id, title, cover, regular_price, sale_price }) {
+  const [unmount, setUnmount] = React.useState(false);
+  const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
+  const price = sale_price || regular_price;
   const dispatch = useDispatch();
+  const { pathname } = useRouter();
   const cartItems = useSelector((state) => state.cart.items);
   const added = cartItems.find((obj) => obj.id === id);
-  const addToCart = () => dispatch(addItem({ id, title, images, price }));
+  const addToCart = () => dispatch(addItem({ id, title, price }));
   const status = useSelector((state) => state.products.status);
+
+  const addToWishList = () => {
+    console.log(pathname);
+    if (pathname === '/wishlist') {
+      setUnmount(true);
+      setTimeout(() => {
+        dispatch(toggleItem({ id, title, cover, price }));
+      }, 400);
+    } else {
+      dispatch(toggleItem({ id, title, cover, price }));
+    }
+  };
 
   React.useEffect(() => {
     console.log(title);
   }, []);
 
   return (
-    <div className={`${className} ${style.wrapper}`}>
+    <div className={`${className} ${style.wrapper} ${unmount && style.hide}`}>
       <div className={`single-product ${style.product}`}>
         <Link href={`products/${id}`}>
-          <a>
-            <Image src={StaticImage} alt="Picture of the author" />
+          <a className={style.imgLink}>
+            <span className="next-img">
+              <Image src={cover} width="100%" height={330} alt="Picture of the author" />
+            </span>
           </a>
         </Link>
         <div className={`product-details ${style.details}`}>
           <Link href={`products/${id}`}>
-            <a>
-              <p className={style.title}>{title}</p>
-            </a>
+            <p className={style.title}>{title}</p>
           </Link>
           <span className={style.buy}>
             <div className={`price ${style.price}`}>
-              <h6>{status === 'success' ? price : 'цена'} сом</h6>
+              <h6>
+                {status === 'success' ? price : 'цена'} <span>сом</span>
+              </h6>
               {sale_price && (
-                <h6 className="l-through">{status === 'success' ? regular_price : 'скидка'} сом</h6>
+                <h6 className="l-through">
+                  {status === 'success' ? regular_price : 'скидка'} <span>сом</span>
+                </h6>
               )}
             </div>
             <div className="prd-bottom">
@@ -48,6 +69,7 @@ export default function ProductBlock({ className, id, title, images, regular_pri
           </span>
         </div>
       </div>
+      <WishButton isWished={inWishtList} onClick={addToWishList} />
     </div>
   );
 }

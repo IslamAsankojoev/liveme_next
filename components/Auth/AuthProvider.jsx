@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/userSlice.js';
-import { Header, Footer, MobileCart, ThankYou } from '../../components/index';
+import { Header, Footer, ThankYou, Mobilenavigate } from '../../components/index';
 import { setCart } from '../../redux/slices/cartSlice.js';
 import lodash from 'lodash';
 import { parseCookies } from 'nookies';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { setLang } from '../../redux/slices/langSlice.js';
+import { setWish } from '../../redux/slices/wishSlice.js';
 
 export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
@@ -36,12 +37,9 @@ export default function AuthProvider({ children }) {
       }
     }
     setUser();
-    const cart = JSON.parse(localStorage.getItem('cart'));
     dispatch(setLang(localStorage.getItem('lang')));
-
-    if (lodash.isArray(cart)) {
-      dispatch(setCart(cart));
-    }
+    dispatch(setWish(JSON.parse(localStorage.getItem('wish')) || []));
+    dispatch(setCart(JSON.parse(localStorage.getItem('cart')) || []));
     push({
       pathname,
       query: {
@@ -55,8 +53,8 @@ export default function AuthProvider({ children }) {
     <>
       <Header />
       <>{children}</>
+      <Mobilenavigate />
       <ThankYou />
-      <MobileCart />
       <Footer />
     </>
   );

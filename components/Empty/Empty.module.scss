@@ -1,0 +1,31 @@
+.block {
+  width: 100%;
+  text-align: center;
+  // background: #e8e8e8;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 500px;
+  h1 {
+    font-size: 2em;
+  }
+  p {
+    font-size: 1.5em;
+  }
+}
+.return {
+  transition: 0.2s;
+  margin-top: 20px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #ff7a05;
+  color: white;
+  font-size: 1.3em;
+  cursor: pointer;
+  &:hover {
+    background: #eb7004;
+    color: white;
+  }
+}

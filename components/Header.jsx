@@ -11,6 +11,7 @@ export default function Header() {
   const languages = ['ru', 'en', 'kg', 'tr'];
   const { lang } = useSelector((state) => state.lang);
   const { totalItems } = useSelector((state) => state.cart);
+  const totalWishes = useSelector((state) => state.wish?.totalItems);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [mobileMeniOpen, setMobileMeniOpen] = React.useState(false);
   const searchRef = React.useRef();
@@ -72,7 +73,6 @@ export default function Header() {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
               <div
                 className={classNames({
                   'collapse navbar-collapse offset': true,
@@ -92,57 +92,6 @@ export default function Header() {
                       <a className="nav-link dropdown-toggle">Каталог</a>
                     </Link>
                   </li>
-                  {/* <li className="nav-item submenu dropdown">
-                  <a
-                    href="#"
-                    className="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                    Blog
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li className="nav-item">
-                      <a className="nav-link" href="blog.html">
-                        Blog
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="single-blog.html">
-                        Blog Details
-                      </a>
-                    </li>
-                  </ul>
-                </li> */}
-                  {/* <li className="nav-item submenu dropdown">
-                  <a
-                    href="#"
-                    className="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                    Pages
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li className="nav-item">
-                      <a className="nav-link" href="login.html">
-                        Login
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="tracking.html">
-                        Tracking
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="elements.html">
-                        Elements
-                      </a>
-                    </li>
-                  </ul>
-                </li> */}
                   <li
                     onClick={toggleMenu}
                     className={`nav-item ${pathname === '/contact' && 'active'}`}>
@@ -179,15 +128,36 @@ export default function Header() {
                       </a>
                     </Link>
                   </li>
-                  {totalItems > 0 && (
-                    <i
-                      onClick={() => {
-                        push('/cart');
-                      }}
-                      className="count-bag">
-                      {totalItems}
-                    </i>
-                  )}
+                  <i
+                    onClick={() => {
+                      push('/cart');
+                    }}
+                    className={`count-bag ${totalItems <= 0 && 'hide-count'}`}>
+                    {totalItems}
+                  </i>
+
+                  <li className={`nav-item ${pathname === '/wishlist' && 'active'}`}>
+                    <Link href="/wishlist">
+                      <a className="cart">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="ti-bag"
+                          viewBox="0 0 16 16">
+                          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg>
+                      </a>
+                    </Link>
+                  </li>
+                  <i
+                    onClick={() => {
+                      push('/wishlist');
+                    }}
+                    className={`count-bag ${totalWishes <= 0 && 'hide-count'}`}>
+                    {totalWishes}
+                  </i>
 
                   <li className="nav-item">
                     <button className="search" onClick={onClickSearch}>

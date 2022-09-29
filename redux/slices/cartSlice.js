@@ -36,14 +36,6 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    setProductCount(state, { payload }) {
-      const finded = state.items.find((item) => item.id === payload.id);
-      if (finded) {
-        finded.count = payload.count;
-      } else {
-      }
-    },
-
     removeItem(state, { payload }) {
       state.items = state.items.filter((item) => item.id !== payload);
       countPriceItemsTotal(state);

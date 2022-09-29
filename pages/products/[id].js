@@ -7,7 +7,6 @@ export const Product = ({ data }) => {
   const { push, query, pathname } = useRouter();
 
   React.useEffect(() => {
-    console.log(data);
     push({
       pathname,
       query: {

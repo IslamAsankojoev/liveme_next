@@ -4,6 +4,7 @@ import user from './slices/userSlice';
 import cart from './slices/cartSlice';
 import thankYou from './slices/thankYouSlice';
 import lang from './slices/langSlice';
+import wish from './slices/wishSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     cart,
     thankYou,
     lang,
+    wish,
   },
 });
 
