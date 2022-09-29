@@ -12,7 +12,7 @@ import { setWish } from '../../redux/slices/wishSlice.js';
 
 export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
-  const { pathname, push, query } = useRouter();
+  const { pathname, push, replace, query } = useRouter();
 
   React.useEffect(() => {
     let { access_token } = parseCookies();
@@ -40,13 +40,17 @@ export default function AuthProvider({ children }) {
     dispatch(setLang(localStorage.getItem('lang')));
     dispatch(setWish(JSON.parse(localStorage.getItem('wish')) || []));
     dispatch(setCart(JSON.parse(localStorage.getItem('cart')) || []));
-    push({
-      pathname,
-      query: {
-        ...query,
-        locale: localStorage.getItem('lang'),
+    replace(
+      {
+        pathname,
+        query: {
+          ...query,
+          locale: localStorage.getItem('lang'),
+        },
       },
-    });
+      undefined,
+      { scroll: false },
+    );
   }, []);
 
   return (

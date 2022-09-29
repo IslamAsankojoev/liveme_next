@@ -22,7 +22,7 @@ export default function SingleProduct({
 
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
   const price = sale_price ? sale_price : regular_price;
-  const [activeTab, setActiveTab] = React.useState('');
+  const [activeTab, setActiveTab] = React.useState('home');
 
   const [count, setCount] = React.useState(1);
   const dispatch = useDispatch();

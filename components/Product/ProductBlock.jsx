@@ -17,7 +17,7 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
   const { pathname } = useRouter();
   const cartItems = useSelector((state) => state.cart.items);
   const added = cartItems.find((obj) => obj.id === id);
-  const addToCart = () => dispatch(addItem({ id, title, price }));
+  const addToCart = () => dispatch(addItem({ id, title, price, cover }));
   const status = useSelector((state) => state.products.status);
 
   const addToWishList = () => {
@@ -25,10 +25,10 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
     if (pathname === '/wishlist') {
       setUnmount(true);
       setTimeout(() => {
-        dispatch(toggleItem({ id, title, cover, price }));
+        dispatch(toggleItem({ id, title, cover, sale_price, regular_price }));
       }, 400);
     } else {
-      dispatch(toggleItem({ id, title, cover, price }));
+      dispatch(toggleItem({ id, title, cover, sale_price, regular_price }));
     }
   };
 

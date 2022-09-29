@@ -29,7 +29,7 @@ export default function Header() {
 
   const onChangeLang = (e) => {
     dispatch(setLang(e.target.value));
-    push(
+    replace(
       {
         pathname,
         query: {
