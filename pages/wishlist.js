@@ -35,17 +35,15 @@ export default function Wishlist() {
             </div>
             <div className="row">
               {items &&
-                items
-                  .map((item) => {
-                    return (
-                      <ProductBlock
-                        className="col-lg-3 col-md-6 col-sm-6 col-6"
-                        key={item.id}
-                        {...item}
-                      />
-                    );
-                  })
-                  .slice(0, 8)}
+                items.map((item) => {
+                  return (
+                    <ProductBlock
+                      className="col-lg-3 col-md-6 col-sm-6 col-6"
+                      key={item.id}
+                      {...item}
+                    />
+                  );
+                })}
               {items.length === 0 && <Empty />}
             </div>
           </div>

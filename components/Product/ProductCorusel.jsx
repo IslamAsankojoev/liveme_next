@@ -33,13 +33,7 @@ const ProductCorusel = ({ images }) => {
               key={image}
               className={`single-prd-item ${active === index && styles.show} ${styles.singleProd}`}>
               <span className="next-img">
-                <Image
-                  className={`${styles.img} img-fluid`}
-                  src={image}
-                  width={140}
-                  height={330}
-                  alt=""
-                />
+                <img className={`${styles.img} img-fluid`} src={image} alt="" />
               </span>
             </div>
           );
@@ -65,7 +59,7 @@ const ProductCorusel = ({ images }) => {
               }}
               key={image}
               className={`${active === index && styles.activeProduct} ${styles.product}`}>
-              <Image className={'img-fluid'} src={image} width={120} height={150} alt="" />
+              <img className={'img-fluid'} src={image} alt="" />
             </div>
           );
         })}

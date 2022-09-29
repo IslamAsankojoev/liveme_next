@@ -35,6 +35,7 @@
   li.active {
     a {
       color: #fc6b27;
+      pointer-events: none;
     }
   }
 }

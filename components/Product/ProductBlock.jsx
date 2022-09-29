@@ -42,7 +42,7 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
         <Link href={`products/${id}`}>
           <a className={style.imgLink}>
             <span className="next-img">
-              <Image src={cover} width="100%" height={330} alt="Picture of the author" />
+              <img src={cover} alt="Picture of the author" />
             </span>
           </a>
         </Link>
