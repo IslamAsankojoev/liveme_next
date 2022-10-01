@@ -13,24 +13,11 @@ import {
 import { setProducts } from '../redux/slices/productSlice.js';
 import { useDispatch } from 'react-redux';
 
-const Home = () => {
+const Home = ({ data }) => {
   const dispatch = useDispatch();
-  const [data, setData] = React.useState([]);
   React.useEffect(() => {
     dispatch(setProducts(data));
   }, [data]);
-
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
-        headers: {
-          'Accept-Language': localStorage.getItem('lang'),
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
   return (
     <>
       <BannerSection />
@@ -46,12 +33,26 @@ const Home = () => {
 
 export default Home;
 
-// export async function getServerSideProps(ctx) {
-//   const locale = ctx.query.locale || 'ru';
-//   let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`, {
-//     headers: {
-//       'Accept-Language': locale,
-//     },
-//   });
+export async function getServerSideProps(ctx) {
+  const locale = ctx.query.locale || 'ru';
+  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`, {
+    headers: {
+      'Accept-Language': locale,
+    },
+  });
+  return { props: { data: res.data } };
+}
+
+// export async function getStaticProps(ctx) {
+//   const locale = ctx.locale || 'ru';
+//   let res = await axios
+//     .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
+//       headers: {
+//         'Accept-Language': locale,
+//       },
+//     })
+//     .then((res) => {
+//       return res;
+//     });
 //   return { props: { data: res.data } };
 // }

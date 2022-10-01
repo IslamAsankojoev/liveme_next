@@ -51,12 +51,12 @@ function Contact() {
                   <h6>
                     <a href="#">+996 708 022 101</a>
                   </h6>
-                  <p>Пн по Сб, с 9 до 6</p>
+                  <p>Пн - Сб, с 9ч - 6ч</p>
                 </div>
                 <div className="info_item">
                   <i className="lnr lnr-envelope"></i>
                   <h6>
-                    <a href="#">support@colorlib.com</a>
+                    <a href="#">support@livemeshop.com</a>
                   </h6>
                   <p>Тех. поддержка всегда подскажет!</p>
                 </div>

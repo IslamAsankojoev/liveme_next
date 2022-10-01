@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import style from './ProductBlock.module.scss';
-import Image from 'next/image';
 import StaticImage from '../../scss/static/img/ıhlamur.webp';
 import { WishButton } from '../index';
 import { toggleItem } from '../../redux/slices/wishSlice.js';
 import { useRouter } from 'next/router.js';
+import Image from 'next/future/image';
 
 export default function ProductBlock({ className, id, title, cover, regular_price, sale_price }) {
   const [unmount, setUnmount] = React.useState(false);
