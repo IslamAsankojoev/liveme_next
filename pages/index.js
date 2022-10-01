@@ -13,7 +13,7 @@ import {
 import { setProducts } from '../redux/slices/productSlice.js';
 import { useDispatch } from 'react-redux';
 
-const Home = ({ data }) => {
+const Home = ({ data = [] }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(setProducts(data));
@@ -35,24 +35,13 @@ export default Home;
 
 export async function getServerSideProps(ctx) {
   const locale = ctx.query.locale || 'ru';
-  let res = await axios.get(`${process.env.SERVER_DOMAIN}/api/products/`, {
-    headers: {
-      'Accept-Language': locale,
-    },
-  });
-  return { props: { data: res.data } };
+  let { data = [] } = await axios
+    .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
+      headers: {
+        'Accept-Language': locale,
+      },
+    })
+    .then((res) => res)
+    .catch((err) => err);
+  return { props: { data: data } };
 }
-
-// export async function getStaticProps(ctx) {
-//   const locale = ctx.locale || 'ru';
-//   let res = await axios
-//     .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
-//       headers: {
-//         'Accept-Language': locale,
-//       },
-//     })
-//     .then((res) => {
-//       return res;
-//     });
-//   return { props: { data: res.data } };
-// }

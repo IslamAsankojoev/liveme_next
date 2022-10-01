@@ -214,14 +214,30 @@ export default function Shop({ data }) {
   );
 }
 
-Shop.getInitialProps = async (ctx) => {
+// Shop.getInitialProps = async (ctx) => {
+//   const locale = ctx.query.locale || 'ru';
+//   let { data = [] } = await axios
+//     .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
+//       headers: {
+//         'Accept-Language': locale,
+//       },
+//     })
+//     .then((res) => res);
+//   return { data: data };
+// };
+
+export async function getServerSideProps(ctx) {
   const locale = ctx.query.locale || 'ru';
-  let res = await axios
+  let { data = [] } = await axios
     .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
       headers: {
         'Accept-Language': locale,
       },
     })
     .then((res) => res);
-  return { data: res?.data };
-};
+  return {
+    props: {
+      data,
+    },
+  };
+}
