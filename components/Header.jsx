@@ -15,7 +15,8 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [mobileMeniOpen, setMobileMeniOpen] = React.useState(false);
   const searchRef = React.useRef();
-  const { replace, pathname, query, push } = useRouter();
+  const { replace, pathname, push, asPath } = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const toggleMenu = () => {
@@ -29,17 +30,7 @@ export default function Header() {
 
   const onChangeLang = (e) => {
     dispatch(setLang(e.target.value));
-    replace(
-      {
-        pathname,
-        query: {
-          ...query,
-          locale: e.target.value,
-        },
-      },
-      undefined,
-      { scroll: false },
-    );
+    replace(asPath, asPath, { locale: e.target.value, scroll: false });
   };
   return (
     <header ref={searchRef} className="header_area sticky-header">

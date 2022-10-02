@@ -25,7 +25,7 @@ const Home = ({ data = [] }) => {
       <CategorySection />
       <ProductLoopSection />
       <ExclusiveDealSection />
-      <BrandSection />
+      {/* <BrandSection /> */}
       {/* <RelatedProductLoopSection /> */}
     </>
   );
@@ -34,7 +34,7 @@ const Home = ({ data = [] }) => {
 export default Home;
 
 export async function getServerSideProps(ctx) {
-  const locale = ctx.query.locale || 'ru';
+  const locale = ctx.locale || 'ru';
   let { data = [] } = await axios
     .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
       headers: {

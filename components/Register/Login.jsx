@@ -27,7 +27,7 @@ export default function Login({ setToggle }) {
         password: data.password,
       });
       setCookie(null, 'access_token', res.data.user.token.access, {
-        maxAge: 24 * 60 * 60,
+        maxAge: 10,
       });
       dispatch(setLoggedIn(res.data.user));
       router.push('/profile');

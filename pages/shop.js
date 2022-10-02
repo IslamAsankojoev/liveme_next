@@ -4,11 +4,13 @@ import axios from 'axios';
 import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
+import { useRouter } from 'next/router.js';
 
-const page_size = 25;
+const page_size = 50;
 
 export default function Shop({ data }) {
-  const products = useSelector((state) => state.products.items);
+  const products = [1];
+  // const products = useSelector((state) => state.products.items);
   const status = useSelector((state) => state.products.status);
   const dispatch = useDispatch();
   const [previous, setPrevious] = React.useState(null);
@@ -16,6 +18,7 @@ export default function Shop({ data }) {
   const [count, setCount] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [category, setCategory] = React.useState('');
+  const lang = useSelector((state) => state.lang.lang);
 
   React.useEffect(() => {
     dispatch(setProducts(data?.results));
@@ -29,7 +32,7 @@ export default function Shop({ data }) {
       await axios
         .get(next, {
           headers: {
-            'Accept-Language': localStorage.getItem('lang'),
+            'Accept-Language': lang || 'ru',
           },
         })
         .then((res) => {
@@ -47,7 +50,7 @@ export default function Shop({ data }) {
       await axios
         .get(previous, {
           headers: {
-            'Accept-Language': localStorage.getItem('lang'),
+            'Accept-Language': lang || 'ru',
           },
         })
         .then((res) => {
@@ -66,7 +69,7 @@ export default function Shop({ data }) {
         `${process.env.SERVER_DOMAIN}/api/products/?category=${category}&page=${page_n}&page_size=${page_size}`,
         {
           headers: {
-            'Accept-Language': localStorage.getItem('lang'),
+            'Accept-Language': lang || 'ru',
           },
         },
       )
@@ -87,7 +90,7 @@ export default function Shop({ data }) {
         }/api/products/?category=${category}&page=${1}&page_size=${page_size}`,
         {
           headers: {
-            'Accept-Language': localStorage.getItem('lang'),
+            'Accept-Language': lang || 'ru',
           },
         },
       )
@@ -163,8 +166,8 @@ export default function Shop({ data }) {
                     })}
 
                 {status === 'success' &&
-                  !lodash.isEmpty(products) &&
-                  products.map((item) => {
+                  !lodash.isEmpty(data.results) &&
+                  data.results.map((item) => {
                     return (
                       <ProductBlock className="col-lg-4 col-md-6 col-6" key={item.id} {...item} />
                     );
@@ -214,27 +217,16 @@ export default function Shop({ data }) {
   );
 }
 
-// Shop.getInitialProps = async (ctx) => {
-//   const locale = ctx.query.locale || 'ru';
-//   let { data = [] } = await axios
-//     .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
-//       headers: {
-//         'Accept-Language': locale,
-//       },
-//     })
-//     .then((res) => res);
-//   return { data: data };
-// };
-
 export async function getServerSideProps(ctx) {
-  const locale = ctx.query.locale || 'ru';
-  let { data = [] } = await axios
-    .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
+  const locale = ctx.locale || 'ru';
+  let { data = [] } = await axios.get(
+    `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
+    {
       headers: {
         'Accept-Language': locale,
       },
-    })
-    .then((res) => res);
+    },
+  );
   return {
     props: {
       data,

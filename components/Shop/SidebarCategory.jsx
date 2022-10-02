@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 export default function SidebarCategory({ setCategory, setPage }) {
   const [categories, setCategories] = React.useState([]);
   const lang = useSelector((state) => state.lang.lang);
+  const router = useRouter();
 
   const onClickCategory = (category) => {
     setCategory(category);
@@ -16,7 +17,7 @@ export default function SidebarCategory({ setCategory, setPage }) {
     axios
       .get(`${process.env.SERVER_DOMAIN}/api/products/category/`, {
         headers: {
-          'Accept-Language': localStorage.getItem('lang'),
+          'Accept-Language': lang || 'ru',
         },
       })
       .then((res) => setCategories(res.data));

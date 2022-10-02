@@ -25,6 +25,7 @@ export default function MyApp({ Component, pageProps }) {
 }
 
 MyApp.getInitialProps = async (ctx) => {
+  console.log(12);
   const appProps = await App.getInitialProps(ctx);
   return { ...appProps };
 };

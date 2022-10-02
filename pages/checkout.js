@@ -97,7 +97,7 @@ export default function Checkout() {
                     items.map((item) => {
                       return (
                         <div key={item.id} className="order_box-product">
-                          <Image src={item.images[0].image} alt={item.title} layout="fill" />
+                          <img src={item.cover} alt={item.title} style={{ background: 'white' }} />
                           <div className="order_box-info">
                             <Link href={`products/${item.id}`}>
                               <a className="title">{item.title}</a>
