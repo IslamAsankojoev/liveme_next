@@ -40,7 +40,8 @@ export default function AuthProvider({ children }) {
       dispatch(setLang(locale));
       dispatch(setWish(JSON.parse(localStorage.getItem('wish')) || []));
       dispatch(setCart(JSON.parse(localStorage.getItem('cart')) || []));
-      // replace(asPath, asPath, { locale: 'ru' });
+      // replace(asPath, asPath, { locale: localStorage.getItem('lang') || 'ru' });
+      console.log(12);
     };
 
     doMagic();

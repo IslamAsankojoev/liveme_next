@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link.js';
-import { ItemBlock } from '../components/index';
-import {useDispatch, useSelector} from "react-redux";
+import { ItemBlock, BannerArea } from '../components/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { Empty } from '../components';
+import cartText from '../collections/cart/cartCollection.json';
 
 export default function Cart() {
   const { items, totalPrice } = useSelector((state) => state.cart);
@@ -9,27 +11,8 @@ export default function Cart() {
 
   return (
     <>
-      {/* <!-- Start Banner Area --> */}
-      <section className="banner-area organic-breadcrumb">
-        <div className="container">
-          <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div className="col-first">
-              <h1>Корзина</h1>
-              <nav className="d-flex align-items-center">
-                <Link href="/">
-                  <a>
-                    Home<span className="lnr lnr-arrow-right"></span>
-                  </a>
-                </Link>
-                <a href="category.html">Корзина</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* <!-- End Banner Area --> */}
+      <BannerArea title={cartText.page_title} />
 
-      {/* <!--================Cart Area =================--> */}
       <section className="cart_area">
         <div className="container">
           {items.length > 0 ? (
@@ -71,19 +54,7 @@ export default function Cart() {
               </div>
             </div>
           ) : (
-            <div className="cart-empty">
-              <h2>Корзина пустая</h2>
-              <p>
-                Вероятней всего, вы не заказывали ещё товар.
-                <br />
-                Для того, чтобы заказать товар, перейди на главную страницу.
-              </p>
-              <br />
-              <br />
-              <Link href="/">
-                <a className="gray_btn">Вернуться в магазин</a>
-              </Link>
-            </div>
+            <Empty title={cartText.empty.title} />
           )}
         </div>
       </section>

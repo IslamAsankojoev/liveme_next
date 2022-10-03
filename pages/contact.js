@@ -1,26 +1,17 @@
 import React from 'react';
+import contactText from '../collections/contacts/contactCollection.json';
+import texts from '../collections/texts.json';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import { BannerArea } from '../components';
 
 function Contact() {
-  const [loaded, setloaded] = React.useState(true)
-
+  const [loaded, setloaded] = React.useState(true);
+  const lang = useSelector((state) => state.lang.lang);
 
   return (
     <>
-      <section className="banner-area organic-breadcrumb">
-        <div className="container">
-          <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div className="col-first">
-              <h1>Контакты</h1>
-              <nav className="d-flex align-items-center">
-                <a href="index.html">
-                  Home<span className="lnr lnr-arrow-right"></span>
-                </a>
-                <a href="category.html">Контакты</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BannerArea title={contactText.page_title} path={'/contact'} />
 
       <section className="map">
         <div className="container">
@@ -34,8 +25,7 @@ function Contact() {
             frameBorder="0"
             style={{
               visibility: loaded ? 'visible' : 'hidden',
-            }}
-          ></iframe>
+            }}></iframe>
           <br />
           <br />
           <br />
@@ -50,22 +40,22 @@ function Contact() {
               <div className="contact_info">
                 <div className="info_item">
                   <i className="lnr lnr-home"></i>
-                  <h6>Кыргызстан, Бишкек</h6>
-                  <p>Первомайский Район</p>
+                  <h6>{contactText.info.country[lang]}</h6>
+                  <p>{contactText.info.region[lang]}</p>
                 </div>
                 <div className="info_item">
                   <i className="lnr lnr-phone-handset"></i>
                   <h6>
-                    <a href="#">+996 708 022 101</a>
+                    <a href="#">{contactText.info.phone}</a>
                   </h6>
-                  <p>Пн - Сб, с 9ч - 6ч</p>
+                  <p>{contactText.info.schedule}</p>
                 </div>
                 <div className="info_item">
                   <i className="lnr lnr-envelope"></i>
                   <h6>
-                    <a href="#">support@livemeshop.com</a>
+                    <a href="#">{contactText.info.email}</a>
                   </h6>
-                  <p>Тех. поддержка всегда подскажет!</p>
+                  <p>{contactText.info.email_text[lang]}</p>
                 </div>
               </div>
             </div>
@@ -78,7 +68,7 @@ function Contact() {
                       className="form-control"
                       id="name"
                       name="name"
-                      placeholder="Ваше имя"
+                      placeholder={contactText.form.name[lang]}
                     />
                   </div>
                   <div className="form-group">
@@ -87,7 +77,7 @@ function Contact() {
                       className="form-control"
                       id="email"
                       name="email"
-                      placeholder="Ваш email"
+                      placeholder={contactText.form.email[lang]}
                     />
                   </div>
                   <div className="form-group">
@@ -96,7 +86,7 @@ function Contact() {
                       className="form-control"
                       id="subject"
                       name="subject"
-                      placeholder="Введите тему"
+                      placeholder={contactText.form.subject[lang]}
                     />
                   </div>
                 </div>
@@ -107,12 +97,12 @@ function Contact() {
                       name="message"
                       id="message"
                       rows="1"
-                      placeholder="Ваше сообщение"></textarea>
+                      placeholder={contactText.form.message[lang]}></textarea>
                   </div>
                 </div>
                 <div className="col-md-12 text-right">
                   <button type="submit" value="submit" className="primary-btn">
-                    Отправить
+                    {contactText.form.send[lang]}
                   </button>
                 </div>
               </form>

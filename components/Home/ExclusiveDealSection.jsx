@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../../redux/slices/cartSlice.js';
+import { addItem } from '../../redux/slices/cartSlice';
+import texts from '../../collections/texts.json';
 
 export default function ExclusiveDealSection() {
   const lang = useSelector((state) => state.lang.lang);
@@ -68,7 +69,9 @@ export default function ExclusiveDealSection() {
                     <a className="add-btn" href="">
                       <span className="ti-bag"></span>
                     </a>
-                    <button className="add-text text-uppercase">Добавить в корзину</button>
+                    <button className="add-text text-uppercase">
+                      {texts.buttonAddToCart[lang].text}
+                    </button>
                   </div>
                 </div>
               </div>

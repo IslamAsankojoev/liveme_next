@@ -8,8 +8,10 @@ import { useRouter } from 'next/router';
 import { setLoggedIn } from '../../redux/slices/userSlice.js';
 import loginImg from '../../scss/static/img/login.webp';
 import Image from 'next/image';
+import profileText from '../../collections/Profile/registerCollection.json';
 
 export default function Register({ setToggle }) {
+  const lang = useSelector((state) => state.lang.lang);
   const [usernameIsAlreadyExist, setUsernameIsAlreadyExist] = React.useState('');
   const user = useSelector((state) => state.user.data);
   const router = useRouter();
@@ -62,21 +64,21 @@ export default function Register({ setToggle }) {
                 {/* <img className="img-fluid" src="static/img/login.webp" alt="" /> */}
                 <Image className="img-fluid" src={loginImg} layout="fill" />
                 <div className="hover">
-                  <h4>Уже есть аккаунт?</h4>
-                  <p>Найслайждайтесь нашими ароматами и духами высшего качества</p>
+                  <h4>{profileText.login.info.title[lang]}</h4>
+                  <p>{profileText.login.info.subtitle[lang]}</p>
                   <a
                     className="primary-btn toggle"
                     onClick={() => {
                       setToggle((prev) => !prev);
                     }}>
-                    Вход
+                    {profileText.login.form.button[lang]}
                   </a>
                 </div>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="login_form_inner">
-                <h3>Регистрация</h3>
+                <h3>{profileText.register.form.title[lang]}</h3>
                 <form className="row login_form" onSubmit={handleSubmit(onSubmit)} id="contactForm">
                   <div className="col-md-12 form-group">
                     <input
@@ -86,7 +88,7 @@ export default function Register({ setToggle }) {
                       className="form-control"
                       id="username"
                       name="username"
-                      placeholder={`Ваш логин ${
+                      placeholder={`${profileText.register.form.name[lang]} ${
                         errors?.username?.type === 'required' ? '- обязательно' : ''
                       }`}
                     />
@@ -108,7 +110,7 @@ export default function Register({ setToggle }) {
                       id="email"
                       name="email"
                       inputMode="email"
-                      placeholder={`Ваш Email ${
+                      placeholder={`${profileText.register.form.email[lang]} ${
                         errors?.email?.type === 'required' ? '- обязательно' : ''
                       }`}
                     />
@@ -123,7 +125,7 @@ export default function Register({ setToggle }) {
                       name="password"
                       className="form-control"
                       type="password"
-                      placeholder={`Ваш пароль ${
+                      placeholder={`${profileText.register.form.password[lang]} ${
                         errors?.password?.type === 'required' ? '- обязательно' : ''
                       }`}
                       {...register('password', {
@@ -154,7 +156,7 @@ export default function Register({ setToggle }) {
 
                   <div className="col-md-12 form-group">
                     <button type="submit" value="submit" className="primary-btn">
-                      Зарегистрироваться
+                      {profileText.register.form.button[lang]}
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>

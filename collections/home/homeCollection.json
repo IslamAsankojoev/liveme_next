@@ -1,4 +1,10 @@
 {
+  "page_title": {
+    "ru": "Главная",
+    "en": "Home",
+    "kg": "Башкы бет",
+    "tr": "Ana Sayfa"
+  },
   "header_area": {
     "kg": {
       "title": "Ең жақсы Коллекциялар",

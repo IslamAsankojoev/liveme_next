@@ -1,56 +1,42 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Empty, ProductBlock, Test } from '../components/index.js';
+import { Empty, ProductBlock, BannerArea } from '../components';
+import wishlistText from '../collections/wishlist/wishlistCollection.json';
 
 export default function Wishlist() {
   const items = useSelector((state) => state.wish.items);
+  const lang = useSelector((state) => state.lang.lang);
   return (
     <>
-      <section className="banner-area organic-breadcrumb">
-        <div className="container">
-          <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div className="col-first">
-              <h1>Избранные</h1>
-              <nav className="d-flex align-items-center">
-                <a href="index.html">
-                  Home<span className="lnr lnr-arrow-right"></span>
-                </a>
-                <a href="category.html">Избранные</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="owl-carousel active-product-area section_gap">
+      <BannerArea title={wishlistText.page_title} path={'/wishlist'} />
+
+      <section className="cart_area owl-carousel active-product-area section_gap">
         <div className="single-product-slider">
           <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-lg-6 text-center">
-                <div className="section-title">
-                  <br />
-                  <br />
-                  <h1>Избранные</h1>
+            {items.length > 0 && (
+              <div className="row justify-content-center">
+                <div className="col-lg-6 text-center">
+                  <div className="section-title">
+                    <br />
+                    <br />
+                    <h1>{wishlistText.page_title[lang]}</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <Test />
-            <div className="row">
-              {items &&
-                items.map((item) => {
-                  return (
-                    <ProductBlock
-                      className="col-lg-3 col-md-6 col-sm-6 col-6"
-                      key={item.id}
-                      {...item}
-                    />
-                  );
-                })}
-              {items.length === 0 && <Empty />}
-            </div>
+            )}
+            {items.length > 0 ? (
+              <div className="row">
+                {items.length > 0 && items.map((item) => <ProductBlock key={item.id} {...item} />)}
+              </div>
+            ) : (
+              <Empty title={wishlistText.empty.title} />
+            )}
           </div>
         </div>
       </section>
     </>
   );
+}
+{
+  /*<ProductBlock className="col-lg-3 col-md-6 col-sm-6 col-6" key={item.id} {...item}/>*/
 }

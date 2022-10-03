@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLang } from '../redux/slices/langSlice';
 import Image from 'next/image';
+import texts from '../collections/texts.json';
+
+const languages = ['ru', 'en', 'kg', 'tr'];
 
 export default function Header() {
-  const languages = ['ru', 'en', 'kg', 'tr'];
-  const { lang } = useSelector((state) => state.lang);
+  const lang = useSelector((state) => state.lang.lang);
   const { totalItems } = useSelector((state) => state.cart);
   const totalWishes = useSelector((state) => state.wish?.totalItems);
   const [searchOpen, setSearchOpen] = React.useState(false);
@@ -18,9 +20,10 @@ export default function Header() {
   const { replace, pathname, push, asPath } = useRouter();
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const { loggedIn } = useSelector((state) => state.user);
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
+    setSearchOpen(false);
   };
 
   const onClickSearch = () => {
@@ -32,12 +35,12 @@ export default function Header() {
     dispatch(setLang(e.target.value));
     replace(asPath, asPath, { locale: e.target.value, scroll: false });
   };
+
   return (
     <header ref={searchRef} className="header_area sticky-header">
       <div className="main_menu">
         <nav className="navbar navbar-expand-lg navbar-light main_box">
           <div className="container">
-            {/* <!-- Brand and toggle get grouped for better mobile display --> */}
             <Link href="/">
               <a className="navbar-brand logo_h">
                 <Image src={'/livemeLogo1.webp'} width={140} height={45} />
@@ -46,7 +49,7 @@ export default function Header() {
             <div className="header-right">
               <select name="langs" onChange={onChangeLang} id="langs">
                 {languages.map((language, id) => (
-                  <option defaultValue={language} key={id} selected={language === lang}>
+                  <option key={id} value={language} selected={language === lang}>
                     {language}
                   </option>
                 ))}
@@ -71,48 +74,40 @@ export default function Header() {
                 })}
                 id="navbarSupportedContent">
                 <ul className="nav navbar-nav menu_nav ml-auto">
-                  <li onClick={toggleMenu} className={`nav-item ${pathname === '/' && 'active'}`}>
-                    <Link href="/">
-                      <a className="nav-link">Главная</a>
-                    </Link>
-                  </li>
-                  <li
-                    onClick={toggleMenu}
-                    className={`nav-item ${pathname === '/shop' && 'active'}`}>
-                    <Link href="/shop">
-                      <a className="nav-link dropdown-toggle">Каталог</a>
-                    </Link>
-                  </li>
-                  <li
-                    onClick={toggleMenu}
-                    className={`nav-item ${pathname === '/contact' && 'active'}`}>
-                    <Link href="/contact">
-                      <a className="nav-link">Контакты</a>
-                    </Link>
-                  </li>
-                  <li
-                    onClick={toggleMenu}
-                    className={`nav-item ${pathname === '/register' && 'active'} ${
-                      pathname === '/profile' && 'active'
-                    }`}>
-                    {user.loggedIn ? (
-                      <Link href="/profile">
-                        <a className="nav-link ">
-                          Профиль -{' '}
-                          <span style={{ color: '#15d015', fontWeight: 'bold' }}>
-                            {user.data.username}
-                          </span>
-                        </a>
-                      </Link>
-                    ) : (
-                      <Link href="/register">
-                        <a className="nav-link">Вход / Регистрация</a>
-                      </Link>
-                    )}
-                  </li>
+                  {texts.header?.menu?.map((item, id) => {
+                    {
+                      if (!loggedIn && item.link === '/register') {
+                        return (
+                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
+                            <Link href={item.link}>
+                              <a className="nav-link">{item.text[lang]}</a>
+                            </Link>
+                          </li>
+                        );
+                      }
+                      if (item.link === '/profile' && loggedIn) {
+                        return (
+                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
+                            <Link href={item.link}>
+                              <a className="nav-link">{item.text[lang]}</a>
+                            </Link>
+                          </li>
+                        );
+                      }
+                      if (item.link !== '/profile' && item.link !== '/register') {
+                        return (
+                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
+                            <Link href={item.link}>
+                              <a className="nav-link">{item.text[lang]}</a>
+                            </Link>
+                          </li>
+                        );
+                      }
+                    }
+                  })}
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                  <li className={`nav-item ${pathname === '/cart' && 'active'}`}>
+                  <li className={`nav-item  ${pathname === '/cart' && 'active'} `}>
                     <Link href="/cart">
                       <a className="cart">
                         <span className="ti-bag"></span>
@@ -127,7 +122,10 @@ export default function Header() {
                     {totalItems}
                   </i>
 
-                  <li className={`nav-item ${pathname === '/wishlist' && 'active'}`}>
+                  <li
+                    className={`nav-item d-sm-flex d-none  ${
+                      pathname === '/wishlist' && 'active'
+                    }`}>
                     <Link href="/wishlist">
                       <a className="cart">
                         <svg

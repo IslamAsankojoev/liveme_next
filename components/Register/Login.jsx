@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { setCookie } from 'nookies';
 import { DevTool } from '@hookform/devtools';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/userSlice.js';
 import { useRouter } from 'next/router.js';
 import Image from 'next/image';
 import loginImg from '../../scss/static/img/login.webp';
+import profileText from '../../collections/Profile/registerCollection.json';
 
 export default function Login({ setToggle }) {
+  const lang = useSelector((state) => state.lang.lang);
   const [serverErrors, setServerErrors] = React.useState({});
   const dispatch = useDispatch();
   const router = useRouter();
@@ -48,21 +50,21 @@ export default function Login({ setToggle }) {
                 {/* <img className="img-fluid" src="static/img/login.webp" alt="" /> */}
                 <Image className="img-fluid" src={loginImg} layout="fill" />
                 <div className="hover">
-                  <h4>Вы у нас впервые?</h4>
-                  <p>Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов</p>
+                  <h4>{profileText.register.info.title[lang]}</h4>
+                  <p>{profileText.register.info.subtitle[lang]}</p>
                   <a
                     className="primary-btn toggle"
                     onClick={() => {
                       setToggle((prev) => !prev);
                     }}>
-                    Регистрация
+                    {profileText.register.form.button[lang]}
                   </a>
                 </div>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="login_form_inner">
-                <h3>Вход</h3>
+                <h3>{profileText.login.form.title[lang]}</h3>
                 <form className="row login_form" onSubmit={handleSubmit(onSubmit)} id="contactForm">
                   <div className="col-md-12 form-group">
                     <input
@@ -72,7 +74,7 @@ export default function Login({ setToggle }) {
                       type="text"
                       className="form-control"
                       name="username"
-                      placeholder="Имя пользователя"
+                      placeholder={profileText.login.form.username[lang]}
                     />
                   </div>
                   <div className="col-md-12 form-group">
@@ -83,7 +85,7 @@ export default function Login({ setToggle }) {
                       type="password"
                       className="form-control"
                       name="password"
-                      placeholder="Пароль"
+                      placeholder={profileText.login.form.password[lang]}
                     />
                     {serverErrors?.detail && (
                       <p className="form-errors">Неверный пароль или логин</p>
@@ -92,7 +94,7 @@ export default function Login({ setToggle }) {
 
                   <div className="col-md-12 form-group">
                     <button type="submit" value="submit" className="primary-btn">
-                      Войти
+                      {profileText.login.form.button[lang]}
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>

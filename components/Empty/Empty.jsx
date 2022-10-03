@@ -1,15 +1,23 @@
 import React from 'react';
 import style from './Empty.module.scss';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import texts from '../../collections/texts.json';
 
-export default function Empty() {
+const Empty = ({ title = texts.empty.title, text = texts.empty.subtitle }) => {
+  const lang = useSelector((state) => state.lang.lang);
   return (
     <div className={style.block}>
-      <h1>Тут пусто 😕</h1>
-      <p>Перейдите на главную страницу.</p>
-      <Link href="/">
-        <a className={style.return}>Вернуться на главную</a>
-      </Link>
+      <div className="cart-empty">
+        <h2>{title[lang] || title}</h2>
+        <p>{text[lang] || text}</p>
+        <br />
+        <br />
+        <Link href="/">
+          <a className="gray_btn">{texts.empty.button[lang]}</a>
+        </Link>
+      </div>
     </div>
   );
-}
+};
+export default Empty;
