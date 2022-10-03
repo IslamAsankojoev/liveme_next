@@ -32,7 +32,7 @@ export default async (req, res) => {
     );
     res.status(200).end();
   } catch (e) {
-    console.log('errrrrr');
+    console.log(e);
     res.status(400).send(e);
   }
 };

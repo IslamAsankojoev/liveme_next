@@ -4,9 +4,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router.js';
 import { useSelector } from 'react-redux';
 export const Product = ({ data }) => {
-  React.useEffect(() => {
-    console.log(data);
-  }, []);
   return <>{data && <SingleProduct {...data} />}</>;
 };
 

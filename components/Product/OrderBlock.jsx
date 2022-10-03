@@ -11,9 +11,6 @@ export default function OrderBlock({
   created,
   payment_method,
 }) {
-  React.useEffect(() => {
-    console.log(products);
-  }, []);
   return (
     <>
       <div className={style.order_item}>

@@ -6,11 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 import { useRouter } from 'next/router.js';
 
-const page_size = 50;
+const page_size = 6;
 
-export default function Shop({ data }) {
-  const products = [1];
-  // const products = useSelector((state) => state.products.items);
+export default function Shop() {
+  const products = useSelector((state) => state.products.items);
   const status = useSelector((state) => state.products.status);
   const dispatch = useDispatch();
   const [previous, setPrevious] = React.useState(null);
@@ -21,11 +20,23 @@ export default function Shop({ data }) {
   const lang = useSelector((state) => state.lang.lang);
 
   React.useEffect(() => {
-    dispatch(setProducts(data?.results));
-    setNext(data?.next);
-    setPrevious(data?.previous);
-    setCount(data?.count);
-  }, [data]);
+    axios
+      .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
+        headers: {
+          'Accept-Language': lang,
+        },
+      })
+      .then(({ data }) => {
+        dispatch(setProducts(data.results));
+      });
+  }, [lang]);
+
+  // React.useEffect(() => {
+  //   dispatch(setProducts(data?.results));
+  //   setNext(data?.next);
+  //   setPrevious(data?.previous);
+  //   setCount(data?.count);
+  // }, [data]);
 
   const handleNext = async () => {
     if (next) {
@@ -166,8 +177,8 @@ export default function Shop({ data }) {
                     })}
 
                 {status === 'success' &&
-                  !lodash.isEmpty(data.results) &&
-                  data.results.map((item) => {
+                  !lodash.isEmpty(products) &&
+                  products.map((item) => {
                     return (
                       <ProductBlock className="col-lg-4 col-md-6 col-6" key={item.id} {...item} />
                     );
@@ -217,19 +228,19 @@ export default function Shop({ data }) {
   );
 }
 
-export async function getServerSideProps(ctx) {
-  const locale = ctx.locale || 'ru';
-  let { data = [] } = await axios.get(
-    `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
-    {
-      headers: {
-        'Accept-Language': locale,
-      },
-    },
-  );
-  return {
-    props: {
-      data,
-    },
-  };
-}
+// export async function getServerSideProps(ctx) {
+//   const locale = ctx.locale || 'ru';
+//   let { data = [] } = await axios.get(
+//     `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
+//     {
+//       headers: {
+//         'Accept-Language': locale,
+//       },
+//     },
+//   );
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }

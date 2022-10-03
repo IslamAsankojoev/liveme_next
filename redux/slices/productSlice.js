@@ -23,11 +23,6 @@ const productsSlice = createSlice({
       state.status = 'success';
     },
   },
-  // extraReducers: {
-  //   [fetchProducts.fulfilled]: (state, action) => {
-  //     console.log(action.payload);
-  //   },
-  // },
 });
 
 export const { setProducts } = productsSlice.actions;

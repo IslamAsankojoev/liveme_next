@@ -38,7 +38,6 @@ export default function Register({ setToggle }) {
           },
         },
       );
-      console.log(res);
       setCookie(null, 'access_token', res.data.token.access, {
         maxAge: 24 * 60 * 60,
       });

@@ -46,9 +46,9 @@ export default function ConfirmPassword() {
     setValue({ password: '', confirmPwd: '', old_password: '' });
   };
 
-  const handleChange = (e) => {
-    console.log(setValue({ ...value, [e.target.name]: e.target.value }));
-  };
+  // const handleChange = (e) => {
+  //   console.log(setValue({ ...value, [e.target.name]: e.target.value }));
+  // };
 
   return (
     <form

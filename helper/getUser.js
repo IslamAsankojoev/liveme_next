@@ -5,7 +5,6 @@ const getUser = async (ctx) => {
 
   let user = {};
   let {access_token, refresh_token} =  parseCookies()
-  console.log(parseCookies())
   return {props: {
       access_token, refresh_token
     }}

@@ -1,6 +1,9 @@
 import React from 'react';
 
 function Contact() {
+  const [loaded, setloaded] = React.useState(true)
+
+
   return (
     <>
       <section className="banner-area organic-breadcrumb">
@@ -28,7 +31,11 @@ function Contact() {
             src="https://yandex.ru/map-widget/v1/?um=constructor%3A672753bef7046eafc75c8229bcaea95324497fbd58ee12953e2e59448ab55af2&amp;source=constructor"
             width="100%"
             height="419"
-            frameBorder="0"></iframe>
+            frameBorder="0"
+            style={{
+              visibility: loaded ? 'visible' : 'hidden',
+            }}
+          ></iframe>
           <br />
           <br />
           <br />

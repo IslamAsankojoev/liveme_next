@@ -1,17 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setLoggedIn } from '../../redux/slices/userSlice.js';
+import { setLoggedIn } from '../../redux/slices/userSlice';
 import { Header, Footer, ThankYou, Mobilenavigate } from '../../components/index';
-import { setCart } from '../../redux/slices/cartSlice.js';
+import { setCart } from '../../redux/slices/cartSlice';
 import { parseCookies } from 'nookies';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { setLang } from '../../redux/slices/langSlice.js';
-import { setWish } from '../../redux/slices/wishSlice.js';
+import { setLang } from '../../redux/slices/langSlice';
+import { setWish } from 'redux/slices/wishSlice';
 
 export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
-  const { pathname, asPath, push, replace, query } = useRouter();
+  const { pathname, asPath, push, replace, query, locale } = useRouter();
 
   React.useEffect(() => {
     const doMagic = () => {
@@ -37,10 +37,10 @@ export default function AuthProvider({ children }) {
         }
       }
       setUser();
-      dispatch(setLang(localStorage.getItem('locale')));
+      dispatch(setLang(locale));
       dispatch(setWish(JSON.parse(localStorage.getItem('wish')) || []));
       dispatch(setCart(JSON.parse(localStorage.getItem('cart')) || []));
-      replace(asPath, asPath, { locale: localStorage.getItem('locale') });
+      // replace(asPath, asPath, { locale: 'ru' });
     };
 
     doMagic();

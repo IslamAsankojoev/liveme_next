@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link.js';
-import { useDispatch, useSelector } from 'react-redux';
 import { ItemBlock } from '../components/index';
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Cart() {
   const { items, totalPrice } = useSelector((state) => state.cart);

@@ -1,8 +1,10 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import React from 'react';
 export default function Document() {
   return (
     <Html>
       <Head>
+        <meta name="google" content="notranslate" />
         {/* <link rel="stylesheet" href="/static/css/linearicons.css" />
         <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
         <link rel="stylesheet" href="/static/css/themify-icons.css" />

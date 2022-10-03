@@ -64,11 +64,11 @@ export default function ExclusiveDealSection() {
                         }),
                       );
                     }}
-                    className="add-bag d-flex align-items-center justify-content-center">
+                    className="add-bag d-flex align-items-center justify-content-center simple-btn">
                     <a className="add-btn" href="">
                       <span className="ti-bag"></span>
                     </a>
-                    <span className="add-text text-uppercase">Добавить в корзину</span>
+                    <button className="add-text text-uppercase">Добавить в корзину</button>
                   </div>
                 </div>
               </div>

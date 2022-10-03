@@ -3,7 +3,6 @@ import { setCookie } from 'nookies';
 export default async (req, res) => {
   const { password, identifier } = req.body;
 
-  console.log(password, identifier);
 
   try {
     const postRes = await axios.post(`${process.env.DOMAIN}/api/auth/local`, {
@@ -20,7 +19,7 @@ export default async (req, res) => {
 
     res.status(200).end();
   } catch (e) {
-    console.log('Catch');
+    console.log(e);
     res.status(400).send(e);
   }
 };

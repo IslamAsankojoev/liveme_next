@@ -31,7 +31,6 @@ export default function Checkout() {
     .toString();
 
   const onSend = async (data) => {
-    console.log(data);
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${
       data?.email
     }\nАдрес - ${data?.address}\nМетод оплаты - ${

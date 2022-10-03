@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Empty, ProductBlock } from '../components/index.js';
+import { Empty, ProductBlock, Test } from '../components/index.js';
 
 export default function Wishlist() {
   const items = useSelector((state) => state.wish.items);
@@ -33,6 +33,8 @@ export default function Wishlist() {
                 </div>
               </div>
             </div>
+
+            <Test />
             <div className="row">
               {items &&
                 items.map((item) => {

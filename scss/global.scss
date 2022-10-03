@@ -3,6 +3,28 @@
 .sticky-header {
   position: fixed;
 }
+.simple-btn {
+  transition: 0.2s;
+  background: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  &:active {
+    transform: translateY(4px);
+  }
+  a{
+    background: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  }
+  button{
+    background: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  }
+}
 .button-add {
   padding: 0px 10px;
   line-height: 30px;

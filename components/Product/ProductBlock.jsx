@@ -21,7 +21,6 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
   const status = useSelector((state) => state.products.status);
 
   const addToWishList = () => {
-    console.log(pathname);
     if (pathname === '/wishlist') {
       setUnmount(true);
       setTimeout(() => {
@@ -32,9 +31,6 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
     }
   };
 
-  React.useEffect(() => {
-    console.log(title);
-  }, []);
 
   return (
     <div className={`${className} ${style.wrapper} ${unmount && style.hide}`}>

@@ -31,3 +31,4 @@ export { default as ProductBlockSkelet } from './Product/ProductBlockSkelet';
 export { default as WishButton } from './Product/WishButton';
 export { default as Empty } from './Empty/Empty';
 export { default as Mobilenavigate } from './MobileNavigate';
+export { default as Test } from './Test/Test.tsx';

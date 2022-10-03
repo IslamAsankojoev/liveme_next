@@ -11,13 +11,24 @@ import {
   RelatedProductLoopSection,
 } from '../components/index';
 import { setProducts } from '../redux/slices/productSlice.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Home = ({ data = [] }) => {
+const Home = () => {
+  const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(setProducts(data));
-  }, [data]);
+    axios
+      .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
+        headers: {
+          'Accept-Language': lang,
+        },
+      })
+      .then(({ data }) => {
+        dispatch(setProducts(data));
+      });
+  }, [lang]);
+  React.useEffect(() => {}, []);
+
   return (
     <>
       <BannerSection />
@@ -32,16 +43,3 @@ const Home = ({ data = [] }) => {
 };
 
 export default Home;
-
-export async function getServerSideProps(ctx) {
-  const locale = ctx.locale || 'ru';
-  let { data = [] } = await axios
-    .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
-      headers: {
-        'Accept-Language': locale,
-      },
-    })
-    .then((res) => res)
-    .catch((err) => err);
-  return { props: { data: data } };
-}

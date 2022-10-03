@@ -1,0 +1,16 @@
+{
+  "buttonAddToCart": {
+    "en": {
+      "text": "Add to cart"
+    },
+    "ru": {
+      "text": "Добавить в корзину"
+    },
+    "kg": {
+      "text": "Сепетке кошуу"
+    },
+    "tr": {
+      "text": "Sepete ekle"
+    }
+  }
+}
