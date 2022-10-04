@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLang } from '../redux/slices/langSlice';
 import Image from 'next/image';
-import texts from '../collections/texts.json';
+import { text } from '../pages/api/collections/texts.js';
 
 const languages = ['ru', 'en', 'kg', 'tr'];
 
@@ -74,7 +74,7 @@ export default function Header() {
                 })}
                 id="navbarSupportedContent">
                 <ul className="nav navbar-nav menu_nav ml-auto">
-                  {texts.header?.menu?.map((item, id) => {
+                  {text.header?.menu?.map((item, id) => {
                     {
                       if (!loggedIn && item.link === '/register') {
                         return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
-import texts from '../../collections/texts.json';
+import { text } from '../../pages/api/collections/texts.js';
 
 export default function ExclusiveDealSection() {
   const lang = useSelector((state) => state.lang.lang);
@@ -70,7 +70,7 @@ export default function ExclusiveDealSection() {
                       <span className="ti-bag"></span>
                     </a>
                     <button className="add-text text-uppercase">
-                      {texts.buttonAddToCart[lang].text}
+                      {text.buttonAddToCart[lang].text}
                     </button>
                   </div>
                 </div>

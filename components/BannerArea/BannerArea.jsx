@@ -1,5 +1,5 @@
 import React from 'react';
-import homeText from '../../collections/Home/homeCollection';
+import { home } from '../../pages/api/collections/home/homeCollection';
 import { useSelector } from 'react-redux';
 
 const BannerArea = ({ title = 'Страница', path = '#' }) => {
@@ -13,7 +13,7 @@ const BannerArea = ({ title = 'Страница', path = '#' }) => {
             <h1>{title[lang] || title}</h1>
             <nav className="d-flex align-items-center">
               <a href="/">
-                {homeText.page_title[lang]}
+                {home.page_title[lang]}
                 <span className="lnr lnr-arrow-right"></span>
               </a>
               <a href={path}>{title[lang] || title}</a>

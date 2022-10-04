@@ -13,12 +13,16 @@ import '../scss/css/ion.rangeSlider.skinFlat.css';
 import '../scss/css/magnific-popup.css';
 import '../scss/css/main.css';
 import '../scss/global.scss';
+import { DevSupport } from '@react-buddy/ide-toolbox';
+import { ComponentPreviews, useInitial } from '../dev';
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <Component {...pageProps} />
+        <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
+          <Component {...pageProps} />
+        </DevSupport>
       </AuthProvider>
     </Provider>
   );

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Empty, ProductBlock, BannerArea } from '../components';
-import wishlistText from '../collections/wishlist/wishlistCollection.json';
+import { wishlistText } from './api/collections/wishlist/wishlistCollection.js';
 
 export default function Wishlist() {
   const items = useSelector((state) => state.wish.items);
   const lang = useSelector((state) => state.lang.lang);
   return (
     <>
-      <BannerArea title={wishlistText.page_title} path={'/wishlist'} />
+      <BannerArea title={wishlistText.page_title[lang]} path={'/wishlist'} />
 
       <section className="cart_area owl-carousel active-product-area section_gap">
         <div className="single-product-slider">

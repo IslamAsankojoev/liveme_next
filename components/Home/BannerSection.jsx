@@ -1,12 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
-import homeText from '../../collections/home/homeCollection';
-import text from '../../collections/texts';
+import { home } from '../../pages/api/collections/home/homeCollection.js';
+import { text } from '../../pages/api/collections/texts.js';
 
 export default function BannerSection() {
   const lang = useSelector((state) => state.lang.lang);
-
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
 
@@ -21,8 +20,8 @@ export default function BannerSection() {
               <div className="row single-slide align-items-center d-flex">
                 <div className="col-lg-5 col-md-6">
                   <div className="banner-content">
-                    <h1>{homeText.header_area[lang]?.title}</h1>
-                    <p>{homeText.header_area[lang]?.text}</p>
+                    <h1>{home.header_area[lang].title}</h1>
+                    <p>{home.header_area[lang].text}</p>
                     <div
                       style={{ cursor: 'pointer' }}
                       onClick={() => {

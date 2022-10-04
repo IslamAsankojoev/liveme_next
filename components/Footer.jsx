@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import texts from '../collections/texts.json';
+import { text } from '../pages/api/collections/texts.js';
 
 export default function Footer() {
   const lang = useSelector((state) => state.lang.lang);
@@ -10,21 +10,21 @@ export default function Footer() {
         <div className="row">
           <div className="col-lg-3 col-md-6 col-sm-6">
             <div className="single-footer-widget">
-              <h6>{texts.footer.about.title[lang]}</h6>
-              <p>{texts.footer.about.subtitle[lang]}</p>
+              <h6>{text.footer.about.title[lang]}</h6>
+              <p>{text.footer.about.subtitle[lang]}</p>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 col-sm-6">
             <div className="single-footer-widget">
-              <h6>{texts.footer.mailing.title[lang]}</h6>
-              <p>{texts.footer.mailing.subtitle[lang]}</p>
+              <h6>{text.footer.mailing.title[lang]}</h6>
+              <p>{text.footer.mailing.subtitle[lang]}</p>
               <div className="" id="mc_embed_signup">
                 <form className="form-inline">
                   <div className="d-flex flex-row">
                     <input
                       className="form-control"
                       name="EMAIL"
-                      placeholder={texts.footer.mailing.placeholder[lang]}
+                      placeholder={text.footer.mailing.placeholder[lang]}
                       required=""
                       type="email"
                     />
@@ -83,8 +83,8 @@ export default function Footer() {
           </div> */}
           <div className="col-lg-2 col-md-6 col-sm-6">
             <div className="single-footer-widget">
-              <h6>{texts.footer.social.title[lang]}</h6>
-              <p>{texts.footer.social.subtitle[lang]}</p>
+              <h6>{text.footer.social.title[lang]}</h6>
+              <p>{text.footer.social.subtitle[lang]}</p>
               <div className="footer-social d-flex align-items-center">
                 <a href="#">
                   <i className="fa fa-facebook"></i>
@@ -105,7 +105,7 @@ export default function Footer() {
         <div className="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
           <p className="footer-text m-0">
             {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
-            Copyright &copy; 2022 {texts.footer.copyright.text[lang]}
+            Copyright &copy; 2022 {text.footer.copyright.text[lang]}
             {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
           </p>
         </div>

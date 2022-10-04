@@ -1,8 +1,6 @@
 import React from 'react';
-import contactText from '../collections/contacts/contactCollection.json';
-import texts from '../collections/texts.json';
+import { contactText } from './api/collections/contacts/contactCollection.js';
 import { useSelector } from 'react-redux';
-import Link from 'next/link';
 import { BannerArea } from '../components';
 
 function Contact() {
