@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import texts from '../../collections/texts';
 
-const Empty = ({ title = texts.empty.title, text = texts.empty.subtitle }) => {
+const Empty = ({ title = texts.empty.title, text = texts.empty.subtitle, button }) => {
   const lang = useSelector((state) => state.lang.lang);
   return (
     <div className={style.block}>
@@ -14,7 +14,7 @@ const Empty = ({ title = texts.empty.title, text = texts.empty.subtitle }) => {
         <br />
         <br />
         <Link href="/">
-          <a className="gray_btn">{texts.empty.button[lang]}</a>
+          <a className="gray_btn">{button || texts.empty.button[lang]}</a>
         </Link>
       </div>
     </div>

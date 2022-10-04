@@ -4,6 +4,7 @@ import { CategiryItem } from '../index';
 import style from './SidebarCategory.module.scss';
 import { useRouter } from 'next/router.js';
 import { useSelector } from 'react-redux';
+import shopText from '../../collections/Shop/shopCollection';
 
 export default function SidebarCategory({ setCategory, setPage }) {
   const [categories, setCategories] = React.useState([]);
@@ -24,7 +25,7 @@ export default function SidebarCategory({ setCategory, setPage }) {
   }, [lang]);
   return (
     <div className={`sidebar-categories ${style.sidebar_categories}`}>
-      <div className="head">Категории</div>
+      <div className="head">{shopText.categories[lang]}</div>
       <ul className="main-categories">
         <li
           style={{ cursor: 'pointer' }}
@@ -34,8 +35,7 @@ export default function SidebarCategory({ setCategory, setPage }) {
           }}>
           <a>
             <span className="lnr lnr-arrow-right"></span>
-            Все
-            {/* <span className="number"></span> */}
+            {shopText.all[lang]}
           </a>
         </li>
         {categories?.map((category) => {

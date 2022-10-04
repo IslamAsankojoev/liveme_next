@@ -5,6 +5,10 @@ import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 import { useRouter } from 'next/router.js';
+import { Empty } from '../components';
+import shopText from '../collections/shop/shopCollection';
+import texts from '../collections/texts';
+import homeText from '../collections/home/homeCollection';
 
 const page_size = 6;
 
@@ -118,15 +122,16 @@ export default function Shop() {
         <div className="container">
           <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div className="col-first">
-              <h1>Shop Category page</h1>
+              <h1>{shopText.page_title[lang]}</h1>
               <nav className="d-flex align-items-center">
                 <a href="index.html">
-                  Home<span className="lnr lnr-arrow-right"></span>
+                  {homeText.page_title[lang]}
+                  <span className="lnr lnr-arrow-right"></span>
                 </a>
                 <a href="#">
-                  Shop<span className="lnr lnr-arrow-right"></span>
+                  {shopText.page_title[lang]}
+                  <span className="lnr lnr-arrow-right"></span>
                 </a>
-                <a href="category.html">Fashon Category</a>
               </nav>
               <span id="top_catalog"></span>
             </div>
@@ -192,8 +197,13 @@ export default function Shop() {
                     <br />
                     <br />
                     <br />
-                    <h2>Пока товаров нету</h2>
-                    <p>Поищите что нибудь для себя в других категориях.</p>
+                    {/*<h2>Пока товаров нету</h2>*/}
+                    {/*<p>Поищите что нибудь для себя в других категориях.</p>*/}
+                    <Empty
+                      title={shopText.empty.title[lang]}
+                      text={shopText.empty.subtitle[lang]}
+                      button={shopText.empty.button[lang]}
+                    />
                     <br />
                     <br />
                     <br />
