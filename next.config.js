@@ -1,3 +1,10 @@
+const localeSubpaths = {
+  en: 'en',
+  ru: 'ru',
+  tr: 'tr',
+  kg: 'kg',
+};
+
 const nextConfig = {
   reactStrictMode: false,
   i18n: {
@@ -11,6 +18,9 @@ const nextConfig = {
   images: {
     domains: ['179.61.188.39', 'localhost'],
     formats: ['image/avif', 'image/webp'],
+  },
+  publicRuntimeConfig: {
+    localeSubpaths,
   },
 };
 

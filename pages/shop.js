@@ -32,6 +32,12 @@ export default function Shop() {
       });
   }, [lang]);
 
+  React.useEffect(() => {
+    axios.get('http://179.61.188.39:8000/api/products/').then(({ data }) => {
+      console.log(data);
+    });
+  }, []);
+
   // React.useEffect(() => {
   //   dispatch(setProducts(data?.results));
   //   setNext(data?.next);

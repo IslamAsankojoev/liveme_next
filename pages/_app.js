@@ -2,6 +2,7 @@ import { Provider } from 'react-redux';
 import App from 'next/app';
 import store from '../redux/store';
 import React from 'react';
+import { appWithTranslation } from 'next-i18next';
 import { AuthProvider } from '../components/index';
 import '../scss/css/bootstrap.css';
 import '../scss/css/font-awesome.min.css';
@@ -16,7 +17,7 @@ import '../scss/global.scss';
 import { DevSupport } from '@react-buddy/ide-toolbox';
 import { ComponentPreviews, useInitial } from '../dev';
 
-export default function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
       <AuthProvider>
@@ -26,9 +27,6 @@ export default function MyApp({ Component, pageProps }) {
       </AuthProvider>
     </Provider>
   );
-}
-
-MyApp.getInitialProps = async (ctx) => {
-  const appProps = await App.getInitialProps(ctx);
-  return { ...appProps };
 };
+
+export default appWithTranslation(MyApp);

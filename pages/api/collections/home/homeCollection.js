@@ -7,23 +7,23 @@ export const home = {
   },
   header_area: {
     kg: {
-      title: 'Ең жақсы Коллекциялар',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+      title: 'Жаңы Аромат Жаңы Стиль',
+      text: 'Жакшы аромат маанайды жаратат, эң жакшысы сиз жөнүндө сөзсүз сүйлөйт.',
       button: 'Сепке кошуу',
     },
     ru: {
-      title: 'Самые лучшие Коллекции',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+      title: 'Новый Аромат Новый Стиль',
+      text: 'Хорошие ароматы создают настроение, лучшие говорят о тебе без слов.',
       button: 'Добавить в корзину',
     },
     en: {
-      title: 'The best Collections',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+      title: 'New Fragrance New Style',
+      text: 'Good fragrances create a mood, the best ones talk about you without words.',
       button: 'Add to cart',
     },
     tr: {
-      title: 'En iyi Koleksiyonlar',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+      title: 'Yeni koku Yeni Stil',
+      text: 'İyi kokular bir ruh hali yaratır, en iyileri senin hakkında konuşmadan konuşur.',
       button: 'Sepete ekle',
     },
   },

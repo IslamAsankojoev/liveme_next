@@ -4,7 +4,7 @@
   position: fixed;
 }
 
-.noselect{
+.noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -25,17 +25,17 @@
   &:active {
     transform: translateY(4px);
   }
-  a{
+  a {
     background: transparent;
-  color: #000;
-  border: none;
-  cursor: pointer;
+    color: #000;
+    border: none;
+    cursor: pointer;
   }
-  button{
+  button {
     background: transparent;
-  color: #000;
-  border: none;
-  cursor: pointer;
+    color: #000;
+    border: none;
+    cursor: pointer;
   }
 }
 .button-add {
@@ -401,7 +401,7 @@
 .nav-item {
   display: flex;
   align-items: center;
-    justify-content: flex-end;
+  justify-content: flex-end;
   color: #222;
   a {
     color: #000;
@@ -461,3 +461,62 @@
 // .banner-area {
 //   display: none;
 // }
+
+* {
+  transition: all 0.6s;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: #888;
+  margin: 0;
+}
+
+#main {
+  display: table;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.fof {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.fof h1 {
+  font-size: 50px;
+  display: inline-block;
+  padding-right: 12px;
+  animation: type 0.5s alternate infinite;
+}
+
+@keyframes type {
+  from {
+    box-shadow: inset -3px 0px 0px #888;
+  }
+  to {
+    box-shadow: inset -3px 0px 0px transparent;
+  }
+}
+.banner-content {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px !important;
+  border-radius: 5px;
+  backdrop-filter: blur(5px);
+  color: white;
+  p {
+    background: transparent !important;
+  }
+
+  button {
+    color: white !important;
+  }
+  h1 {
+    color: white !important;
+  }
+}

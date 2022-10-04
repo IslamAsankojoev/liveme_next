@@ -32,3 +32,4 @@ export { default as WishButton } from './Product/WishButton';
 export { default as Empty } from './Empty/Empty';
 export { default as Mobilenavigate } from './MobileNavigate';
 export { default as BannerArea } from './BannerArea/BannerArea';
+export { default as ErrorPage } from './404';

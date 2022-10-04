@@ -18,6 +18,11 @@ export default function BannerSection() {
           <div className="col-lg-12">
             <div className="active-banner-slider owl-carousel">
               <div className="row single-slide align-items-center d-flex">
+                <div className="col-lg-1">
+                  <div className="banner-img">
+                    {/* <img className="img-fluid" src="static/img/banner/banner-img.png" alt="" /> */}
+                  </div>
+                </div>
                 <div className="col-lg-5 col-md-6">
                   <div className="banner-content">
                     <h1>{home.header_area[lang].title}</h1>
@@ -57,11 +62,7 @@ export default function BannerSection() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-7">
-                  <div className="banner-img">
-                    {/* <img className="img-fluid" src="static/img/banner/banner-img.png" alt="" /> */}
-                  </div>
-                </div>
+                <div className="col-lg-6"></div>
               </div>
             </div>
           </div>

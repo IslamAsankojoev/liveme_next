@@ -27,7 +27,6 @@ const Home = () => {
         dispatch(setProducts(data));
       });
   }, [lang]);
-  React.useEffect(() => {}, []);
 
   return (
     <>
