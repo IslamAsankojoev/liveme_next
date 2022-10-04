@@ -37,10 +37,10 @@ export default function AuthProvider({ children }) {
         }
       }
       setUser();
-      dispatch(setLang(locale));
+      dispatch(setLang(localStorage.getItem('locale') || 'ru'));
       dispatch(setWish(JSON.parse(localStorage.getItem('wish')) || []));
       dispatch(setCart(JSON.parse(localStorage.getItem('cart')) || []));
-      // replace(asPath, asPath, { locale: localStorage.getItem('lang') || 'ru' });
+      replace(asPath, asPath, { locale: localStorage.getItem('locale') || 'ru' });
       console.log(12);
     };
 

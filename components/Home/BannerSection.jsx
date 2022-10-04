@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
-import homeText from '../../collections/home/homeCollection.json';
-import text from '../../collections/texts.json';
+import homeText from '../../collections/home/homeCollection';
+import text from '../../collections/texts';
 
 export default function BannerSection() {
   const lang = useSelector((state) => state.lang.lang);

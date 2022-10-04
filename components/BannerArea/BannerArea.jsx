@@ -1,5 +1,5 @@
 import React from 'react';
-import homeText from '../../collections/Home/homeCollection.json';
+import homeText from '../../collections/Home/homeCollection';
 import { useSelector } from 'react-redux';
 
 const BannerArea = ({ title = 'Страница', path = '#' }) => {

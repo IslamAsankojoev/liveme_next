@@ -78,7 +78,10 @@ export default function Header() {
                     {
                       if (!loggedIn && item.link === '/register') {
                         return (
-                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
+                          <li
+                            onClick={toggleMenu}
+                            key={id}
+                            className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link">{item.text[lang]}</a>
                             </Link>
@@ -87,7 +90,10 @@ export default function Header() {
                       }
                       if (item.link === '/profile' && loggedIn) {
                         return (
-                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
+                          <li
+                            onClick={toggleMenu}
+                            key={id}
+                            className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link">{item.text[lang]}</a>
                             </Link>
@@ -96,7 +102,10 @@ export default function Header() {
                       }
                       if (item.link !== '/profile' && item.link !== '/register') {
                         return (
-                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
+                          <li
+                            onClick={toggleMenu}
+                            key={id}
+                            className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link">{item.text[lang]}</a>
                             </Link>
