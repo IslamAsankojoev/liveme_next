@@ -1,7 +1,7 @@
 export const profileText = {
   page_title: {
     ru: 'Вход / Регистрация',
-    default: 'Login / Register',
+    en: 'Login / Register',
     kg: 'Кирүү / Теркөлүү',
     tr: 'Giriş / Kayıt ol',
   },
@@ -9,13 +9,13 @@ export const profileText = {
     info: {
       title: {
         ru: 'Уже есть аккаунт?',
-        default: 'Already have an account?',
+        en: 'Already have an account?',
         kg: 'Аккаунт барында?',
         tr: 'Zaten bir hesabınız var mı?',
       },
       subtitle: {
         ru: 'Найслайждайтесь нашими ароматами и духами высшего качества',
-        default: 'Enjoy our high quality fragrances and perfumes',
+        en: 'Enjoy our high quality fragrances and perfumes',
         kg: 'Биздин качалык ароматтар мен духтарымыздын ырахатаныңыз',
         tr: 'Yüksek kaliteli parfümlerimiz ve parfümlerimizden zevk alın',
       },
@@ -23,25 +23,25 @@ export const profileText = {
     form: {
       title: {
         ru: 'Вход',
-        default: 'Login',
+        en: 'Login',
         kg: 'Кирүү',
         tr: 'Giriş',
       },
       username: {
         ru: 'Имя пользователя',
-        default: 'Username',
+        en: 'Username',
         kg: 'Колдонуучунун аты',
         tr: 'Kullanıcı adı',
       },
       password: {
         ru: 'Пароль',
-        default: 'Password',
+        en: 'Password',
         kg: 'Сыр сөз',
         tr: 'Parola',
       },
       button: {
         ru: 'Войти',
-        default: 'Login',
+        en: 'Login',
         kg: 'Кирүү',
         tr: 'Giriş',
       },
@@ -51,13 +51,13 @@ export const profileText = {
     info: {
       title: {
         ru: 'Вы у нас впервые?',
-        default: 'You are new here?',
+        en: 'You are new here?',
         kg: 'Аккаунт жокпу?',
         tr: 'Burada ilk defa mısınız?',
       },
       subtitle: {
         ru: 'Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов',
-        default: 'Register and always be up to date with new fragrances and aromas',
+        en: 'Register and always be up to date with new fragrances and aromas',
         kg: 'Тизмеге кирүү мен биздин жаңы ароматтар мен духи жаңылыктарын белгилөөңүз',
         tr: 'Kaydolun ve yeni parfümler ve aromalarla her zaman güncel kalın',
       },
@@ -65,31 +65,31 @@ export const profileText = {
     form: {
       title: {
         ru: 'Регистрация',
-        default: 'Register',
+        en: 'Register',
         kg: 'Тизмеге кирүү',
         tr: 'Kayıt ol',
       },
       name: {
         ru: 'Ваше имя',
-        default: 'Your name',
+        en: 'Your name',
         kg: 'Сиздин атыңыз',
         tr: 'Adınız',
       },
       email: {
         ru: 'Ваш email',
-        default: 'Your email',
+        en: 'Your email',
         kg: 'Сиздин электрондук почта',
         tr: 'E-posta adresiniz',
       },
       password: {
         ru: 'Пароль',
-        default: 'Password',
+        en: 'Password',
         kg: 'Сыр сөз',
         tr: 'Parola',
       },
       button: {
         ru: 'Зарегестрироваться',
-        default: 'Register',
+        en: 'Register',
         kg: 'Тизмеге кирүү',
         tr: 'Kayıt ol',
       },

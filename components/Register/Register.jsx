@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { setLoggedIn } from '../../redux/slices/userSlice.js';
 import loginImg from '../../scss/static/img/login.webp';
 import Image from 'next/image';
-import { profileText } from '../../pages/api/collections/profile/registerCollection.js';
+import { profileText } from '../../public/collections/profile/registerCollection.js';
 
 export default function Register({ setToggle }) {
   const lang = useSelector((state) => state.lang.lang);

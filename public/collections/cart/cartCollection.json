@@ -1,27 +1,27 @@
 {
   "page_title": {
     "ru": "Корзина",
-    "default": "Cart",
+    "en": "Cart",
     "kg": "Сепет",
     "tr": "Sepet"
   },
   "empty": {
     "title": {
       "ru": "Корзина пуста",
-      "default": "Cart is empty",
+      "en": "Cart is empty",
       "kg": "Сепет бош",
       "tr": "Sepet boş"
     }
   },
   "order": {
     "ru": "Заказать",
-    "default": "Order",
+    "en": "Order",
     "kg": "Тапсырма",
     "tr": "Sipariş"
   },
   "button": {
     "ru": "Вернуться в каталог",
-    "default": "Back to catalog",
+    "en": "Back to catalog",
     "kg": "Каталогга кайтуу",
     "tr": "Kataloga geri dön"
   }

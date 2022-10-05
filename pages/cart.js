@@ -3,7 +3,7 @@ import Link from 'next/link.js';
 import { ItemBlock, BannerArea } from '../components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Empty } from '../components';
-import cartText from './api/collections/cart/cartCollection.json';
+import cartText from '../public/collections/cart/cartCollection.json';
 
 export default function Cart() {
   const { items, totalPrice } = useSelector((state) => state.cart);

@@ -5,7 +5,7 @@ import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 import { BannerArea, Empty } from '../components';
-import { shopText } from './api/collections/shop/shopCollection.js';
+import { shopText } from '../public/collections/shop/shopCollection.js';
 
 const page_size = 6;
 

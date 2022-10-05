@@ -1,5 +1,5 @@
 import React from 'react';
-import { contactText } from './api/collections/contacts/contactCollection.js';
+import { contactText } from '../public/collections/contacts/contactCollection.js';
 import { useSelector } from 'react-redux';
 import { BannerArea } from '../components';
 

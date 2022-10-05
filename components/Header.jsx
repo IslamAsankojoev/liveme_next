@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLang } from '../redux/slices/langSlice';
 import Image from 'next/image';
-import { text } from '../pages/api/collections/texts.js';
+import { text } from '../public/collections/texts.js';
 
-const languages = ['ru', 'default', 'kg', 'tr'];
+const languages = ['ru', 'en', 'kg', 'tr'];
 
 export default function Header() {
   const lang = useSelector((state) => state.lang.lang);

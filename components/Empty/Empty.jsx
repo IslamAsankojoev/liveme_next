@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Empty.module.scss';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-import { text } from '../../pages/api/collections/texts.js';
+import { text } from '../../public/collections/texts.js';
 
 const Empty = ({ title = text.empty.title, content = text.empty.subtitle, button }) => {
   const lang = useSelector((state) => state.lang.lang);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Login, Register, BannerArea } from '../index';
-import { profileText } from '../../pages/api/collections/profile/registerCollection.js';
+import { profileText } from '../../public/collections/profile/registerCollection.js';
 
 export default function LoginRegisterPage() {
   const [toggle, setToggle] = React.useState(true);

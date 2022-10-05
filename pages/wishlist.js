@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Empty, ProductBlock, BannerArea } from '../components';
-import { wishlistText } from './api/collections/wishlist/wishlistCollection.js';
+import { wishlistText } from '../public/collections/wishlist/wishlistCollection.js';
 
 export default function Wishlist() {
   const items = useSelector((state) => state.wish.items);
