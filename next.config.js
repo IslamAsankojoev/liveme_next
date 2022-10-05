@@ -1,8 +1,9 @@
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   i18n: {
-    locales: ['ru', 'en', 'tr', 'kg'],
-    defaultLocale: 'ru',
+    locales: ['ru', 'default', 'tr', 'kg'],
+    defaultLocale: 'default',
+    localeDetection: false,
   },
   env: {
     SERVER_DOMAIN: process.env.BACKEND_APP_DOMAIN_NAME,

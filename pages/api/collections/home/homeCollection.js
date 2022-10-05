@@ -1,7 +1,7 @@
 export const home = {
   page_title: {
     ru: 'Главная',
-    en: 'Home',
+    default: 'Home',
     kg: 'Башкы бет',
     tr: 'Ana Sayfa',
   },
@@ -16,7 +16,7 @@ export const home = {
       text: 'Хорошие ароматы создают настроение, лучшие говорят о тебе без слов.',
       button: 'Добавить в корзину',
     },
-    en: {
+    default: {
       title: 'New Fragrance New Style',
       text: 'Good fragrances create a mood, the best ones talk about you without words.',
       button: 'Add to cart',

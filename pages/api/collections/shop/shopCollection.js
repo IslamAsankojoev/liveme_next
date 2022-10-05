@@ -1,39 +1,39 @@
 export const shopText = {
   page_title: {
     ru: 'Каталог',
-    en: 'Shop',
+    default: 'Shop',
     kg: 'Каталог',
     tr: 'Katalog',
   },
   empty: {
     title: {
       ru: 'Пока товаров нету',
-      en: 'No products yet',
+      default: 'No products yet',
       kg: 'Товарлар жок',
       tr: 'Henüz ürün yok',
     },
     subtitle: {
       ru: 'Поищите что нибудь для себя в других категориях.',
-      en: 'Look for something for yourself in other categories.',
+      default: 'Look for something for yourself in other categories.',
       kg: 'Башка категорияларды карап көрүңүз.',
       tr: 'Başka kategorilerde kendin için bir şey arayın.',
     },
     button: {
       ru: 'на главную',
-      en: 'to main',
+      default: 'to main',
       kg: 'башкы бетке кайту',
       tr: 'ana sayfaya git',
     },
   },
   categories: {
     ru: 'Категории',
-    en: 'Categories',
+    default: 'Categories',
     kg: 'Категориялар',
     tr: 'Kategoriler',
   },
   all: {
     ru: 'Все',
-    en: 'All',
+    default: 'All',
     kg: 'Бардыгы',
     tr: 'Hepsi',
   },

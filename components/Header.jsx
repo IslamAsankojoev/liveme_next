@@ -8,7 +8,7 @@ import { setLang } from '../redux/slices/langSlice';
 import Image from 'next/image';
 import { text } from '../pages/api/collections/texts.js';
 
-const languages = ['ru', 'en', 'kg', 'tr'];
+const languages = ['ru', 'default', 'kg', 'tr'];
 
 export default function Header() {
   const lang = useSelector((state) => state.lang.lang);
@@ -33,7 +33,7 @@ export default function Header() {
 
   const onChangeLang = (e) => {
     dispatch(setLang(e.target.value));
-    replace(asPath, asPath, { locale: e.target.value, scroll: false });
+    replace(asPath, asPath, { locale: e.target.value, scroll: false, shallow: true });
   };
 
   return (
