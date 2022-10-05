@@ -5,12 +5,10 @@ import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLang } from '../redux/slices/langSlice';
-import Image from 'next/image';
-import { text } from '../public/collections/texts.js';
-
-const languages = ['ru', 'en', 'kg', 'tr'];
+import { text } from '../public/locales/texts.js';
 
 export default function Header() {
+  const languages = ['ru', 'en', 'kg', 'tr'];
   const lang = useSelector((state) => state.lang.lang);
   const { totalItems } = useSelector((state) => state.cart);
   const totalWishes = useSelector((state) => state.wish?.totalItems);
@@ -43,7 +41,7 @@ export default function Header() {
           <div className="container">
             <Link href="/">
               <a className="navbar-brand logo_h">
-                <Image src={'/livemeLogo1.webp'} width={140} height={45} />
+                <img src={'/livemeLogo1.webp'} width={140} height={45} />
               </a>
             </Link>
             <div className="header-right">

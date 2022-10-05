@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
-import { text } from '../../public/collections/texts.js';
+import { text } from '../../public/locales/texts.js';
 
 export default function ExclusiveDealSection() {
   const lang = useSelector((state) => state.lang.lang);

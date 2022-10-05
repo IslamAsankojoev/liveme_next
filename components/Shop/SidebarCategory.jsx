@@ -4,7 +4,7 @@ import { CategiryItem } from '../index';
 import style from './SidebarCategory.module.scss';
 import { useRouter } from 'next/router.js';
 import { useSelector } from 'react-redux';
-import { shopText } from '../../public/collections/shop/shopCollection';
+import { shopText } from '../../public/locales/shop/shopCollection';
 
 export default function SidebarCategory({ setCategory, setPage }) {
   const [categories, setCategories] = React.useState([]);

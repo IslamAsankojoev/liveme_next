@@ -11,7 +11,7 @@ import { setWish } from 'redux/slices/wishSlice';
 
 export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
-  const { pathname, asPath, push, replace, query, locale } = useRouter();
+  const { pathname, asPath, push, replace, query, locale, defaultLocale } = useRouter();
 
   React.useEffect(() => {
     const doMagic = () => {
@@ -43,7 +43,7 @@ export default function AuthProvider({ children }) {
       console.log(12);
     };
 
-    doMagic();
+    // doMagic();
   }, []);
 
   return (

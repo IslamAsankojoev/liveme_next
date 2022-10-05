@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { text } from '../public/collections/texts.js';
+import { text } from '../public/locales/texts.js';
 
 export default function Footer() {
   const lang = useSelector((state) => state.lang.lang);
