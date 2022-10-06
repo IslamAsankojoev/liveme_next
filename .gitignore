@@ -28,5 +28,7 @@ yarn-error.log*
 .env.production.local
 
 #default
-./idea
-./vscode
+/.vscode/
+/.idea/
+/.vscode
+/.idea
