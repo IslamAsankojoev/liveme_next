@@ -7,7 +7,6 @@ import StaticImage from '../../scss/static/img/ıhlamur.webp';
 import { WishButton } from '../index';
 import { toggleItem } from '../../redux/slices/wishSlice.js';
 import { useRouter } from 'next/router.js';
-import Color, { useColor } from 'color-thief-react';
 
 export default function ProductBlock({ className, id, title, cover, regular_price, sale_price }) {
   const [unmount, setUnmount] = React.useState(false);
