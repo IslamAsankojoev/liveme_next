@@ -1,11 +1,13 @@
 import React from 'react';
-import { Header, Footer, WishButton } from '../index';
+import { Header, Footer, WishButton, BannerArea } from '../index';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import store from '../../redux/store';
-import { addItem } from '../../redux/slices/cartSlice.js';
+import { addItem } from '../../redux/slices/cartSlice';
 import ProductCorusel from './ProductCorusel';
-import { toggleItem } from '../../redux/slices/wishSlice.js';
+import { toggleItem } from '../../redux/slices/wishSlice';
+import { text } from '../../public/locales/texts';
+import { product } from '../../public/locales/product/productCollections';
 
 export default function SingleProduct({
   id,
@@ -33,27 +35,11 @@ export default function SingleProduct({
   const toggleWish = () => {
     dispatch(toggleItem({ id, title, cover, price }));
   };
+  const lang = useSelector((state) => state.lang.lang);
 
   return (
     <>
-      <section className="banner-area organic-breadcrumb">
-        <div className="container">
-          <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div className="col-first">
-              <h1>Страница товара</h1>
-              <nav className="d-flex align-items-center">
-                <a href="index.html">
-                  Home<span className="lnr lnr-arrow-right"></span>
-                </a>
-                <a href="#">
-                  Shop<span className="lnr lnr-arrow-right"></span>
-                </a>
-                <a href="single-product.html">product-details</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BannerArea title={title} path={`/products/${id}`} />
 
       <div className="product_image_area">
         <div className="container">
@@ -71,18 +57,18 @@ export default function SingleProduct({
                 <ul className="list">
                   <li>
                     <a className="active" href="#">
-                      <span>Категория</span> : {category?.title}
+                      <span>{product.category[lang]}</span> : {category?.title}
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <span>В складе</span> : В наличии
+                      <span>{product.inStock[lang]}</span>
                     </a>
                   </li>
                 </ul>
                 <p className="product_description">{description}</p>
                 <div className="product_count">
-                  <label htmlFor="qty">Количество:</label>
+                  <label htmlFor="qty">{product.quantity[lang]}:</label>
                   <input
                     type="number"
                     name="qty"
@@ -112,7 +98,7 @@ export default function SingleProduct({
                 </div>
                 <div className="card_area d-flex align-items-center">
                   <button onClick={addToCart} className="primary-btn button-add">
-                    В корзину
+                    {text.buttonAddToCart[lang]}
                   </button>
                 </div>
               </div>
@@ -120,8 +106,15 @@ export default function SingleProduct({
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
-      <section className="product_description_area">
+      <section className="product_description_area d-none">
         <div className="container">
           <ul className="nav nav-tabs" id="myTab">
             <li className="nav-item">

@@ -49,18 +49,10 @@ export const text = {
     ],
   },
   buttonAddToCart: {
-    en: {
-      text: 'Add to cart',
-    },
-    ru: {
-      text: 'Добавить в корзину',
-    },
-    kg: {
-      text: 'Сепетке кошуу',
-    },
-    tr: {
-      text: 'Sepete ekle',
-    },
+    ru: 'Добавить в корзину',
+    en: 'Add to cart',
+    tr: 'Sepete ekle',
+    kg: 'Сепке кошуу',
   },
   footer: {
     about: {

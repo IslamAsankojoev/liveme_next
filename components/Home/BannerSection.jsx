@@ -57,7 +57,7 @@ export default function BannerSection() {
                         </svg>
                       </a>
                       <button className="add-text text-uppercase ">
-                        {text.buttonAddToCart[lang].text}
+                        {text.buttonAddToCart[lang]}
                       </button>
                     </div>
                   </div>
