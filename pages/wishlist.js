@@ -26,7 +26,10 @@ export default function Wishlist() {
             )}
             {items.length > 0 ? (
               <div className="row">
-                {items.length > 0 && items.map((item) => <ProductBlock key={item.id} {...item} />)}
+                {items.length > 0 &&
+                  items.map((item) => (
+                    <ProductBlock className="col-lg-3 col-md-4 col-6" key={item.id} {...item} />
+                  ))}
               </div>
             ) : (
               <Empty title={wishlistText.empty.title} />

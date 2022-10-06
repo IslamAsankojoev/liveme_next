@@ -7,9 +7,9 @@ import { setProducts } from '../redux/slices/productSlice';
 import { BannerArea, Empty } from '../components';
 import { shopText } from '../public/locales/shop/shopCollection.js';
 
-const page_size = 6;
+const page_size = 70;
 
-export default function Shop() {
+export default function Shop({ data }) {
   const products = useSelector((state) => state.products.items);
   const status = useSelector((state) => state.products.status);
   const dispatch = useDispatch();
@@ -31,12 +31,6 @@ export default function Shop() {
         dispatch(setProducts(data.results));
       });
   }, [lang]);
-
-  React.useEffect(() => {
-    axios.get('http://179.61.188.39:8000/api/products/').then(({ data }) => {
-      console.log(data);
-    });
-  }, []);
 
   // React.useEffect(() => {
   //   dispatch(setProducts(data?.results));
@@ -222,7 +216,8 @@ export default function Shop() {
 }
 
 // export async function getServerSideProps(ctx) {
-//   const locale = ctx.locale || 'ru';
+//   const locale = parseCookies(ctx).NEXT_LOCALE || 'ru';
+//   console.log(locale);
 //   let { data = [] } = await axios.get(
 //     `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
 //     {
@@ -237,3 +232,19 @@ export default function Shop() {
 //     },
 //   };
 // }
+//
+// Shop.getInitialProps = async (ctx) => {
+//   const locale = parseCookies(ctx).NEXT_LOCALE || 'ru';
+//   console.log(ctx.req.headers.cookie);
+//   let { data = [] } = await axios.get(
+//     `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
+//     {
+//       headers: {
+//         'Accept-Language': locale,
+//       },
+//     },
+//   );
+//   return {
+//     data,
+//   };
+// };
