@@ -25,8 +25,8 @@ export default function BannerSection() {
                 </div>
                 <div className="col-lg-5 col-md-6">
                   <div className="banner-content">
-                    <h1>{home.header_area[lang].title}</h1>
-                    <p>{home.header_area[lang].text}</p>
+                    <h1>{home.headerArea.title[lang]}</h1>
+                    <p>{home.headerArea.text[lang]}</p>
                     <div
                       style={{ cursor: 'pointer' }}
                       onClick={() => {

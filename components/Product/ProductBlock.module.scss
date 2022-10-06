@@ -3,7 +3,7 @@
   opacity: 1;
   visibility: visible;
   position: relative;
-  padding: 0px 0px 0px 0px;
+  padding: 0px 0px 10px 0px;
   box-shadow: 0px 0px 10px -7px #00000090;
   transition: all 0.1s ease-in;
   margin: 0 !important;
@@ -58,10 +58,9 @@
     align-items: flex-end;
     @media (max-width: 767px) {
       // flex-direction: column;
-      justify-content: center;
       margin-top: 0px;
       button {
-        padding: 0px 5px;
+        padding: 5px 10px;
         font-size: 0.9em;
       }
     }

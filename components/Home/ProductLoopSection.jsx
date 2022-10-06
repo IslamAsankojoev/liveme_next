@@ -2,9 +2,11 @@ import React from 'react';
 import { ProductBlock } from '../index';
 import { useSelector, useDispatch } from 'react-redux';
 import lodash from 'lodash';
+import { home } from '../../public/locales/home/homeCollection.js';
 
 export default function ProductLoopSection() {
   const items = useSelector((state) => state.products.items);
+  const lang = useSelector((state) => state.lang.lang);
   return (
     <section className="owl-carousel active-product-area section_gap">
       <div className="single-product-slider">
@@ -14,11 +16,8 @@ export default function ProductLoopSection() {
               <div className="section-title">
                 <br />
                 <br />
-                <h1>Latest Products</h1>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
+                <h1>{home.productsArea.title[lang]}</h1>
+                <p>{home.productsArea.subtitle[lang]}</p>
               </div>
             </div>
           </div>

@@ -2,8 +2,10 @@ import axios from 'axios';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import style from './AccountTabs.module.scss';
+import { useRouter } from 'next/router';
 
 export default function AccountTabs({ activeTab, setActiveTab }) {
+  const router = useRouter();
   const tabs = [
     {
       title_ru: 'Профиль',
@@ -24,7 +26,7 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
   const lang = useSelector((state) => state.lang.lang);
   const logout = async () => {
     await axios.get('/api/logout');
-    window.location.href = '/register';
+    router.reload();
   };
   return (
     <div className={style.tabs}>

@@ -41,10 +41,10 @@ export default function Register({ setToggle }) {
         },
       );
       setCookie(null, 'access_token', res.data.token.access, {
-        maxAge: 24 * 60 * 60,
+        maxAge: 30 * 24 * 60 * 60,
       });
       dispatch(setLoggedIn(res.data));
-      // router.push('/profile');
+      router.reload();
     } catch (err) {
       console.log(err);
       if (err.response.data.username) {

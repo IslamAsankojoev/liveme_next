@@ -7,12 +7,14 @@ import axios from 'axios';
 import { parseCookies } from 'nookies';
 import ResetPassword from './ResetPassword';
 import { setLoggedIn } from '../../redux/slices/userSlice.js';
+import { profileText } from '../../public/locales/profile/registerCollection';
 
 export default function AccountDetail() {
   const [serverErrors, setServerErrors] = React.useState({});
   const [changeSuccess, setChangeSuccess] = React.useState(false);
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.lang.lang);
   const router = useRouter();
   const {
     register,
@@ -48,7 +50,7 @@ export default function AccountDetail() {
 
   return (
     <div className={style.detail}>
-      <h2>Профиль</h2>
+      <h2>{profileText.profile.info.title[lang]}</h2>
       <br />
       <br />
       <form
@@ -63,7 +65,7 @@ export default function AccountDetail() {
             id="username"
             name="username"
             defaultValue={user.username}
-            placeholder={`Ваш логин ${
+            placeholder={`${profileText.profile.form.name[lang]} ${
               errors?.username?.type === 'required' ? '- обязательно' : ''
             }`}
           />
@@ -84,7 +86,9 @@ export default function AccountDetail() {
             name="email"
             inputMode="email"
             defaultValue={user.email}
-            placeholder={`Ваш Email ${errors?.email?.type === 'required' ? '- обязательно' : ''}`}
+            placeholder={`${profileText.profile.form.email[lang]} ${
+              errors?.email?.type === 'required' ? '- обязательно' : ''
+            }`}
           />
           <p className="form-errors">
             {errors?.email?.type === 'pattern' && errors?.email?.message}
@@ -100,14 +104,18 @@ export default function AccountDetail() {
             name="adress"
             inputMode="text"
             defaultValue={user.adress}
-            placeholder={`Ваш Адрес ${errors?.adress?.type === 'required' ? '- обязательно' : ''}`}
+            placeholder={`${profileText.profile.form.address[lang]} ${
+              errors?.adress?.type === 'required' ? '- обязательно' : ''
+            }`}
           />
         </div>
         <div className="col-md-12 form-group">
           <button type="submit" value="submit" className="primary-btn">
-            Изменить данные
+            {profileText.profile.form.title[lang]}
           </button>
-          {changeSuccess && <p className="form-success">Данные успешно изменены</p>}
+          {changeSuccess && (
+            <p className="form-success">{profileText.profile.form.data_success[lang]}</p>
+          )}
           {/* <a href="#">Забыли пароль?</a> */}
         </div>
       </form>

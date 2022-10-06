@@ -8,8 +8,10 @@ import sendMessage from '../bot';
 import { setShow } from '../redux/slices/thankYouSlice.js';
 import { useRouter } from 'next/router.js';
 import lodash from 'lodash';
+import { checkoutCollectionsText as checkoutText } from '../public/locales/checkout/checkoutCollections';
 import { DevTool } from '@hookform/devtools';
 import Image from 'next/image';
+import { BannerArea } from '../components';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
@@ -17,6 +19,7 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const router = useRouter();
   const delivery_price = 200;
+  const lang = useSelector((state) => state.lang.lang);
 
   const {
     register,
@@ -69,28 +72,14 @@ export default function Checkout() {
   React.useEffect(() => {}, []);
   return (
     <>
-      <section className="banner-area organic-breadcrumb">
-        <div className="container">
-          <div className="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div className="col-first">
-              <h1>Оформление заказа</h1>
-              <nav className="d-flex align-items-center">
-                <a href="index.html">
-                  Главная<span className="lnr lnr-arrow-right"></span>
-                </a>
-                <a href="single-product.html">Оформление</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BannerArea title={checkoutText.page_title} path={'/checkout'} />
 
       <section className="checkout_area section_gap">
         <div className="container">
           <div className="billing_details">
             <div className="row">
               <div className="col-lg-6">
-                <h3>Ваш заказ</h3>
+                <h3>{checkoutText.your_order[lang]}</h3>
                 <div className="col-md-12 order_box">
                   {items &&
                     items.map((item) => {
@@ -112,7 +101,7 @@ export default function Checkout() {
                 </div>
               </div>
               <div className="col-lg-6">
-                <h3>Детали заказа</h3>
+                <h3>{checkoutText.order_details[lang]}</h3>
                 <form onSubmit={handleSubmit(onSend)} className="row contact_form">
                   <div className="col-md-12 form-group p_star">
                     <input
@@ -122,7 +111,7 @@ export default function Checkout() {
                       type="text"
                       className="form-control"
                       name="username"
-                      placeholder="Ваше имя"
+                      placeholder={checkoutText.form.name[lang]}
                       defaultValue={user.data && user.data.username}
                     />
                   </div>
@@ -135,7 +124,7 @@ export default function Checkout() {
                       className="form-control phoneMask"
                       name="phone"
                       inputMode="tel"
-                      placeholder="Ваш номер"
+                      placeholder={checkoutText.form.phone[lang]}
                     />
                   </div>
                   <div className="col-md-12 form-group p_star">
@@ -146,7 +135,7 @@ export default function Checkout() {
                       type="text"
                       className="form-control"
                       name="address"
-                      placeholder="Ваш адрес"
+                      placeholder={checkoutText.form.address[lang]}
                       defaultValue={user.data?.adress && user.data.adress}
                     />
                   </div>
@@ -163,7 +152,7 @@ export default function Checkout() {
                       id="email"
                       name="email"
                       inputMode="email"
-                      placeholder="Ваш Email"
+                      placeholder={checkoutText.form.email[lang]}
                       defaultValue={user.data && user.data.email}
                     />
                     <p>{errors?.email?.message}</p>
@@ -173,22 +162,25 @@ export default function Checkout() {
                     <ul className="list list_2">
                       <li>
                         <a href="#">
-                          Сумма <span>{totalPrice} сом</span>
+                          {checkoutText.details.sum[lang]} <span>{totalPrice} сом</span>
                         </a>
                       </li>
                       <li>
                         <a href="#">
-                          Доставка <span>200 сом</span>
+                          {checkoutText.details.delivery[lang]} <span>{delivery_price} сом</span>
                         </a>
                       </li>
                       <li>
                         <a href="#">
-                          Итого <span>{totalPrice + delivery_price} сом</span>
+                          {checkoutText.details.total[lang]}{' '}
+                          <span>{totalPrice + delivery_price} сом</span>
                         </a>
                       </li>
                     </ul>
                     <br />
-                    <p>Метод оплаты</p>
+                    <p>
+                      <b>{checkoutText.details.paymentMethod[lang]}</b>
+                    </p>
                     <div className="payment_item">
                       <div className="radion_btn">
                         <input
@@ -196,9 +188,9 @@ export default function Checkout() {
                           type="radio"
                           id="radio1"
                           defaultChecked
-                          value="Банковский счет"
+                          value={checkoutText.details.bank[lang]}
                         />
-                        <label htmlFor="radio1">Банковский счет</label>
+                        <label htmlFor="radio1">{checkoutText.details.bank[lang]}</label>
                         <div className="check"></div>
                       </div>
                     </div>
@@ -208,9 +200,9 @@ export default function Checkout() {
                           {...register('payment_method')}
                           type="radio"
                           id="radio2"
-                          value="Наличкой"
+                          value={checkoutText.details.cash[lang]}
                         />
-                        <label htmlFor="radio2">Наличкой</label>
+                        <label htmlFor="radio2">{checkoutText.details.cash[lang]} </label>
                         <div className="check"></div>
                       </div>
                     </div>
@@ -220,26 +212,23 @@ export default function Checkout() {
                           {...register('payment_method')}
                           type="radio"
                           id="radio3"
-                          value="Картой"
+                          value={checkoutText.details.card[lang]}
                         />
-                        <label htmlFor="radio3">Картой </label>
+                        <label htmlFor="radio3">{checkoutText.details.card[lang]}</label>
                         <div className="check"></div>
                       </div>
-                      <p>
-                        После оплаты картой или банковским переводом, в переводе добавьте номер
-                        заказа чтобы мы могли быстрее найти ваш заказ.
-                      </p>
+                      <p>{checkoutText.details.additional[lang]} </p>
                     </div>
                     <div className="creat_account">
                       <input type="checkbox" defaultChecked id="f-option4" name="selector" />
-                      <label htmlFor="f-option4">Я прочитал </label>
+                      <label htmlFor="f-option4">{checkoutText.details.terms[lang]} </label>
                       <a href="#"> terms & conditions*</a>
                     </div>
                     <button
                       className="primary-btn"
                       type="submit"
                       style={{ width: '100%', border: '0px solid' }}>
-                      Заказть
+                      {checkoutText.details.button[lang]}
                     </button>
                   </div>
 

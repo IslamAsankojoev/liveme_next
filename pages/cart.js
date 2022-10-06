@@ -3,15 +3,16 @@ import Link from 'next/link.js';
 import { ItemBlock, BannerArea } from '../components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Empty } from '../components';
-import cartText from '../public/locales/cart/cartCollection.json';
+import { cartCollection } from '../public/locales/cart/cartCollection.js';
 
 export default function Cart() {
+  const lang = useSelector((state) => state.lang.lang);
   const { items, totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   return (
     <>
-      <BannerArea title={cartText.page_title} />
+      <BannerArea title={cartCollection.page_title} />
 
       <section className="cart_area">
         <div className="container">
@@ -21,10 +22,10 @@ export default function Cart() {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th scope="col">Товар</th>
-                      <th scope="col">Цена</th>
-                      <th scope="col">Количество</th>
-                      <th scope="col">Цена</th>
+                      <th scope="col">{cartCollection.table.product[lang]}</th>
+                      <th scope="col">{cartCollection.table.price[lang]}</th>
+                      <th scope="col">{cartCollection.table.quantity[lang]}</th>
+                      <th scope="col">{cartCollection.table.total[lang]}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -33,7 +34,7 @@ export default function Cart() {
                       <td></td>
                       <td></td>
                       <td>
-                        <h5>Сумма</h5>
+                        <h5>{cartCollection.cartTotal[lang]}</h5>
                       </td>
                       <td>
                         <h5>{totalPrice} сом</h5>
@@ -44,17 +45,17 @@ export default function Cart() {
                 <div className="out_button_area">
                   <div className="checkout_btn_inner d-flex align-items-center">
                     <Link href="/">
-                      <a className="gray_btn">Вернуться в магазин</a>
+                      <a className="gray_btn">{cartCollection.returnButton[lang]}</a>
                     </Link>
                     <Link href="/checkout">
-                      <a className="primary-btn">Заказать</a>
+                      <a className="primary-btn">{cartCollection.orderButton[lang]}</a>
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
           ) : (
-            <Empty title={cartText.empty.title} />
+            <Empty title={cartCollection.empty.title} />
           )}
         </div>
       </section>

@@ -9,7 +9,6 @@ const nextConfig = {
   //   defaultLocale: 'ru',
   //   localeDetection: false,
   // },
-  trailingSlash: true,
   images: {
     domains: ['179.61.188.39', 'localhost'],
     formats: ['image/avif', 'image/webp'],

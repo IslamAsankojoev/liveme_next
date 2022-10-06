@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import { text } from '../../public/locales/texts.js';
+import { home } from '../../public/locales/home/homeCollection.js';
 
 export default function ExclusiveDealSection() {
   const lang = useSelector((state) => state.lang.lang);
@@ -14,32 +15,32 @@ export default function ExclusiveDealSection() {
           <div className="col-lg-6 no-padding exclusive-left">
             <div className="row clock_sec clockdiv" id="clockdiv">
               <div className="col-lg-12">
-                <h1>Exclusive Hot Deal Ends Soon!</h1>
-                <p>Who are in extremely love with eco friendly system.</p>
+                <h1>{home.exclusiveArea.title[lang]}!</h1>
+                <p>{home.exclusiveArea.subtitle[lang]}.</p>
               </div>
-              <div className="col-lg-12">
-                <div className="row clock-wrap">
-                  <div className="col clockinner1 clockinner">
-                    <h1 className="days">150</h1>
-                    <span className="smalltext">Days</span>
-                  </div>
-                  <div className="col clockinner clockinner1">
-                    <h1 className="hours">23</h1>
-                    <span className="smalltext">Hours</span>
-                  </div>
-                  <div className="col clockinner clockinner1">
-                    <h1 className="minutes">47</h1>
-                    <span className="smalltext">Mins</span>
-                  </div>
-                  <div className="col clockinner clockinner1">
-                    <h1 className="seconds">59</h1>
-                    <span className="smalltext">Secs</span>
-                  </div>
-                </div>
-              </div>
+              {/*<div className="col-lg-12">*/}
+              {/*  <div className="row clock-wrap">*/}
+              {/*    <div className="col clockinner1 clockinner">*/}
+              {/*      <h1 className="days">150</h1>*/}
+              {/*      <span className="smalltext">Days</span>*/}
+              {/*    </div>*/}
+              {/*    <div className="col clockinner clockinner1">*/}
+              {/*      <h1 className="hours">23</h1>*/}
+              {/*      <span className="smalltext">Hours</span>*/}
+              {/*    </div>*/}
+              {/*    <div className="col clockinner clockinner1">*/}
+              {/*      <h1 className="minutes">47</h1>*/}
+              {/*      <span className="smalltext">Mins</span>*/}
+              {/*    </div>*/}
+              {/*    <div className="col clockinner clockinner1">*/}
+              {/*      <h1 className="seconds">59</h1>*/}
+              {/*      <span className="smalltext">Secs</span>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
             </div>
             <a href="" className="primary-btn">
-              Shop Now
+              {home.exclusiveArea.shopNow[lang]}
             </a>
           </div>
           <div className="col-lg-6 no-padding exclusive-right">

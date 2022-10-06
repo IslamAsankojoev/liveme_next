@@ -7,11 +7,11 @@ import { parseCookies, setCookie } from 'nookies';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { setLang } from '../../redux/slices/langSlice';
-import { setWish } from 'redux/slices/wishSlice';
+import { setWish } from '../../redux/slices/wishSlice';
 
 export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
-  const { pathname, asPath, push, replace, query } = useRouter();
+  const router = useRouter();
 
   React.useEffect(() => {
     setCookie(null, 'NEXT_LOCALE', parseCookies().NEXT_LOCALE || 'ru', {
@@ -30,6 +30,7 @@ export default function AuthProvider({ children }) {
           .then((res) => {
             dispatch(setLoggedIn(res.data));
           });
+        console.log('check cookies');
       }
       async function setUser() {
         try {

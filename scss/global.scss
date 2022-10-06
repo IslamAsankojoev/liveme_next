@@ -39,13 +39,22 @@
   }
 }
 .button-add {
-  padding: 0px 10px;
+  padding: 5px 15px 10px 15px;
   line-height: 30px;
   border-radius: 5px;
   border: 0px;
   transition: 0.3s;
+  position: relative;
   &:active {
     transform: translateY(5px);
+  }
+  span.count {
+    position: absolute;
+    text-align: center;
+    font-size: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 .product_description {

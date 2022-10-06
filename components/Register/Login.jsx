@@ -29,10 +29,10 @@ export default function Login({ setToggle }) {
         password: data.password,
       });
       setCookie(null, 'access_token', res.data.user.token.access, {
-        maxAge: 10,
+        maxAge: 30 * 24 * 60 * 60,
       });
       dispatch(setLoggedIn(res.data.user));
-      router.push('/profile');
+      router.reload();
     } catch (err) {
       if (err.response.data) {
         setServerErrors(err.response.data);

@@ -6,12 +6,14 @@ import { useRouter } from 'next/router.js';
 import axios from 'axios';
 import { parseCookies } from 'nookies';
 import { useSelector } from 'react-redux';
+import { profileText } from '../../public/locales/profile/registerCollection';
 
 export default function ConfirmPassword() {
   const [serverErrors, setServerErrors] = React.useState({});
   const [resetSuccess, setResetSuccess] = React.useState(false);
   const [value, setValue] = React.useState({ password: '', confirmPwd: '', old_password: '' });
   const user = useSelector((state) => state.user.data);
+  const lang = useSelector((state) => state.lang.lang);
   const formSchema = Yup.object().shape({
     password: Yup.string()
       .required('Пароль обязателен')
@@ -64,7 +66,7 @@ export default function ConfirmPassword() {
           id="old_password"
           name="old_password"
           inputMode="text"
-          placeholder="Cтарый пароль"
+          placeholder={profileText.profile.form.old_password[lang]}
           value={value.old_password}
         />
         {serverErrors.old_password && <p className="form-errors">Неверный пароль</p>}
@@ -77,7 +79,7 @@ export default function ConfirmPassword() {
           id="password"
           name="password"
           inputMode="text"
-          placeholder="Новый пароль"
+          placeholder={profileText.profile.form.new_password[lang]}
           value={value.password}
         />
         {serverErrors.password &&
@@ -91,17 +93,19 @@ export default function ConfirmPassword() {
           id="confirmPwd"
           name="confirmPwd"
           inputMode="text"
-          placeholder="Подтвердите пароль"
+          placeholder={profileText.profile.form.confirm_password[lang]}
           value={value.confirmPwd}
         />
         {errors.confirmPwd && <p className="form-errors">{errors.confirmPwd?.message}</p>}
       </div>
       <div className="col-md-12 form-group">
         <button type="submit" value="submit" className="primary-btn">
-          Изменить пароль
+          {profileText.profile.form.buttonChangePassword[lang]}
         </button>
         {/* <a href="#">Забыли пароль?</a> */}
-        {resetSuccess && <p className="form-success">Пароль успешно изменен</p>}
+        {resetSuccess && (
+          <p className="form-success">{profileText.profile.form.password_success[lang]}</p>
+        )}
       </div>
     </form>
   );

@@ -40,7 +40,7 @@ export default function Header() {
       <div className="main_menu">
         <nav className="navbar navbar-expand-lg navbar-light main_box">
           <div className="container">
-            <Link href="/">
+            <Link href="/" onClick={toggleMenu}>
               <a className="navbar-brand logo_h">
                 <img src={'/livemeLogo1.webp'} width={140} height={45} />
               </a>
