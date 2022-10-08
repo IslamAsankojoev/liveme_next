@@ -87,7 +87,7 @@ export default function Checkout() {
                         <div key={item.id} className="order_box-product">
                           <img src={item.cover} alt={item.title} style={{ background: 'white' }} />
                           <div className="order_box-info">
-                            <Link href={`products/${item.id}`}>
+                            <Link href={`/products/${item.id}`}>
                               <a className="title">{item.title}</a>
                             </Link>
                             <span>

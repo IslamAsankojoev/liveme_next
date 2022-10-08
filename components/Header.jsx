@@ -34,13 +34,16 @@ export default function Header() {
     setCookie(null, 'NEXT_LOCALE', e.target.value, { maxAge: 30 * 24 * 60 * 60, path: '/' });
     replace(asPath, asPath, { scroll: false });
   };
+  React.useEffect(() => {
+    setMobileMeniOpen(false);
+  }, [asPath]);
 
   return (
     <header ref={searchRef} className="header_area sticky-header">
       <div className="main_menu">
         <nav className="navbar navbar-expand-lg navbar-light main_box">
           <div className="container">
-            <Link href="/" onClick={toggleMenu}>
+            <Link href="/">
               <a className="navbar-brand logo_h">
                 <img src={'/livemeLogo1.webp'} width={140} height={45} />
               </a>
@@ -77,10 +80,7 @@ export default function Header() {
                     {
                       if (!loggedIn && item.link === '/register') {
                         return (
-                          <li
-                            onClick={toggleMenu}
-                            key={id}
-                            className={`nav-item ${asPath === item.link && 'active'}`}>
+                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link">{item.text[lang]}</a>
                             </Link>
@@ -89,10 +89,7 @@ export default function Header() {
                       }
                       if (item.link === '/profile' && loggedIn) {
                         return (
-                          <li
-                            onClick={toggleMenu}
-                            key={id}
-                            className={`nav-item ${asPath === item.link && 'active'}`}>
+                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link">{item.text[lang]}</a>
                             </Link>
@@ -101,10 +98,7 @@ export default function Header() {
                       }
                       if (item.link !== '/profile' && item.link !== '/register') {
                         return (
-                          <li
-                            onClick={toggleMenu}
-                            key={id}
-                            className={`nav-item ${asPath === item.link && 'active'}`}>
+                          <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link">{item.text[lang]}</a>
                             </Link>

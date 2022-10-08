@@ -18,13 +18,13 @@ const Home = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/`, {
+      .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=8`, {
         headers: {
           'Accept-Language': lang,
         },
       })
       .then(({ data }) => {
-        dispatch(setProducts(data));
+        dispatch(setProducts(data.results));
       });
   }, [lang]);
 

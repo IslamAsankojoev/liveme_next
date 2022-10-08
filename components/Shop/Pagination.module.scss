@@ -1,9 +1,17 @@
 .shop_pagination {
+  overflow: scroll;
   cursor: pointer;
+  display: block !important;
+  //height: 40px;
   a {
+    display: block;
+    width: 50px;
     transition: 0s !important;
     &:hover {
       color: white !important;
+      i {
+        color: white !important;
+      }
     }
   }
   .arrow_hide {
@@ -12,5 +20,10 @@
     &:hover {
       background: white;
     }
+  }
+}
+.wrapper {
+  @media (max-width: 768px) {
+    margin-top: 40px;
   }
 }

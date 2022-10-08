@@ -11,7 +11,6 @@ export default function CategiryItem({ title, products, onClick, id }) {
       <a>
         <span className="lnr lnr-arrow-right"></span>
         {title}
-        <span className="number">({products})</span>
       </a>
     </li>
   );
