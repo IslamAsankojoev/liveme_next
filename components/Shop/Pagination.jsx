@@ -11,6 +11,16 @@ export default function PaginationComp({
   page_size,
   handlePage,
 }) {
+  const [current, setCurrent] = React.useState(0);
+
+  const handleChange = (value) => {
+    setCurrent(value);
+    handlePage(value);
+  };
+  React.useEffect(() => {
+    setCurrent(page);
+  }, [page]);
+
   return (
     <div className={style.wrapper}>
       <Pagination
@@ -18,8 +28,9 @@ export default function PaginationComp({
         count={count}
         {...items}
         onChange={(e, page) => {
-          handlePage(page);
+          handleChange(page);
         }}
+        page={current}
         size="large"
         shape="rounded"
         renderItem={(item) => (
