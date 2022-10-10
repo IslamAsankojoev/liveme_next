@@ -10,7 +10,7 @@ export default function BannerSection() {
   const items = useSelector((state) => state.products.items);
 
   return (
-    <section className="banner-area">
+    <section className="banner-area home">
       <div className="container">
         <div
           className="row fullscreen align-items-center justify-content-start"

@@ -44,15 +44,14 @@ export default function Register({ setToggle }) {
         maxAge: 30 * 24 * 60 * 60,
       });
       dispatch(setLoggedIn(res.data));
-      router.reload();
     } catch (err) {
-      console.log(err);
+      console.log(err, 'err from register');
       if (err.response.data.username) {
         setUsernameIsAlreadyExist(err.response.data.username[0]);
       }
     }
+    router.reload();
   };
-  console.log(errors);
 
   return (
     <>

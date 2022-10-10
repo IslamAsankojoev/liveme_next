@@ -18,7 +18,7 @@ export default function Header() {
   const searchRef = React.useRef();
   const { replace, pathname, push, asPath } = useRouter();
   const dispatch = useDispatch();
-  const { loggedIn } = useSelector((state) => state.user);
+  const { loggedIn, data } = useSelector((state) => state.user);
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
     setSearchOpen(false);
@@ -71,8 +71,8 @@ export default function Header() {
               </button>
               <div
                 className={classNames({
-                  'collapse navbar-collapse offset': true,
-                  show: mobileMeniOpen,
+                  'collapse navbar-collapse offset m-menu': true,
+                  showMobileMenu: mobileMeniOpen,
                 })}
                 id="navbarSupportedContent">
                 <ul className="nav navbar-nav menu_nav ml-auto">
@@ -91,7 +91,7 @@ export default function Header() {
                         return (
                           <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
-                              <a className="nav-link">{item.text[lang]}</a>
+                              <a className="nav-link text-success">{data.username}</a>
                             </Link>
                           </li>
                         );

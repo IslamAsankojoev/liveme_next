@@ -35,9 +35,11 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
 
   React.useEffect(() => {
     if (searchValue) {
-      axios.get(`${process.env.SERVER_DOMAIN}/api/products/?title=${searchValue}`).then((res) => {
-        setSearchResult((prev) => res.data);
-      });
+      axios
+        .get(`${process.env.SERVER_DOMAIN}/api/products/?title=${searchValue}&page_size=50`)
+        .then((res) => {
+          setSearchResult((prev) => res.data.results);
+        });
     } else {
       setSearchResult([]);
     }

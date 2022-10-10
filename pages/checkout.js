@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../redux/slices/cartSlice';
 import { useForm } from 'react-hook-form';
@@ -25,8 +25,13 @@ export default function Checkout() {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: React.useMemo(() => {
+      return user.data;
+    }, [user]),
+  });
   const itemsText = items
     .map((item) => {
       return `\n\n${item?.title}\n${item?.count} шт - ${item?.price * item?.count} сом`;
@@ -36,7 +41,7 @@ export default function Checkout() {
   const onSend = async (data) => {
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${
       data?.email
-    }\nАдрес - ${data?.address}\nМетод оплаты - ${
+    }\nАдрес - ${data?.adress}\nМетод оплаты - ${
       data?.payment_method
     }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
     try {
@@ -44,7 +49,7 @@ export default function Checkout() {
         `${process.env.SERVER_DOMAIN}/api/orders/`,
         {
           client_name: data.username,
-          client_address: data.address,
+          client_address: data.adress,
           client_phone: data.phone,
           client_email: data.email,
           products: items,
@@ -69,7 +74,10 @@ export default function Checkout() {
     await dispatch(clearCart());
     dispatch(setShow());
   };
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    reset(user.data);
+  }, [user]);
+
   return (
     <>
       <BannerArea title={checkoutText.page_title} path={'/checkout'} />
@@ -112,7 +120,6 @@ export default function Checkout() {
                       className="form-control"
                       name="username"
                       placeholder={checkoutText.form.name[lang]}
-                      defaultValue={user.data && user.data.username}
                     />
                   </div>
                   <div className="col-md-12 form-group p_star">
@@ -129,14 +136,13 @@ export default function Checkout() {
                   </div>
                   <div className="col-md-12 form-group p_star">
                     <input
-                      {...register('address', {
+                      {...register('adress', {
                         required: true,
                       })}
                       type="text"
                       className="form-control"
                       name="address"
                       placeholder={checkoutText.form.address[lang]}
-                      defaultValue={user.data?.adress && user.data.adress}
                     />
                   </div>
                   <div className="col-md-12 form-group p_star">
@@ -153,7 +159,6 @@ export default function Checkout() {
                       name="email"
                       inputMode="email"
                       placeholder={checkoutText.form.email[lang]}
-                      defaultValue={user.data && user.data.email}
                     />
                     <p>{errors?.email?.message}</p>
                   </div>

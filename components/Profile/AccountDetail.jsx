@@ -19,20 +19,31 @@ export default function AccountDetail() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: React.useMemo(() => {
+      return {
+        username: user?.username,
+        email: user?.email,
+        address: user?.address,
+      };
+    }, [user]),
+  });
 
   const onSubmit = async (data) => {
     setServerErrors({});
     try {
       const res = await axios.put(
-        `${process.env.SERVER_DOMAIN}/api/users/update/${user.id}`,
+        `${process.env.SERVER_DOMAIN}/api/users/${user.id}`,
         {
+          id: user.id,
           username: data.username,
           email: data.email,
-          adress: data.adress,
-          first_name: 'firstName',
-          last_name: 'lastName',
+          address: data.address,
+          password: user.password,
+          first_name: user.first_name,
+          last_name: user.last_name,
         },
         {
           headers: {
@@ -47,6 +58,14 @@ export default function AccountDetail() {
       setServerErrors(err.response?.data);
     }
   };
+
+  React.useEffect(() => {
+    reset({
+      username: user?.username,
+      email: user?.email,
+      address: user?.address,
+    });
+  }, [user]);
 
   return (
     <div className={style.detail}>
@@ -64,7 +83,6 @@ export default function AccountDetail() {
             className="form-control"
             id="username"
             name="username"
-            defaultValue={user.username}
             placeholder={`${profileText.profile.form.name[lang]} ${
               errors?.username?.type === 'required' ? '- обязательно' : ''
             }`}
@@ -85,7 +103,6 @@ export default function AccountDetail() {
             id="email"
             name="email"
             inputMode="email"
-            defaultValue={user.email}
             placeholder={`${profileText.profile.form.email[lang]} ${
               errors?.email?.type === 'required' ? '- обязательно' : ''
             }`}
@@ -97,21 +114,30 @@ export default function AccountDetail() {
         </div>
         <div className="col-md-12 form-group">
           <input
-            {...register('adress')}
+            {...register('address')}
             type="text"
             className="form-control"
-            id="adress"
-            name="adress"
+            id="address"
+            name="address"
             inputMode="text"
-            defaultValue={user.adress}
             placeholder={`${profileText.profile.form.address[lang]} ${
-              errors?.adress?.type === 'required' ? '- обязательно' : ''
+              errors?.address?.type === 'required' ? '- обязательно' : ''
             }`}
           />
         </div>
+        {/*<div className="col-md-12 form-group">*/}
+        {/*  <input*/}
+        {/*    {...register('password')}*/}
+        {/*    type="password"*/}
+        {/*    className="form-control"*/}
+        {/*    id="password"*/}
+        {/*    name="password"*/}
+        {/*    placeholder="Пароль"*/}
+        {/*  />*/}
+        {/*</div>*/}
         <div className="col-md-12 form-group">
           <button type="submit" value="submit" className="primary-btn">
-            {profileText.profile.form.title[lang]}
+            {profileText.profile.form.buttonChangeData[lang]}
           </button>
           {changeSuccess && (
             <p className="form-success">{profileText.profile.form.data_success[lang]}</p>

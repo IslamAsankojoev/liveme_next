@@ -39,12 +39,12 @@ export default function ConfirmPassword() {
           },
         },
       );
+      setResetSuccess(true);
     } catch (err) {
       if (err.response.status === 400) {
         setServerErrors(err.response.data);
       }
     }
-    setResetSuccess(true);
     setValue({ password: '', confirmPwd: '', old_password: '' });
   };
 

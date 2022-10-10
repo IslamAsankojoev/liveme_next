@@ -20,32 +20,32 @@ export default function AuthProvider({ children }) {
     });
     const doMagic = () => {
       let { access_token } = parseCookies();
-      async function getAccess() {
+      async function getAccess(token) {
         axios
           .get(`${process.env.SERVER_DOMAIN}/api/users/me`, {
             headers: {
-              Authorization: 'Bearer ' + access_token,
+              Authorization: 'Bearer ' + token,
             },
           })
           .then((res) => {
             dispatch(setLoggedIn(res.data));
+            console.log(res.data);
           });
         console.log('check cookies');
       }
       async function setUser() {
         try {
           if (access_token) {
-            await getAccess();
+            await getAccess(access_token);
           }
         } catch (err) {
-          window.location.href = '/register';
+          console.log(err, 'err check cookies');
         }
       }
       setUser();
       dispatch(setLang(parseCookies().NEXT_LOCALE || 'ru'));
       dispatch(setWish(JSON.parse(localStorage.getItem('wish')) || []));
       dispatch(setCart(JSON.parse(localStorage.getItem('cart')) || []));
-      console.log(12);
     };
 
     doMagic();

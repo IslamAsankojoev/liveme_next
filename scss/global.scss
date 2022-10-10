@@ -81,9 +81,33 @@
   visibility: hidden;
   transition: 0.3s;
 }
+.navbar-collapse {
+  transition: 0.2s;
+  @media (max-width: 768px) {
+    transform: translateX(100%);
+  }
+}
 .show {
   opacity: 1;
   visibility: visible;
+}
+.m-menu {
+  @media (max-width: 768px) {
+    display: block !important;
+    transform: translateY(-110%) !important;
+    opacity: 1;
+    z-index: -2 !important;
+    padding-top: 20px;
+    top: 45px;
+    visibility: visible;
+    height: 40vh;
+  }
+}
+
+.m-menu.showMobileMenu {
+  @media (max-width: 768px) {
+    transform: translateY(0%) !important;
+  }
 }
 
 .login_box_area {
@@ -91,6 +115,7 @@
     color: white !important;
   }
 }
+
 .profile {
   @media (max-width: 768px) {
   }
@@ -348,6 +373,7 @@
 }
 
 .profile-orders {
+  min-height: 100%;
   transition: 0.3s;
   display: flex;
   align-items: center;
@@ -527,5 +553,10 @@ body {
   }
   h1 {
     color: white !important;
+  }
+}
+.banner-area.home {
+  @media (max-width: 768px) {
+    height: 100vh;
   }
 }

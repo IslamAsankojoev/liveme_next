@@ -91,7 +91,7 @@ export default function Shop({ data }) {
           <br />
           <br />
           <div className="col-xl-9 col-lg-8 col-md-12">
-            <div className="d-flex flex-wrap align-items-center">
+            <div className="d-flex flex-wrap align-items-center justify-content-center">
               <PaginationComp
                 items={products}
                 page={page}
@@ -157,7 +157,7 @@ export default function Shop({ data }) {
               </div>
               <br />
             </section>
-            <div className="d-flex flex-wrap align-items-center">
+            <div className="d-flex flex-wrap align-items-center justify-content-center">
               <PaginationComp
                 page={page}
                 count={pageCount}
