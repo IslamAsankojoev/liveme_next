@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    SERVER_DOMAIN: process.env.BACKEND_APP_DOMAIN_NAME,
+    SERVER_DOMAIN: process.env.SERVER,
   },
   images: {
     domains: ['179.61.188.39', 'localhost'],
