@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import style from './AccountTabs.module.scss';
 import { useRouter } from 'next/router';
+import { destroyCookie } from 'nookies';
 
 export default function AccountTabs({ activeTab, setActiveTab }) {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
 
   const lang = useSelector((state) => state.lang.lang);
   const logout = async () => {
-    await axios.get('/api/logout');
+    destroyCookie(null, 'access_token');
     router.reload();
   };
   return (
