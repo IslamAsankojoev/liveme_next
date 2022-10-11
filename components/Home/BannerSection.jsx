@@ -5,10 +5,17 @@ import { home } from '../../public/locales/home/homeCollection.js';
 import { text } from '../../public/locales/texts.js';
 
 export default function BannerSection() {
+  const [saleItems, setSaleItems] = React.useState({});
   const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
+  const addToCart = () => {
+    dispatch(addItem({ ...saleItems, price: saleItems.sale_price || saleItems.regular_price }));
+  };
 
+  React.useEffect(() => {
+    setSaleItems(items.find((item) => item.id === 2));
+  }, [items]);
   return (
     <section className="banner-area home">
       <div className="container">
@@ -29,16 +36,7 @@ export default function BannerSection() {
                     <p>{home.headerArea.text[lang]}</p>
                     <div
                       style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        dispatch(
-                          addItem({
-                            id: items[5]?.id,
-                            title: items[5]?.title,
-                            images: items[5]?.images,
-                            price: items[5]?.regular_price,
-                          }),
-                        );
-                      }}
+                      onClick={addToCart}
                       className="add-bag d-flex align-items-center simple-btn">
                       <a className="add-btn">
                         <svg

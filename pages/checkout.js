@@ -10,6 +10,7 @@ import lodash from 'lodash';
 import { checkoutCollectionsText as checkoutText } from '../public/locales/checkout/checkoutCollections';
 import { BannerArea } from '../components';
 import { useSnackbar } from 'notistack';
+import { parseCookies } from 'nookies';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
@@ -40,28 +41,49 @@ export default function Checkout() {
   const onSend = async (data) => {
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${
       data?.email
-    }\nАдрес - ${data?.adress}\nМетод оплаты - ${
+    }\nАдрес - ${data?.address}\nМетод оплаты - ${
       data?.payment_method
     }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
     try {
-      await axios.post(
-        `${process.env.SERVER_DOMAIN}/api/orders/`,
-        {
-          client_name: data.username,
-          client_address: data.address,
-          client_phone: data.phone,
-          client_email: data.email,
-          products: items,
-          payment_method: data.payment_method,
-        },
-        {
-          headers: !lodash.isEmpty(user)
-            ? {
-                Authorization: 'Bearer ' + user.data.token.access,
+      await axios
+        .post(
+          `${process.env.SERVER_DOMAIN}/api/orders/`,
+          {
+            client_name: data.username,
+            client_address: data.address,
+            client_phone: data.phone,
+            client_email: data.email,
+            products: items,
+            payment_method: data.payment_method,
+          },
+          parseCookies()
+            ? null
+            : {
+                headers: {
+                  Authorization: `Bearer ${parseCookies().access_token}`,
+                },
+              },
+        )
+        .then((res) => {
+          if (res.status === 201) {
+            enqueueSnackbar(`Ваш заказ успешно оформлен`, {
+              variant: 'success',
+              autoHideDuration: 3000,
+              anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            });
+            dispatch(clearCart());
+            setTimeout(() => {
+              if (parseCookies().access_token) {
+                router.push('/profile');
+              } else {
+                router.push('/shop');
               }
-            : {},
-        },
-      );
+            }, 2000);
+          }
+        });
     } catch (err) {
       console.log(err);
     }
@@ -70,18 +92,6 @@ export default function Checkout() {
     } catch (err) {
       console.log(err);
     }
-    await dispatch(clearCart());
-    enqueueSnackbar('Ваш заказ успешно оформлен', {
-      variant: 'success',
-      autoHideDuration: 3000,
-      anchorOrigin: {
-        vertical: 'bottom',
-        horizontal: 'right',
-      },
-    });
-    setTimeout(() => {
-      router.push('/');
-    }, 2000);
   };
 
   React.useEffect(() => {
@@ -203,7 +213,7 @@ export default function Checkout() {
                           type="radio"
                           id="radio1"
                           defaultChecked
-                          value={checkoutText.details.bank[lang]}
+                          value="Банковский счет"
                         />
                         <label htmlFor="radio1">{checkoutText.details.bank[lang]}</label>
                         <div className="check"></div>
@@ -215,7 +225,7 @@ export default function Checkout() {
                           {...register('payment_method')}
                           type="radio"
                           id="radio2"
-                          value={checkoutText.details.cash[lang]}
+                          value="Наличкой"
                         />
                         <label htmlFor="radio2">{checkoutText.details.cash[lang]} </label>
                         <div className="check"></div>
@@ -227,7 +237,7 @@ export default function Checkout() {
                           {...register('payment_method')}
                           type="radio"
                           id="radio3"
-                          value={checkoutText.details.card[lang]}
+                          value="Картой"
                         />
                         <label htmlFor="radio3">{checkoutText.details.card[lang]}</label>
                         <div className="check"></div>

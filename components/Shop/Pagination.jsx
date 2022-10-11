@@ -2,15 +2,7 @@ import React from 'react';
 import style from './Pagination.module.scss';
 import { Pagination, PaginationItem } from '@mui/material';
 
-export default function PaginationComp({
-  items,
-  page,
-  count,
-  next,
-  previous,
-  page_size,
-  handlePage,
-}) {
+export default function PaginationComp({ items, page, count, handlePage }) {
   const [current, setCurrent] = React.useState(0);
   const [pagesCount, setPagesCount] = React.useState(1);
 
@@ -38,15 +30,7 @@ export default function PaginationComp({
         page={current}
         size="large"
         shape="rounded"
-        renderItem={(item) => (
-          <PaginationItem
-            className={'paginationItem'}
-            {...item}
-            sx={{
-              background: item.selected ? 'red' : '#fff',
-            }}
-          />
-        )}
+        renderItem={(item) => <PaginationItem className={'paginationItem'} {...item} />}
       />
     </div>
   );

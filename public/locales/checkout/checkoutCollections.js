@@ -81,9 +81,9 @@ export const checkoutCollectionsText = {
       tr: 'Kart',
     },
     cash: {
-      ru: 'Наличными',
+      ru: 'Наличкой',
       en: 'Cash',
-      kg: 'Наличными',
+      kg: 'Наличкой',
       tr: 'Nakit',
     },
     additional: {

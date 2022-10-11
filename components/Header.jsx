@@ -6,9 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLang } from '../redux/slices/langSlice';
 import { text } from '../public/locales/texts.js';
-import { setCookie } from 'nookies';
+import { parseCookies, setCookie } from 'nookies';
+import { setLoggedIn } from '../redux/slices/userSlice';
+import axios from 'axios';
 
 export default function Header() {
+  const selectRef = React.useRef(null);
   const languages = ['ru', 'en', 'kg', 'tr'];
   const lang = useSelector((state) => state.lang.lang);
   const { totalItems } = useSelector((state) => state.cart);
@@ -19,6 +22,7 @@ export default function Header() {
   const { replace, pathname, push, asPath } = useRouter();
   const dispatch = useDispatch();
   const { loggedIn, data } = useSelector((state) => state.user);
+  const defaultSelect = lang;
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
     setSearchOpen(false);
@@ -36,7 +40,22 @@ export default function Header() {
   };
   React.useEffect(() => {
     setMobileMeniOpen(false);
+    if (parseCookies().access_token) {
+      axios
+        .get(`${process.env.SERVER_DOMAIN}/api/users/me`, {
+          headers: {
+            Authorization: 'Bearer ' + parseCookies().access_token,
+          },
+        })
+        .then((res) => {
+          dispatch(setLoggedIn(res.data));
+        });
+    }
   }, [asPath]);
+
+  React.useEffect(() => {
+    selectRef.current.value = lang;
+  }, [lang]);
 
   return (
     <header ref={searchRef} className="header_area sticky-header">
@@ -45,13 +64,18 @@ export default function Header() {
           <div className="container">
             <Link href="/">
               <a className="navbar-brand logo_h">
-                <img src={'/livemeLogo1.webp'} width={140} height={45} />
+                <img src={'/livemeLogo1.webp'} width={140} height={45} alt={'Logo'} />
               </a>
             </Link>
             <div className="header-right">
-              <select name="langs" onChange={onChangeLang} id="langs">
+              <select
+                ref={selectRef}
+                defaultValue={defaultSelect}
+                name="languages"
+                onChange={onChangeLang}
+                id="langs">
                 {languages.map((language, id) => (
-                  <option key={id} value={language} selected={language === lang}>
+                  <option key={id} value={language}>
                     {language}
                   </option>
                 ))}

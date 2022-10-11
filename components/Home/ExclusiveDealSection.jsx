@@ -61,7 +61,7 @@ export default function ExclusiveDealSection() {
                         addItem({
                           id: items[5]?.id,
                           title: items[5]?.title,
-                          images: items[5]?.images,
+                          cover: items[5]?.cover,
                           price: items[5]?.regular_price,
                         }),
                       );
