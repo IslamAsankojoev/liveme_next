@@ -51,7 +51,10 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
               </h6>
               {sale_price && (
                 <h6 className="l-through">
-                  {regular_price} <span>сом</span>
+                  <s>
+                    {regular_price}
+                    <span>сом</span>
+                  </s>
                 </h6>
               )}
             </div>

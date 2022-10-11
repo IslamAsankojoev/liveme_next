@@ -5,13 +5,11 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Link from 'next/link';
 import sendMessage from '../bot';
-import { setShow } from '../redux/slices/thankYouSlice.js';
 import { useRouter } from 'next/router.js';
 import lodash from 'lodash';
 import { checkoutCollectionsText as checkoutText } from '../public/locales/checkout/checkoutCollections';
-import { DevTool } from '@hookform/devtools';
-import Image from 'next/image';
 import { BannerArea } from '../components';
+import { useSnackbar } from 'notistack';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
@@ -20,6 +18,7 @@ export default function Checkout() {
   const router = useRouter();
   const delivery_price = 200;
   const lang = useSelector((state) => state.lang.lang);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const {
     register,
@@ -49,7 +48,7 @@ export default function Checkout() {
         `${process.env.SERVER_DOMAIN}/api/orders/`,
         {
           client_name: data.username,
-          client_address: data.adress,
+          client_address: data.address,
           client_phone: data.phone,
           client_email: data.email,
           products: items,
@@ -72,8 +71,19 @@ export default function Checkout() {
       console.log(err);
     }
     await dispatch(clearCart());
-    dispatch(setShow());
+    enqueueSnackbar('Ваш заказ успешно оформлен', {
+      variant: 'success',
+      autoHideDuration: 3000,
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'right',
+      },
+    });
+    setTimeout(() => {
+      router.push('/');
+    }, 2000);
   };
+
   React.useEffect(() => {
     reset(user.data);
   }, [user]);
@@ -136,7 +146,7 @@ export default function Checkout() {
                   </div>
                   <div className="col-md-12 form-group p_star">
                     <input
-                      {...register('adress', {
+                      {...register('address', {
                         required: true,
                       })}
                       type="text"
@@ -236,8 +246,6 @@ export default function Checkout() {
                       {checkoutText.details.button[lang]}
                     </button>
                   </div>
-
-                  <DevTool control={control} />
                 </form>
               </div>
             </div>

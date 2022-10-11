@@ -12,14 +12,17 @@ import '../scss/css/ion.rangeSlider.skinFlat.css';
 import '../scss/css/magnific-popup.css';
 import '../scss/css/main.css';
 import '../scss/global.scss';
+import { SnackbarProvider } from 'notistack';
 
 const App = ({ Component, pageProps }) => {
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
-    </Provider>
+    <SnackbarProvider maxSnack={3}>
+      <Provider store={store}>
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
+      </Provider>
+    </SnackbarProvider>
   );
 };
 

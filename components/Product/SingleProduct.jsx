@@ -57,7 +57,7 @@ export default function SingleProduct({
                 <ul className="list">
                   <li>
                     <a className="active" href="#">
-                      <span>{product.category[lang]}</span> : {category?.title}
+                      <span>{product.category[lang]}</span> : {category}
                     </a>
                   </li>
                   <li>

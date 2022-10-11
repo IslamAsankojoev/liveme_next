@@ -87,6 +87,10 @@
     transform: translateX(100%);
   }
 }
+
+.header_area {
+  z-index: 1000 !important;
+}
 .show {
   opacity: 1;
   visibility: visible;
@@ -94,9 +98,9 @@
 .m-menu {
   @media (max-width: 768px) {
     display: block !important;
+    opacity: 0;
     transform: translateY(-110%) !important;
-    opacity: 1;
-    z-index: -2 !important;
+    //z-index: -10 !important;
     padding-top: 20px;
     top: 45px;
     visibility: visible;
@@ -106,6 +110,7 @@
 
 .m-menu.showMobileMenu {
   @media (max-width: 768px) {
+    opacity: 1;
     transform: translateY(0%) !important;
   }
 }
