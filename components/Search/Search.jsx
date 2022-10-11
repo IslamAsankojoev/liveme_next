@@ -5,11 +5,13 @@ import lodash from 'lodash';
 import axios from 'axios';
 import Link from 'next/link.js';
 import SearchItem from './SearchItem.jsx';
+import { useSelector } from 'react-redux';
 
 export default function Search({ setSearchOpen, searchOpen, searchRef }) {
   const [searchValue, setSearchValue] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
   const [value, setValue] = React.useState('');
+  const lang = useSelector((state) => state.lang.lang);
 
   const handleSearch = (e) => {
     handleSearchResult(e.target.value);
@@ -36,7 +38,11 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
   React.useEffect(() => {
     if (searchValue) {
       axios
-        .get(`${process.env.SERVER_DOMAIN}/api/products/?search=${searchValue}&page_size=50`)
+        .get(`${process.env.SERVER_DOMAIN}/api/products/?search=${searchValue}&page_size=50`, {
+          headers: {
+            'Accept-Language': lang,
+          },
+        })
         .then((res) => {
           setSearchResult((prev) => res.data.results);
         });

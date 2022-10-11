@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import style from './ProductBlock.module.scss';
-import StaticImage from '../../scss/static/img/ıhlamur.webp';
 import { WishButton } from '../index';
 import { toggleItem } from '../../redux/slices/wishSlice.js';
 import { useRouter } from 'next/router.js';
