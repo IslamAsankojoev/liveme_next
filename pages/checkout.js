@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../redux/slices/cartSlice';
 import { useForm } from 'react-hook-form';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import sendMessage from '../bot';
 import { useRouter } from 'next/router.js';
-import lodash from 'lodash';
+import { text } from '../public/locales/texts';
 import { checkoutCollectionsText as checkoutText } from '../public/locales/checkout/checkoutCollections';
 import { BannerArea } from '../components';
 import { useSnackbar } from 'notistack';
@@ -53,20 +53,19 @@ export default function Checkout() {
             client_address: data.address,
             client_phone: data.phone,
             client_email: data.email,
-            products: items,
             payment_method: data.payment_method,
           },
-          parseCookies()
-            ? null
-            : {
+          user.loggedIn
+            ? {
                 headers: {
                   Authorization: `Bearer ${parseCookies().access_token}`,
                 },
-              },
+              }
+            : null,
         )
         .then((res) => {
           if (res.status === 201) {
-            enqueueSnackbar(`Ваш заказ успешно оформлен`, {
+            enqueueSnackbar(text.notifications.successOrder[lang], {
               variant: 'success',
               autoHideDuration: 3000,
               anchorOrigin: {

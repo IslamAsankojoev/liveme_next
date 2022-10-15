@@ -6,7 +6,7 @@ import { useRouter } from 'next/router.js';
 import { useSelector } from 'react-redux';
 import { shopText } from '../../public/locales/shop/shopCollection';
 
-export default function SidebarCategory({ setCategory, setPage }) {
+export default function SidebarCategory({ setCategory, setPage, categoryCurrent }) {
   const [categories, setCategories] = React.useState([]);
   const lang = useSelector((state) => state.lang.lang);
   const router = useRouter();
@@ -44,6 +44,7 @@ export default function SidebarCategory({ setCategory, setPage }) {
               key={category.id + category.title}
               {...category}
               onClick={onClickCategory}
+                categoryCurrent={categoryCurrent}
             />
           );
         })}

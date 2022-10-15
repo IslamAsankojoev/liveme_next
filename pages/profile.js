@@ -7,7 +7,7 @@ import { profileText } from '../public/locales/profile/registerCollection';
 import { BannerArea } from '../components';
 import { parseCookies } from 'nookies';
 
-export default function profile() {
+export default function profile({ prevPath }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function profile() {
       <br />
       <br />
       <br />
-      <Profile />
+      <Profile prevPath={prevPath} />
     </>
   );
 }
@@ -34,6 +34,8 @@ export async function getServerSideProps(ctx) {
     };
   }
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      prevPath: ctx?.req?.headers?.referer,
+    }, // will be passed to the page component as props
   };
 }

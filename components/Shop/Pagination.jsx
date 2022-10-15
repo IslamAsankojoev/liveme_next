@@ -3,7 +3,7 @@ import style from './Pagination.module.scss';
 import { Pagination, PaginationItem } from '@mui/material';
 
 export default function PaginationComp({ items, page, count, handlePage }) {
-  const [current, setCurrent] = React.useState(0);
+  const [current, setCurrent] = React.useState(1);
   const [pagesCount, setPagesCount] = React.useState(1);
 
   const handleChange = (value) => {
@@ -21,16 +21,13 @@ export default function PaginationComp({ items, page, count, handlePage }) {
   return (
     <div className={style.wrapper}>
       <Pagination
-        className={style.pagination}
         count={pagesCount}
-        {...items}
-        onChange={(e, page) => {
+        onChange={(_, page) => {
           handleChange(page);
         }}
         page={current}
         size="large"
         shape="rounded"
-        renderItem={(item) => <PaginationItem className={'paginationItem'} {...item} />}
       />
     </div>
   );

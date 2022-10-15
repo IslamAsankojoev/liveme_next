@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { OrderBlock, AccountOrder, AccountTabs, AccountDetail } from '../../components/index';
 import lodash from 'lodash';
 
-const Profile = () => {
+const Profile = ({ prevPath }) => {
   const [activeTab, setActiveTab] = React.useState('profile');
 
   const dispatch = useDispatch();
@@ -21,6 +21,12 @@ const Profile = () => {
       console.log(e);
     }
   };
+
+  React.useEffect(() => {
+    if (prevPath.includes('checkout')) {
+      setActiveTab('orders');
+    }
+  }, []);
 
   return (
     <div className="container profile">

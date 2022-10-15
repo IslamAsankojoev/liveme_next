@@ -132,4 +132,12 @@ export const text = {
       kg: 'Дарыкка кайтуу',
     },
   },
+  notifications: {
+    successOrder: {
+      ru: 'Ваш заказ успешно оформлен',
+      en: 'Your order has been successfully placed',
+      tr: 'Siparişiniz başarıyla yerleştirildi',
+      kg: 'Сиздин сатып алуу сәтті тапсырылды',
+    },
+  },
 };

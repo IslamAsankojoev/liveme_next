@@ -12,7 +12,7 @@ import { setProducts } from '../redux/slices/productSlice';
 import { BannerArea, Empty } from '../components';
 import { shopText } from '../public/locales/shop/shopCollection.js';
 
-const page_size = 27;
+const page_size = 9;
 
 export default function Shop({ data }) {
   const products = useSelector((state) => state.products.items);
@@ -86,7 +86,7 @@ export default function Shop({ data }) {
       <div className="container">
         <div className="row">
           <div className="col-xl-3 col-lg-4 col-md-5">
-            <SidebarCategory setCategory={setCategory} setPage={setPage} />
+              <SidebarCategory setCategory={setCategory} setPage={setPage} categoryCurrent={category} />
           </div>
           <br />
           <br />
