@@ -53,9 +53,9 @@ export default function AccountDetail() {
       );
       dispatch(setLoggedIn(res.data));
       setChangeSuccess(true);
-    } catch (err) {
-      console.log(err);
-      setServerErrors(err.response?.data);
+    } catch (error) {
+      console.log(error, 'change user data error');
+      setServerErrors(error.response?.data);
     }
   };
 

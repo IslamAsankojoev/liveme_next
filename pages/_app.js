@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import store from '../redux/store';
 import React from 'react';
+import App from "next/app"
 import { AuthProvider } from '../components/index';
 import '../scss/css/bootstrap.css';
 import '../scss/css/font-awesome.min.css';
@@ -13,17 +14,58 @@ import '../scss/css/magnific-popup.css';
 import '../scss/css/main.css';
 import '../scss/global.scss';
 import { SnackbarProvider } from 'notistack';
+import axios from 'axios';
+import { parseCookies} from 'nookies';
 
-const App = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps, userServerSideData }) => {
   return (
     <SnackbarProvider maxSnack={3}>
       <Provider store={store}>
-        <AuthProvider>
-          <Component {...pageProps} />
+          <AuthProvider>
+            <Component {...pageProps} />
         </AuthProvider>
       </Provider>
     </SnackbarProvider>
   );
 };
 
-export default App;
+//MyApp.getInitialProps = async (appContext) => {
+//    const appProps = await App.getInitialProps(appContext)
+//    const auth = parseCookies(appContext).access_token;
+//        let user = null
+//        if (auth) {
+//            axios
+//            .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
+//                headers: {
+//                    Authorization: 'Bearer ' + auth,
+//                },
+//            })
+//            .then((res) => {
+//                user = res.data
+//            });
+//        }
+//
+//    return { ...appProps, userServerSideData: user }
+//}
+
+export default MyApp;
+//export async function getServerSideProps(ctx) {
+//    const auth = parseCookies(ctx).access_token;
+//    let user = null
+//    if (auth) {
+//        axios
+//        .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
+//            headers: {
+//                Authorization: 'Bearer ' + auth,
+//            },
+//        })
+//        .then((res) => {
+//            console.log(res)
+//        });
+//    }
+//    return {
+//        props: {
+//            userServerSideData: user,
+//        },
+//    };
+//}

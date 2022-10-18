@@ -47,7 +47,7 @@ export default function ExclusiveDealSection() {
             <div className="active-exclusive-product-slider">
               {/* <!-- single exclusive carousel --> */}
               <div className="single-exclusive-slider">
-                <img className="img-fluid" src={items[5]?.cover} width="100%" alt="" />
+                  <img className="img-fluid" src={items[5]?.image} width="100%" alt="" />
                 <div className="product-details">
                   <div className="price">
                     <h6>{items[5]?.regular_price} сом</h6>
@@ -61,7 +61,7 @@ export default function ExclusiveDealSection() {
                         addItem({
                           id: items[5]?.id,
                           title: items[5]?.title,
-                          cover: items[5]?.cover,
+                            image: items[5]?.image,
                           price: items[5]?.regular_price,
                         }),
                       );

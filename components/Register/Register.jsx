@@ -41,7 +41,7 @@ export default function Register({ setToggle }) {
         },
       );
       setCookie(null, 'access_token', res.data.token.access, {
-        maxAge: 30 * 24 * 60 * 60,
+        maxAge: 1 * 24 * 60 * 60,
       });
       dispatch(setLoggedIn(res.data));
     } catch (err) {

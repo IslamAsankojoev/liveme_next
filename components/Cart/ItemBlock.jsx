@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import style from './itemBlock.module.scss';
 import Image from 'next/image';
 
-export default function ItemBlock({ id, title, cover, price, count }) {
+export default function ItemBlock({ id, title, image, price, count }) {
   const [removing, setRemoving] = React.useState(false);
   const [removed, setRemoved] = React.useState(false);
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export default function ItemBlock({ id, title, cover, price, count }) {
         <td>
           <div className="media">
             <div className="d-flex" style={{ position: 'relative' }}>
-              <img src={cover} width={100} height={170} />
+                <img src={image} width={100} height={170} />
             </div>
             <div className="media-body">
               <p>{title}</p>

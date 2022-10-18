@@ -17,10 +17,10 @@ export default function SingleProduct({
   sale_price,
   description,
   category,
-  cover,
+    image,
   title_ru,
 }) {
-  const gallery = [{ image: cover }, ...images];
+    const gallery = [{ image: image }, ...images];
 
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
   const price = sale_price ? sale_price : regular_price;
@@ -29,11 +29,11 @@ export default function SingleProduct({
   const [count, setCount] = React.useState(1);
   const dispatch = useDispatch();
   const addToCart = () => {
-    dispatch(addItem({ id, title, cover, price, count }));
+      dispatch(addItem({ id, title, image, price, count }));
     setCount(1);
   };
   const toggleWish = () => {
-    dispatch(toggleItem({ id, title, cover, price }));
+      dispatch(toggleItem({ id, title, image, price }));
   };
   const lang = useSelector((state) => state.lang.lang);
 

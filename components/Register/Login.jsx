@@ -28,12 +28,12 @@ export default function Login({ setToggle }) {
         username: data.username,
         password: data.password,
       });
-      setCookie(null, 'access_token', res.data?.user.token.access, {
-        maxAge: 30 * 24 * 60 * 60,
+      setCookie(null, 'access_token', res.data.user.token.access, {
+        maxAge: 1 * 24 * 60 * 60,
       });
       dispatch(setLoggedIn(res.data?.user));
-    } catch (err) {
-      console.log(err, 'err from login');
+    } catch (error) {
+      console.log(err, 'error from login');
       setServerErrors(err.response?.data);
     }
     router.reload();

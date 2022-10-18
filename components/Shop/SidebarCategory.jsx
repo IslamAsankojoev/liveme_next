@@ -21,7 +21,7 @@ export default function SidebarCategory({ setCategory, setPage, categoryCurrent 
           'Accept-Language': lang || 'ru',
         },
       })
-      .then((res) => setCategories(res.data));
+      .then((res) => setCategories(res.data.results));
   }, [lang]);
   return (
     <div className={`sidebar-categories ${style.sidebar_categories}`}>

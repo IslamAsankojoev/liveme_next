@@ -17,8 +17,8 @@ const Profile = ({ prevPath }) => {
       await axios.get('/api/logout');
       dispatch(setLoggedIn({}));
       router.push('/');
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error, 'logout error');
     }
   };
 

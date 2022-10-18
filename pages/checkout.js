@@ -54,6 +54,7 @@ export default function Checkout() {
             client_phone: data.phone,
             client_email: data.email,
             payment_method: data.payment_method,
+              user: user.data.id
           },
           user.loggedIn
             ? {
@@ -65,31 +66,43 @@ export default function Checkout() {
         )
         .then((res) => {
           if (res.status === 201) {
+              items.forEach((el)=>{
+                  axios
+                  .post(
+                          `${process.env.SERVER_DOMAIN}/api/orders/item/`,
+                          {
+                              product_count: el.count,
+                              order: res.data.id,
+                              product: el.id,
+                          })
+              })
+
+          }
+        }).then((resItems)=>{
             enqueueSnackbar(text.notifications.successOrder[lang], {
-              variant: 'success',
-              autoHideDuration: 3000,
-              anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'right',
-              },
+                variant: 'success',
+                autoHideDuration: 3000,
+                anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                },
             });
             dispatch(clearCart());
             setTimeout(() => {
-              if (parseCookies().access_token) {
-                router.push('/profile');
-              } else {
-                router.push('/shop');
-              }
+                if (parseCookies().access_token) {
+                    router.push('/profile');
+                } else {
+                    router.push('/shop');
+                }
             }, 2000);
-          }
-        });
-    } catch (err) {
-      console.log(err);
+        })
+    } catch (error) {
+      console.log(error, 'order error');
     }
     try {
       await sendMessage(teletext);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error, 'telegram send text error');
     }
   };
 
@@ -112,7 +125,7 @@ export default function Checkout() {
                     items.map((item) => {
                       return (
                         <div key={item.id} className="order_box-product">
-                          <img src={item.cover} alt={item.title} style={{ background: 'white' }} />
+                            <img src={item.image} alt={item.title} style={{ background: 'white' }} />
                           <div className="order_box-info">
                             <Link href={`/products/${item.id}`}>
                               <a className="title">{item.title}</a>
@@ -212,7 +225,7 @@ export default function Checkout() {
                           type="radio"
                           id="radio1"
                           defaultChecked
-                          value="Банковский счет"
+                          value="Bank"
                         />
                         <label htmlFor="radio1">{checkoutText.details.bank[lang]}</label>
                         <div className="check"></div>
@@ -224,7 +237,7 @@ export default function Checkout() {
                           {...register('payment_method')}
                           type="radio"
                           id="radio2"
-                          value="Наличкой"
+                          value="Cash"
                         />
                         <label htmlFor="radio2">{checkoutText.details.cash[lang]} </label>
                         <div className="check"></div>
@@ -236,7 +249,7 @@ export default function Checkout() {
                           {...register('payment_method')}
                           type="radio"
                           id="radio3"
-                          value="Картой"
+                          value="Card"
                         />
                         <label htmlFor="radio3">{checkoutText.details.card[lang]}</label>
                         <div className="check"></div>

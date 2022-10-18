@@ -49,7 +49,7 @@ export default function ConfirmPassword() {
   };
 
   const handleChange = (e) => {
-    console.log(setValue({ ...value, [e.target.name]: e.target.value }));
+    setValue({ ...value, [e.target.name]: e.target.value })
   };
 
   return (

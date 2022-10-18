@@ -7,7 +7,7 @@ import { WishButton } from '../index';
 import { toggleItem } from '../../redux/slices/wishSlice.js';
 import { useRouter } from 'next/router.js';
 
-export default function ProductBlock({ className, id, title, cover, regular_price, sale_price }) {
+export default function ProductBlock({ className, id, title, image, regular_price, sale_price }) {
   const [unmount, setUnmount] = React.useState(false);
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
   const price = sale_price || regular_price;
@@ -15,17 +15,17 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
   const { pathname } = useRouter();
   const cartItems = useSelector((state) => state.cart.items);
   const added = cartItems.find((obj) => obj.id === id);
-  const addToCart = () => dispatch(addItem({ id, title, price, cover }));
+  const addToCart = () => dispatch(addItem({ id, title, price, image }));
   const status = useSelector((state) => state.products.status);
 
   const addToWishList = () => {
     if (pathname === '/wishlist') {
       setUnmount(true);
       setTimeout(() => {
-        dispatch(toggleItem({ id, title, cover, sale_price, regular_price }));
+          dispatch(toggleItem({ id, title, image, sale_price, regular_price }));
       }, 400);
     } else {
-      dispatch(toggleItem({ id, title, cover, sale_price, regular_price }));
+        dispatch(toggleItem({ id, title, image, sale_price, regular_price }));
     }
   };
 
@@ -35,7 +35,7 @@ export default function ProductBlock({ className, id, title, cover, regular_pric
         <Link href={`products/${id}`}>
           <a className={style.imgLink}>
             <span className="next-img">
-              <img src={cover} alt="Picture of the author" />
+                <img src={image} alt="Picture of the author" />
             </span>
           </a>
         </Link>

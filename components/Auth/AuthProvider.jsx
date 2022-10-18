@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { setLang } from '../../redux/slices/langSlice';
 import { setWish } from '../../redux/slices/wishSlice';
 
-export default function AuthProvider({ children }) {
+export default function AuthProvider({ children, userServerSideData }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -22,24 +22,22 @@ export default function AuthProvider({ children }) {
       let { access_token } = parseCookies();
       async function getAccess(token) {
         axios
-          .get(`${process.env.SERVER_DOMAIN}/api/users/me`, {
+          .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
             headers: {
               Authorization: 'Bearer ' + token,
             },
           })
           .then((res) => {
             dispatch(setLoggedIn(res.data));
-            console.log(res.data);
           });
-        console.log('check cookies');
       }
       async function setUser() {
         try {
           if (access_token) {
             await getAccess(access_token);
           }
-        } catch (err) {
-          console.log(err, 'err check cookies');
+        } catch (error) {
+          console.log(err, 'error check cookies');
         }
       }
       setUser();
@@ -53,7 +51,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <>
-      <Header />
+    <Header userServerSideData={userServerSideData}/>
       <>{children}</>
       <Mobilenavigate />
       <ThankYou />

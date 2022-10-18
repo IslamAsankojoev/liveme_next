@@ -10,7 +10,7 @@ import { parseCookies, setCookie } from 'nookies';
 import { setLoggedIn } from '../redux/slices/userSlice';
 import axios from 'axios';
 
-export default function Header() {
+export default function Header({userServerSideData}) {
   const selectRef = React.useRef(null);
   const languages = ['ru', 'en', 'kg', 'tr'];
   const lang = useSelector((state) => state.lang.lang);
@@ -42,7 +42,7 @@ export default function Header() {
     setMobileMeniOpen(false);
     if (parseCookies().access_token) {
       axios
-        .get(`${process.env.SERVER_DOMAIN}/api/users/me`, {
+        .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
           headers: {
             Authorization: 'Bearer ' + parseCookies().access_token,
           },
@@ -56,6 +56,10 @@ export default function Header() {
   React.useEffect(() => {
     selectRef.current.value = lang;
   }, [lang]);
+
+  React.useEffect(()=>{
+      console.log(userServerSideData)
+      }, [])
 
   return (
     <header ref={searchRef} className="header_area sticky-header">
