@@ -5,7 +5,7 @@ const nextConfig = {
     SERVER_DOMAIN: process.env.SERVER,
   },
   images: {
-    domains: ['179.61.188.39', 'localhost'],
+    domains: ['0.0.0.0', 'localhost'],
     formats: ['image/avif', 'image/webp'],
   },
 };
