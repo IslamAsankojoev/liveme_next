@@ -18,7 +18,6 @@ export default function AccountOrder({ user }) {
       {!lodash.isEmpty(user.orders) ? (
         <>
           <h2 align="center">{profileText.profile.orders.order[lang]}</h2>
-
           <div className="titles">
             <p className="number">{profileText.profile.orders.number[lang]}</p>
             <p className="created">{profileText.profile.orders.date[lang]}</p>

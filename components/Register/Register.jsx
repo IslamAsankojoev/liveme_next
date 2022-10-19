@@ -60,7 +60,6 @@ export default function Register({ setToggle }) {
           <div className="row">
             <div className="col-lg-6">
               <div className="login_box_img" style={{ minHeight: 500 }}>
-                {/* <img className="img-fluid" src="static/img/login.webp" alt="" /> */}
                 <Image className="img-fluid" src={loginImg} layout="fill" />
                 <div className="hover">
                   <h4>{profileText.login.info.title[lang]}</h4>
