@@ -20,7 +20,6 @@ export default function SingleProduct({
     image,
   title_ru,
 }) {
-    const gallery = [{ image: image }, ...images];
 
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
   const price = sale_price ? sale_price : regular_price;
@@ -47,7 +46,7 @@ export default function SingleProduct({
             <div className="col-lg-6">
               <div className="s_Product_carousel">
                 <WishButton isWished={inWishtList} onClick={toggleWish} />
-                <ProductCorusel images={gallery} />
+                  <ProductCorusel images={[{item:image},...images]} />
               </div>
             </div>
             <div className="col-lg-5 offset-lg-1">

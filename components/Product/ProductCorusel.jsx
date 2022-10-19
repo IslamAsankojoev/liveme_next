@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ProductCorusel.module.scss';
-import classnames from 'classnames';
-import Image from 'next/image';
+import Magnifier from "react-magnifier";
+
 
 const ProductCorusel = ({ images }) => {
   const [active, setActive] = React.useState(0);
@@ -27,14 +27,12 @@ const ProductCorusel = ({ images }) => {
   return (
     <div style={{ width: '100%' }}>
       <div className={styles.corusel}>
-        {images?.map(({ image }, index) => {
+          {images?.map(({ item }, index) => {
           return (
             <div
-              key={image}
+                key={item}
               className={`single-prd-item ${active === index && styles.show} ${styles.singleProd}`}>
-              <span className="next-img">
-                <img className={`${styles.img} img-fluid`} src={image} alt="" />
-              </span>
+                <Magnifier className={styles.soomed} src={item} mgTouchOffsetX={-60} mgTouchOffsetY={-60} mgShape="square" height="100%" width="auto" mgBorderWidth=".5" zoomFactor=".7" mgHeight={300} mgWidth={300}/>
             </div>
           );
         })}
@@ -51,15 +49,15 @@ const ProductCorusel = ({ images }) => {
         )}
       </div>
       <div className={styles.productList}>
-        {images?.map(({ image }, index) => {
+        {images?.map(({ item }, index) => {
           return (
             <div
               onClick={() => {
                 activate(index);
               }}
-              key={image}
+                key={item}
               className={`${active === index && styles.activeProduct} ${styles.product}`}>
-              <img className={'img-fluid'} src={image} alt="" />
+                <img className={'img-fluid'} src={item} alt="" />
             </div>
           );
         })}
