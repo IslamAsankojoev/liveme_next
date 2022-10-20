@@ -54,7 +54,8 @@ export default function Checkout() {
             client_phone: data.phone,
             client_email: data.email,
             payment_method: data.payment_method,
-              user: user.data.id
+              user: user.data.id,
+              order_status: 'pending'
           },
           user.loggedIn
             ? {

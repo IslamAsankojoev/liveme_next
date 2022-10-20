@@ -54,7 +54,6 @@ export default function AuthProvider({ children, userServerSideData }) {
     <Header userServerSideData={userServerSideData}/>
       <>{children}</>
       <Mobilenavigate />
-      <ThankYou />
       <Footer />
     </>
   );
