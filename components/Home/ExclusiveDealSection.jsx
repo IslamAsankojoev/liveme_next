@@ -59,10 +59,10 @@ export default function ExclusiveDealSection() {
                     onClick={() => {
                       dispatch(
                         addItem({
-                          id: items[5]?.id,
-                          title: items[5]?.title,
-                            image: items[5]?.image,
-                          price: items[5]?.regular_price,
+                          id: items[0]?.id,
+                          title: items[0]?.title,
+                            image: items[0]?.image,
+                          price: items[0]?.regular_price,
                         }),
                       );
                     }}

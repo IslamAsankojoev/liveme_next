@@ -20,7 +20,7 @@ export default function CategorySection() {
                       {(lang === 'ru' && 'Аромат') ||
                         (lang === 'en' && 'Aroma') ||
                         (lang === 'kg' && 'Аромат') ||
-                        (lang === 'tr' && 'Aroma')}
+                      (lang === 'tr' && 'Oda kokusu')}
                     </h6>
                   </div>
                 </div>
@@ -31,7 +31,12 @@ export default function CategorySection() {
                   {/* <img className="img-fluid w-100" src="static/img/1 (1).webp" alt="" /> */}
                   <img className="img-fluid w-100" src="/1 (1).webp" alt="" />
                   <div className="deal-details">
-                    <h6 className="deal-title">Косметика</h6>
+                    <h6 className="deal-title">
+                        {(lang === 'ru' && 'Косметика') ||
+                        (lang === 'en' && 'Cosmetic') ||
+                        (lang === 'kg' && 'Косметика') ||
+                        (lang === 'tr' && 'Kozmetik')}
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -40,7 +45,13 @@ export default function CategorySection() {
                   <div className="overlay"></div>
                   <img className="img-fluid w-100" src="/5 (1).webp" alt="" />
                   <div className="deal-details">
-                    <h6 className="deal-title">Запах</h6>
+                    <h6 className="deal-title">
+
+                        {(lang === 'ru' && 'Комнатный спрей') ||
+                        (lang === 'en' && ' Room spray') ||
+                        (lang === 'kg' && 'Бөлмө спрей') ||
+                        (lang === 'tr' && 'Oda spreyi')}
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -49,7 +60,12 @@ export default function CategorySection() {
                   <div className="overlay"></div>
                   <img className="img-fluid w-100" src="/4 (1).webp" alt="" />
                   <div className="deal-details">
-                    <h6 className="deal-title">Духи</h6>
+                    <h6 className="deal-title">
+                        {(lang === 'ru' && 'Парфюм') ||
+                        (lang === 'en' && ' Parfum') ||
+                        (lang === 'kg' && 'Атыр') ||
+                        (lang === 'tr' && 'Parfüm')}
+                    </h6>
                   </div>
                 </div>
               </div>

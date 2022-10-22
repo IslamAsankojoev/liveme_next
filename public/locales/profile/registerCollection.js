@@ -3,7 +3,7 @@ export const profileText = {
     ru: 'Вход / Регистрация',
     en: 'Login / Register',
     kg: 'Кирүү / Теркөлүү',
-    tr: 'Giriş / Kayıt ol',
+      tr: 'Giriş / Kayıt ol',
   },
   login: {
     info: {
@@ -17,7 +17,7 @@ export const profileText = {
         ru: 'Найслайждайтесь нашими ароматами и духами высшего качества',
         en: 'Enjoy our high quality fragrances and perfumes',
         kg: 'Биздин качалык ароматтар мен духтарымыздын ырахатаныңыз',
-        tr: 'Yüksek kaliteli parfümlerimiz ve parfümlerimizden zevk alın',
+          tr: 'Liveme’ile gü zel ortam kokusuna sahip olun tü m fırsatlardan faydalanmak için kayıt olmak ister misiniz!',
       },
     },
     form: {
@@ -59,7 +59,7 @@ export const profileText = {
         ru: 'Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов',
         en: 'Register and always be up to date with new fragrances and aromas',
         kg: 'Тизмеге кирүү мен биздин жаңы ароматтар мен духи жаңылыктарын белгилөөңүз',
-        tr: 'Kaydolun ve yeni parfümler ve aromalarla her zaman güncel kalın',
+          tr: 'Yeni parfü mlar ve aromalardan her zaman gü ncel bilgiler edinin',
       },
     },
     form: {
@@ -67,7 +67,7 @@ export const profileText = {
         ru: 'Регистрация',
         en: 'Register',
         kg: 'Тизмеге кирүү',
-        tr: 'Kayıt ol',
+          tr: 'KAYIT OL',
       },
       name: {
         ru: 'Ваше имя',
