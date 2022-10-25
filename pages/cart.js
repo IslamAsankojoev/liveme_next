@@ -1,14 +1,13 @@
 import React from 'react';
 import Link from 'next/link.js';
 import { ItemBlock, BannerArea } from '../components/index';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Empty } from '../components';
 import { cartCollection } from '../public/locales/cart/cartCollection.js';
 
 export default function Cart() {
   const lang = useSelector((state) => state.lang.lang);
   const { items, totalPrice } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
   return (
     <>

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { setCookie } from 'nookies';
 import { DevTool } from '@hookform/devtools';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoggedIn } from '../../redux/slices/userSlice.js';
+import { setLoggedIn } from '../../redux/slices/userSlice';
 import { useRouter } from 'next/router.js';
 import Image from 'next/image';
 import loginImg from '../../scss/static/img/login.webp';
@@ -24,7 +24,7 @@ export default function Login({ setToggle }) {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(`${process.env.SERVER_DOMAIN}/api/users/login/`, {
+      const res = await axios.post(`${process.env.SERVER}/api/users/login/`, {
         username: data.username,
         password: data.password,
       });

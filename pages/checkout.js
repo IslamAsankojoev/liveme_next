@@ -39,63 +39,61 @@ export default function Checkout() {
     .toString();
 
   const onSend = async (data) => {
-    const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${
-      data?.email
-    }\nАдрес - ${data?.address}\nМетод оплаты - ${
-      data?.payment_method
-    }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
+    const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${data?.email
+      }\nАдрес - ${data?.address}\nМетод оплаты - ${data?.payment_method
+      }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
     try {
       await axios
         .post(
-          `${process.env.SERVER_DOMAIN}/api/orders/`,
+          `${process.env.SERVER}/api/orders/`,
           {
             client_name: data.username,
             client_address: data.address,
             client_phone: data.phone,
             client_email: data.email,
             payment_method: data.payment_method,
-              user: user.data.id,
-              order_status: 'pending'
+            user: user.data.id,
+            order_status: 'pending'
           },
           user.loggedIn
             ? {
-                headers: {
-                  Authorization: `Bearer ${parseCookies().access_token}`,
-                },
-              }
+              headers: {
+                Authorization: `Bearer ${parseCookies().access_token}`,
+              },
+            }
             : null,
         )
         .then((res) => {
           if (res.status === 201) {
-              items.forEach((el)=>{
-                  axios
-                  .post(
-                          `${process.env.SERVER_DOMAIN}/api/orders/item/`,
-                          {
-                              product_count: el.count,
-                              order: res.data.id,
-                              product: el.id,
-                          })
-              })
+            items.forEach((el) => {
+              axios
+                .post(
+                  `${process.env.SERVER}/api/orders/item/`,
+                  {
+                    order: res.data.id,
+                    product: el.id,
+                    product_count: el.count,
+                  })
+            })
 
           }
-        }).then((resItems)=>{
-            enqueueSnackbar(text.notifications.successOrder[lang], {
-                variant: 'success',
-                autoHideDuration: 3000,
-                anchorOrigin: {
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                },
-            });
-            dispatch(clearCart());
-            setTimeout(() => {
-                if (parseCookies().access_token) {
-                    router.push('/profile');
-                } else {
-                    router.push('/shop');
-                }
-            }, 2000);
+        }).then((resItems) => {
+          enqueueSnackbar(text.notifications.successOrder[lang], {
+            variant: 'success',
+            autoHideDuration: 3000,
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'right',
+            },
+          });
+          dispatch(clearCart());
+          setTimeout(() => {
+            if (parseCookies().access_token) {
+              router.push('/profile');
+            } else {
+              router.push('/shop');
+            }
+          }, 2000);
         })
     } catch (error) {
       console.log(error, 'order error');
@@ -126,7 +124,7 @@ export default function Checkout() {
                     items.map((item) => {
                       return (
                         <div key={item.id} className="order_box-product">
-                            <img src={item.image} alt={item.title} style={{ background: 'white' }} />
+                          <img src={item.image} alt={item.title} style={{ background: 'white' }} />
                           <div className="order_box-info">
                             <Link href={`/products/${item.id}`}>
                               <a className="title">{item.title}</a>

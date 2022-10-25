@@ -1,24 +1,97 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../redux/slices/cartSlice';
-import { home } from '../../public/locales/home/homeCollection.js';
-import { text } from '../../public/locales/texts.js';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../../redux/slices/cartSlice'
+import { home } from '../../public/locales/home/homeCollection.js'
+import { text } from '../../public/locales/texts.js'
+import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
+import { useRouter } from 'next/router.js'
 
 export default function BannerSection() {
   const [saleItems, setSaleItems] = React.useState({});
   const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
+  const bannerRef = React.useRef()
+  const banners = ['/banners/баннер1.webp', '/banners/баннер2.webp', '/banners/баннер3.webp']
+  const [banner, setBanner] = React.useState(0)
+  const router = useRouter()
+
   const addToCart = () => {
     dispatch(addItem({ ...saleItems, price: saleItems.sale_price || saleItems.regular_price }));
   };
 
+  const onChangeBanner = (value) => {
+    setBanner(+value)
+  }
+
+  const nextSlide = () => {
+    if (banner === banners.length - 1) {
+      setBanner(0)
+    } else {
+      setBanner((prev) => prev + 1)
+    }
+  }
+
+  const prevSlide = () => {
+    if (banner === 0) {
+      setBanner(banners.length - 1)
+    } else {
+      setBanner((prev) => prev - 1)
+    }
+  }
   React.useEffect(() => {
-    setSaleItems(items.find((item) => item.id === 2));
+    setSaleItems(items.find((item) => item.id === 1));
   }, [items]);
+
+  React.useEffect(() => {
+    let touchstartX = 0
+    let touchendX = 0
+
+    function checkDirection() {
+      if (touchendX < touchstartX) nextSlide()
+      if (touchendX > touchstartX) prevSlide()
+    }
+
+    bannerRef.current.addEventListener('touchstart', e => {
+      touchstartX = e.changedTouches[0].screenX
+    })
+
+    bannerRef.current.addEventListener('touchend', e => {
+      touchendX = e.changedTouches[0].screenX
+      checkDirection()
+    })
+  }, [])
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide()
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [banner])
+
+
+
+
   return (
-    <section className="banner-area home">
-      <div className="container">
+    <section ref={bannerRef} className="banner-area home" style={{ backgroundImage: `url(${banners[banner]})`, transition: '.3s' }}>
+      <div className="container" style={{ height: '100%' }}>
+        <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}>
+          <FormControl>
+            <RadioGroup
+              sx={{ display: 'flex', flexDirection: 'row' }}
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="1"
+              name="radio-buttons-group"
+              value={banner}
+              onChange={(e, value) => onChangeBanner(value)}
+            >
+              <FormControlLabel value={0} control={<Radio color="warning" size="small" />} label="" />
+              <FormControlLabel value={1} control={<Radio color="warning" size="small" />} label="" />
+              <FormControlLabel value={2} control={<Radio color="warning" size="small" />} label="" />
+            </RadioGroup>
+          </FormControl>
+
+        </div>
         <div
           className="row fullscreen align-items-center justify-content-start"
           style={{ height: 80 + 'vh' }}>
@@ -32,7 +105,8 @@ export default function BannerSection() {
                 </div>
                 <div className="col-lg-5 col-md-6">
                   <div className="banner-content">
-                    <h1>{home.headerArea.title[lang]}</h1>
+                    <h2>{home.headerArea.title[lang]}</h2>
+                    <h2 style={{ textAlign: 'right' }}>{home.headerArea.title2[lang]}</h2>
                     <p>{home.headerArea.text[lang]}</p>
                     <div
                       style={{ cursor: 'pointer' }}

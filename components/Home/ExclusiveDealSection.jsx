@@ -67,7 +67,7 @@ export default function ExclusiveDealSection() {
                       );
                     }}
                     className="add-bag d-flex align-items-center justify-content-center simple-btn">
-                    <a className="add-btn" href="">
+                    <a className="add-btn">
                       <span className="ti-bag"></span>
                     </a>
                     <button className="add-text text-uppercase">

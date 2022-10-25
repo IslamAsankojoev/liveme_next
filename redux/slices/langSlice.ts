@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface langSliceProps {
+  lang: string;
+}
+
+const initialState: langSliceProps = {
   lang: 'ru',
 };
 
@@ -10,7 +14,6 @@ const langSlice = createSlice({
   reducers: {
     setLang: (state, action) => {
       state.lang = action.payload;
-      // localStorage.setItem('locale', action.payload);
     },
   },
 });

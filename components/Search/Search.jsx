@@ -38,7 +38,7 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
   React.useEffect(() => {
     if (searchValue) {
       axios
-        .get(`${process.env.SERVER_DOMAIN}/api/products/?search=${searchValue}&page_size=50`, {
+        .get(`${process.env.SERVER}/api/products/?search=${searchValue}&page_size=50`, {
           headers: {
             'Accept-Language': lang,
           },

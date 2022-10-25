@@ -16,7 +16,7 @@ export default function SidebarCategory({ setCategory, setPage, categoryCurrent 
   };
   React.useEffect(() => {
     axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/category/`, {
+      .get(`${process.env.SERVER}/api/products/category/`, {
         headers: {
           'Accept-Language': lang || 'ru',
         },

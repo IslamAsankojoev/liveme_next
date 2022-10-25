@@ -14,15 +14,13 @@ import '../scss/css/magnific-popup.css';
 import '../scss/css/main.css';
 import '../scss/global.scss';
 import { SnackbarProvider } from 'notistack';
-import axios from 'axios';
-import { parseCookies} from 'nookies';
 
 const MyApp = ({ Component, pageProps, userServerSideData }) => {
   return (
     <SnackbarProvider maxSnack={3}>
       <Provider store={store}>
-          <AuthProvider>
-            <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />
         </AuthProvider>
       </Provider>
     </SnackbarProvider>
@@ -35,7 +33,7 @@ const MyApp = ({ Component, pageProps, userServerSideData }) => {
 //        let user = null
 //        if (auth) {
 //            axios
-//            .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
+//            .get(`${process.env.SERVER}/api/users/me/`, {
 //                headers: {
 //                    Authorization: 'Bearer ' + auth,
 //                },
@@ -54,7 +52,7 @@ export default MyApp;
 //    let user = null
 //    if (auth) {
 //        axios
-//        .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
+//        .get(`${process.env.SERVER}/api/users/me/`, {
 //            headers: {
 //                Authorization: 'Bearer ' + auth,
 //            },

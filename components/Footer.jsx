@@ -1,6 +1,8 @@
+// @ts-nocheck
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { text } from '../public/locales/texts.js';
+import Link from "next/link";
 
 export default function Footer() {
   const lang = useSelector((state) => state.lang.lang);
@@ -10,8 +12,24 @@ export default function Footer() {
         <div className="row">
           <div className="col-lg-3 col-md-6 col-sm-6">
             <div className="single-footer-widget">
-              <h6>{text.footer.about.title[lang]}</h6>
+              <Link href="/about">
+                  <a>
+                  <h6>{text.footer.about.title[lang]}</h6>
+                      </a>
+              </Link>
               <p>{text.footer.about.subtitle[lang]}</p>
+              <Link href="/policy">
+                <a style={{
+                  color: '#fff',
+                }}>
+                {lang === "en" && "Privacy Policy"}
+                {lang === "ru" && "Политика конфиденциальности"}
+                {lang === 'tr' && "Gizlilik Politikası"}
+                {lang === 'kg' && "Политика конфиденциальности"}
+                
+
+                </a></Link>
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6 col-sm-6">
@@ -25,7 +43,7 @@ export default function Footer() {
                       className="form-control"
                       name="EMAIL"
                       placeholder={text.footer.mailing.placeholder[lang]}
-                      required=""
+                      required
                       type="email"
                     />
 
@@ -86,17 +104,8 @@ export default function Footer() {
               <h6>{text.footer.social.title[lang]}</h6>
               <p>{text.footer.social.subtitle[lang]}</p>
               <div className="footer-social d-flex align-items-center">
-                <a href="#">
-                  <i className="fa fa-facebook"></i>
-                </a>
-                <a href="#">
-                  <i className="fa fa-twitter"></i>
-                </a>
-                <a href="#">
-                  <i className="fa fa-dribbble"></i>
-                </a>
-                <a href="#">
-                  <i className="fa fa-behance"></i>
+                  <a href="https://www.instagram.com/liveme.kg/">
+                  <i className="fa fa-instagram"></i>
                 </a>
               </div>
             </div>

@@ -1,31 +1,42 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import style from './ProductBlock.module.scss';
 import { WishButton } from '../index';
-import { toggleItem } from '../../redux/slices/wishSlice.js';
+import { toggleItem } from '../../redux/slices/wishSlice';
 import { useRouter } from 'next/router.js';
+import { RootSate } from '../../redux/store';
 
-export default function ProductBlock({ className, id, title, image, regular_price, sale_price }) {
+interface ProductBlockProps {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  regular_price: number,
+  sale_price: number,
+  is_published: boolean,
+  category: number,
+  slug: string,
+  className: string,
+}
+
+const ProductBlock: FC<ProductBlockProps> = ({ id, title, description, image, regular_price, sale_price, is_published, category, slug, className }) => {
   const [unmount, setUnmount] = React.useState(false);
-  const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
+  const inWishtList = useSelector((state: RootSate) => state.wish.items.find((item) => item.id === id));
   const price = sale_price || regular_price;
   const dispatch = useDispatch();
   const { pathname } = useRouter();
-  const cartItems = useSelector((state) => state.cart.items);
-  const added = cartItems.find((obj) => obj.id === id);
-  const addToCart = () => dispatch(addItem({ id, title, price, image }));
-  const status = useSelector((state) => state.products.status);
+  const addToCart = () => dispatch(addItem({ id, title, description, image, price, is_published, category, slug, count: 1 }));
 
   const addToWishList = () => {
     if (pathname === '/wishlist') {
       setUnmount(true);
       setTimeout(() => {
-          dispatch(toggleItem({ id, title, image, sale_price, regular_price }));
+        dispatch(toggleItem({ id, title, description, image, regular_price, sale_price, is_published, category, slug }));
       }, 400);
     } else {
-        dispatch(toggleItem({ id, title, image, sale_price, regular_price }));
+      dispatch(toggleItem({ id, title, description, image, regular_price, sale_price, is_published, category, slug }));
     }
   };
 
@@ -35,7 +46,7 @@ export default function ProductBlock({ className, id, title, image, regular_pric
         <Link href={`products/${id}`}>
           <a className={style.imgLink}>
             <span className="next-img">
-                <img src={image} alt="Picture of the author" />
+              <img src={image} alt="Picture of the author" />
             </span>
           </a>
         </Link>
@@ -78,3 +89,5 @@ export default function ProductBlock({ className, id, title, image, regular_pric
     </div>
   );
 }
+
+export default ProductBlock;

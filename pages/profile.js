@@ -1,17 +1,10 @@
 import React from 'react';
-import { Header, Footer, Profile } from '../components/index';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLoggedIn } from '../redux/slices/userSlice.js';
-import { useRouter } from 'next/router';
+import { Profile } from '../components/index';
 import { profileText } from '../public/locales/profile/registerCollection';
 import { BannerArea } from '../components';
 import { parseCookies } from 'nookies';
 
 export default function profile({ prevPath }) {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const router = useRouter();
-
   return (
     <>
       <BannerArea title={profileText.profile.info.title} path={'/profile'} />

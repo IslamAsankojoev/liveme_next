@@ -1,16 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import {
-  ThankYou,
   BannerSection,
   FeaturesSection,
   CategorySection,
   ProductLoopSection,
   ExclusiveDealSection,
-  BrandSection,
-  RelatedProductLoopSection,
 } from '../components/index';
-import { setProducts } from '../redux/slices/productSlice.js';
+import { setProducts } from '../redux/slices/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
@@ -18,7 +15,7 @@ const Home = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=8`, {
+      .get(`${process.env.SERVER}/api/products/?page_size=8`, {
         headers: {
           'Accept-Language': lang,
         },

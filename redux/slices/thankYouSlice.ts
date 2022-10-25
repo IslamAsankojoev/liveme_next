@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface thankYouSliceProps {
+  visible: boolean;
+}
+
+const initialState: thankYouSliceProps = {
   visible: false,
 };
 
@@ -8,10 +12,10 @@ const thankYouSlice = createSlice({
   name: 'thankYou',
   initialState,
   reducers: {
-    setShow(state, { payload }) {
+    setShow(state) {
       state.visible = true;
     },
-    setHide(state, { payload }) {
+    setHide(state) {
       state.visible = false;
     },
   },

@@ -59,7 +59,7 @@ export const profileText = {
         ru: 'Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов',
         en: 'Register and always be up to date with new fragrances and aromas',
         kg: 'Тизмеге кирүү мен биздин жаңы ароматтар мен духи жаңылыктарын белгилөөңүз',
-          tr: 'Yeni parfü mlar ve aromalardan her zaman gü ncel bilgiler edinin',
+          tr: 'Liveme ile tüm fırsatlardan faydalanmak için kayıt olmak ister misiniz ?',
       },
     },
     form: {

@@ -3,7 +3,18 @@
 .sticky-header {
   position: fixed;
 }
+.banner-content{
+    h2{
+        font-size:3em;
+        color:white;
+        font-weight:700;
+        margin:0px!important;
+    }
+p{
+        margin-top:20px!important;
+    }
 
+}
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -85,6 +96,7 @@
   transition: 0.2s;
   @media (max-width: 768px) {
     transform: translateX(100%);
+    background:white;
   }
 }
 
@@ -97,21 +109,26 @@
 }
 .m-menu {
   @media (max-width: 768px) {
+
     display: block !important;
     opacity: 0;
-    transform: translateY(-120%) !important;
     //z-index: -10 !important;
     padding-top: 20px;
-    top: 45px;
+//    top: 45px;
     visibility: visible;
-    height: 40vh;
+
+    height:0px !important;
+    overflow:hidden;
+    background:white!important;
+
+
   }
 }
 
 .m-menu.showMobileMenu {
   @media (max-width: 768px) {
     opacity: 1;
-    transform: translateY(0%) !important;
+    height:40vh !important;
   }
 }
 
@@ -388,7 +405,7 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   .titles {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     text-align: center;
     padding: 20px;
 
@@ -562,6 +579,9 @@ body {
 }
 .banner-area.home {
   @media (max-width: 768px) {
-    height: 100vh;
+    height: 85vh;
   }
+}
+.container{
+  position: relative;
 }

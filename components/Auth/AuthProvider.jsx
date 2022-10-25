@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setLoggedIn } from '../../redux/slices/userSlice';
-import { Header, Footer, ThankYou, Mobilenavigate } from '../../components/index';
-import { setCart } from '../../redux/slices/cartSlice';
+import { Header, Footer, Mobilenavigate } from '../../components/index';
 import { parseCookies, setCookie } from 'nookies';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { setCart } from '../../redux/slices/cartSlice';
 import { setLang } from '../../redux/slices/langSlice';
+import { setLoggedIn } from '../../redux/slices/userSlice';
 import { setWish } from '../../redux/slices/wishSlice';
+
 
 export default function AuthProvider({ children, userServerSideData }) {
   const dispatch = useDispatch();
@@ -22,13 +23,15 @@ export default function AuthProvider({ children, userServerSideData }) {
       let { access_token } = parseCookies();
       async function getAccess(token) {
         axios
-          .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
+          .get(`${process.env.SERVER}/api/users/me/`, {
             headers: {
               Authorization: 'Bearer ' + token,
             },
           })
-          .then((res) => {
-            dispatch(setLoggedIn(res.data));
+          .then(({data}) => {
+              let {password, ...user} = data
+              console.log(user)
+              dispatch(setLoggedIn(user));
           });
       }
       async function setUser() {
@@ -37,7 +40,7 @@ export default function AuthProvider({ children, userServerSideData }) {
             await getAccess(access_token);
           }
         } catch (error) {
-          console.log(err, 'error check cookies');
+          console.log(error, 'error check cookies');
         }
       }
       setUser();

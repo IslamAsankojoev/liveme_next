@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './ProductCorusel.module.scss';
-import Magnifier from "react-magnifier";
 
 
 const ProductCorusel = ({ images }) => {
@@ -27,16 +26,16 @@ const ProductCorusel = ({ images }) => {
   return (
     <div style={{ width: '100%' }}>
       <div className={styles.corusel}>
-          {images?.map(({ item }, index) => {
+        {images?.map(({ item }, index) => {
           return (
             <div
-                key={item}
+              key={item}
               className={`single-prd-item ${active === index && styles.show} ${styles.singleProd}`}>
-                <Magnifier className={styles.soomed} src={item} mgTouchOffsetX={-60} mgTouchOffsetY={-60} mgShape="square" height="100%" width="auto" mgBorderWidth=".5" zoomFactor=".7" mgHeight={300} mgWidth={300}/>
+              <img src={item} alt="" />
             </div>
           );
         })}
-        {}
+        { }
         {images?.length > 1 && (
           <>
             <div
@@ -55,9 +54,9 @@ const ProductCorusel = ({ images }) => {
               onClick={() => {
                 activate(index);
               }}
-                key={item}
+              key={item}
               className={`${active === index && styles.activeProduct} ${styles.product}`}>
-                <img className={'img-fluid'} src={item} alt="" />
+              <img className={'img-fluid'} src={item} alt="" />
             </div>
           );
         })}

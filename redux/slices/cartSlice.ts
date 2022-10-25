@@ -1,13 +1,35 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { productProps } from './productSlice';
 
-const countPriceItemsTotal = (state) => {
+
+export type cartItemProps = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+  is_published: boolean,
+  category: number,
+  slug: string,
+  count: number;
+}
+
+interface cartSliceProps {
+  items: cartItemProps[];
+  totalPrice: number;
+  totalItems: number;
+}
+
+const countPriceItemsTotal = (state: cartSliceProps) => {
   state.totalPrice = state.items.reduce(
     (totalPrice, item) => totalPrice + item.price * item.count,
     0,
   );
   state.totalItems = state.items?.reduce((totalItems, item) => totalItems + item.count, 0);
 };
-const initialState = {
+
+
+const initialState: cartSliceProps = {
   items: [],
   totalItems: 0,
   totalPrice: 0,
@@ -17,7 +39,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem(state, { payload }) {
+    addItem(state, { payload }: PayloadAction<cartItemProps>) {
       const finded = state.items.find((item) => item.id === payload.id);
       if (finded) {
         if (payload.count) {
@@ -36,7 +58,7 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    removeItem(state, { payload }) {
+    removeItem(state, { payload }: PayloadAction<number>) {
       state.items = state.items.filter((item) => item.id !== payload);
       countPriceItemsTotal(state);
       localStorage.setItem('cart', JSON.stringify(state.items));
@@ -49,24 +71,28 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    setCart(state, { payload }) {
+    setCart(state, { payload }: PayloadAction<cartItemProps[]>) {
       state.items = payload;
       countPriceItemsTotal(state);
       localStorage.setItem('cart', JSON.stringify(state.items));
     },
 
-    increment(state, { payload }) {
+    increment(state, { payload }: PayloadAction<cartItemProps>) {
       const item = state.items.find((item) => item.id === payload.id);
-      item.count--;
-      countPriceItemsTotal(state);
-      localStorage.setItem('cart', JSON.stringify(state.items));
+      if (item) {
+        item.count--;
+        countPriceItemsTotal(state);
+        localStorage.setItem('cart', JSON.stringify(state.items));
+      }
     },
 
-    decrement(state, { payload }) {
+    decrement(state, { payload }: PayloadAction<cartItemProps>) {
       const item = state.items.find((item) => item.id === payload.id);
-      item.count++;
-      countPriceItemsTotal(state);
-      localStorage.setItem('cart', JSON.stringify(state.items));
+      if (item) {
+        item.count++;
+        countPriceItemsTotal(state);
+        localStorage.setItem('cart', JSON.stringify(state.items));
+      }
     },
   },
 });

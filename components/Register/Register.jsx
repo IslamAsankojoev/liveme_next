@@ -5,7 +5,7 @@ import { setCookie } from 'nookies';
 import { DevTool } from '@hookform/devtools';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { setLoggedIn } from '../../redux/slices/userSlice.js';
+import { setLoggedIn } from '../../redux/slices/userSlice';
 import loginImg from '../../scss/static/img/login.webp';
 import Image from 'next/image';
 import { profileText } from '../../public/locales/profile/registerCollection.js';
@@ -32,7 +32,7 @@ export default function Register({ setToggle }) {
       setUsernameIsAlreadyExist('');
 
       const res = await axios.post(
-        `${process.env.SERVER_DOMAIN}/api/users/`,
+        `${process.env.SERVER}/api/users/`,
         { ...data },
         {
           headers: {

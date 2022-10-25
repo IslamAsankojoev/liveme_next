@@ -14,7 +14,7 @@ import { shopText } from '../public/locales/shop/shopCollection.js';
 
 const page_size = 9;
 
-export default function Shop({ data }) {
+export default function Shop() {
   const products = useSelector((state) => state.products.items);
   const status = useSelector((state) => state.products.status);
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function Shop({ data }) {
 
   React.useEffect(() => {
     axios
-      .get(`${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`, {
+      .get(`${process.env.SERVER}/api/products/?page_size=${page_size}`, {
         headers: {
           'Accept-Language': lang,
         },
@@ -41,7 +41,7 @@ export default function Shop({ data }) {
   const handlePage = async (page_n) => {
     await axios
       .get(
-        `${process.env.SERVER_DOMAIN}/api/products/?category=${category}&page=${page_n}&page_size=${page_size}`,
+        `${process.env.SERVER}/api/products/?category=${category}&page=${page_n}&page_size=${page_size}`,
         {
           headers: {
             'Accept-Language': lang || 'ru',
@@ -60,8 +60,7 @@ export default function Shop({ data }) {
   React.useEffect(() => {
     axios
       .get(
-        `${
-          process.env.SERVER_DOMAIN
+        `${process.env.SERVER
         }/api/products/?category=${category}&page=${1}&page_size=${page_size}`,
         {
           headers: {
@@ -86,7 +85,7 @@ export default function Shop({ data }) {
       <div className="container">
         <div className="row">
           <div className="col-xl-3 col-lg-4 col-md-5">
-              <SidebarCategory setCategory={setCategory} setPage={setPage} categoryCurrent={category} />
+            <SidebarCategory setCategory={setCategory} setPage={setPage} categoryCurrent={category} />
           </div>
           <br />
           <br />
@@ -182,7 +181,7 @@ export default function Shop({ data }) {
 //   const locale = parseCookies(ctx).NEXT_LOCALE || 'ru';
 //   console.log(locale);
 //   let { data = [] } = await axios.get(
-//     `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
+//     `${process.env.SERVER}/api/products/?page_size=${page_size}`,
 //     {
 //       headers: {
 //         'Accept-Language': locale,
@@ -200,7 +199,7 @@ export default function Shop({ data }) {
 //   const locale = parseCookies(ctx).NEXT_LOCALE || 'ru';
 //   console.log(ctx.req.headers.cookie);
 //   let { data = [] } = await axios.get(
-//     `${process.env.SERVER_DOMAIN}/api/products/?page_size=${page_size}`,
+//     `${process.env.SERVER}/api/products/?page_size=${page_size}`,
 //     {
 //       headers: {
 //         'Accept-Language': locale,

@@ -1,10 +1,19 @@
-import React from 'react';
-import { increment, decrement, removeItem } from '../../redux/slices/cartSlice';
+import React, { FC } from 'react';
+import { increment, decrement, removeItem, cartItemProps } from '../../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import style from './itemBlock.module.scss';
-import Image from 'next/image';
 
-export default function ItemBlock({ id, title, image, price, count }) {
+const ItemBlock: FC<cartItemProps> = (
+  { id,
+    title,
+    description,
+    image,
+    price,
+    is_published,
+    category,
+    slug,
+    count }
+) => {
   const [removing, setRemoving] = React.useState(false);
   const [removed, setRemoved] = React.useState(false);
   const dispatch = useDispatch();
@@ -20,13 +29,12 @@ export default function ItemBlock({ id, title, image, price, count }) {
   return (
     <>
       <tr
-        className={`cart-item  ${style.cartItem} ${removing ? style.removing : ''} ${
-          removed ? style.removed : ''
-        }`}>
+        className={`cart-item  ${style.cartItem} ${removing ? style.removing : ''} ${removed ? style.removed : ''
+          }`}>
         <td>
           <div className="media">
             <div className="d-flex" style={{ position: 'relative' }}>
-                <img src={image} width={100} height={170} />
+              <img src={image} width={100} height={170} />
             </div>
             <div className="media-body">
               <p>{title}</p>
@@ -42,14 +50,23 @@ export default function ItemBlock({ id, title, image, price, count }) {
               type="text"
               name="qty"
               id="sst"
-              maxLength="12"
               value={count}
               title="Quantity:"
               className="input-text qty"
             />
             <button
               onClick={() => {
-                dispatch(decrement({ id, title }));
+                dispatch(decrement({
+                  id,
+                  title,
+                  description,
+                  image,
+                  price,
+                  is_published,
+                  category,
+                  slug,
+                  count
+                }));
               }}
               className="increase items-count"
               type="button">
@@ -68,7 +85,17 @@ export default function ItemBlock({ id, title, image, price, count }) {
             </button>
             <button
               onClick={() => {
-                dispatch(increment({ id, title }));
+                dispatch(increment({
+                  id,
+                  title,
+                  description,
+                  image,
+                  price,
+                  is_published,
+                  category,
+                  slug,
+                  count
+                }));
               }}
               disabled={count === 1}
               className="reduced items-count"
@@ -111,3 +138,5 @@ export default function ItemBlock({ id, title, image, price, count }) {
     </>
   );
 }
+
+export default ItemBlock;

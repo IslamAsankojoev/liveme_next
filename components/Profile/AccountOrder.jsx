@@ -8,14 +8,14 @@ export default function AccountOrder({ user }) {
   const lang = useSelector((state) => state.lang.lang);
   const [orders, setOrders] = React.useState([])
 
-    React.useEffect(()=>{
-        axios.get(`${process.env.SERVER_DOMAIN}/api/orders/`).then((res)=>{
-        setOrders(res.data)
+  React.useEffect(() => {
+    axios.get(`${process.env.SERVER}/api/orders/`).then((res) => {
+      setOrders(res.data)
     })
-    }, [])
+  }, [])
   return (
     <>
-      {!lodash.isEmpty(user.orders) ? (
+      {!lodash.isEmpty(user?.orders) ? (
         <>
           <h2 align="center">{profileText.profile.orders.order[lang]}</h2>
           <div className="titles">

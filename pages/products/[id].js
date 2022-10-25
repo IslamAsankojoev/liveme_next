@@ -15,7 +15,7 @@ export async function getServerSideProps(ctx) {
   const cookies = parseCookies(ctx);
   const locale = cookies.NEXT_LOCALE || 'ru';
   let { data = [] } = await axios.get(
-    `${process.env.SERVER_DOMAIN}/api/products/${ctx.params.id}/`,
+    `${process.env.SERVER}/api/products/${ctx.params.id}/`,
     {
       headers: {
         'Accept-Language': locale,

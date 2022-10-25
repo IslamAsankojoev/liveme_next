@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setHide } from '../../redux/slices/thankYouSlice.js';
+import { setHide } from '../../redux/slices/thankYouSlice';
 import style from './ThankYou.module.scss';
 
 export default function ThankYou() {

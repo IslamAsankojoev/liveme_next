@@ -6,7 +6,7 @@ import { useRouter } from 'next/router.js';
 import axios from 'axios';
 import { parseCookies } from 'nookies';
 import ResetPassword from './ResetPassword';
-import { setLoggedIn } from '../../redux/slices/userSlice.js';
+import { setLoggedIn } from '../../redux/slices/userSlice';
 import { profileText } from '../../public/locales/profile/registerCollection';
 
 export default function AccountDetail() {
@@ -35,7 +35,7 @@ export default function AccountDetail() {
     setServerErrors({});
     try {
       const res = await axios.put(
-        `${process.env.SERVER_DOMAIN}/api/users/${user.id}`,
+        `${process.env.SERVER}/api/users/${user.id}`,
         {
           id: user.id,
           username: data.username,

@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import { setLang } from '../redux/slices/langSlice';
 import { text } from '../public/locales/texts.js';
 import { parseCookies, setCookie } from 'nookies';
-import { setLoggedIn } from '../redux/slices/userSlice';
 import axios from 'axios';
+import { setLoggedIn } from '../redux/slices/userSlice';
 
-export default function Header({userServerSideData}) {
+export default function Header() {
   const selectRef = React.useRef(null);
   const languages = ['ru', 'en', 'kg', 'tr'];
   const lang = useSelector((state) => state.lang.lang);
@@ -42,7 +42,7 @@ export default function Header({userServerSideData}) {
     setMobileMeniOpen(false);
     if (parseCookies().access_token) {
       axios
-        .get(`${process.env.SERVER_DOMAIN}/api/users/me/`, {
+        .get(`${process.env.SERVER}/api/users/me/`, {
           headers: {
             Authorization: 'Bearer ' + parseCookies().access_token,
           },
@@ -57,9 +57,6 @@ export default function Header({userServerSideData}) {
     selectRef.current.value = lang;
   }, [lang]);
 
-  React.useEffect(()=>{
-      console.log(userServerSideData)
-      }, [])
 
   return (
     <header ref={searchRef} className="header_area sticky-header">

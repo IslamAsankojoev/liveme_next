@@ -839,7 +839,7 @@ h6 {
   cursor: pointer;
 }
 
-.default-switch input + label {
+.default-switch input+label {
   position: absolute;
   top: 1px;
   left: 1px;
@@ -855,7 +855,7 @@ h6 {
   cursor: pointer;
 }
 
-.default-switch input:checked + label {
+.default-switch input:checked+label {
   left: 19px;
 }
 
@@ -879,7 +879,7 @@ h6 {
   opacity: 0;
 }
 
-.primary-switch input + label {
+.primary-switch input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -889,7 +889,7 @@ h6 {
   height: 100%;
 }
 
-.primary-switch input + label:before {
+.primary-switch input+label:before {
   content: '';
   position: absolute;
   left: 0;
@@ -907,7 +907,7 @@ h6 {
   transition: all 0.2s;
 }
 
-.primary-switch input + label:after {
+.primary-switch input+label:after {
   content: '';
   position: absolute;
   top: 1px;
@@ -924,11 +924,11 @@ h6 {
   cursor: pointer;
 }
 
-.primary-switch input:checked + label:after {
+.primary-switch input:checked+label:after {
   left: 19px;
 }
 
-.primary-switch input:checked + label:before {
+.primary-switch input:checked+label:before {
   background: #ffba00;
 }
 
@@ -952,7 +952,7 @@ h6 {
   opacity: 0;
 }
 
-.confirm-switch input + label {
+.confirm-switch input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -962,7 +962,7 @@ h6 {
   height: 100%;
 }
 
-.confirm-switch input + label:before {
+.confirm-switch input+label:before {
   content: '';
   position: absolute;
   left: 0;
@@ -980,7 +980,7 @@ h6 {
   cursor: pointer;
 }
 
-.confirm-switch input + label:after {
+.confirm-switch input+label:after {
   content: '';
   position: absolute;
   top: 1px;
@@ -997,11 +997,11 @@ h6 {
   cursor: pointer;
 }
 
-.confirm-switch input:checked + label:after {
+.confirm-switch input:checked+label:after {
   left: 19px;
 }
 
-.confirm-switch input:checked + label:before {
+.confirm-switch input:checked+label:before {
   background: #4cd3e3;
 }
 
@@ -1025,7 +1025,7 @@ h6 {
   opacity: 0;
 }
 
-.primary-checkbox input + label {
+.primary-checkbox input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -1038,7 +1038,7 @@ h6 {
   border: 1px solid #f1f1f1;
 }
 
-.primary-checkbox input:checked + label {
+.primary-checkbox input:checked+label {
   background: url(../static/img/elements/primary-check.png.jpeg) no-repeat center center/cover;
   border: none;
 }
@@ -1063,7 +1063,7 @@ h6 {
   opacity: 0;
 }
 
-.confirm-checkbox input + label {
+.confirm-checkbox input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -1076,7 +1076,7 @@ h6 {
   border: 1px solid #f1f1f1;
 }
 
-.confirm-checkbox input:checked + label {
+.confirm-checkbox input:checked+label {
   background: url(../static/img/elements/success-check.png) no-repeat center center/cover;
   border: none;
 }
@@ -1101,7 +1101,7 @@ h6 {
   opacity: 0;
 }
 
-.disabled-checkbox input + label {
+.disabled-checkbox input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -1119,7 +1119,7 @@ h6 {
   z-index: 3;
 }
 
-.disabled-checkbox input:checked + label {
+.disabled-checkbox input:checked+label {
   background: url(../static/img/elements/disabled-check.png) no-repeat center center/cover;
   border: none;
 }
@@ -1144,7 +1144,7 @@ h6 {
   opacity: 0;
 }
 
-.primary-radio input + label {
+.primary-radio input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -1157,7 +1157,7 @@ h6 {
   border: 1px solid #f1f1f1;
 }
 
-.primary-radio input:checked + label {
+.primary-radio input:checked+label {
   background: url(../static/img/elements/primary-radio.png) no-repeat center center/cover;
   border: none;
 }
@@ -1182,7 +1182,7 @@ h6 {
   opacity: 0;
 }
 
-.confirm-radio input + label {
+.confirm-radio input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -1195,7 +1195,7 @@ h6 {
   border: 1px solid #f1f1f1;
 }
 
-.confirm-radio input:checked + label {
+.confirm-radio input:checked+label {
   background: url(../static/img/elements/success-radio.png) no-repeat center center/cover;
   border: none;
 }
@@ -1220,7 +1220,7 @@ h6 {
   opacity: 0;
 }
 
-.disabled-radio input + label {
+.disabled-radio input+label {
   position: absolute;
   left: 0;
   top: 0;
@@ -1238,7 +1238,7 @@ h6 {
   z-index: 3;
 }
 
-.disabled-radio input:checked + label {
+.disabled-radio input:checked+label {
   background: url(../static/img/elements/disabled-radio.png) no-repeat center center/cover;
   border: none;
 }
@@ -1662,8 +1662,9 @@ h6 {
 }
 
 @media (max-width: 575px) {
-  .navbar-expand-lg > .container,
-  .navbar-expand-lg > .container-fluid {
+
+  .navbar-expand-lg>.container,
+  .navbar-expand-lg>.container-fluid {
     padding: 0px 15px;
   }
 }
@@ -1681,6 +1682,7 @@ h6 {
   .banner-area .fullscreen {
     height: 650px !important;
   }
+
   .banner-area {
     background-position: left 100%;
   }
@@ -2473,11 +2475,7 @@ h6 {
     padding-bottom: 80px;
   }
 
-  .exclusive-deal-area
-    .exclusive-right
-    .active-exclusive-product-slider
-    .single-exclusive-slider
-    img {
+  .exclusive-deal-area .exclusive-right .active-exclusive-product-slider .single-exclusive-slider img {
     max-width: 450px;
     margin: 0 auto;
   }
@@ -2949,7 +2947,7 @@ label {
   padding: 20px;
 }
 
-.pixel-checkbox + label {
+.pixel-checkbox+label {
   margin-left: 10px;
 }
 
@@ -6401,7 +6399,7 @@ label {
   background: #fff;
 }
 
-.p_star input:focus + .placeholder {
+.p_star input:focus+.placeholder {
   display: none;
 }
 
@@ -7019,16 +7017,16 @@ label {
   -webkit-transition: background 0.25s linear;
 }
 
-.radion_btn input[type='radio']:checked ~ .check {
+.radion_btn input[type='radio']:checked~.check {
   border: 1px solid #ffba00;
   background: #ffba00;
 }
 
-.radion_btn input[type='radio']:checked ~ .check::before {
+.radion_btn input[type='radio']:checked~.check::before {
   background: #fff;
 }
 
-.radion_btn input[type='radio']:checked ~ label {
+.radion_btn input[type='radio']:checked~label {
   color: #000;
 }
 
@@ -7164,7 +7162,7 @@ label {
   font-weight: 500;
 }
 
-.causes_item .causes_bottom a + a {
+.causes_item .causes_bottom a+a {
   border-color: #eeeeee;
   background: #fff;
   font-size: 14px;
@@ -7229,7 +7227,7 @@ label {
   background: #c5322d;
 }
 
-.tags .tag_btn + .tag_btn {
+.tags .tag_btn+.tag_btn {
   margin-left: 2px;
 }
 
@@ -7470,7 +7468,7 @@ label {
   transition: all 0.2s linear;
 }
 
-.blog_right_sidebar .author_widget .social_icon a + a {
+.blog_right_sidebar .author_widget .social_icon a+a {
   margin-left: 20px;
 }
 
@@ -7502,7 +7500,7 @@ label {
   margin-bottom: 0px;
 }
 
-.blog_right_sidebar .popular_post_widget .post_item + .post_item {
+.blog_right_sidebar .popular_post_widget .post_item+.post_item {
   margin-top: 20px;
 }
 
@@ -7522,7 +7520,7 @@ label {
   margin-bottom: 0px;
 }
 
-.blog_right_sidebar .post_category_widget .cat-list li + li {
+.blog_right_sidebar .post_category_widget .cat-list li+li {
   padding-top: 15px;
 }
 

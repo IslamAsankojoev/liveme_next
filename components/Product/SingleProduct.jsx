@@ -1,8 +1,6 @@
 import React from 'react';
-import { Header, Footer, WishButton, BannerArea } from '../index';
+import { WishButton, BannerArea } from '../index';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import store from '../../redux/store';
 import { addItem } from '../../redux/slices/cartSlice';
 import ProductCorusel from './ProductCorusel';
 import { toggleItem } from '../../redux/slices/wishSlice';
@@ -17,8 +15,7 @@ export default function SingleProduct({
   sale_price,
   description,
   category,
-    image,
-  title_ru,
+  image,
 }) {
 
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
@@ -28,11 +25,11 @@ export default function SingleProduct({
   const [count, setCount] = React.useState(1);
   const dispatch = useDispatch();
   const addToCart = () => {
-      dispatch(addItem({ id, title, image, price, count }));
+    dispatch(addItem({ id, title, image, price, count }));
     setCount(1);
   };
   const toggleWish = () => {
-      dispatch(toggleItem({ id, title, image, price }));
+    dispatch(toggleItem({ id, title, image, price }));
   };
   const lang = useSelector((state) => state.lang.lang);
 
@@ -46,12 +43,12 @@ export default function SingleProduct({
             <div className="col-lg-6">
               <div className="s_Product_carousel">
                 <WishButton isWished={inWishtList} onClick={toggleWish} />
-                  <ProductCorusel images={[{item:image},...images]} />
+                <ProductCorusel images={[{ item: image }, ...images]} />
               </div>
             </div>
             <div className="col-lg-5 offset-lg-1">
               <div className="s_product_text">
-                <h3>{title || title_ru}</h3>
+                <h3>{title}</h3>
                 <h2>{price} сом</h2>
                 <ul className="list">
                   <li>
@@ -73,7 +70,7 @@ export default function SingleProduct({
                     name="qty"
                     id="sst"
                     value={count}
-                    onChange={() => {}}
+                    onChange={() => { }}
                     title="Quantity:"
                     className="input-text qty"
                   />

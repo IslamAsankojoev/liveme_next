@@ -19,6 +19,7 @@
     width: 100%;
 
     a {
+        position:relative;
       transition: 0.1s;
       color: #333;
       display: flex;
@@ -38,4 +39,24 @@
       pointer-events: none;
     }
   }
+}
+.indicator{
+    background-color: #fe5f1e;
+    border-radius: 30px;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    height: 22px;
+    right: -10px;
+    line-height: 22px;
+    position: absolute;
+    top: -15px;
+    width: 22px;
+    text-align: center;
+    cursor: pointer;
+}
+.hideIndicator{
+    opacity:0;
 }
