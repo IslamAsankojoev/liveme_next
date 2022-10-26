@@ -15,18 +15,18 @@ export const text = {
           ru: 'Каталог',
           en: 'Shop',
           tr: 'Katalog',
-          kg: 'Дарык',
+          kg: 'Каталог',
         },
         link: '/shop',
       },
       {
-          text: {
-              ru: 'О нас',
-              en: 'About us',
-              tr: 'Hakkımızda',
-              kg: 'Биз',
-          },
-          link: '/about',
+        text: {
+          ru: 'О нас',
+          en: 'About us',
+          tr: 'Hakkımızda',
+          kg: 'Биз жөнүндө',
+        },
+        link: '/about',
       },
       {
         text: {
@@ -41,8 +41,8 @@ export const text = {
         text: {
           ru: 'Вход / Регистрация',
           en: 'Login / Register',
-            tr: 'Giriş / Kayıt ol',
-          kg: 'Кирүү / Теркөлүү',
+          tr: 'Giriş / Kayıt ol',
+          kg: 'Кирүү / Тиркелүү',
         },
         link: '/register',
       },
@@ -61,7 +61,7 @@ export const text = {
     ru: 'Добавить в корзину',
     en: 'Add to cart',
     tr: 'Sepete ekle',
-    kg: 'Сепке кошуу',
+    kg: 'Себетке кошуу',
   },
   footer: {
     about: {
@@ -74,28 +74,28 @@ export const text = {
       subtitle: {
         ru: 'Мы предлагаем вам лучшие товары по самым низким ценам',
         en: 'We offer you the best products at the lowest prices',
-          tr: 'En iyi ürünleri en uygun fiyatlara sunuyoruz',
-        kg: 'Сизге ең жаңы жана ең башындагы маалыматтарды берүүгө мүмкүнчүлүк берүүдөн башкарабыз',
+        tr: 'En iyi ürünleri en uygun fiyatlara sunuyoruz',
+        kg: 'Сизге эң мыкты продукттарды эң арзан баа менен сунуштайбыз',
       },
     },
     mailing: {
       title: {
         ru: 'Новости',
         en: 'News',
-          tr: 'Haberler',
+        tr: 'Haberler',
         kg: 'Жаңылыктар',
       },
       subtitle: {
         ru: 'Узнавайте первыми о наших новстях',
         en: 'Be the first to know about our news',
-          tr: 'Haberlerimiz hakkında ilk siz bilgi edinin',
-        kg: 'Биздин жаңылыктар боюнча биринчи билгилөөңүздү бизден алыңыз',
+        tr: 'Haberlerimiz hakkında ilk siz bilgi edinin',
+        kg: 'Биздин жаңылыктар боюнча биринчилерден билиңиз',
       },
       placeholder: {
         ru: 'Ваш email',
         en: 'Your email',
         tr: 'E-posta adresiniz',
-        kg: 'Электрондук почта',
+        kg: 'Электрондук почтаңыз',
       },
     },
     social: {
@@ -107,9 +107,9 @@ export const text = {
       },
       subtitle: {
         ru: 'Мы в социальных сетях',
-        en: 'We are in social networks',
-          tr: 'Sosyal Medya Hesaplarımız',
-        kg: 'Биз социалдык желілерде',
+        en: 'We are in social media',
+        tr: 'Sosyal Medya Hesaplarımız',
+        kg: 'Биз социалдык тармактарда',
       },
     },
     copyright: {
@@ -117,7 +117,7 @@ export const text = {
         ru: 'Все права защищены',
         en: 'All rights reserved',
         tr: 'Tüm hakları saklıdır',
-        kg: 'Бардык эркинликтер үзүлгөн',
+        kg: 'Бардык эрежелер сакталган',
       },
     },
   },
@@ -126,19 +126,19 @@ export const text = {
       ru: 'Тут пусто',
       en: 'Nothing here',
       tr: 'Burada hiçbir şey yok',
-      kg: 'Бул жерде эчтемке жок',
+      kg: 'Бул жерде эч нерсе жок',
     },
     subtitle: {
-      ru: 'Вероятней всего, вы не добавляли ещё товар. Для того, чтобы добавить товар товар, перейди на главную страницу.',
+      ru: 'Вы ещё не добавляли товар,перейдите на главную страницу.',
       en: 'Most likely, you have not added any products yet. To add a product, go to the main page.',
-      tr: 'Muhtemelen henüz hiçbir ürün eklememişsiniz. Bir ürün eklemek için ana sayfaya gidin.',
-      kg: 'Эч кандай маалымат жок. Башкы бетке кайтып, маалыматты кошуңузду тандап көрүңүз.',
+      tr: 'Ürün eklememişsiniz. Bir ürün eklemek için ana sayfaya gidin.',
+      kg: 'Эч кандай продукт кошо элексиз, башкы беттен тандаңыз.',
     },
     button: {
-      ru: 'Вернуться в магазин',
+      ru: 'Вернуться в каталог',
       en: 'Go to shop',
-      tr: 'Mağazaya git',
-      kg: 'Дарыкка кайтуу',
+      tr: 'Kataloga git',
+      kg: 'Каталогко кайтуу',
     },
   },
   notifications: {
@@ -146,7 +146,7 @@ export const text = {
       ru: 'Ваш заказ успешно оформлен',
       en: 'Your order has been successfully placed',
       tr: 'Siparişiniz başarıyla yerleştirildi',
-      kg: 'Сиздин сатып алуу сәтті тапсырылды',
+      kg: 'Сиздин буйрутмаңыз кабыл алынды',
     },
   },
 };

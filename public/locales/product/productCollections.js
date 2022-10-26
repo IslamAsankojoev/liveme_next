@@ -8,13 +8,13 @@ export const product = {
   inStock: {
     ru: 'В наличии',
     en: 'In stock',
-    kg: 'Даракта',
+    kg: 'Кампада бар',
     tr: 'Stokta',
   },
   outOfStock: {
     ru: 'Нет в наличии',
     en: 'Out of stock',
-    kg: 'Дарактада жок',
+    kg: 'Кампада жок',
     tr: 'Stokta yok',
   },
   quantity: {

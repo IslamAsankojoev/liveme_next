@@ -9,20 +9,20 @@ export const shopText = {
     title: {
       ru: 'Пока товаров нету',
       en: 'No products yet',
-      kg: 'Товарлар жок',
-        tr: 'Henüz ürün yok',
+      kg: 'Азырынча товарлар жок',
+      tr: 'Henüz ürün yok',
     },
     subtitle: {
       ru: 'Поищите что нибудь для себя в других категориях.',
       en: 'Look for something for yourself in other categories.',
       kg: 'Башка категорияларды карап көрүңүз.',
-        tr: 'Başka kategorilerde kendin için bir şey arayın.',
+      tr: 'Başka kategorilerde kendin için bir şey arayın.',
     },
     button: {
       ru: 'на главную',
       en: 'to main',
-      kg: 'башкы бетке кайту',
-        tr: 'ANA SAYFAYA GIT',
+      kg: 'башкы бетке кайтуу',
+      tr: 'ANA SAYFAYA GIT',
     },
   },
   categories: {

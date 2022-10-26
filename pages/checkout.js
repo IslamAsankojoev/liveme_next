@@ -258,7 +258,7 @@ export default function Checkout() {
                     <div className="creat_account">
                       <input type="checkbox" defaultChecked id="f-option4" name="selector" />
                       <label htmlFor="f-option4">{checkoutText.details.terms[lang]} </label>
-                      <a href="#"> terms & conditions*</a>
+                      <Link href="/agreement"><a> terms & conditions*</a></Link>
                     </div>
                     <button
                       className="primary-btn"

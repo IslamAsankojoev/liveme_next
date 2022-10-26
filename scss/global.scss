@@ -109,7 +109,7 @@ p{
 }
 .m-menu {
   @media (max-width: 768px) {
-
+    box-shadow: 0 10px 10px rgb(0 0 0 / 10%)!important;
     display: block !important;
     opacity: 0;
     //z-index: -10 !important;

@@ -2,21 +2,21 @@ export const cartCollection = {
   page_title: {
     ru: 'Корзина',
     en: 'Cart',
-    kg: 'Сепет',
+    kg: 'Себет',
     tr: 'Sepet',
   },
   empty: {
     title: {
       ru: 'Корзина пуста',
       en: 'Cart is empty',
-      kg: 'Сепет бош',
+      kg: 'Себет бош',
       tr: 'Sepet boş',
     },
   },
   order: {
     ru: 'Заказать',
     en: 'Order',
-    kg: 'Тапсырма',
+    kg: 'Буйрутма',
     tr: 'Sipariş',
   },
   button: {
@@ -29,7 +29,7 @@ export const cartCollection = {
     product: {
       ru: 'Товар',
       en: 'Product',
-      kg: 'Маалымат',
+      kg: 'Товар',
       tr: 'Ürün',
     },
     price: {
@@ -52,21 +52,21 @@ export const cartCollection = {
     },
   },
   cartTotal: {
-    ru: 'В общем и целом',
+    ru: 'В общем',
     en: 'Total cart',
-    kg: 'Бардык сепет',
+    kg: 'Бардык себет',
     tr: 'Toplam sepet',
   },
   orderButton: {
     ru: 'Заказать',
     en: 'Order',
-    kg: 'Тапсырма',
+    kg: 'Буйрутманы жөнөтүү',
     tr: 'Sipariş',
   },
   returnButton: {
     ru: 'Вернуться в каталог',
     en: 'Back to catalog',
-    kg: 'Каталогга кайтуу',
+    kg: 'Каталогко кайтуу',
     tr: 'Kataloga geri dön',
   },
 };

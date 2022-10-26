@@ -13,23 +13,30 @@ export default function Footer() {
           <div className="col-lg-3 col-md-6 col-sm-6">
             <div className="single-footer-widget">
               <Link href="/about">
-                  <a>
+                <a>
                   <h6>{text.footer.about.title[lang]}</h6>
-                      </a>
+                </a>
               </Link>
               <p>{text.footer.about.subtitle[lang]}</p>
               <Link href="/policy">
                 <a style={{
                   color: '#fff',
                 }}>
-                {lang === "en" && "Privacy Policy"}
-                {lang === "ru" && "Политика конфиденциальности"}
-                {lang === 'tr' && "Gizlilik Politikası"}
-                {lang === 'kg' && "Политика конфиденциальности"}
-                
-
+                  {lang === "en" && "Privacy Policy"}
+                  {lang === "ru" && "Политика конфиденциальности"}
+                  {lang === 'tr' && "Gizlilik Politikası"}
+                  {lang === 'kg' && "Политика конфиденциальности"}
                 </a></Link>
-
+              <br />
+              <Link href="/agreement">
+                <a style={{
+                  color: '#fff',
+                }}>
+                  {lang === "en" && "User Agreements"}
+                  {lang === "ru" && "Пользовательское соглашение"}
+                  {lang === 'tr' && "Kullanıcı Sözleşmesi"}
+                  {lang === 'kg' && "Пользовательское соглашение"}
+                </a></Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 col-sm-6">
@@ -104,7 +111,7 @@ export default function Footer() {
               <h6>{text.footer.social.title[lang]}</h6>
               <p>{text.footer.social.subtitle[lang]}</p>
               <div className="footer-social d-flex align-items-center">
-                  <a href="https://www.instagram.com/liveme.kg/">
+                <a href="https://www.instagram.com/liveme.kg/">
                   <i className="fa fa-instagram"></i>
                 </a>
               </div>

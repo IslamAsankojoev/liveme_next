@@ -2,22 +2,22 @@ export const profileText = {
   page_title: {
     ru: 'Вход / Регистрация',
     en: 'Login / Register',
-    kg: 'Кирүү / Теркөлүү',
-      tr: 'Giriş / Kayıt ol',
+    kg: 'Кирүү / Тиркелүү',
+    tr: 'Giriş / Kayıt ol',
   },
   login: {
     info: {
       title: {
         ru: 'Уже есть аккаунт?',
         en: 'Already have an account?',
-        kg: 'Аккаунт барында?',
-        tr: 'Zaten bir hesabınız var mı?',
+        kg: 'Аккаунтуңуз барбы?',
+        tr: 'Hesabınız var mı?',
       },
       subtitle: {
-        ru: 'Найслайждайтесь нашими ароматами и духами высшего качества',
+        ru: 'Наслайждайтесь нашими ароматами и духами высшего качества',
         en: 'Enjoy our high quality fragrances and perfumes',
-        kg: 'Биздин качалык ароматтар мен духтарымыздын ырахатаныңыз',
-          tr: 'Liveme’ile gü zel ortam kokusuna sahip olun tü m fırsatlardan faydalanmak için kayıt olmak ister misiniz!',
+        kg: 'Биздин сапаттуу ароматтар жана атырларыбыз менен ырахаттаныңыз',
+        tr: 'Liveme’ile güzel ortam kokusuna sahip olun tüm fırsatlardan faydalanmak için kayıt olmak ister misiniz!',
       },
     },
     form: {
@@ -30,7 +30,7 @@ export const profileText = {
       username: {
         ru: 'Имя пользователя',
         en: 'Username',
-        kg: 'Колдонуучунун аты',
+        kg: 'Колдонуучу атыңыз',
         tr: 'Kullanıcı adı',
       },
       password: {
@@ -52,22 +52,22 @@ export const profileText = {
       title: {
         ru: 'Вы у нас впервые?',
         en: 'You are new here?',
-        kg: 'Аккаунт жокпу?',
+        kg: 'Аккаунтуңуз жокпу?',
         tr: 'Burada ilk defa mısınız?',
       },
       subtitle: {
-        ru: 'Зарегестрируйтесь и будьте всегда вкурсе новых духов и араматов',
-        en: 'Register and always be up to date with new fragrances and aromas',
-        kg: 'Тизмеге кирүү мен биздин жаңы ароматтар мен духи жаңылыктарын белгилөөңүз',
-          tr: 'Liveme ile tüm fırsatlardan faydalanmak için kayıt olmak ister misiniz ?',
+        ru: 'Хотите зарегистрироваться, чтобы воспользоваться всеми возможностями Liveme?',
+        en: 'Would you like to register to take advantage of all the opportunities with Liveme?',
+        kg: 'Liveme менен бардык мүмкүнчүлүктөрдү алуу үчүн катталыңыз?',
+        tr: 'Liveme ile tüm fırsatlardan faydalanmak için kayıt olmak ister misiniz?',
       },
     },
     form: {
       title: {
         ru: 'Регистрация',
         en: 'Register',
-        kg: 'Тизмеге кирүү',
-          tr: 'KAYIT OL',
+        kg: 'Катталуу',
+        tr: 'KAYIT OL',
       },
       name: {
         ru: 'Ваше имя',
@@ -78,7 +78,7 @@ export const profileText = {
       email: {
         ru: 'Ваш email',
         en: 'Your email',
-        kg: 'Сиздин электрондук почта',
+        kg: 'Сиздин электрондук почтаңыз',
         tr: 'E-posta adresiniz',
       },
       password: {
@@ -90,7 +90,7 @@ export const profileText = {
       button: {
         ru: 'Зарегестрироваться',
         en: 'Register',
-        kg: 'Тизмеге кирүү',
+        kg: 'Катталуу',
         tr: 'Kayıt ol',
       },
     },
@@ -108,7 +108,7 @@ export const profileText = {
       orders: {
         ru: 'Заказы',
         en: 'Orders',
-        kg: 'Заказы',
+        kg: 'Буюртмаларыңыз',
         tr: 'Siparişler',
       },
       logout: {
@@ -140,7 +140,7 @@ export const profileText = {
       email: {
         ru: 'Ваш email',
         en: 'Your email',
-        kg: 'Сиздин электрондук почта',
+        kg: 'Сиздин электрондук почтаңыз',
         tr: 'E-posta adresiniz',
       },
       address: {
@@ -196,44 +196,44 @@ export const profileText = {
       empty_orders: {
         ru: 'У вас нет заказов',
         en: 'You have no orders',
-        kg: 'Сизде заказ жок',
+        kg: 'Сиздин буйрутмаларыңыз жок',
         tr: 'Siparişiniz yok',
       },
       order: {
         ru: 'Заказ',
         en: 'Order',
-        kg: 'Заказ',
+        kg: 'Буйрутма',
         tr: 'Sipariş',
       },
       number: {
         ru: 'Номер заказа',
         en: 'Order number',
-        kg: 'Заказдын номери',
+        kg: 'Буйрутманын номери',
         tr: 'Sipariş numarası',
       },
       date: {
         ru: 'Дата заказа',
         en: 'Order date',
-        kg: 'Заказдын датасы',
+        kg: 'Буйрутманын датасы',
         tr: 'Sipariş tarihi',
       },
       sum: {
         ru: 'Сумма заказа',
         en: 'Order sum',
-        kg: 'Заказдын суммасы',
-        tr: 'Sipariş toplamı',
+        kg: 'Буйрутманын суммасы',
+        tr: 'Sipariş toplam tutar',
       },
       paymentMethod: {
         ru: 'Способ оплаты',
         en: 'Payment method',
-        kg: 'Төлемдүн түрү',
+        kg: 'Төлөмдүн түрү',
         tr: 'Ödeme yöntemi',
       },
       contact_phone: {
-        ru: 'Контактный телефон',
-        en: 'Contact phone',
+        ru: 'Телефон',
+        en: 'Phone',
         kg: 'Телефону',
-        tr: 'İletişim telefonu',
+        tr: 'Telefon',
       },
     },
   },
