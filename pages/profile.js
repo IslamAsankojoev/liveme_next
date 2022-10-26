@@ -29,6 +29,6 @@ export async function getServerSideProps(ctx) {
   return {
     props: {
       prevPath: ctx?.req?.headers?.referer,
-    }, // will be passed to the page component as props
+    }
   };
 }

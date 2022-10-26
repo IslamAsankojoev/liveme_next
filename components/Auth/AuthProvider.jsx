@@ -8,7 +8,7 @@ import { setCart } from '../../redux/slices/cartSlice';
 import { setLang } from '../../redux/slices/langSlice';
 import { setLoggedIn } from '../../redux/slices/userSlice';
 import { setWish } from '../../redux/slices/wishSlice';
-
+import Head from 'next/head';
 
 export default function AuthProvider({ children, userServerSideData }) {
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ export default function AuthProvider({ children, userServerSideData }) {
               Authorization: 'Bearer ' + token,
             },
           })
-          .then(({data}) => {
-              let {password, ...user} = data
-              console.log(user)
-              dispatch(setLoggedIn(user));
+          .then(({ data }) => {
+            let { password, ...user } = data
+            console.log(user)
+            dispatch(setLoggedIn(user));
           });
       }
       async function setUser() {
@@ -54,7 +54,15 @@ export default function AuthProvider({ children, userServerSideData }) {
 
   return (
     <>
-    <Header userServerSideData={userServerSideData}/>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>Livemeshop</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="shortcut icon" href="/livemeLogo1.png" />
+      </Head>
+      <Header userServerSideData={userServerSideData} />
       <>{children}</>
       <Mobilenavigate />
       <Footer />

@@ -83,9 +83,8 @@ export default function AccountDetail() {
             className="form-control"
             id="username"
             name="username"
-            placeholder={`${profileText.profile.form.name[lang]} ${
-              errors?.username?.type === 'required' ? '- обязательно' : ''
-            }`}
+            placeholder={`${profileText.profile.form.name[lang]} ${errors?.username?.type === 'required' ? '- обязательно' : ''
+              }`}
           />
           {serverErrors?.username && <p className="form-errors">Это имя уже занято</p>}
         </div>
@@ -103,9 +102,8 @@ export default function AccountDetail() {
             id="email"
             name="email"
             inputMode="email"
-            placeholder={`${profileText.profile.form.email[lang]} ${
-              errors?.email?.type === 'required' ? '- обязательно' : ''
-            }`}
+            placeholder={`${profileText.profile.form.email[lang]} ${errors?.email?.type === 'required' ? '- обязательно' : ''
+              }`}
           />
           <p className="form-errors">
             {errors?.email?.type === 'pattern' && errors?.email?.message}
@@ -120,9 +118,8 @@ export default function AccountDetail() {
             id="address"
             name="address"
             inputMode="text"
-            placeholder={`${profileText.profile.form.address[lang]} ${
-              errors?.address?.type === 'required' ? '- обязательно' : ''
-            }`}
+            placeholder={`${profileText.profile.form.address[lang]} ${errors?.address?.type === 'required' ? '- обязательно' : ''
+              }`}
           />
         </div>
         {/*<div className="col-md-12 form-group">*/}

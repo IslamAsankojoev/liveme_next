@@ -15,7 +15,7 @@ import '../scss/css/main.css';
 import '../scss/global.scss';
 import { SnackbarProvider } from 'notistack';
 
-const MyApp = ({ Component, pageProps, userServerSideData }) => {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <SnackbarProvider maxSnack={3}>
       <Provider store={store}>

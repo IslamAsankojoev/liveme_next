@@ -150,9 +150,8 @@ export default function Header() {
                   </i>
 
                   <li
-                    className={`nav-item d-sm-flex d-none  ${
-                      pathname === '/wishlist' && 'active'
-                    }`}>
+                    className={`nav-item d-sm-flex d-none  ${pathname === '/wishlist' && 'active'
+                      }`}>
                     <Link href="/wishlist">
                       <a className="cart">
                         <svg
