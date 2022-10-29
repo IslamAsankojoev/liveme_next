@@ -24,17 +24,17 @@ export default function Login({ setToggle }) {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(`${process.env.SERVER}/api/users/login/`, {
+      const res = await axios.post(`${process.env.SERVER}/api/login/`, {
         username: data.username,
         password: data.password,
       });
-      setCookie(null, 'access_token', res.data.user.token.access, {
+      setCookie(null, 'access_token', res.data.access, {
         maxAge: 1 * 24 * 60 * 60,
       });
-      dispatch(setLoggedIn(res.data?.user));
+      // dispatch(setLoggedIn(res.data?.user));
     } catch (error) {
-      console.log(err, 'error from login');
-      setServerErrors(err.response?.data);
+      console.log(error, 'error from login');
+      setServerErrors(error.response?.data);
     }
     router.reload();
   };

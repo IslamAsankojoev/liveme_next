@@ -6,6 +6,7 @@ import {
   CategorySection,
   ProductLoopSection,
   ExclusiveDealSection,
+  SliderMain
 } from '../components/index';
 import { setProducts } from '../redux/slices/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +28,7 @@ const Home = () => {
 
   return (
     <>
-      <BannerSection />
+      <SliderMain />
       <FeaturesSection />
       <CategorySection />
       <ProductLoopSection />

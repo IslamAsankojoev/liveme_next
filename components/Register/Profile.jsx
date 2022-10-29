@@ -23,7 +23,7 @@ const Profile = ({ prevPath }) => {
   };
 
   React.useEffect(() => {
-    if (prevPath.includes('checkout')) {
+    if (prevPath?.includes('checkout')) {
       setActiveTab('orders');
     }
   }, []);

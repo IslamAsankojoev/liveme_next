@@ -3,7 +3,7 @@ export const shopText = {
     ru: 'Каталог',
     en: 'Shop',
     kg: 'Каталог',
-    tr: 'Katalog',
+    tr: 'Ürün',
   },
   empty: {
     title: {

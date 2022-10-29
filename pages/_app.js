@@ -13,6 +13,8 @@ import '../scss/css/ion.rangeSlider.skinFlat.css';
 import '../scss/css/magnific-popup.css';
 import '../scss/css/main.css';
 import '../scss/global.scss';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { SnackbarProvider } from 'notistack';
 
 const MyApp = ({ Component, pageProps }) => {

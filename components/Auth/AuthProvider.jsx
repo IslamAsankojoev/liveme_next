@@ -56,6 +56,7 @@ export default function AuthProvider({ children, userServerSideData }) {
     <>
       <Head>
         <meta charSet="utf-8" />
+        <meta name="google" content="notranslate" />
         <title>Livemeshop</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />

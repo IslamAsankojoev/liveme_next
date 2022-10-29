@@ -18,7 +18,7 @@ export const contactText = {
       kg: 'Первомайский Район',
       tr: 'Pervomayskiy Rayon',
     },
-    phone: '+996 708 022 101',
+    phone: '+90 549 675 10 12',
     schedule: 'Пн - Сб, с 9ч - 6ч',
     email: 'support@livemeshop.com',
     email_text: {

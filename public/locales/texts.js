@@ -14,7 +14,7 @@ export const text = {
         text: {
           ru: 'Каталог',
           en: 'Shop',
-          tr: 'Katalog',
+          tr: 'Ürün',
           kg: 'Каталог',
         },
         link: '/shop',

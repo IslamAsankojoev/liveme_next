@@ -52,14 +52,14 @@ export default function SingleProduct({
                 <h2>{price} сом</h2>
                 <ul className="list">
                   <li>
-                    <a className="active" href="#">
+                    <span className="active">
                       <span>{product.category[lang]}</span> : {category}
-                    </a>
+                    </span>
                   </li>
                   <li>
-                    <a href="#">
+                    <span>
                       <span>{product.inStock[lang]}</span>
-                    </a>
+                    </span>
                   </li>
                 </ul>
                 <p className="product_description">{description}</p>

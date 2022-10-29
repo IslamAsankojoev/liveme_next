@@ -108,6 +108,13 @@ p{
   visibility: visible;
 }
 .m-menu {
+  li{
+    transition: .2s;
+    a{
+      transition: .2s;
+    }
+  }
+
   @media (max-width: 768px) {
     box-shadow: 0 10px 10px rgb(0 0 0 / 10%)!important;
     display: block !important;

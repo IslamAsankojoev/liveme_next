@@ -8,5 +8,8 @@ const nextConfig = {
     domains: ['localhost'],
     formats: ['image/avif', 'image/webp'],
   },
+  devIndicators: {
+    buildActivity: false
+  }
 };
 module.exports = nextConfig;
