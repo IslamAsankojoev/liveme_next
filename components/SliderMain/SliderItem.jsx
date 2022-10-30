@@ -5,7 +5,7 @@ import { home } from '../../public/locales/home/homeCollection.js'
 import { text } from '../../public/locales/texts.js'
 
 
-export default function BannerSection() {
+const SliderItem = () => {
   const [saleItems, setSaleItems] = React.useState({});
   const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
@@ -77,3 +77,5 @@ export default function BannerSection() {
     </>
   );
 }
+
+export default SliderItem;

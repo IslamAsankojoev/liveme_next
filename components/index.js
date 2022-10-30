@@ -14,7 +14,7 @@ export { default as Register } from './Register/Register';
 export { default as Login } from './Register/Login';
 export { default as LoginRegisterPage } from './Register/LoginRegisterPage';
 export { default as Profile } from './Register/Profile';
-export { default as AuthProvider } from './Auth/AuthProvider';
+export { default as Layout } from './Layout/Layout';
 export { default as ItemBlock } from './Cart/ItemBlock';
 export { default as MobileCart } from './Cart/MobileCart';
 export { default as OrderBlock } from './Product/OrderBlock';
@@ -37,3 +37,4 @@ export { default as About } from './About'
 export { default as Policy } from './Policy'
 export { default as Agreement } from './Agreement'
 export { default as SliderMain } from './SliderMain'
+export { default as LoaderFullScreen } from './LoaderFullScreen'

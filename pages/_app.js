@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 import React from 'react';
 import App from "next/app"
-import { AuthProvider } from '../components/index';
+import { Layout } from '../components/index';
 import '../scss/css/bootstrap.css';
 import '../scss/css/font-awesome.min.css';
 import '../scss/css/themify-icons.css';
@@ -21,9 +21,9 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <SnackbarProvider maxSnack={3}>
       <Provider store={store}>
-        <AuthProvider>
+        <Layout>
           <Component {...pageProps} />
-        </AuthProvider>
+        </Layout>
       </Provider>
     </SnackbarProvider>
   );

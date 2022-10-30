@@ -1,20 +1,21 @@
 import React from 'react';
 import style from './style.module.scss';
-import Link from 'next/link.js';
-import { useRouter } from 'next/router.js';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { home } from '../../public/locales/home/homeCollection.js';
 import { shopText } from '../../public/locales/shop/shopCollection.js';
 import { profileText } from '../../public/locales/profile/registerCollection';
-import { cartCollection } from '../../public/locales/cart/cartCollection.js';
+import { cartCollection } from '../../public/locales/cart/cartCollection';
 import { wishlistText } from '../../public/locales/wishlist/wishlistCollection';
+import { RootSate } from '../../redux/store';
 
-export default function Mobilenavigate() {
-  const { pathname } = useRouter();
-  const loggedIn = useSelector((state) => state.user.loggedIn);
-  const lang = useSelector((state) => state.lang.lang);
-  const cartTotal = useSelector(state=>state.cart.totalItems)
-    const wishTotal = useSelector(state=>state.wish.totalItems)
+const Mobilenavigate = () => {
+  const { pathname, push } = useRouter();
+  const loggedIn = useSelector((state: RootSate) => state.user.loggedIn);
+  const lang = useSelector((state: RootSate) => state.lang.lang);
+  const cartTotal = useSelector((state: RootSate) => state.cart.totalItems)
+  const wishTotal = useSelector((state: RootSate) => state.wish.totalItems)
 
   return (
     <div className={style.mobNav}>
@@ -68,13 +69,13 @@ export default function Mobilenavigate() {
                 <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
               </svg>
               {cartCollection.page_title[lang]}
-                <i
-                    onClick={() => {
-                        push('/cart');
-                    }}
-                    className={`${style.indicator} ${cartTotal <= 0 && style.hideIndicator}`}>
-                    {cartTotal}
-                </i>
+              <i
+                onClick={() => {
+                  push('/cart')
+                }}
+                className={`${style.indicator} ${cartTotal <= 0 && style.hideIndicator}`}>
+                {cartTotal}
+              </i>
             </a>
           </Link>
         </li>
@@ -90,20 +91,19 @@ export default function Mobilenavigate() {
                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
               </svg>
               {wishlistText.page_title[lang]}
-                <i
-                    onClick={() => {
-                        push('/cart');
-                    }}
-                    className={`${style.indicator} ${wishTotal <= 0 && style.hideIndicator}`}>
-                    {wishTotal}
-                </i>
+              <i
+                onClick={() => {
+                  push('/cart');
+                }}
+                className={`${style.indicator} ${wishTotal <= 0 && style.hideIndicator}`}>
+                {wishTotal}
+              </i>
             </a>
           </Link>
         </li>
         <li
-          className={`${
-            (pathname === '/profile' && style.active) || (pathname === '/register' && style.active)
-          }`}>
+          className={`${(pathname === '/profile' && style.active) || (pathname === '/register' && style.active)
+            }`}>
           <Link href="/profile">
             <a>
               <svg
@@ -123,6 +123,8 @@ export default function Mobilenavigate() {
           </Link>
         </li>
       </ul>
-    </div>
+    </div >
   );
 }
+
+export default Mobilenavigate;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Header, Footer, Mobilenavigate } from '../../components/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { Header, Footer, Mobilenavigate, LoaderFullScreen } from '../index';
 import { parseCookies, setCookie } from 'nookies';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -10,9 +10,11 @@ import { setLoggedIn } from '../../redux/slices/userSlice';
 import { setWish } from '../../redux/slices/wishSlice';
 import Head from 'next/head';
 
-export default function AuthProvider({ children, userServerSideData }) {
+
+export default function Layout({ children, userServerSideData }) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { isLoading } = useSelector((state) => state.loader);
 
   React.useEffect(() => {
     setCookie(null, 'NEXT_LOCALE', parseCookies().NEXT_LOCALE || 'ru', {
@@ -66,6 +68,7 @@ export default function AuthProvider({ children, userServerSideData }) {
       <Header userServerSideData={userServerSideData} />
       <>{children}</>
       <Mobilenavigate />
+      {isLoading ? <LoaderFullScreen /> : null}
       <Footer />
     </>
   );

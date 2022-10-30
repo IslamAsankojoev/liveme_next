@@ -16,7 +16,7 @@ const BannerArea = ({ title = 'Страница', path = '#' }) => {
                 {home.page_title[lang]}
                 <span className="lnr lnr-arrow-right"></span>
               </a>
-              <a href={path}>{title[lang] || title}</a>
+              {path && (<a href={path}>{title[lang] || title}</a>)}
             </nav>
           </div>
         </div>

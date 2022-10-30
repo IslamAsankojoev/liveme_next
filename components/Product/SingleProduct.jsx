@@ -33,9 +33,10 @@ export default function SingleProduct({
   };
   const lang = useSelector((state) => state.lang.lang);
 
+
   return (
     <>
-      <BannerArea title={title} path={`/products/${id}`} />
+      <BannerArea title={title} />
 
       <div className="product_image_area">
         <div className="container">
@@ -43,7 +44,7 @@ export default function SingleProduct({
             <div className="col-lg-6">
               <div className="s_Product_carousel">
                 <WishButton isWished={inWishtList} onClick={toggleWish} />
-                <ProductCorusel images={[{ item: image }, ...images]} />
+                <ProductCorusel images={images && images.length > 0 ? [{ item: image }, ...images] : [{ item: image },]} />
               </div>
             </div>
             <div className="col-lg-5 offset-lg-1">

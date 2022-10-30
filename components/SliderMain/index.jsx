@@ -1,8 +1,5 @@
 import React from "react";
-import BannerSection from "../Home/BannerSection.jsx";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import SliderItem from "./SliderItem";
 
 import style from "./index.module.scss";
 
@@ -23,13 +20,13 @@ const SliderMain = () => {
     <div className={style.slider}>
       <Slider {...settings}>
         <div>
-          <BannerSection />
+          <SliderItem />
         </div>
         <div>
-          <BannerSection />
+          <SliderItem />
         </div>
         <div>
-          <BannerSection />
+          <SliderItem />
         </div>
       </Slider>
     </div>
