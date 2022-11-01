@@ -11,24 +11,15 @@ import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 
 
-const AccountRoles = () => {
-  const [roles, setRoles] = React.useState([]);
+const AccountRoles = ({ roles }) => {
   const user = useSelector((state) => state.user.data);
   const total_pay = Math.ceil(useSelector((state) => state.user.data?.total_pay))
 
-  React.useEffect(() => {
-    axios.get(`${process.env.SERVER}/api/role/?ordering=back_id`, {
-      headers: {
-        'Authorization': `Bearer ${parseCookies().access_token}`
-      }
-    }).then((res) => {
-      setRoles(res.data.results);
-    });
-  }, []);
+
 
   return (
     <>
-      {total_pay ? (
+      {(
         <div className={style.roles}>
           <h2>Your achievements</h2>
           <div className={style.row}>
@@ -52,7 +43,7 @@ const AccountRoles = () => {
                             width: `${parseInt(total_pay >= item.score_pay ? 100 : total_pay / item.score_pay * 100)}%`
                           }}>
                           </div>
-                          <span>{total_pay >= item.score_pay ? 'completed' : `${item.score_pay} / ${total_pay}`}</span>
+                          <span>{total_pay >= item.score_pay ? 'completed' : `${item.score_pay.toLocaleString()} / ${total_pay.toLocaleString()}`}</span>
                         </div>
                       </div>
                     </div>
@@ -62,7 +53,7 @@ const AccountRoles = () => {
             }) : null}
           </div >
         </div >
-      ) : null}
+      )}
     </>
   )
 }

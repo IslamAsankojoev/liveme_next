@@ -5,10 +5,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { OrderBlock, AccountOrder, AccountTabs, AccountDetail, AccountRoles } from '../../components/index';
 import lodash from 'lodash';
+import { parseCookies } from 'nookies';
 
 const Profile = ({ prevPath }) => {
   const [activeTab, setActiveTab] = React.useState('profile');
-
+  const [roles, setRoles] = React.useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const router = useRouter();
@@ -28,6 +29,13 @@ const Profile = ({ prevPath }) => {
         setActiveTab('orders');
       }
     }
+    axios.get(`${process.env.SERVER}/api/role/?ordering=back_id`, {
+      headers: {
+        'Authorization': `Bearer ${parseCookies().access_token}`
+      }
+    }).then((res) => {
+      setRoles(res.data.results);
+    });
 
   }, []);
 
@@ -42,7 +50,7 @@ const Profile = ({ prevPath }) => {
           <div className="profile-orders">
             {activeTab === 'profile' ? <AccountDetail /> : null}
             {activeTab === 'orders' ? <AccountOrder /> : null}
-            {activeTab === 'status' ? <AccountRoles /> : null}
+            {activeTab === 'status' ? <AccountRoles roles={roles} /> : null}
           </div>
         </div>
       </div>
