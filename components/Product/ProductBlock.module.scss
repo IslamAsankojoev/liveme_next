@@ -74,13 +74,16 @@
         font-weight: 600;
         text-shadow: 0px 0px 1px yellow;
         span {
-          font-size: 0.8em;
+          color:rgb(71, 71, 71)!important;
+          text-shadow: none;
         }
-        
+        span.s{
+          text-decoration: line-through!important;
+        }
       }
-      h6.sale{
-        color:black!important;
-      }
+
+
+     
     }
   }
 }

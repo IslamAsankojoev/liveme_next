@@ -34,6 +34,13 @@ export type userDataProps = {
   first_name: string;
   last_name: string;
   address: string;
+  role: {
+    id: number;
+    type: string;
+    discount: number;
+    score_pay: number;
+    image: string;
+  };
   token: {
     access: string;
     refresh: string;

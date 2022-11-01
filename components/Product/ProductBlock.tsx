@@ -29,7 +29,7 @@ const ProductBlock: FC<ProductBlockProps> = ({ id, title, description, image, re
   const dispatch = useDispatch();
   const { pathname } = useRouter();
   const addToCart = () => dispatch(addItem({ id, title, description, image, price, is_published, category, slug, count: 1 }));
-
+  const role = useSelector((state: RootSate) => state.user.data?.role);
   const addToWishList = () => {
     if (pathname === '/wishlist') {
       setUnmount(true);
@@ -58,8 +58,8 @@ const ProductBlock: FC<ProductBlockProps> = ({ id, title, description, image, re
           <span className={style.buy}>
             <div className={`price ${style.price}`}>
               <h6><DiscountedPrice price={sale_price || regular_price} /></h6>
-              <h6 className="l-through sale">
-                {regular_price}сом
+              <h6 className={`${role ? 'sale' : 'sale'}`}>
+                <span className={role ? style.s : ''}>{regular_price}сом</span>
               </h6>
             </div>
             <div className="prd-bottom">
