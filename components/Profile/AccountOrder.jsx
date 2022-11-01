@@ -4,8 +4,9 @@ import lodash from 'lodash';
 import { profileText } from '../../public/locales/profile/registerCollection';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-export default function AccountOrder({ user }) {
+export default function AccountOrder() {
   const lang = useSelector((state) => state.lang.lang);
+  const user = useSelector((state) => state.user.data);
   const [orders, setOrders] = React.useState([])
 
   React.useEffect(() => {

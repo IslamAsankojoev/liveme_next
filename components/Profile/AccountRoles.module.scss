@@ -1,0 +1,46 @@
+.roles{
+  h2{
+    text-align: center;
+  }
+  .role{
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    &__icon{
+      padding: 20px;
+    }
+    &__text{
+      font-size: 1em;
+    }
+    &__progress{
+      // height: 30px;
+      width: 100%;
+      background: #D7D7D7;
+      border-radius: 10px;
+      margin-top: 10px;
+      &__bar{
+        height: 100%;
+        background: #ff7700;
+        border-radius: 10px;
+        color:white;
+
+      }
+    }
+  }
+}
+.row{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .col{
+    width: 30%;
+    margin: 0 10px;
+    @media (max-width: 1199px) {
+      width: 45%;
+    }
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+
+  }
+}

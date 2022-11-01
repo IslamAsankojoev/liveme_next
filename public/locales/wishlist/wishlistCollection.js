@@ -4,6 +4,7 @@ export const wishlistText = {
     en: 'Wishlist',
     kg: 'Тандалгандар',
     tr: 'Favorilerim',
+    pl: 'Ulubione',
   },
   empty: {
     title: {
@@ -11,6 +12,7 @@ export const wishlistText = {
       en: 'Wishlist is empty',
       kg: 'Тандалган товарлар жок',
       tr: 'Favoriler listesi boş',
+      pl: 'Lista życzeń jest pusta',
     },
   },
 };

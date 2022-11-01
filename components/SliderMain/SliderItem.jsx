@@ -5,7 +5,7 @@ import { home } from '../../public/locales/home/homeCollection.js'
 import { text } from '../../public/locales/texts.js'
 
 
-const SliderItem = () => {
+const SliderItem = ({ image, grid }) => {
   const [saleItems, setSaleItems] = React.useState({});
   const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
@@ -19,9 +19,15 @@ const SliderItem = () => {
     setSaleItems(items.find((item) => item.id === 1));
   }, [items]);
 
+  React.useEffect(() => {
+    console.log(image)
+  }, []);
+
   return (
     <>
-      <section className="banner-area home">
+      <section className="banner-area home" style={{
+        backgroundImage: image ? `url(${image.src})` : null,
+      }}>
         <div className="container" style={{ height: '100%' }}>
           <div
             className="row fullscreen align-items-center justify-content-start"
@@ -29,12 +35,12 @@ const SliderItem = () => {
             <div className="col-lg-12">
               <div className="active-banner-slider owl-carousel">
                 <div className="row single-slide align-items-center d-flex">
-                  <div className="col-lg-1">
+                  <div className={`col-lg-${grid?.left}`}>
                     <div className="banner-img">
                       {/* <img className="img-fluid" src="static/img/banner/banner-img.png" alt="" /> */}
                     </div>
                   </div>
-                  <div className="col-lg-5 col-md-6">
+                  <div className={`col-lg-${grid?.center}`}>
                     <div className="banner-content">
                       <h2>{home.headerArea.title[lang]}</h2>
                       <h2 style={{ textAlign: 'right' }}>{home.headerArea.title2[lang]}</h2>
@@ -67,7 +73,7 @@ const SliderItem = () => {
                       ) : null}
                     </div>
                   </div>
-                  <div className="col-lg-6"></div>
+                  <div className={`col-lg-${grid?.right}`}></div>
                 </div>
               </div>
             </div>

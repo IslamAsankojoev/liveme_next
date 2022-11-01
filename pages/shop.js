@@ -10,9 +10,11 @@ import lodash from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProducts } from '../redux/slices/productSlice';
 import { BannerArea, Empty } from '../components';
-import { shopText } from '../public/locales/shop/shopCollection.js';
+import { shopText } from '../public/locales/shop/shopCollection';
+import Skeleton from '@mui/material/Skeleton';
 
 const page_size = 9;
+
 
 export default function Shop() {
   const products = useSelector((state) => state.products.items);
@@ -35,7 +37,7 @@ export default function Shop() {
       })
       .then(({ data }) => {
         dispatch(setProducts(data.results));
-      });
+      })
   }, [lang]);
 
   const handlePage = async (page_n) => {
@@ -104,20 +106,20 @@ export default function Shop() {
             <section className="lattest-product-area pb-40 category-list">
               <br />
               <div className="row">
-                {status === 'pending' && (
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '1000px',
-                    }}></div>
-                )}
                 {status === 'pending' &&
-                  Array(20)
+                  Array(6)
                     .fill(1)
-                    .map((item, index) => {
+                    .map((_, index) => {
                       return (
-                        <div className="col-md-4 col-sm-6" key={index}>
-                          <ProductBlockSkelet />
+                        <div className="col-lg-4 col-md-6 col-6" key={index}>
+                          <Skeleton animation="wave" variant="rectangular" width='100%' height={451}
+                            sx={{
+                              marginTop: '10px',
+                              borderRadius: '5px',
+                              padding: '10px',
+                              boxShadow: '0px 0px 10px -7px rgb(0 0 0 / 56%)'
+                            }}
+                          />
                         </div>
                       );
                     })}
@@ -130,7 +132,7 @@ export default function Shop() {
                     );
                   })}
 
-                {lodash.isEmpty(products) && (
+                {status === 'success' && lodash.isEmpty(products) && (
                   <div className="col-12">
                     <br />
                     <br />
@@ -153,6 +155,8 @@ export default function Shop() {
                     <br />
                   </div>
                 )}
+
+
               </div>
               <br />
             </section>
@@ -168,7 +172,7 @@ export default function Shop() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
       <br />
       <br />
       <br />

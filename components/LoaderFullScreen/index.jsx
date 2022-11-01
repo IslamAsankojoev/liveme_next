@@ -16,7 +16,7 @@ export default function LoaderFullScreen() {
       alignItems: 'center',
       backgroundColor: "white"
     }}>
-      <CircularProgress />
+      <CircularProgress color="warning" />
     </Box>
   )
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setLoggedIn } from '../../redux/slices/userSlice';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { OrderBlock, AccountOrder, AccountTabs, AccountDetail } from '../../components/index';
+import { OrderBlock, AccountOrder, AccountTabs, AccountDetail, AccountRoles } from '../../components/index';
 import lodash from 'lodash';
 
 const Profile = ({ prevPath }) => {
@@ -23,9 +23,12 @@ const Profile = ({ prevPath }) => {
   };
 
   React.useEffect(() => {
-    if (prevPath?.includes('checkout')) {
-      setActiveTab('orders');
+    if (prevPath) {
+      if (prevPath?.includes('checkout')) {
+        setActiveTab('orders');
+      }
     }
+
   }, []);
 
   return (
@@ -37,7 +40,9 @@ const Profile = ({ prevPath }) => {
         </div>
         <div className="col-xl-9 col-lg-8 col-md-7">
           <div className="profile-orders">
-            {activeTab === 'profile' ? <AccountDetail /> : <AccountOrder user={user} />}
+            {activeTab === 'profile' ? <AccountDetail /> : null}
+            {activeTab === 'orders' ? <AccountOrder /> : null}
+            {activeTab === 'status' ? <AccountRoles /> : null}
           </div>
         </div>
       </div>

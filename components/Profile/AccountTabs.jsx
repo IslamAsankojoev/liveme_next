@@ -13,6 +13,7 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
       title_en: 'Profile',
       title_tr: 'Profil',
       title_kg: 'Профил',
+      title_pl: 'Profil',
       value: 'profile',
     },
     {
@@ -20,7 +21,16 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
       title_en: 'Orders',
       title_tr: 'Siparişler',
       title_kg: 'Заказ',
+      title_pl: 'Zamówienia',
       value: 'orders',
+    },
+    {
+      title_ru: 'Статус',
+      title_en: 'Status',
+      title_tr: 'Durum',
+      title_kg: 'Статус',
+      title_pl: 'Status',
+      value: 'status',
     },
   ];
 
@@ -34,16 +44,10 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
       {tabs.map((tab, id) => {
         return (
           <div
-            key={id + tab.title}
+            key={id + tab.value}
             className={`${style.tab} ${activeTab === tab.value ? style.active : ''}`}
             onClick={() => setActiveTab(tab.value)}>
-            {lang === 'ru'
-              ? tab.title_ru
-              : lang === 'en'
-              ? tab.title_en
-              : lang === 'tr'
-              ? tab.title_tr
-              : tab.title_kg}
+            {tab[`title_${lang}`]}
           </div>
         );
       })}

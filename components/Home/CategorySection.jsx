@@ -20,7 +20,8 @@ export default function CategorySection() {
                       {(lang === 'ru' && 'Аромат') ||
                         (lang === 'en' && 'Aroma') ||
                         (lang === 'kg' && 'Аромат') ||
-                      (lang === 'tr' && 'Oda kokusu')}
+                        (lang === 'tr' && 'Oda kokusu') ||
+                        (lang === 'pl' && 'ZAPACH W POKOJU')}
                     </h6>
                   </div>
                 </div>
@@ -32,10 +33,11 @@ export default function CategorySection() {
                   <img className="img-fluid w-100" src="/1 (1).webp" alt="" />
                   <div className="deal-details">
                     <h6 className="deal-title">
-                        {(lang === 'ru' && 'Косметика') ||
+                      {(lang === 'ru' && 'Косметика') ||
                         (lang === 'en' && 'Cosmetic') ||
                         (lang === 'kg' && 'Косметика') ||
-                        (lang === 'tr' && 'Kozmetik')}
+                        (lang === 'tr' && 'Kozmetik') ||
+                        (lang === 'pl' && 'KOSMETYKY')}
                     </h6>
                   </div>
                 </div>
@@ -46,11 +48,11 @@ export default function CategorySection() {
                   <img className="img-fluid w-100" src="/5 (1).webp" alt="" />
                   <div className="deal-details">
                     <h6 className="deal-title">
-
-                        {(lang === 'ru' && 'Комнатный спрей') ||
+                      {(lang === 'ru' && 'Комнатный спрей') ||
                         (lang === 'en' && ' Room spray') ||
                         (lang === 'kg' && 'Бөлмө спрей') ||
-                        (lang === 'tr' && 'Oda spreyi')}
+                        (lang === 'tr' && 'Oda spreyi') ||
+                        (lang === 'pl' && 'odświeżacz powietrza')}
                     </h6>
                   </div>
                 </div>
@@ -61,10 +63,11 @@ export default function CategorySection() {
                   <img className="img-fluid w-100" src="/4 (1).webp" alt="" />
                   <div className="deal-details">
                     <h6 className="deal-title">
-                        {(lang === 'ru' && 'Парфюм') ||
+                      {(lang === 'ru' && 'Парфюм') ||
                         (lang === 'en' && ' Parfum') ||
                         (lang === 'kg' && 'Атыр') ||
-                        (lang === 'tr' && 'Parfüm')}
+                        (lang === 'tr' && 'Parfüm')
+                        || (lang === 'pl' && 'PERFUMY')}
                     </h6>
                   </div>
                 </div>

@@ -4,6 +4,7 @@ export const cartCollection = {
     en: 'Cart',
     kg: 'Себет',
     tr: 'Sepet',
+    pl: 'Koszyk',
   },
   empty: {
     title: {
@@ -11,6 +12,7 @@ export const cartCollection = {
       en: 'Cart is empty',
       kg: 'Себет бош',
       tr: 'Sepet boş',
+      pl: 'Koszyk jest pusty',
     },
   },
   order: {
@@ -18,12 +20,14 @@ export const cartCollection = {
     en: 'Order',
     kg: 'Буйрутма',
     tr: 'Sipariş',
+    pl: 'Zamów',
   },
   button: {
     ru: 'Вернуться в каталог',
     en: 'Back to catalog',
     kg: 'Каталогга кайтуу',
     tr: 'Kataloga geri dön',
+    pl: 'POWRÓT DO KATALOGU',
   },
   table: {
     product: {
@@ -31,24 +35,28 @@ export const cartCollection = {
       en: 'Product',
       kg: 'Товар',
       tr: 'Ürün',
+      pl: 'Produkt',
     },
     price: {
       ru: 'Цена',
       en: 'Price',
       kg: 'Баасы',
       tr: 'Fiyat',
+      pl: 'Cena ',
     },
     quantity: {
       ru: 'Количество',
       en: 'Quantity',
       kg: 'Саны',
       tr: 'Miktar',
+      pl: 'Ilość',
     },
     total: {
       ru: 'Итого',
       en: 'Total',
       kg: 'Бардык',
       tr: 'Toplam',
+      pl: 'Razem',
     },
   },
   cartTotal: {
@@ -56,17 +64,20 @@ export const cartCollection = {
     en: 'Total cart',
     kg: 'Бардык себет',
     tr: 'Toplam sepet',
+    pl: 'Razem koszyk',
   },
   orderButton: {
     ru: 'Заказать',
     en: 'Order',
     kg: 'Буйрутманы жөнөтүү',
     tr: 'Sipariş',
+    pl: 'Zamów',
   },
   returnButton: {
     ru: 'Вернуться в каталог',
     en: 'Back to catalog',
     kg: 'Каталогко кайтуу',
     tr: 'Kataloga geri dön',
+    pl: 'Wróć do katalogu',
   },
 };

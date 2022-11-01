@@ -46,7 +46,7 @@ function Contact() {
                   <h6>
                     <a href="#">{contactText.info.phone}</a>
                   </h6>
-                  <p>{contactText.info.schedule}</p>
+                  <p>{contactText.info.schedule[lang]}</p>
                 </div>
                 <div className="info_item">
                   <i className="lnr lnr-envelope"></i>

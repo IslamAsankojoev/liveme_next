@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { text } from '../public/locales/texts.js';
 import Link from "next/link";
+import paymentsLogo from '../public/payments_logo.png';
 
 export default function Footer() {
   const lang = useSelector((state) => state.lang.lang);
@@ -26,6 +27,7 @@ export default function Footer() {
                   {lang === "ru" && "Политика конфиденциальности"}
                   {lang === 'tr' && "Gizlilik Politikası"}
                   {lang === 'kg' && "Политика конфиденциальности"}
+                  {lang === 'pl' && "Polityka prywatności"}
                 </a></Link>
               <br />
               <Link href="/agreement">
@@ -36,6 +38,7 @@ export default function Footer() {
                   {lang === "ru" && "Пользовательское соглашение"}
                   {lang === 'tr' && "Kullanıcı Sözleşmesi"}
                   {lang === 'kg' && "Пользовательское соглашение"}
+                  {lang === 'pl' && "Zgoda użytkownika"}
                 </a></Link>
             </div>
           </div>
@@ -117,13 +120,24 @@ export default function Footer() {
               </div>
             </div>
           </div>
+
         </div>
-        <div className="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-          <p className="footer-text m-0">
+        <div className="footer-bottom d-flex justify-content-center align-items-center flex-wrap flex-column">
+          <br />
+          <br />
+          <br />
+          <img src={paymentsLogo.src} width={250} alt="payments" style={{
+            background: '#fff',
+            padding: '10px 20px',
+            borderRadius: '10px',
+          }} />
+          <p className="footer-text m-0" style={{ paddingTop: '10px' }}>
             {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
             Copyright &copy; 2022 {text.footer.copyright.text[lang]}
             {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
+
           </p>
+
         </div>
       </div>
     </footer>

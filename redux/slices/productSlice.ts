@@ -29,7 +29,7 @@ interface productSliceProps {
 
 const initialState: productSliceProps = {
   items: [],
-  status: 'panding',
+  status: 'pending',
 };
 
 const productsSlice = createSlice({

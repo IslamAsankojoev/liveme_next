@@ -16,11 +16,11 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-
+import Badge from '@mui/material/Badge';
 
 export default function Header() {
   const selectRef = React.useRef(null);
-  const languages = ['ru', 'en', 'kg', 'tr'];
+  const languages = ['ru', 'en', 'kg', 'tr', 'pl'];
   const lang = useSelector((state) => state.lang.lang);
   const { totalItems } = useSelector((state) => state.cart);
   const totalWishes = useSelector((state) => state.wish?.totalItems);
@@ -124,7 +124,10 @@ export default function Header() {
                         return (
                           <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
-                              <a className="nav-link text-success"><AccountCircleIcon /></a>
+                              <a className="nav-link" style={{ position: 'relative' }}>
+                                <AccountCircleIcon color="warning" fontSize="large" />
+                                {/* {data.role.image ? (<img src={process.env.SERVER + data.role.image} width={50} style={{ position: 'absolute', right: 20, bottom: -30, zIndex: 999999 }} />) : null} */}
+                              </a>
                             </Link>
                           </li>
                         );
@@ -185,6 +188,7 @@ export default function Header() {
               </div>
             </div>
           </div>
+
         </nav>
       </div>
       <Search setSearchOpen={setSearchOpen} searchOpen={searchOpen} searchRef={searchRef} />
