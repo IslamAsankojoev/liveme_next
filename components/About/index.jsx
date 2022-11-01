@@ -109,6 +109,68 @@ const About = () => {
                     </div>
                 ) : null
             }
+            {
+                lang === 'pl' ? (
+                    <div className={style.about}>
+                        <h1>O NAS</h1>
+                        <p>
+                            Nasza firma Liveme powstała w 2022 roku. <br />
+                            Nasza firma, Liveme, która ma siedzibę w Turcji i zaczynała z młodym i dynamicznym zespołem, jest firmą otwartą na innowacje, koncentrującą się na swoich celach i rozwijającą się coraz bardziej każdego dnia, jest najbardziej preferowaną firmą. Nasza marka, której celem jest stopniowe rozszerzanie swojego rynku krajowego i międzynarodowego, eksportuje do wielu krajów, w szczególności do Rosji, Kazachstanu, Kirgistanu, Gruzji, Ukrainy, Niemiec i Polski.
+                        </p>
+
+                        <p>
+                            Nasza wizja Liveme (cel) <br />
+                            "Live me", które jest znaczeniem naszej marki Liveme, jest stworzenie niezapomnianej atmosfery dla naszych klientów. Ponadto zmierzamy w kierunku bycia zdrową i najbardziej podziwianą firmą lidera z wieloma kategoriami produktów.
+
+                        </p>
+                        <p>
+                            Misja Liveme (cel) <br />
+                            Będziemy nadal oferować naszym cenionym klientom nasze motto "nigdy nie zapomnisz środowiska, do którego przywykłeś", które sprawi, że nasi klienci poczują się dobrze, tworząc spokojną i szczęśliwą atmosferę. Dzięki naszym wysoce zaawansowanym technologiom będziemy nadal prowadzić nasz zespół ekspertów i prace badawczo-rozwojowe na całym świecie w naszym obszarze produkcyjnym. Nadal będziemy naturalną i szczerą marką odpowiednią dla wszystkich naszych klientów, wprowadzając nowe życie w tym sektorze dzięki wizjonerskiej strukturze. Nadal będziemy marką, która naturalnie zapewnia szczęście dzięki naszym produktom odpowiednim dla każdej skóry i każdego środowiska, wnosząc nowy oddech do sektora dzięki naszej przyszłościowej i wizjonerskiej strukturze.
+
+                        </p>
+                        <p>
+                            MIĘDZY NASZYMI WARTOŚCIAMI <br />
+                            Jakość i niezawodność są na pierwszym miejscu. Każdy z naszych klientów ma dla nas szczególne znaczenie. Żyjemy w rodzinnej atmosferze z naszymi klientami i naszym zespołem, mówiąc "szczęśliwy klient, szczęśliwy pracownik" w naszym rozumieniu handlu.
+
+                        </p>
+                        <p>
+                            JESTEŚMY INNOWACYJNĄ FIRMĄ <br />
+                            Nasz wyposażony i nowoczesny zakład produkcyjny jest w stanie dostosować się natychmiast, śledząc trendy i rozwój technologiczny przez nasze zespoły ekspertów. Nasza firma, która jest zawsze otwarta na innowacje i przejrzysta, kontynuuje ścieżkę rozwoju bez zatrzymywania się.
+                        </p>
+                    </div>
+                ) : null
+            }
+            {
+                lang === 'kg' ? (
+                    <div className={style.about}>
+                        <h1>БИЗ ЖӨНҮНДӨ </h1>
+                        <p>
+                            Liveme компаниясы 2022-жылы түзүлгөн.  <br />
+                            Турцияда жайгашкан жана  жаш , динамикалуу фирма. Жаңычылдыктарга ачык, максаттарына көңүл бурган жана күн сайын өнүгүп келе жаткан компания. Ички жана тышкы эл аралык соода рыногун  акырындык менен кеңейтүүнү максат кылган бренд.  Орусия, Казакстан, Кыргызстан, Грузия, Украина, Германия жана Польша жана башка өлкөлөр менен кызматташат.
+                        </p>
+                        <p>
+                            Биздин миссиябыз .  <br />
+                            Liveme брендинин мааниси болгон "Жаша мени" урааны менен кардарларыбыз үчүн сапаттуу кызмат көрсөтүү .
+                            Мындан тышкары,  көптөгөн ден соолукка жана сулуулукка пайдалуу товарларыбыз менен эң жакшы лидер компания болуу жолунда бара жатабыз.
+                        </p>
+                        <p>
+                            Liveme максат.  <br />
+                            Биз кардарларыбызга тынчтык жана бактылуу атмосфераны түзүп, кардарларыбызды жакшы сезе турган "Жытына көнгөн чөйрөнү эч качан унута албайсың" деген ураан менен тартуулоону улантабыз. Биздин жогорку өнүккөн технологиялар менен өндүрүш аймагыбызда эксперттик командабызды жана R&D-багытталган ишибизди дүйнөгө алып чыгабыз.
+                        </p>
+                        <p>
+                            Биз көрөгөч структура менен бул секторго жаңы жашоо тартуулоо менен бардык кардарларыбызга ылайыктуу табигый жана чын ыкластуу бренд болууну улантабыз. Ар бир катмарга жана ар бир чөйрөгө ылайыктуу өнүмдөрүбүз менен табигый бакыт тартуулаган, келечекти ойлогон жана көрөгөч структурабыз менен секторго жаңы дем алып келген бренд болуу негизги максатыбыз.
+                        </p>
+                        <p>
+                            БИЗДИН БААЛУУЛУКТАРДЫН АРАСЫНДА  <br />
+                            Сапат жана ишенимдүүлүк биринчи орунда турат. Биздин кардарлардын ар бири биз үчүн өзгөчө мааниге ээ. Биз соода түшүнүгүбүздө "Бактылуу кардар, бактылуу кызматкер" деген эреже менен аракеттенебиз.
+                        </p>
+                        <p>
+                            БИЗ ИННОВАЦИЯЛЫК КОМПАНИЯБЫЗ  <br />
+                            Биздин заманбап өндүрүштүк жайыбыз жана эксперттик топтордун тенденциялары технологиялык өнүгүүлөрүнө көз салып, заматта ыңгайлаша алат. Ар дайым инновацияга ачык, айкын болгон компаниябыз өнүгүү жолунда токтобостон уланууда.
+                        </p>
+                    </div>
+                ) : null
+            }
 
         </>
     )

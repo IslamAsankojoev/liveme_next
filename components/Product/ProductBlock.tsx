@@ -7,6 +7,7 @@ import { WishButton } from '../index';
 import { toggleItem } from '../../redux/slices/wishSlice';
 import { useRouter } from 'next/router.js';
 import { RootSate } from '../../redux/store';
+import { DiscountedPrice } from '../index';
 
 interface ProductBlockProps {
   id: number;
@@ -56,17 +57,10 @@ const ProductBlock: FC<ProductBlockProps> = ({ id, title, description, image, re
           </Link>
           <span className={style.buy}>
             <div className={`price ${style.price}`}>
-              <h6>
-                {price} <span>сом</span>
+              <h6><DiscountedPrice price={sale_price || regular_price} /></h6>
+              <h6 className="l-through sale">
+                {regular_price}сом
               </h6>
-              {sale_price && (
-                <h6 className="l-through">
-                  <s>
-                    {regular_price}
-                    <span>сом</span>
-                  </s>
-                </h6>
-              )}
             </div>
             <div className="prd-bottom">
               <button onClick={addToCart} className="primary-btn button-add">
