@@ -13,7 +13,7 @@ import { BannerArea, Empty } from '../components';
 import { shopText } from '../public/locales/shop/shopCollection';
 import Skeleton from '@mui/material/Skeleton';
 
-const page_size = 9;
+const page_size = 12;
 
 
 export default function Shop() {
