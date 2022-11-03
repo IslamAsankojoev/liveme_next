@@ -142,7 +142,7 @@ export default function Header() {
                               <a className="nav-link" style={{ position: 'relative' }}>
                                 {/* передать сюда роли и сделать условия по ролям */}
                                 {console.log(data)}
-                                {data.role.back_id ? (<img src={roles[data.role.back_id - 1].src} width={40} />) : null}
+                                {data.role ? (<img src={roles[data.role.back_id - 1].src} width={40} />) : <AccountCircleIcon color="warning" fontSize="large" />}
                               </a>
                             </Link>
                           </li>

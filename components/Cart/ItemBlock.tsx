@@ -52,6 +52,8 @@ const ItemBlock: FC<cartItemProps> = (
               id="sst"
               value={count}
               title="Quantity:"
+              // onChange={}
+              // TODO двойная связь инпута со стейтом или диспатчером(переписать функцию декремента, он их переименовал местами)
               className="input-text qty"
             />
             <button
