@@ -16,7 +16,7 @@ const SliderMain = () => {
     slidesToScroll: 1,
     autoplay: true,
     speed: 300,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 3000,
     cssEase: "linear"
   };
 
