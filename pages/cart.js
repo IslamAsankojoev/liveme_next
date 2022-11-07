@@ -7,6 +7,7 @@ import { cartCollection } from '../public/locales/cart/cartCollection.js';
 
 export default function Cart() {
   const lang = useSelector((state) => state.lang.lang);
+  const { currency } = useSelector((state) => state.country);
   const { items, totalPrice } = useSelector((state) => state.cart);
 
   return (
@@ -36,7 +37,7 @@ export default function Cart() {
                         <h5>{cartCollection.cartTotal[lang]}</h5>
                       </td>
                       <td>
-                        <h5>{totalPrice} сом</h5>
+                        <h5>{totalPrice + currency}</h5>
                       </td>
                     </tr>
                   </tbody>

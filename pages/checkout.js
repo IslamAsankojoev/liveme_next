@@ -19,6 +19,7 @@ export default function Checkout() {
   const router = useRouter();
   const delivery_price = 200;
   const lang = useSelector((state) => state.lang.lang);
+  const { currency, code } = useSelector((state) => state.country);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const {
@@ -34,14 +35,14 @@ export default function Checkout() {
   });
   const itemsText = items
     .map((item) => {
-      return `\n\n${item?.title}\n${item?.count} шт - ${item?.price * item?.count} сом`;
+      return `\n\n${item?.title}\n${item?.count} шт - ${item?.price * item?.count} ${currency}`;
     })
     .toString();
 
   const onSend = async (data) => {
     const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${data?.phone}\nПочта - ${data?.email
       }\nАдрес - ${data?.address}\nМетод оплаты - ${data?.payment_method
-      }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price}сом`;
+      }\n\nТовары${itemsText}\n\nСумма: ${totalPrice + delivery_price} ${currency}`;
     try {
       await axios
         .post(
@@ -130,7 +131,7 @@ export default function Checkout() {
                               <a className="title">{item.title}</a>
                             </Link>
                             <span>
-                              <p>{item.price * item.count} сом</p>
+                              <p>{item.price * item.count + currency}</p>
                               <p>{item.count} шт.</p>
                             </span>
                           </div>
@@ -197,19 +198,19 @@ export default function Checkout() {
                   <div className="col-md-12 order_box">
                     <ul className="list list_2">
                       <li>
-                        <a href="#">
-                          {checkoutText.details.sum[lang]} <span>{totalPrice} сом</span>
+                        <a>
+                          {checkoutText.details.sum[lang]} <span>{totalPrice + currency}</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          {checkoutText.details.delivery[lang]} <span>{delivery_price} сом</span>
+                        <a>
+                          {checkoutText.details.delivery[lang]} <span>{delivery_price + currency}</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a>
                           {checkoutText.details.total[lang]}{' '}
-                          <span>{totalPrice + delivery_price} сом</span>
+                          <span>{totalPrice + delivery_price + currency}</span>
                         </a>
                       </li>
                     </ul>

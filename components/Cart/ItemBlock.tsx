@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { increment, decrement, removeItem, cartItemProps } from '../../redux/slices/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './itemBlock.module.scss';
+import { RootSate } from '../../redux/store';
 
 const ItemBlock: FC<cartItemProps> = (
   { id,
@@ -14,9 +15,11 @@ const ItemBlock: FC<cartItemProps> = (
     slug,
     count }
 ) => {
+
   const [removing, setRemoving] = React.useState(false);
   const [removed, setRemoved] = React.useState(false);
   const dispatch = useDispatch();
+  const { currency } = useSelector((state: RootSate) => state.country);
 
   const removeProductFromCart = (index) => {
     setRemoving(true);
@@ -42,7 +45,7 @@ const ItemBlock: FC<cartItemProps> = (
           </div>
         </td>
         <td>
-          <h5>{price} сом</h5>
+          <h5>{price + currency}</h5>
         </td>
         <td>
           <div className="product_count">
@@ -119,7 +122,7 @@ const ItemBlock: FC<cartItemProps> = (
         </td>
 
         <td>
-          <h5>{(price * count).toFixed(2)} сом</h5>
+          <h5>{(price * count).toFixed(2) + currency}</h5>
         </td>
         <td>
           <svg

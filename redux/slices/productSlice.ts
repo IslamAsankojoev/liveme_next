@@ -13,8 +13,12 @@ export type productProps = {
   description_kg?: string;
   description_tr?: string;
   image: string;
-  regular_price: number,
-  sale_price: number,
+  price_ru: number,
+  price_en: number,
+  price_kg: number,
+  price_tr: number,
+  price_pl: number;
+  sale: number,
   is_published: boolean,
   category: number,
   slug: string,

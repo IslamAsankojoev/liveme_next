@@ -3,6 +3,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import React, { FC } from 'react';
 import { orderItemProps, orderProps } from '../../redux/slices/userSlice';
 import style from './OrderBlock.module.scss';
+import { useSelector } from 'react-redux';
+import { RootSate } from '../../redux/store';
 
 export interface DialogTitleProps {
   id: string;
@@ -28,7 +30,8 @@ const OrderBlock: FC<orderProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
-
+  const lang = useSelector((state: RootSate) => state.lang.lang);
+  const { currency, code } = useSelector((state: RootSate) => state.country);
   const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -90,9 +93,8 @@ const OrderBlock: FC<orderProps> = ({
         <p className={`price ${style.order_item_price}`}>
           <span>Сумма </span>
           {items && items
-            .reduce((totalPrice: number, item: orderItemProps) => totalPrice + (item.product.sale_price || item.product.regular_price) * item.product_count, 0)
-            .toFixed(2)}{' '}
-          сом
+            .reduce((totalPrice: number, item: orderItemProps) => totalPrice + item.product[`price_${lang}`] * item.product_count, 0)
+            .toFixed(2) + currency}
         </p>
         <p className="payment_method">
           <span>Метод оплаты </span>
@@ -200,7 +202,7 @@ const OrderBlock: FC<orderProps> = ({
                             <Typography
                               variant="body2"
                               gutterBottom
-                            >{item.product_count}шт = <span className={style.order_item_price}>{item.product_count * item.product.sale_price || item.product.regular_price} сом</span></Typography>
+                            >{item.product_count}шт = <span className={style.order_item_price}>{item.product_count * item.product[`price_${code}`] + currency}</span></Typography>
                           </Box>
                         </Paper>
                       </Grid>

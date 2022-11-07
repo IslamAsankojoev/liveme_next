@@ -6,6 +6,7 @@ import thankYou from './slices/thankYouSlice';
 import lang from './slices/langSlice';
 import wish from './slices/wishSlice';
 import loader from './slices/loaderSlice';
+import country from './slices/countrySlice';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     lang,
     wish,
     loader,
+    country,
   },
 });
 

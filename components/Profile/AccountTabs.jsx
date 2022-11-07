@@ -23,15 +23,7 @@ export default function AccountTabs({ activeTab, setActiveTab }) {
       title_kg: 'Заказ',
       title_pl: 'Zamówienia',
       value: 'orders',
-    },
-    {
-      title_ru: 'Статус',
-      title_en: 'Status',
-      title_tr: 'Durum',
-      title_kg: 'Статус',
-      title_pl: 'Status',
-      value: 'status',
-    },
+    }
   ];
 
   const lang = useSelector((state) => state.lang.lang);

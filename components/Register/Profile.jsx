@@ -9,7 +9,6 @@ import { parseCookies } from 'nookies';
 
 const Profile = ({ prevPath }) => {
   const [activeTab, setActiveTab] = React.useState('profile');
-  const [roles, setRoles] = React.useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const router = useRouter();
@@ -29,13 +28,6 @@ const Profile = ({ prevPath }) => {
         setActiveTab('orders');
       }
     }
-    axios.get(`${process.env.SERVER}/api/role/?ordering=back_id`, {
-      headers: {
-        'Authorization': `Bearer ${parseCookies().access_token}`
-      }
-    }).then((res) => {
-      setRoles(res.data.results);
-    });
 
   }, []);
 

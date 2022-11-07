@@ -12,7 +12,7 @@ export default function BannerSection() {
   const items = useSelector((state) => state.products.items);
 
   const addToCart = () => {
-    dispatch(addItem({ ...saleItems, price: saleItems.sale_price || saleItems.regular_price }));
+    dispatch(addItem({ ...saleItems, count: 1 }));
   };
 
   React.useEffect(() => {

@@ -7,39 +7,62 @@ import { WishButton } from '../index';
 import { toggleItem } from '../../redux/slices/wishSlice';
 import { useRouter } from 'next/router.js';
 import { RootSate } from '../../redux/store';
-import { DiscountedPrice } from '../index';
+import getCurrency from '../../helper/getCurrency';
 
 interface ProductBlockProps {
   id: number;
   title: string;
   description: string;
   image: string;
-  regular_price: number,
-  sale_price: number,
+  price_ru: number,
+  price_kg: number,
+  price_en: number,
+  price_tr: number,
+  price_pl: number,
+  sale: number,
   is_published: boolean,
   category: number,
   slug: string,
   className: string,
 }
 
-const ProductBlock: FC<ProductBlockProps> = ({ id, title, description, image, regular_price, sale_price, is_published, category, slug, className }) => {
+const ProductBlock: FC<ProductBlockProps> = (props) => {
+  const { className, ...product } = props;
+  const {
+    id,
+    title,
+    image,
+    price_ru,
+    price_kg,
+    price_en,
+    price_tr,
+    price_pl,
+    ...cartItem
+  } = product;
+
+  const { currency, code } = useSelector((state: RootSate) => state.country);
   const [unmount, setUnmount] = React.useState(false);
   const inWishtList = useSelector((state: RootSate) => state.wish.items.find((item) => item.id === id));
-  const price = sale_price || regular_price;
   const dispatch = useDispatch();
   const { pathname } = useRouter();
-  const addToCart = () => dispatch(addItem({ id, title, description, image, price, is_published, category, slug, count: 1 }));
-  const role = useSelector((state: RootSate) => state.user.data?.role);
+  const price = product[`price_${code}`];
+
+  const addToCart = () => dispatch(addItem({ ...cartItem, id, title, image, price, count: 1 }));
+
   const addToWishList = () => {
     if (pathname === '/wishlist') {
       setUnmount(true);
       setTimeout(() => {
-        dispatch(toggleItem({ id, title, description, image, regular_price, sale_price, is_published, category, slug }));
+        dispatch(toggleItem({ ...product }));
       }, 400);
     } else {
-      dispatch(toggleItem({ id, title, description, image, regular_price, sale_price, is_published, category, slug }));
+      dispatch(toggleItem({ ...product }));
     }
   };
+
+  React.useEffect(() => {
+    console.log(currency)
+  }, [currency]);
 
   return (
     <div className={`${className} ${style.wrapper} ${unmount && style.hide}`}>
@@ -57,13 +80,10 @@ const ProductBlock: FC<ProductBlockProps> = ({ id, title, description, image, re
           </Link>
           <span className={style.buy}>
             <div className={`price ${style.price}`}>
-              <h6><DiscountedPrice price={sale_price || regular_price} /></h6>
-              <h6 className={`${role ? 'sale' : 'sale'}`}>
-                <span className={role ? style.s : ''}>{regular_price}сом</span>
-              </h6>
+              <h6>{product[`price_${code}`] && product[`price_${code}`] + currency}</h6>
             </div>
             <div className="prd-bottom">
-              <button onClick={addToCart} className="primary-btn button-add">
+              <button onClick={addToCart} disabled={!product[`price_${code}`]} className="primary-btn button-add">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="26"

@@ -4,6 +4,7 @@ import style from './ProductBlock.module.scss';
 import Image from 'next/image';
 
 export default function ProductBlock() {
+
   return (
     <div className={` ${style.wrapper}`}>
       <div className={`single-product ${style.product}`}>
@@ -25,7 +26,7 @@ export default function ProductBlock() {
           </Link>
           <span className={style.buy}>
             <div className={`price ${style.price}`}>
-              <h6>{'цена'} сом</h6>
+              <h6>{'цена$'}</h6>
             </div>
             <div className="prd-bottom">
               <button className="primary-btn button-add">{'В корзину'}</button>

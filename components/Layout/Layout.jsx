@@ -7,9 +7,10 @@ import { useRouter } from 'next/router';
 import { setCart } from '../../redux/slices/cartSlice';
 import { setLang } from '../../redux/slices/langSlice';
 import { setLoggedIn } from '../../redux/slices/userSlice';
+import { setCountry } from '../../redux/slices/countrySlice';
 import { setWish } from '../../redux/slices/wishSlice';
 import Head from 'next/head';
-
+import getCurrency from '../../helper/getCurrency';
 
 export default function Layout({ children, userServerSideData }) {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ export default function Layout({ children, userServerSideData }) {
           })
           .then(({ data }) => {
             let { password, ...user } = data
-            console.log(user)
             dispatch(setLoggedIn(user));
           });
       }
@@ -52,6 +52,14 @@ export default function Layout({ children, userServerSideData }) {
     };
 
     doMagic();
+
+  }, []);
+
+  React.useEffect(() => {
+    getCurrency().then((current) => {
+      console.log(current);
+      dispatch(setCountry(current))
+    })
   }, []);
 
   return (

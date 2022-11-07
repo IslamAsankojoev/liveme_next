@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { productProps } from './productSlice';
+import getCurrency from '../../helper/getCurrency';
 
 
 export type cartItemProps = {

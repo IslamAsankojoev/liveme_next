@@ -11,15 +11,14 @@ export default function SingleProduct({
   id,
   title,
   images,
-  regular_price,
-  sale_price,
+  price,
+  sale,
   description,
   category,
   image,
 }) {
 
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
-  const price = sale_price ? sale_price : regular_price;
   const [activeTab, setActiveTab] = React.useState('home');
 
   const [count, setCount] = React.useState(1);
@@ -32,7 +31,7 @@ export default function SingleProduct({
     dispatch(toggleItem({ id, title, image, price }));
   };
   const lang = useSelector((state) => state.lang.lang);
-
+  const { currency } = useSelector((state) => state.country);
 
   return (
     <>
@@ -50,7 +49,7 @@ export default function SingleProduct({
             <div className="col-lg-5 offset-lg-1">
               <div className="s_product_text">
                 <h3>{title}</h3>
-                <h2>{price} сом</h2>
+                <h2>{price + currency}</h2>
                 <ul className="list">
                   <li>
                     <span className="active">

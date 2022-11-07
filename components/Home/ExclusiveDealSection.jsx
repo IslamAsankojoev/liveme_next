@@ -6,6 +6,7 @@ import { home } from '../../public/locales/home/homeCollection.js';
 
 export default function ExclusiveDealSection() {
   const lang = useSelector((state) => state.lang.lang);
+  const { currency } = useSelector((state) => state.country);
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
   return (
@@ -50,7 +51,7 @@ export default function ExclusiveDealSection() {
                 <img className="img-fluid" src={items[5]?.image} width="100%" alt="" />
                 <div className="product-details">
                   <div className="price">
-                    <h6>{items[5]?.regular_price} сом</h6>
+                    <h6>{items[5]?.price + currency}</h6>
                     <h6 className="l-through">210.00</h6>
                   </div>
                   <h4>{items[5]?.title}</h4>
@@ -62,7 +63,7 @@ export default function ExclusiveDealSection() {
                           id: items[0]?.id,
                           title: items[0]?.title,
                           image: items[0]?.image,
-                          price: items[0]?.regular_price,
+                          price: items[0]?.price,
                         }),
                       );
                     }}

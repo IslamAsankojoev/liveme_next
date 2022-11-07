@@ -26,7 +26,7 @@ export default function Header() {
   const roles = [
     Silver, Gold, Diamond
   ]
-  const {myRole, setMyRole} = useState(0)
+  const { myRole, setMyRole } = useState(0)
   const selectRef = React.useRef(null);
   const languages = ['ru', 'en', 'kg', 'tr', 'pl'];
   const lang = useSelector((state) => state.lang.lang);
@@ -80,7 +80,9 @@ export default function Header() {
   React.useEffect(() => {
     selectRef.current.value = lang;
   }, [lang]);
-  
+
+
+
   return (
     <header ref={searchRef} className="header_area sticky-header">
       <div className="main_menu">
@@ -140,9 +142,7 @@ export default function Header() {
                           <li key={id} className={`nav-item ${asPath === item.link && 'active'}`}>
                             <Link href={item.link}>
                               <a className="nav-link" style={{ position: 'relative' }}>
-                                {/* передать сюда роли и сделать условия по ролям */}
-                                {console.log(data)}
-                                {data.role ? (<img src={roles[data.role.back_id - 1].src} width={40} />) : <AccountCircleIcon color="warning" fontSize="large" />}
+                                {!loggedIn ? <AccountCircleOutlinedIcon /> : <AccountCircleIcon color="warning" fontSize="large" />}
                               </a>
                             </Link>
                           </li>

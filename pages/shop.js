@@ -180,37 +180,3 @@ export default function Shop() {
     </>
   );
 }
-
-// export async function getServerSideProps(ctx) {
-//   const locale = parseCookies(ctx).NEXT_LOCALE || 'ru';
-//   console.log(locale);
-//   let { data = [] } = await axios.get(
-//     `${process.env.SERVER}/api/products/?page_size=${page_size}`,
-//     {
-//       headers: {
-//         'Accept-Language': locale,
-//       },
-//     },
-//   );
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }
-//
-// Shop.getInitialProps = async (ctx) => {
-//   const locale = parseCookies(ctx).NEXT_LOCALE || 'ru';
-//   console.log(ctx.req.headers.cookie);
-//   let { data = [] } = await axios.get(
-//     `${process.env.SERVER}/api/products/?page_size=${page_size}`,
-//     {
-//       headers: {
-//         'Accept-Language': locale,
-//       },
-//     },
-//   );
-//   return {
-//     data,
-//   };
-// };

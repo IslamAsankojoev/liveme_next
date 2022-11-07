@@ -10,18 +10,15 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 
-
 const AccountRoles = ({ roles }) => {
   const user = useSelector((state) => state.user.data);
   const total_pay = Math.ceil(useSelector((state) => state.user.data?.total_pay))
-
-
 
   return (
     <>
       {(
         <div className={style.roles}>
-          <h2>Your achievements</h2>
+          {/* <h2>Your achievements</h2>
           <div className={style.row}>
             {roles.length > 0 ? roles.map((item) => {
               return (
@@ -51,7 +48,7 @@ const AccountRoles = ({ roles }) => {
                 </div>
               )
             }) : null}
-          </div >
+          </div > */}
         </div >
       )}
     </>

@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { setCookie } from 'nookies';
-import { DevTool } from '@hookform/devtools';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLoggedIn } from '../../redux/slices/userSlice';
@@ -86,9 +85,8 @@ export default function Register({ setToggle }) {
                       className="form-control"
                       id="username"
                       name="username"
-                      placeholder={`${profileText.register.form.name[lang]} ${
-                        errors?.username?.type === 'required' ? '- обязательно' : ''
-                      }`}
+                      placeholder={`${profileText.register.form.name[lang]} ${errors?.username?.type === 'required' ? '- обязательно' : ''
+                        }`}
                     />
                     {usernameIsAlreadyExist && (
                       <p className="form-errors">Пользователь с таким именем уже существует</p>
@@ -108,9 +106,8 @@ export default function Register({ setToggle }) {
                       id="email"
                       name="email"
                       inputMode="email"
-                      placeholder={`${profileText.register.form.email[lang]} ${
-                        errors?.email?.type === 'required' ? '- обязательно' : ''
-                      }`}
+                      placeholder={`${profileText.register.form.email[lang]} ${errors?.email?.type === 'required' ? '- обязательно' : ''
+                        }`}
                     />
 
                     <p className="form-errors">
@@ -123,9 +120,9 @@ export default function Register({ setToggle }) {
                       name="password"
                       className="form-control"
                       type="password"
-                      placeholder={`${profileText.register.form.password[lang]} ${
-                        errors?.password?.type === 'required' ? '- обязательно' : ''
-                      }`}
+                      autoComplete='new-password'
+                      placeholder={`${profileText.register.form.password[lang]} ${errors?.password?.type === 'required' ? '- обязательно' : ''
+                        }`}
                       {...register('password', {
                         required: true,
                         minLength: {
@@ -158,7 +155,6 @@ export default function Register({ setToggle }) {
                     </button>
                     {/* <a href="#">Забыли пароль?</a> */}
                   </div>
-                  <DevTool control={control} />
                 </form>
               </div>
             </div>
