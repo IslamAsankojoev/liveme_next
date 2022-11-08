@@ -60,9 +60,6 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
     }
   };
 
-  React.useEffect(() => {
-    console.log(currency)
-  }, [currency]);
 
   return (
     <div className={`${className} ${style.wrapper} ${unmount && style.hide}`}>

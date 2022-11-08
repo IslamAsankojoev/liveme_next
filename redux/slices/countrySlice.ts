@@ -17,9 +17,9 @@ const countrySlice = createSlice({
   initialState,
   reducers: {
     setCountry: (state, { payload }) => {
-      state.code = payload.code;
-      state.country = payload.country;
-      state.currency = payload.currency;
+      state.code = payload?.code;
+      state.country = payload?.country;
+      state.currency = payload?.currency;
     }
   }
 });

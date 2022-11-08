@@ -19,10 +19,6 @@ const SliderItem = ({ image, grid }) => {
     setSaleItems(items.find((item) => item.id === 1));
   }, [items]);
 
-  React.useEffect(() => {
-    console.log(image)
-  }, []);
-
   return (
     <>
       <section className="banner-area home" style={{

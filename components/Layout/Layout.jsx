@@ -56,9 +56,11 @@ export default function Layout({ children, userServerSideData }) {
   }, []);
 
   React.useEffect(() => {
-    getCurrency().then((current) => {
-      console.log(current);
-      dispatch(setCountry(current))
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position.coords.latitude, position.coords.longitude)
+      getCurrency(position.coords.latitude, position.coords.longitude).then((current) => {
+        dispatch(setCountry(current));
+      })
     })
   }, []);
 
