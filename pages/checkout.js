@@ -87,6 +87,7 @@ export default function Checkout() {
               horizontal: 'right',
             },
           });
+
           dispatch(clearCart());
           setTimeout(() => {
             if (parseCookies().access_token) {
@@ -140,6 +141,7 @@ export default function Checkout() {
                     })}
                 </div>
               </div>
+
               <div className="col-lg-6">
                 <h3>{checkoutText.order_details[lang]}</h3>
                 <form onSubmit={handleSubmit(onSend)} className="row contact_form">

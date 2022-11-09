@@ -21,14 +21,25 @@ import { useState } from 'react';
 import Gold from '../public/gold.webp';
 import Silver from '../public/silver.webp';
 import Diamond from '../public/diamond.webp';
+import { setCurrency } from '../redux/slices/countrySlice';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+
+const languages = ['ru', 'en', 'kg', 'tr', 'pl'];
+
+const currencies = [
+  { currency: 'с', name: 'KGS', code: 'kg', flag: 'kg' },
+  { currency: '$', name: 'USD', code: 'en', flag: 'us' },
+  { currency: '₺', name: 'TRY', code: 'tr', flag: 'tr' },
+  { currency: 'zł', name: 'PLN', code: 'pl', flag: 'pl' },
+]
 
 export default function Header() {
-  const roles = [
-    Silver, Gold, Diamond
-  ]
-  const { myRole, setMyRole } = useState(0)
-  const selectRef = React.useRef(null);
-  const languages = ['ru', 'en', 'kg', 'tr', 'pl'];
+  const langRef = React.useRef(null);
+  const currencyRef = React.useRef(null);
   const lang = useSelector((state) => state.lang.lang);
   const { totalItems } = useSelector((state) => state.cart);
   const totalWishes = useSelector((state) => state.wish?.totalItems);
@@ -38,7 +49,9 @@ export default function Header() {
   const { replace, pathname, push, asPath } = useRouter();
   const dispatch = useDispatch();
   const { loggedIn, data } = useSelector((state) => state.user);
-  const defaultSelect = lang;
+  const defaultLang = lang;
+  const defaultCurrency = useSelector((state) => state.country.currency);
+
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
     setSearchOpen(false);
@@ -54,6 +67,11 @@ export default function Header() {
     setCookie(null, 'NEXT_LOCALE', e.target.value, { maxAge: 30 * 24 * 60 * 60, path: '/' });
     replace(asPath, asPath, { scroll: false });
   };
+
+  const onChangeCurrency = (e) => {
+    dispatch(setCurrency(currencies.find((item) => item.currency === e.target.value)));
+  };
+
   React.useEffect(() => {
     setMobileMeniOpen(false);
     if (parseCookies().access_token) {
@@ -64,21 +82,13 @@ export default function Header() {
           },
         })
         .then((res) => {
-          // TODO исправить вот это
-          // if (res.data.back_id === 1){
-          //   setMyRole(Silver)
-          // }else if (res.data.back_id === 2){
-          //   setMyRole(Gold)
-          // }else if (res.data.back_id === 3){
-          //   setMyRole(Diamond)
-          // }
           dispatch(setLoggedIn(res.data));
         });
     }
   }, [asPath]);
 
   React.useEffect(() => {
-    selectRef.current.value = lang;
+    langRef.current.value = lang;
   }, [lang]);
 
 
@@ -94,18 +104,33 @@ export default function Header() {
               </a>
             </Link>
             <div className="header-right">
-              <select
-                ref={selectRef}
-                defaultValue={defaultSelect}
-                name="languages"
+
+              {data?.country ? null : (<Select
+                className='header-select currency orange'
+                size='small'
+                sx={{ backgroundColor: 'grey' }}
+                value={defaultCurrency}
+                onChange={onChangeCurrency}
+                defaultValue={defaultCurrency}
+              >
+                {currencies.map(({ name, currency, flag }, id) => {
+                  return <MenuItem key={id} value={currency}><img src={`https://flagcdn.com/${flag}.svg`} width="53px" /></MenuItem>
+                })}
+              </Select>)}
+
+              <Select
+
+                ref={langRef}
+                className='header-select orange'
+                size='small'
+                value={defaultLang}
                 onChange={onChangeLang}
-                id="langs">
-                {languages.map((language, id) => (
-                  <option key={id} value={language}>
-                    {language}
-                  </option>
-                ))}
-              </select>
+                defaultValue={defaultLang}
+              >
+                {languages.map((language, id) => {
+                  return <MenuItem key={id} value={language}>{language}</MenuItem>
+                })}
+              </Select>
               <button
                 onClick={toggleMenu}
                 className="navbar-toggler"

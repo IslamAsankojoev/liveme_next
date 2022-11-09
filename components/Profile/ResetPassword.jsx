@@ -27,8 +27,8 @@ export default function ConfirmPassword() {
   const { errors } = formState;
   const onSubmit = async (data) => {
     try {
-      await axios.put(
-        `${process.env.SERVER}/api/users/change_password/${user.id}`,
+      await axios.patch(
+        `${process.env.SERVER}/api/users/change_password/${user.id}/`,
         {
           password: data.password,
           old_password: data.old_password,

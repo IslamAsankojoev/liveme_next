@@ -1,4 +1,11 @@
 export const text = {
+  required: {
+    ru: 'Обязательное поле',
+    kg: 'Обязательное поле',
+    en: 'Required field',
+    tr: 'Gerekli alan',
+    pl: 'Pole wymagane',
+  },
   header: {
     menu: [
       {

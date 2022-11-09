@@ -1,4 +1,11 @@
 export const profileText = {
+  country: {
+    ru: 'Выберите страну',
+    kg: 'Выберите страну',
+    en: 'Choose country',
+    tr: 'Ülke seçin',
+    pl: 'Wybierz kraj',
+  },
   page_title: {
     ru: 'Вход / Регистрация',
     en: 'Login / Register',

@@ -6,6 +6,14 @@ interface countrySliceProps {
   currency: string;
 }
 
+let currencies = {
+  ru: 'с',
+  kg: 'с',
+  en: '$',
+  tr: '₺',
+  pl: 'zł',
+};
+
 const initialState: countrySliceProps = {
   country: 'United States',
   code: 'en',
@@ -19,11 +27,27 @@ const countrySlice = createSlice({
     setCountry: (state, { payload }) => {
       state.code = payload?.code;
       state.country = payload?.country;
+      if(currencies[payload?.code.toLowerCase()]){
+        state.currency = currencies[payload?.code.toLowerCase()];
+      }
+      else{
+        state.currency = '$';
+        state.code = 'en';
+      }
+    },
+    setCurrency: (state, { payload }) => {
       state.currency = payload?.currency;
+      if(currencies[payload?.code.toLowerCase()]){
+        state.currency = currencies[payload?.code.toLowerCase()];
+      }
+      else{
+        state.currency = '$';
+        state.code = 'en';
+      }
     }
   }
 });
 
-export const { setCountry } = countrySlice.actions;
+export const { setCountry, setCurrency } = countrySlice.actions;
 
 export default countrySlice.reducer;

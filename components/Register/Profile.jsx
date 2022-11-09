@@ -14,7 +14,6 @@ const Profile = ({ prevPath }) => {
   const router = useRouter();
   const logout = async () => {
     try {
-      await axios.get('/api/logout');
       dispatch(setLoggedIn({}));
       router.push('/');
     } catch (error) {

@@ -11,11 +11,13 @@ import { setCountry } from '../../redux/slices/countrySlice';
 import { setWish } from '../../redux/slices/wishSlice';
 import Head from 'next/head';
 import getCurrency from '../../helper/getCurrency';
+import countries from '../../utils/countries'
 
 export default function Layout({ children, userServerSideData }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const { isLoading } = useSelector((state) => state.loader);
+  const { loggedIn, data } = useSelector((state) => state.user);
 
   React.useEffect(() => {
     setCookie(null, 'NEXT_LOCALE', parseCookies().NEXT_LOCALE || 'ru', {
@@ -56,13 +58,23 @@ export default function Layout({ children, userServerSideData }) {
   }, []);
 
   React.useEffect(() => {
-    window.navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position.coords.latitude, position.coords.longitude)
-      getCurrency(position.coords.latitude, position.coords.longitude).then((current) => {
-        dispatch(setCountry(current));
+
+    if (!!loggedIn) {
+      dispatch(setCountry({
+        country: countries.find(({ code }) => code === data.country).name,
+        code: data.country,
+      }));
+    } else {
+      window.navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.latitude, position.coords.longitude)
+        getCurrency(position.coords.latitude, position.coords.longitude).then((current) => {
+          dispatch(setCountry(current));
+        })
       })
-    })
-  }, []);
+    }
+  }, [loggedIn]);
+
+
 
   return (
     <>

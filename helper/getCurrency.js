@@ -5,8 +5,8 @@ let codes = ['ru', 'kg', 'en', 'tr', 'pl'];
 const key = '0c0f0eb6c4ce4d50bac61d86098d4a07'
 
 let currencies = {
-  ru: 'сом',
-  kg: 'сом',
+  ru: 'с',
+  kg: 'с',
   en: '$',
   tr: '₺',
   pl: 'zł',
@@ -23,13 +23,11 @@ export default async function getCurrency(lat, lon) {
         return {
           country: info.country,
           code: info.country_code.toLowerCase(),
-          currency: currencies[info.country_code.toLowerCase()],
         }
       }
       return {
         country: info.country,
         code: 'en',
-        currency: currencies['en'],
       };
     });
   return currency;

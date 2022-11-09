@@ -8,6 +8,7 @@ import { parseCookies } from 'nookies';
 import ResetPassword from './ResetPassword';
 import { setLoggedIn } from '../../redux/slices/userSlice';
 import { profileText } from '../../public/locales/profile/registerCollection';
+import { text } from '../../public/locales/texts';
 
 export default function AccountDetail() {
   const [serverErrors, setServerErrors] = React.useState({});
@@ -34,8 +35,8 @@ export default function AccountDetail() {
   const onSubmit = async (data) => {
     setServerErrors({});
     try {
-      const res = await axios.put(
-        `${process.env.SERVER}/api/users/${user.id}`,
+      const res = await axios.patch(
+        `${process.env.SERVER}/api/users/${user.id}/`,
         {
           id: user.id,
           username: data.username,
@@ -83,7 +84,7 @@ export default function AccountDetail() {
             className="form-control"
             id="username"
             name="username"
-            placeholder={`${profileText.profile.form.name[lang]} ${errors?.username?.type === 'required' ? '- обязательно' : ''
+            placeholder={`${profileText.profile.form.name[lang]} ${errors?.username?.type === 'required' ? ` - ${text.required[lang]}` : ''
               }`}
           />
           {serverErrors?.username && <p className="form-errors">Это имя уже занято</p>}
@@ -102,7 +103,7 @@ export default function AccountDetail() {
             id="email"
             name="email"
             inputMode="email"
-            placeholder={`${profileText.profile.form.email[lang]} ${errors?.email?.type === 'required' ? '- обязательно' : ''
+            placeholder={`${profileText.profile.form.email[lang]} ${errors?.email?.type === 'required' ? ` - ${text.required[lang]}` : ''
               }`}
           />
           <p className="form-errors">
@@ -118,7 +119,7 @@ export default function AccountDetail() {
             id="address"
             name="address"
             inputMode="text"
-            placeholder={`${profileText.profile.form.address[lang]} ${errors?.address?.type === 'required' ? '- обязательно' : ''
+            placeholder={`${profileText.profile.form.address[lang]} ${errors?.address?.type === 'required' ? ` - ${text.required[lang]}` : ''
               }`}
           />
         </div>

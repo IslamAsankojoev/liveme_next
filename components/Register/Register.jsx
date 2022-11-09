@@ -8,6 +8,8 @@ import { setLoggedIn } from '../../redux/slices/userSlice';
 import loginImg from '../../scss/static/img/login.webp';
 import Image from 'next/image';
 import { profileText } from '../../public/locales/profile/registerCollection.js';
+import { text } from '../../public/locales/texts.js';
+import countries from '../../utils/countries'
 
 export default function Register({ setToggle }) {
   const lang = useSelector((state) => state.lang.lang);
@@ -52,6 +54,11 @@ export default function Register({ setToggle }) {
     router.reload();
   };
 
+
+  React.useEffect(() => {
+    console.log(errors)
+  }, [errors]);
+
   return (
     <>
       <section className="login_box_area section_gap">
@@ -85,7 +92,7 @@ export default function Register({ setToggle }) {
                       className="form-control"
                       id="username"
                       name="username"
-                      placeholder={`${profileText.register.form.name[lang]} ${errors?.username?.type === 'required' ? '- обязательно' : ''
+                      placeholder={`${profileText.register.form.name[lang]} ${errors?.username?.type === 'required' ? `- ${text.required[lang]}` : ''
                         }`}
                     />
                     {usernameIsAlreadyExist && (
@@ -106,13 +113,32 @@ export default function Register({ setToggle }) {
                       id="email"
                       name="email"
                       inputMode="email"
-                      placeholder={`${profileText.register.form.email[lang]} ${errors?.email?.type === 'required' ? '- обязательно' : ''
+                      placeholder={`${profileText.register.form.email[lang]} ${errors?.email?.type === 'required' ? `- ${text.required[lang]}` : ''
                         }`}
                     />
 
                     <p className="form-errors">
                       {errors?.email?.type === 'pattern' && errors.email.message}
                     </p>
+                  </div>
+                  <div className="col-md-12 form-group">
+                    <select
+                      style={{
+                        border: 'none',
+                        borderRadius: 0,
+                        margin: '15px 0 0 0',
+                        borderBottom: '1px solid #cccccc',
+                      }}
+                      className="form-control"
+                      {...register('country', {
+                        required: true,
+                      })}
+                      id="country" name="country">
+                      <option value="" disabled selected>{profileText.country[lang]}{errors?.country?.type === 'required' ? `- ${text.required[lang]}` : null}</option>
+                      {countries.map(({ name, code }, index) => {
+                        return <option key={index} value={code}>{name}</option>
+                      })}
+                    </select>
                   </div>
 
                   <div className="col-md-12 form-group">
@@ -121,7 +147,7 @@ export default function Register({ setToggle }) {
                       className="form-control"
                       type="password"
                       autoComplete='new-password'
-                      placeholder={`${profileText.register.form.password[lang]} ${errors?.password?.type === 'required' ? '- обязательно' : ''
+                      placeholder={`${profileText.register.form.password[lang]} ${errors?.password?.type === 'required' ? `- ${text.required[lang]}` : ''
                         }`}
                       {...register('password', {
                         required: true,
