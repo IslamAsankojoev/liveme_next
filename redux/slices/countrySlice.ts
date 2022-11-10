@@ -36,9 +36,10 @@ const countrySlice = createSlice({
       }
     },
     setCurrency: (state, { payload }) => {
-      state.currency = payload?.currency;
       if(currencies[payload?.code.toLowerCase()]){
-        state.currency = currencies[payload?.code.toLowerCase()];
+        state.currency = payload?.currency;
+        state.code = payload?.code;
+        state.country = payload?.country;
       }
       else{
         state.currency = '$';

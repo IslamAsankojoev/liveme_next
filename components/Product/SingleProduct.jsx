@@ -7,16 +7,15 @@ import { toggleItem } from '../../redux/slices/wishSlice';
 import { text } from '../../public/locales/texts';
 import { product } from '../../public/locales/product/productCollections';
 
-export default function SingleProduct({
-  id,
-  title,
-  images,
-  price,
-  sale,
-  description,
-  category,
-  image,
-}) {
+export default function SingleProduct(props) {
+  const {
+    id,
+    title,
+    description,
+    image,
+    images,
+    category,
+  } = props
 
   const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
   const [activeTab, setActiveTab] = React.useState('home');
@@ -31,7 +30,12 @@ export default function SingleProduct({
     dispatch(toggleItem({ id, title, image, price }));
   };
   const lang = useSelector((state) => state.lang.lang);
-  const { currency } = useSelector((state) => state.country);
+  const { currency, code } = useSelector((state) => state.country);
+
+  React.useEffect(() => {
+    console.log(code)
+    console.log(props[`price_${code}`])
+  }, [code]);
 
   return (
     <>
@@ -49,7 +53,7 @@ export default function SingleProduct({
             <div className="col-lg-5 offset-lg-1">
               <div className="s_product_text">
                 <h3>{title}</h3>
-                <h2>{price + currency}</h2>
+                <h2>{props[`price_${code}`] + currency}</h2>
                 <ul className="list">
                   <li>
                     <span className="active">

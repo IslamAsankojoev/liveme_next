@@ -11,6 +11,7 @@ import { checkoutCollectionsText as checkoutText } from '../public/locales/check
 import { BannerArea } from '../components';
 import { useSnackbar } from 'notistack';
 import { parseCookies } from 'nookies';
+import countries from '../utils/countries.js';
 
 export default function Checkout() {
   const { totalPrice, totalItems, items } = useSelector((state) => state.cart);
@@ -21,6 +22,7 @@ export default function Checkout() {
   const lang = useSelector((state) => state.lang.lang);
   const { currency, code } = useSelector((state) => state.country);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
 
   const {
     register,
@@ -33,6 +35,49 @@ export default function Checkout() {
       return user.data;
     }, [user]),
   });
+
+
+  const request = {
+    locale: 'en',
+    price: totalPrice,
+    paidPrice: totalPrice,
+    callbackUrl: 'https://www.merchant.com/callback',
+    buyer: {
+      id: user.data?.id || '00000',
+      name: register.username,
+      surname: 'nothing',
+      email: register.email,
+      identityNumber: user.data?.id || '00000',
+      registrationAddress: register.address || 'nothing',
+      city: 'nothing',
+      country: user.data?.country || 'nothing',
+    },
+    shippingAddress: {
+      contactName: register.username,
+      city: 'nothing',
+      country: user.data?.country || 'nothing',
+      address: register.address || 'nothing',
+    },
+    billingAddress: {
+      contactName: register.username,
+      city: 'nothing',
+      country: user.data?.country || 'nothing',
+      address: register.address || 'nothing',
+    },
+    basketItems: [
+      {
+        id: 1,
+        name: 'Livemeshop urun',
+        category1: 'liveme',
+        itemType: "PHYSICAL",
+        price: totalPrice
+      },
+    ]
+  };
+
+
+
+
   const itemsText = items
     .map((item) => {
       return `\n\n${item?.title}\n${item?.count} шт - ${item?.price * item?.count} ${currency}`;
@@ -53,7 +98,7 @@ export default function Checkout() {
             client_phone: data.phone,
             client_email: data.email,
             payment_method: data.payment_method,
-            user: user.data.id,
+            user: user.data?.id || null,
             order_status: 'pending'
           },
           user.loggedIn
@@ -78,24 +123,67 @@ export default function Checkout() {
             })
 
           }
-        }).then((resItems) => {
-          enqueueSnackbar(text.notifications.successOrder[lang], {
-            variant: 'success',
-            autoHideDuration: 3000,
-            anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'right',
-            },
-          });
+        }).then(() => {
+          try {
+            axios.post(`${process.env.SERVER}/api/payment/`,
+              {
+                locale: 'en',
+                price: totalPrice,
+                paidPrice: totalPrice,
+                callbackUrl: 'https://livemeshop.com/',
+                buyer: {
+                  id: user.data?.id || '00000',
+                  name: data.username,
+                  surname: 'nothing',
+                  email: data.email,
+                  identityNumber: user.data?.id || '00000',
+                  registrationAddress: data.address || 'nothing',
+                  city: 'nothing',
+                  country: user.data?.country || 'nothing',
+                },
+                shippingAddress: {
+                  contactName: data.username,
+                  city: 'nothing',
+                  country: user.data?.country || 'nothing',
+                  address: data.address || 'nothing',
+                },
+                billingAddress: {
+                  contactName: data.username,
+                  city: 'nothing',
+                  country: user.data?.country || 'nothing',
+                  address: data.address || 'nothing',
+                },
+                basketItems: [
+                  {
+                    id: 1,
+                    name: 'Livemeshop urun',
+                    category1: 'liveme',
+                    itemType: "PHYSICAL",
+                    price: totalPrice
+                  },
+                ]
+              }
+            ).then(({ data }) => {
+              enqueueSnackbar(text.notifications.successOrder[lang], {
+                variant: 'success',
+                autoHideDuration: 3000,
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                },
+              });
 
-          dispatch(clearCart());
-          setTimeout(() => {
-            if (parseCookies().access_token) {
-              router.push('/profile');
-            } else {
-              router.push('/shop');
-            }
-          }, 2000);
+              dispatch(clearCart());
+              window.location.href = data.paymentPageUrl;
+            }).catch((err) => {
+              console.log(err, 'payment error')
+            })
+          }
+          catch (error) {
+            console.log(error, 'error payment')
+          }
+        }).catch((err) => {
+          console.log(err, 'error')
         })
     } catch (error) {
       console.log(error, 'order error');

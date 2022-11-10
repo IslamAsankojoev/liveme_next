@@ -11,7 +11,7 @@ import {
 import { setProducts } from '../redux/slices/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Home = () => {
+const Home = ({ prevPath }) => {
   const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
   React.useEffect(() => {
@@ -25,6 +25,10 @@ const Home = () => {
         dispatch(setProducts(data.results));
       });
   }, [lang]);
+
+  React.useEffect(() => {
+    console.log(prevPath)
+  }, []);
 
   return (
     <>
@@ -41,3 +45,10 @@ const Home = () => {
 
 export default Home;
 
+export async function getServerSideProps(ctx) {
+  return {
+    props: {
+      prevPath: ctx.req.headers.referer || 'no referer',
+    }
+  };
+}

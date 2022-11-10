@@ -28,7 +28,7 @@ export async function getServerSideProps(ctx) {
   }
   return {
     props: {
-      prevPath: ctx?.req?.headers?.referer,
+      prevPath: ctx?.req?.headers?.referer || null,
     }
   };
 }

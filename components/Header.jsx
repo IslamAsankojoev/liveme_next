@@ -26,6 +26,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import countries from '../utils/countries';
 
 
 const languages = ['ru', 'en', 'kg', 'tr', 'pl'];
@@ -50,7 +51,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const { loggedIn, data } = useSelector((state) => state.user);
   const defaultLang = lang;
-  const defaultCurrency = useSelector((state) => state.country.currency);
+  const defaultCurrency = useSelector((state) => state.country.code);
 
   const toggleMenu = () => {
     setMobileMeniOpen((prev) => !prev);
@@ -69,7 +70,7 @@ export default function Header() {
   };
 
   const onChangeCurrency = (e) => {
-    dispatch(setCurrency(currencies.find((item) => item.currency === e.target.value)));
+    dispatch(setCurrency({ ...currencies.find((item) => item.code === e.target.value), country: countries.find((item) => item.code === e.target.value) }));
   };
 
   React.useEffect(() => {
@@ -113,8 +114,8 @@ export default function Header() {
                 onChange={onChangeCurrency}
                 defaultValue={defaultCurrency}
               >
-                {currencies.map(({ name, currency, flag }, id) => {
-                  return <MenuItem key={id} value={currency}><img src={`https://flagcdn.com/${flag}.svg`} width="53px" /></MenuItem>
+                {currencies.map(({ name, currency, flag, code }, id) => {
+                  return <MenuItem key={id} value={code}><img src={`https://flagcdn.com/${flag}.svg`} width="53px" /></MenuItem>
                 })}
               </Select>)}
 
