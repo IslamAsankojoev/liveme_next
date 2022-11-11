@@ -23,7 +23,7 @@ interface cartSliceProps {
 
 const countPriceItemsTotal = (state: cartSliceProps) => {
   state.totalPrice = state.items.reduce(
-    (totalPrice, item) => totalPrice + item.price * item.count,
+    (totalPrice, item) => Math.ceil(totalPrice + item.price * item.count),
     0,
   );
   state.totalItems = state.items?.reduce((totalItems, item) => totalItems + item.count, 0);

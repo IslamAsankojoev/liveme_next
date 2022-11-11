@@ -1,587 +1,125 @@
-import React from 'react';
-import { WishButton, BannerArea } from '../index';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../../redux/slices/cartSlice';
-import ProductCorusel from './ProductCorusel';
-import { toggleItem } from '../../redux/slices/wishSlice';
-import { text } from '../../public/locales/texts';
-import { product } from '../../public/locales/product/productCollections';
+import { Button } from '@mui/material'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { product } from '../../public/locales/product/productCollections'
+import { text } from '../../public/locales/texts'
+import { addItem } from '../../redux/slices/cartSlice'
+import { toggleItem } from '../../redux/slices/wishSlice'
+import { BannerArea, WishButton } from '../index'
+
+import ProductCorusel from './ProductCorusel'
 
 export default function SingleProduct(props) {
-  const {
-    id,
-    title,
-    description,
-    image,
-    images,
-    category,
-  } = props
+	const { id, title, description, image, images, category } = props
 
-  const inWishtList = useSelector((state) => state.wish?.items?.find((item) => item.id === id));
-  const [activeTab, setActiveTab] = React.useState('home');
+	const inWishtList = useSelector((state) =>
+		state.wish?.items?.find((item) => item.id === id)
+	)
+	// const [activeTab, setActiveTab] = React.useState('home')
+	const lang = useSelector((state) => state.lang.lang)
+	const { currency, code } = useSelector((state) => state.country)
+	const [count, setCount] = React.useState(1)
+	const dispatch = useDispatch()
+	const price = props[`price_${code}`]
 
-  const [count, setCount] = React.useState(1);
-  const dispatch = useDispatch();
-  const addToCart = () => {
-    dispatch(addItem({ id, title, image, price, count }));
-    setCount(1);
-  };
-  const toggleWish = () => {
-    dispatch(toggleItem({ id, title, image, price }));
-  };
-  const lang = useSelector((state) => state.lang.lang);
-  const { currency, code } = useSelector((state) => state.country);
+	const addToCart = () => {
+		dispatch(addItem({ id, title, image, price, count }))
+		setCount(1)
+	}
+	const toggleWish = () => {
+		dispatch(toggleItem({ id, title, image, price }))
+	}
 
-  React.useEffect(() => {
-    console.log(code)
-    console.log(props[`price_${code}`])
-  }, [code]);
+	const qtyChange = (e) => {
+		setCount(parseInt(e.target.value))
+	}
 
-  return (
-    <>
-      <BannerArea title={title} />
-
-      <div className="product_image_area">
-        <div className="container">
-          <div className="row s_product_inner">
-            <div className="col-lg-6">
-              <div className="s_Product_carousel">
-                <WishButton isWished={inWishtList} onClick={toggleWish} />
-                <ProductCorusel images={images && images.length > 0 ? [{ item: image }, ...images] : [{ item: image },]} />
-              </div>
-            </div>
-            <div className="col-lg-5 offset-lg-1">
-              <div className="s_product_text">
-                <h3>{title}</h3>
-                <h2>{props[`price_${code}`] + currency}</h2>
-                <ul className="list">
-                  <li>
-                    <span className="active">
-                      <span>{product.category[lang]}</span> : {category}
-                    </span>
-                  </li>
-                  <li>
-                    <span>
-                      <span>{product.inStock[lang]}</span>
-                    </span>
-                  </li>
-                </ul>
-                <p className="product_description">{description}</p>
-                <div className="product_count">
-                  <label htmlFor="qty">{product.quantity[lang]}:</label>
-                  <input
-                    type="number"
-                    name="qty"
-                    id="sst"
-                    value={count}
-                    onChange={() => { }}
-                    title="Quantity:"
-                    className="input-text qty"
-                  />
-                  <button
-                    onClick={() => {
-                      setCount((prev) => prev + 1);
-                    }}
-                    className="increase items-count"
-                    type="button">
-                    <i className="lnr lnr-chevron-up"></i>
-                  </button>
-                  <button
-                    onClick={() => {
-                      setCount((prev) => prev - 1);
-                    }}
-                    disabled={count === 1}
-                    className="reduced items-count"
-                    type="button">
-                    <i className="lnr lnr-chevron-down"></i>
-                  </button>
-                </div>
-                <div className="card_area d-flex align-items-center">
-                  <button onClick={addToCart} className="primary-btn button-add">
-                    {text.buttonAddToCart[lang]}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      {/*<section className="product_description_area d-none">*/}
-      {/*  <div className="container">*/}
-      {/*    <ul className="nav nav-tabs" id="myTab">*/}
-      {/*      <li className="nav-item">*/}
-      {/*        <a*/}
-      {/*          className={`nav-link ${activeTab === 'home' && 'active'}`}*/}
-      {/*          onClick={() => {*/}
-      {/*            setActiveTab('home');*/}
-      {/*          }}*/}
-      {/*          id="home-tab"*/}
-      {/*          href="#home">*/}
-      {/*          Описание*/}
-      {/*        </a>*/}
-      {/*      </li>*/}
-      {/*      <li className="nav-item">*/}
-      {/*        <a*/}
-      {/*          className={`nav-link ${activeTab === 'profile' && 'active'}`}*/}
-      {/*          onClick={() => {*/}
-      {/*            setActiveTab('profile');*/}
-      {/*          }}*/}
-      {/*          id="profile-tab"*/}
-      {/*          href="#profile">*/}
-      {/*          Характеристики*/}
-      {/*        </a>*/}
-      {/*      </li>*/}
-      {/*      <li className="nav-item">*/}
-      {/*        <a*/}
-      {/*          className={`nav-link ${activeTab === 'contact' && 'active'}`}*/}
-      {/*          onClick={() => {*/}
-      {/*            setActiveTab('contact');*/}
-      {/*          }}*/}
-      {/*          id="contact-tab"*/}
-      {/*          href="#contact">*/}
-      {/*          Комментарии*/}
-      {/*        </a>*/}
-      {/*      </li>*/}
-      {/*      <li className="nav-item">*/}
-      {/*        <a*/}
-      {/*          className={`nav-link ${activeTab === 'review' && 'active'}`}*/}
-      {/*          onClick={() => {*/}
-      {/*            setActiveTab('review');*/}
-      {/*          }}*/}
-      {/*          id="review-tab"*/}
-      {/*          href="#review">*/}
-      {/*          Отзывы*/}
-      {/*        </a>*/}
-      {/*      </li>*/}
-      {/*    </ul>*/}
-      {/*    <div className="tab-content" id="myTabContent">*/}
-      {/*      <div className={`tab-pane fade ${activeTab === 'home' && ' show active'}`}>*/}
-      {/*        <p>{description}</p>*/}
-      {/*      </div>*/}
-      {/*      <div className={`tab-pane fade ${activeTab === 'profile' && ' show active'}`}>*/}
-      {/*        <div className="table-responsive">*/}
-      {/*          <table className="table">*/}
-      {/*            <tbody>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Width</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>128mm</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Height</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>508mm</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Depth</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>85mm</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Weight</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>52gm</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Quality checking</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>yes</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Freshness Duration</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>03days</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>When packeting</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Without touch of hand</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*              <tr>*/}
-      {/*                <td>*/}
-      {/*                  <h5>Each Box contains</h5>*/}
-      {/*                </td>*/}
-      {/*                <td>*/}
-      {/*                  <h5>60pcs</h5>*/}
-      {/*                </td>*/}
-      {/*              </tr>*/}
-      {/*            </tbody>*/}
-      {/*          </table>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*      <div className={`tab-pane fade ${activeTab === 'contact' && ' show active'}`}>*/}
-      {/*        <div className="row">*/}
-      {/*          <div className="col-lg-6">*/}
-      {/*            <div className="comment_list">*/}
-      {/*              <div className="review_item">*/}
-      {/*                <div className="media">*/}
-      {/*                  <div className="d-flex">*/}
-      {/*                    <img src="/static/img/product/review-1.png" alt="" />*/}
-      {/*                  </div>*/}
-      {/*                  <div className="media-body">*/}
-      {/*                    <h4>Blake Ruiz</h4>*/}
-      {/*                    <h5>12th Feb, 2018 at 05:56 pm</h5>*/}
-      {/*                    <a className="reply_btn" href="#">*/}
-      {/*                      Reply*/}
-      {/*                    </a>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <p>*/}
-      {/*                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-      {/*                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,*/}
-      {/*                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo*/}
-      {/*                </p>*/}
-      {/*              </div>*/}
-      {/*              <div className="review_item reply">*/}
-      {/*                <div className="media">*/}
-      {/*                  <div className="d-flex">*/}
-      {/*                    <img src="/static/img/product/review-2.png" alt="" />*/}
-      {/*                  </div>*/}
-      {/*                  <div className="media-body">*/}
-      {/*                    <h4>Blake Ruiz</h4>*/}
-      {/*                    <h5>12th Feb, 2018 at 05:56 pm</h5>*/}
-      {/*                    <a className="reply_btn" href="#">*/}
-      {/*                      Reply*/}
-      {/*                    </a>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <p>*/}
-      {/*                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-      {/*                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,*/}
-      {/*                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo*/}
-      {/*                </p>*/}
-      {/*              </div>*/}
-      {/*              <div className="review_item">*/}
-      {/*                <div className="media">*/}
-      {/*                  <div className="d-flex">*/}
-      {/*                    <img src="/static/img/product/review-3.png" alt="" />*/}
-      {/*                  </div>*/}
-      {/*                  <div className="media-body">*/}
-      {/*                    <h4>Blake Ruiz</h4>*/}
-      {/*                    <h5>12th Feb, 2018 at 05:56 pm</h5>*/}
-      {/*                    <a className="reply_btn" href="#">*/}
-      {/*                      Reply*/}
-      {/*                    </a>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <p>*/}
-      {/*                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-      {/*                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,*/}
-      {/*                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo*/}
-      {/*                </p>*/}
-      {/*              </div>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*          <div className="col-lg-6">*/}
-      {/*            <div className="review_box">*/}
-      {/*              <h4>Post a comment</h4>*/}
-      {/*              <form*/}
-      {/*                className="row contact_form"*/}
-      {/*                action="contact_process.php"*/}
-      {/*                method="post"*/}
-      {/*                id="contactForm">*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <input*/}
-      {/*                      type="text"*/}
-      {/*                      className="form-control"*/}
-      {/*                      id="name"*/}
-      {/*                      name="name"*/}
-      {/*                      placeholder="Your Full name"*/}
-      {/*                    />*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <input*/}
-      {/*                      type="email"*/}
-      {/*                      className="form-control"*/}
-      {/*                      id="email"*/}
-      {/*                      name="email"*/}
-      {/*                      placeholder="Email Address"*/}
-      {/*                    />*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <input*/}
-      {/*                      type="text"*/}
-      {/*                      className="form-control"*/}
-      {/*                      id="number"*/}
-      {/*                      name="number"*/}
-      {/*                      placeholder="Phone Number"*/}
-      {/*                    />*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <textarea*/}
-      {/*                      className="form-control"*/}
-      {/*                      name="message"*/}
-      {/*                      id="message"*/}
-      {/*                      rows="1"*/}
-      {/*                      placeholder="Message"></textarea>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12 text-right">*/}
-      {/*                  <button type="submit" defaultValue="submit" className="btn primary-btn">*/}
-      {/*                    Submit Now*/}
-      {/*                  </button>*/}
-      {/*                </div>*/}
-      {/*              </form>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*      <div className={`tab-pane fade ${activeTab === 'review' && ' show active'}`}>*/}
-      {/*        <div className="row">*/}
-      {/*          <div className="col-lg-6">*/}
-      {/*            <div className="row total_rate">*/}
-      {/*              <div className="col-6">*/}
-      {/*                <div className="box_total">*/}
-      {/*                  <h5>Overall</h5>*/}
-      {/*                  <h4>4.0</h4>*/}
-      {/*                  <h6>(03 Reviews)</h6>*/}
-      {/*                </div>*/}
-      {/*              </div>*/}
-      {/*              <div className="col-6">*/}
-      {/*                <div className="rating_list">*/}
-      {/*                  <h3>Based on 3 Reviews</h3>*/}
-      {/*                  <ul className="list">*/}
-      {/*                    <li>*/}
-      {/*                      <a href="#">*/}
-      {/*                        5 Star <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i> 01*/}
-      {/*                      </a>*/}
-      {/*                    </li>*/}
-      {/*                    <li>*/}
-      {/*                      <a href="#">*/}
-      {/*                        4 Star <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i> 01*/}
-      {/*                      </a>*/}
-      {/*                    </li>*/}
-      {/*                    <li>*/}
-      {/*                      <a href="#">*/}
-      {/*                        3 Star <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i> 01*/}
-      {/*                      </a>*/}
-      {/*                    </li>*/}
-      {/*                    <li>*/}
-      {/*                      <a href="#">*/}
-      {/*                        2 Star <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i> 01*/}
-      {/*                      </a>*/}
-      {/*                    </li>*/}
-      {/*                    <li>*/}
-      {/*                      <a href="#">*/}
-      {/*                        1 Star <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i>*/}
-      {/*                        <i className="fa fa-star"></i> 01*/}
-      {/*                      </a>*/}
-      {/*                    </li>*/}
-      {/*                  </ul>*/}
-      {/*                </div>*/}
-      {/*              </div>*/}
-      {/*            </div>*/}
-      {/*            <div className="review_list">*/}
-      {/*              <div className="review_item">*/}
-      {/*                <div className="media">*/}
-      {/*                  <div className="d-flex">*/}
-      {/*                    <img src="/static/img/product/review-1.png" alt="" />*/}
-      {/*                  </div>*/}
-      {/*                  <div className="media-body">*/}
-      {/*                    <h4>Blake Ruiz</h4>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <p>*/}
-      {/*                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-      {/*                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,*/}
-      {/*                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo*/}
-      {/*                </p>*/}
-      {/*              </div>*/}
-      {/*              <div className="review_item">*/}
-      {/*                <div className="media">*/}
-      {/*                  <div className="d-flex">*/}
-      {/*                    <img src="/static/img/product/review-2.png" alt="" />*/}
-      {/*                  </div>*/}
-      {/*                  <div className="media-body">*/}
-      {/*                    <h4>Blake Ruiz</h4>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <p>*/}
-      {/*                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-      {/*                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,*/}
-      {/*                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo*/}
-      {/*                </p>*/}
-      {/*              </div>*/}
-      {/*              <div className="review_item">*/}
-      {/*                <div className="media">*/}
-      {/*                  <div className="d-flex">*/}
-      {/*                    <img src="/static/img/product/review-3.png" alt="" />*/}
-      {/*                  </div>*/}
-      {/*                  <div className="media-body">*/}
-      {/*                    <h4>Blake Ruiz</h4>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <p>*/}
-      {/*                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-      {/*                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,*/}
-      {/*                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo*/}
-      {/*                </p>*/}
-      {/*              </div>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*          <div className="col-lg-6">*/}
-      {/*            <div className="review_box">*/}
-      {/*              <h4>Add a Review</h4>*/}
-      {/*              <p>Your Rating:</p>*/}
-      {/*              <ul className="list">*/}
-      {/*                <li>*/}
-      {/*                  <a href="#">*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </a>*/}
-      {/*                </li>*/}
-      {/*                <li>*/}
-      {/*                  <a href="#">*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </a>*/}
-      {/*                </li>*/}
-      {/*                <li>*/}
-      {/*                  <a href="#">*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </a>*/}
-      {/*                </li>*/}
-      {/*                <li>*/}
-      {/*                  <a href="#">*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </a>*/}
-      {/*                </li>*/}
-      {/*                <li>*/}
-      {/*                  <a href="#">*/}
-      {/*                    <i className="fa fa-star"></i>*/}
-      {/*                  </a>*/}
-      {/*                </li>*/}
-      {/*              </ul>*/}
-      {/*              <p>Outstanding</p>*/}
-      {/*              <form*/}
-      {/*                className="row contact_form"*/}
-      {/*                action="contact_process.php"*/}
-      {/*                method="post"*/}
-      {/*                id="contactForm">*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <input*/}
-      {/*                      type="text"*/}
-      {/*                      className="form-control"*/}
-      {/*                      id="name"*/}
-      {/*                      name="name"*/}
-      {/*                      placeholder="Your Full name"*/}
-      {/*                    />*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <input*/}
-      {/*                      type="email"*/}
-      {/*                      className="form-control"*/}
-      {/*                      id="email"*/}
-      {/*                      name="email"*/}
-      {/*                      placeholder="Email Address"*/}
-      {/*                    />*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <input*/}
-      {/*                      type="text"*/}
-      {/*                      className="form-control"*/}
-      {/*                      id="number"*/}
-      {/*                      name="number"*/}
-      {/*                      placeholder="Phone Number"*/}
-      {/*                    />*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12">*/}
-      {/*                  <div className="form-group">*/}
-      {/*                    <textarea*/}
-      {/*                      className="form-control"*/}
-      {/*                      name="message"*/}
-      {/*                      id="message"*/}
-      {/*                      rows="1"*/}
-      {/*                      placeholder="Review"></textarea>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*                <div className="col-md-12 text-right">*/}
-      {/*                  <button type="submit" defaultValue="submit" className="primary-btn">*/}
-      {/*                    Submit Now*/}
-      {/*                  </button>*/}
-      {/*                </div>*/}
-      {/*              </form>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</section>*/}
-    </>
-  );
+	return (
+		<>
+			<BannerArea title={title} />
+			<div
+				className="product_image_area"
+				style={{
+					marginBottom: '150px',
+				}}
+			>
+				<div className="container">
+					<div className="row s_product_inner">
+						<div className="col-lg-6">
+							<div className="s_Product_carousel">
+								<WishButton isWished={inWishtList} onClick={toggleWish} />
+								<ProductCorusel
+									images={
+										images && images.length > 0
+											? [{ item: image }, ...images]
+											: [{ item: image }]
+									}
+								/>
+							</div>
+						</div>
+						<div className="col-lg-5 offset-lg-1">
+							<div className="s_product_text">
+								<h3>{title}</h3>
+								<h2>{props[`price_${code}`] + currency}</h2>
+								{/* <ul className="list">
+									<li>
+										<span className="active">
+											<span>{product.category[lang]}</span> : {category}
+										</span>
+									</li>
+									<li>
+										<span>
+											<span>{product.inStock[lang]}</span>
+										</span>
+									</li>
+								</ul> */}
+								<p className="product_description">{description}</p>
+								<div className="product_count">
+									<label htmlFor="qty">{product.quantity[lang]}:</label>
+									<input
+										type="number"
+										name="qty"
+										id="sst"
+										value={count}
+										onChange={qtyChange}
+										title="Quantity:"
+										className="input-text qty"
+									/>
+									<button
+										onClick={() => {
+											setCount((prev) => prev + 1)
+										}}
+										className="increase items-count"
+										type="button"
+									>
+										<i className="lnr lnr-chevron-up"></i>
+									</button>
+									<button
+										onClick={() => {
+											setCount((prev) => prev - 1)
+										}}
+										disabled={count === 1}
+										className="reduced items-count"
+										type="button"
+									>
+										<i className="lnr lnr-chevron-down"></i>
+									</button>
+								</div>
+								<div className="card_area d-flex align-items-center">
+									<Button
+										onClick={addToCart}
+										variant="contained"
+										color="warning"
+									>
+										{text.buttonAddToCart[lang]}
+									</Button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	)
 }

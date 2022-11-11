@@ -15,9 +15,9 @@ let currencies = {
 };
 
 const initialState: countrySliceProps = {
-  country: 'United States',
-  code: 'en',
-  currency: '$',
+  country: 'Turkey',
+  code: 'tr',
+  currency: '₺',
 };
 
 const countrySlice = createSlice({

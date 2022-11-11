@@ -1,24 +1,27 @@
+import CheckIcon from '@mui/icons-material/Check'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
+import Paper from '@mui/material/Paper'
+import Stack from '@mui/material/Stack'
+import axios from 'axios'
+import { parseCookies } from 'nookies'
 import React from 'react'
-import style from "./AccountRoles.module.scss";
-import Paper from '@mui/material/Paper';
-import axios from 'axios';
-import { parseCookies } from 'nookies';
-import { useSelector } from 'react-redux';
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import Stack from '@mui/material/Stack';
-import AlertTitle from '@mui/material/AlertTitle';
+import { useSelector } from 'react-redux'
+
+import style from './AccountRoles.module.scss'
 
 const AccountRoles = ({ roles }) => {
-  const user = useSelector((state) => state.user.data);
-  const total_pay = Math.ceil(useSelector((state) => state.user.data?.total_pay))
+	const user = useSelector((state) => state.user.data)
+	const total_pay = Math.ceil(
+		useSelector((state) => state.user.data?.total_pay)
+	)
 
-  return (
-    <>
-      {(
-        <div className={style.roles}>
-          {/* <h2>Your achievements</h2>
+	return (
+		<>
+			{
+				<div className={style.roles}>
+					{/* <h2>Your achievements</h2>
           <div className={style.row}>
             {roles.length > 0 ? roles.map((item) => {
               return (
@@ -49,10 +52,10 @@ const AccountRoles = ({ roles }) => {
               )
             }) : null}
           </div > */}
-        </div >
-      )}
-    </>
-  )
+				</div>
+			}
+		</>
+	)
 }
 
 export default AccountRoles
