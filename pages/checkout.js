@@ -96,7 +96,7 @@ export default function Checkout() {
 			totalPrice + delivery_price
 		} ${currency}`
 		try {
-			await axios
+			axios
 				.post(
 					`${process.env.SERVER}/api/orders/`,
 					{
@@ -117,84 +117,83 @@ export default function Checkout() {
 						: null
 				)
 				.then((res) => {
-					if (res.status === 201) {
-						items.forEach((el) => {
-							axios.post(`${process.env.SERVER}/api/orders/item/`, {
-								order: res.data.id,
-								product: el.id,
-								product_count: el.count,
-							})
+					items.forEach((el) => {
+						axios.post(`${process.env.SERVER}/api/orders/item/`, {
+							order: res.data.id,
+							product: el.id,
+							product_count: el.count,
 						})
-					}
+					})
 				})
-				.then(() => {
-					try {
-						axios
-							.post(`${process.env.SERVER}/api/payment/`, {
-								locale: 'en',
-								price: totalPrice,
-								paidPrice: totalPrice,
-								callbackUrl: 'https://livemeshop.com/',
-								buyer: {
-									id: user.data?.id || '00000',
-									name: data.username,
-									surname: 'nothing',
-									email: data.email,
-									identityNumber: user.data?.id || '00000',
-									registrationAddress: data.address || 'nothing',
-									city: 'nothing',
-									country: user.data?.country || 'nothing',
-								},
-								shippingAddress: {
-									contactName: data.username,
-									city: 'nothing',
-									country: user.data?.country || 'nothing',
-									address: data.address || 'nothing',
-								},
-								billingAddress: {
-									contactName: data.username,
-									city: 'nothing',
-									country: user.data?.country || 'nothing',
-									address: data.address || 'nothing',
-								},
-								basketItems: [
-									{
-										id: 1,
-										name: 'Livemeshop urun',
-										category1: 'liveme',
-										itemType: 'PHYSICAL',
-										price: totalPrice,
-									},
-								],
-							})
-							.then(({ data }) => {
-								enqueueSnackbar(text.notifications.successOrder[lang], {
-									variant: 'success',
-									autoHideDuration: 3000,
-									anchorOrigin: {
-										vertical: 'bottom',
-										horizontal: 'right',
-									},
-								})
 
-								dispatch(clearCart())
-								window.location.href = data.paymentPageUrl
-							})
-							.catch((err) => {
-								console.log(err, 'payment error')
-							})
-					} catch (error) {
-						console.log(error, 'error payment')
-					}
-				})
-				.catch((err) => {
-					console.log(err, 'error')
-				})
-		} catch (error) {
-			console.log(error, 'order error')
+			if (data.payment_method === 'Card') {
+				try {
+					axios
+						.post(`${process.env.SERVER}/api/payment/`, {
+							locale: 'en',
+							price: totalPrice,
+							paidPrice: totalPrice,
+							callbackUrl: process.env.SERVER,
+							buyer: {
+								id: user.data?.id || '00000',
+								name: data.username,
+								surname: 'nothing',
+								email: data.email,
+								identityNumber: user.data?.id || '00000',
+								registrationAddress: data.address || 'nothing',
+								city: 'nothing',
+								country: user.data?.country || 'nothing',
+							},
+							shippingAddress: {
+								contactName: data.username,
+								city: 'nothing',
+								country: user.data?.country || 'nothing',
+								address: data.address || 'nothing',
+							},
+							billingAddress: {
+								contactName: data.username,
+								city: 'nothing',
+								country: user.data?.country || 'nothing',
+								address: data.address || 'nothing',
+							},
+							basketItems: [
+								{
+									id: 1,
+									name: 'Livemeshop urun',
+									category1: 'liveme',
+									itemType: 'PHYSICAL',
+									price: totalPrice,
+								},
+							],
+						})
+						.then(({ data }) => {
+							dispatch(clearCart())
+							window.location.href = data.paymentPageUrl
+						})
+						.catch((err) => {
+							console.log(err, 'payment error')
+						})
+				} catch (error) {
+					console.log(error, 'error payment')
+				}
+			}
+			enqueueSnackbar(text.notifications.successOrder[lang], {
+				variant: 'success',
+				autoHideDuration: 3000,
+				anchorOrigin: {
+					vertical: 'bottom',
+					horizontal: 'right',
+				},
+			})
+			if (data.payment_method === 'Cash') {
+				dispatch(clearCart())
+				router.push('/shop')
+			}
+		} catch (err) {
+			console.log(err)
 		}
 		try {
-			await sendMessage(teletext)
+			sendMessage(teletext)
 		} catch (error) {
 			console.log(error, 'telegram send text error')
 		}
@@ -324,7 +323,7 @@ export default function Checkout() {
 										<p>
 											<b>{checkoutText.details.paymentMethod[lang]}</b>
 										</p>
-										<div className="payment_item">
+										{/* <div className="payment_item">
 											<div className="radion_btn">
 												<input
 													{...register('payment_method')}
@@ -338,7 +337,7 @@ export default function Checkout() {
 												</label>
 												<div className="check"></div>
 											</div>
-										</div>
+										</div> */}
 										<div className="payment_item">
 											<div className="radion_btn">
 												<input
