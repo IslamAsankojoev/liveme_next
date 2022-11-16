@@ -38,7 +38,18 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 	const dispatch = useDispatch()
 	const { pathname } = useRouter()
 
-	const price = `price_${code}` as keyof typeof product
+	const price =
+		code === 'en'
+			? price_en
+			: code === 'ru'
+			? price_ru
+			: code === 'tr'
+			? price_tr
+			: code === 'kg'
+			? price_kg
+			: code === 'pl'
+			? price_pl
+			: price_en
 
 	const addToCart = () => {
 		dispatch(
