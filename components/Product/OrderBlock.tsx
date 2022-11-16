@@ -29,22 +29,23 @@ export interface DialogTitleProps {
 	onClose: () => void
 }
 
-const OrderBlock: FC<orderProps> = ({
-	id,
-	created,
-	updated,
-	items,
-	client_email,
-	client_address,
-	client_phone,
-	client_name,
-	payment_method,
-	order_status,
-	is_published,
-	user,
-	image,
-	order_time,
-}) => {
+const OrderBlock: FC<orderProps> = (props) => {
+	const {
+		id,
+		created,
+		updated,
+		items,
+		client_email,
+		client_address,
+		client_phone,
+		client_name,
+		payment_method,
+		order_status,
+		is_published,
+		user,
+		image,
+		order_time,
+	} = props
 	const [open, setOpen] = React.useState(false)
 	const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper')
 	const lang = useSelector((state: RootSate) => state.lang.lang)
@@ -59,6 +60,7 @@ const OrderBlock: FC<orderProps> = ({
 	}
 
 	const descriptionElementRef = React.useRef<HTMLElement>(null)
+
 	React.useEffect(() => {
 		if (open) {
 			const { current: descriptionElement } = descriptionElementRef
@@ -108,8 +110,10 @@ const OrderBlock: FC<orderProps> = ({
 						items
 							.reduce(
 								(totalPrice: number, item: orderItemProps) =>
+									// @ts-ignore
 									totalPrice +
-									item.product[`price_${lang}`] * item.product_count,
+									// @ts-ignore
+									item.product[`price_${code}`] * item.product_count,
 								0
 							)
 							.toFixed(2) + currency}
@@ -235,7 +239,9 @@ const OrderBlock: FC<orderProps> = ({
 														<Typography variant="body2" gutterBottom>
 															{item.product_count}шт ={' '}
 															<span className={style.order_item_price}>
+																// @ts-ignore
 																{item.product_count *
+																	// @ts-ignore
 																	item.product[`price_${code}`] +
 																	currency}
 															</span>

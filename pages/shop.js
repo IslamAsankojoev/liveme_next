@@ -5,14 +5,15 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { BannerArea, Empty } from '../components'
+import { shopText } from '../public/locales/shop/shopCollection'
+import { setProducts } from '../redux/slices/productSlice'
+
 import {
 	PaginationComp,
 	ProductBlock,
 	ProductBlockSkelet,
 	SidebarCategory,
-} from '../components/index'
-import { shopText } from '../public/locales/shop/shopCollection'
-import { setProducts } from '../redux/slices/productSlice'
+} from '@/components/index'
 
 const page_size = 12
 

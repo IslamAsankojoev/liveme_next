@@ -123,7 +123,6 @@ export default function Header() {
 								<Select
 									className="header-select currency orange"
 									size="small"
-									sx={{ backgroundColor: 'grey' }}
 									value={defaultCurrency}
 									onChange={onChangeCurrency}
 									defaultValue={defaultCurrency}

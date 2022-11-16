@@ -1,64 +1,33 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    // Подсвечивает все места где не указан тип
-    // Однако это не означает, что теперь вовсе нельзя использовать any.
-    // Это означает лишь, что в подобных ситуация разработчик должен явно писать any,
-    "noImplicitAny": true,
-    "module": "ESNext",
-    // В какую спецификацию компилируем: для поддержки большинства браузеров
-    "target": "es5",
-    "jsx": "preserve",
-    // Компилятор будет обрабатывать не только TS файлы, но и JS файлы
-    "allowJs": true,
-    "moduleResolution": "node",
-    // Для абсолютного импорта
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "./src/*"
-      ]
-    },
-    // esModuleInterop позволяет работать с пакетами, которые используют
-    // common js как с обычными пакета с помощью import (require() module.export) = common js
-    // import Moment from 'moment';
-    // без флага esModuleInterop результат undefined
-    // c флагом результат [object Object]
-    "esModuleInterop": true,
-    // Если какая-либо библиотека не имеет default import,
-    // лоадеры вроде ts-loader или babel-loader автоматически создают их
-    // вместо такого импорта
-    // import * as React from 'react';
-    // можно писать такой
-    // import React from 'react';
-    "allowSyntheticDefaultImports": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
-  },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS",
-      "jsx": "react",
-      "--jsx": "react"
-    }
-  },
-  "include": [
-    "./config/jest/setupTests.ts",
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
-
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"baseUrl": "/",
+		"paths": {
+			"@/components/*": ["components/*"],
+			"@/public/*": ["public/*"],
+			"@/locales/*": ["public/locales/*"],
+			"@/slices/*": ["redux/slices/*"],
+			"@/helper/*": ["helper/*"]
+		},
+		"plugins": [
+			{
+				"name": "next"
+			}
+		]
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+	"exclude": ["node_modules"]
 }

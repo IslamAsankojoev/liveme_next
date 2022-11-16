@@ -5,27 +5,15 @@ import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { addItem } from '../../redux/slices/cartSlice'
+import { productTypes } from '../../redux/slices/productSlice'
 import { toggleItem } from '../../redux/slices/wishSlice'
 import { RootSate } from '../../redux/store'
 import { WishButton } from '../index'
 
 import style from './ProductBlock.module.scss'
 
-interface ProductBlockProps {
-	id: number
-	title: string
-	description: string
-	image: string
-	price_ru: number
-	price_kg: number
-	price_en: number
-	price_tr: number
-	price_pl: number
-	sale: number
-	is_published: boolean
-	category: number
-	slug: string
-	className: string
+interface ProductBlockProps extends productTypes {
+	className?: string
 }
 
 const ProductBlock: FC<ProductBlockProps> = (props) => {
@@ -34,25 +22,35 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 		id,
 		title,
 		image,
-		price_ru,
-		price_kg,
 		price_en,
+		price_ru,
 		price_tr,
+		price_kg,
 		price_pl,
 		...cartItem
 	} = product
 
 	const { currency, code } = useSelector((state: RootSate) => state.country)
 	const [unmount, setUnmount] = React.useState(false)
-	const inWishtList = useSelector((state: RootSate) =>
+	const inWishList = useSelector((state: RootSate) =>
 		state.wish.items.find((item) => item.id === id)
 	)
 	const dispatch = useDispatch()
 	const { pathname } = useRouter()
-	const price = product[`price_${code}`]
+
+	const price = `price_${code}` as keyof typeof product
 
 	const addToCart = () => {
-		dispatch(addItem({ ...cartItem, id, title, image, price, count: 1 }))
+		dispatch(
+			addItem({
+				...cartItem,
+				id,
+				title,
+				image,
+				price: parseInt(price),
+				count: 1,
+			})
+		)
 	}
 
 	const addToWishList = () => {
@@ -65,6 +63,10 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 			dispatch(toggleItem({ ...product }))
 		}
 	}
+
+	React.useEffect(() => {
+		console.log(price)
+	}, [])
 
 	return (
 		<div className={`${className} ${style.wrapper} ${unmount && style.hide}`}>
@@ -82,15 +84,12 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 					</Link>
 					<span className={style.buy}>
 						<div className={`price ${style.price}`}>
-							<h6>
-								{product[`price_${code}`] &&
-									product[`price_${code}`] + currency}
-							</h6>
+							<h6>{price && price + currency}</h6>
 						</div>
 						<div className="prd-bottom">
 							<Button
 								onClick={addToCart}
-								disabled={!product[`price_${code}`]}
+								disabled={!price}
 								variant="contained"
 								color="warning"
 							>
@@ -110,7 +109,7 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 					</span>
 				</div>
 			</div>
-			<WishButton isWished={inWishtList} onClick={addToWishList} />
+			<WishButton isWished={inWishList} onClick={addToWishList} />
 		</div>
 	)
 }

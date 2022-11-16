@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 interface langSliceProps {
-  lang: string;
+	lang: string
 }
 
 const initialState: langSliceProps = {
-  lang: 'ru',
-};
+	lang: 'ru',
+}
 
 const langSlice = createSlice({
-  name: 'lang',
-  initialState,
-  reducers: {
-    setLang: (state, action) => {
-      state.lang = action.payload;
-    },
-  },
-});
+	name: 'lang',
+	initialState,
+	reducers: {
+		setLang: (state, action) => {
+			state.lang = action.payload
+		},
+	},
+})
 
-export const { setLang } = langSlice.actions;
+export const { setLang } = langSlice.actions
 
-export default langSlice.reducer;
+export default langSlice.reducer

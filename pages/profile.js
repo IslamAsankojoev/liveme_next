@@ -1,9 +1,9 @@
 import { parseCookies } from 'nookies'
 import React from 'react'
 
-import { BannerArea } from '../components'
-import { Profile } from '../components/index'
 import { profileText } from '../public/locales/profile/registerCollection'
+
+import { BannerArea, Profile } from '@/components/index'
 
 export default function profile({ prevPath }) {
 	return (
