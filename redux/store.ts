@@ -1,26 +1,27 @@
-import { configureStore } from '@reduxjs/toolkit';
-import products from './slices/productSlice';
-import user from './slices/userSlice';
-import cart from './slices/cartSlice';
-import thankYou from './slices/thankYouSlice';
-import lang from './slices/langSlice';
-import wish from './slices/wishSlice';
-import loader from './slices/loaderSlice';
-import country from './slices/countrySlice';
+import { configureStore } from '@reduxjs/toolkit'
+
+import cart from './slices/cartSlice'
+import country from './slices/countrySlice'
+import lang from './slices/langSlice'
+import loader from './slices/loaderSlice'
+import products from './slices/productSlice'
+import thankYou from './slices/thankYouSlice'
+import user from './slices/userSlice'
+import wish from './slices/wishSlice'
 
 const store = configureStore({
-  reducer: {
-    products,
-    user,
-    cart,
-    thankYou,
-    lang,
-    wish,
-    loader,
-    country,
-  },
-});
+	reducer: {
+		products,
+		user,
+		cart,
+		thankYou,
+		lang,
+		wish,
+		loader,
+		country,
+	},
+})
 
-export default store;
+export default store
 
-export type RootSate = ReturnType<typeof store.getState>;
+export type RootSate = ReturnType<typeof store.getState>

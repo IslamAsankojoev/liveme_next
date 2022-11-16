@@ -14,10 +14,10 @@ import style from './style.module.scss'
 
 const Mobilenavigate = () => {
 	const { pathname, push } = useRouter()
-	const loggedIn = useSelector((state: RootSate) => state.user.loggedIn)
-	const lang = useSelector((state: RootSate) => state.lang.lang)
-	const cartTotal = useSelector((state: RootSate) => state.cart.totalItems)
-	const wishTotal = useSelector((state: RootSate) => state.wish.totalItems)
+	const loggedIn = useSelector((state) => state.user.loggedIn)
+	const lang = useSelector((state) => state.lang.lang)
+	const cartTotal = useSelector((state) => state.cart.totalItems)
+	const wishTotal = useSelector((state) => state.wish.totalItems)
 
 	return (
 		<div className={style.mobNav}>
