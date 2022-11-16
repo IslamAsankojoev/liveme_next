@@ -613,3 +613,8 @@ body {
 .orange {
 	background: #ff6d2e;
 }
+
+.header_area .navbar .nav .nav-item:hover .nav-link,
+.header_area .navbar .nav .nav-item.active .nav-link {
+	color: #ff6d2e;
+}

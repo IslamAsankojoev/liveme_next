@@ -14,7 +14,7 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
-		"baseUrl": "/",
+		"baseUrl": ".",
 		"paths": {
 			"@/components/*": ["components/*"],
 			"@/public/*": ["public/*"],
@@ -28,6 +28,12 @@
 			}
 		]
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"components/MobileNavigate/index.jsx"
+	],
 	"exclude": ["node_modules"]
 }

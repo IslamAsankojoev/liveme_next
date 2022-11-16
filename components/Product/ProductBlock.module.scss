@@ -1,120 +1,136 @@
 .product {
-  transition: 0.2s;
-  opacity: 1;
-  visibility: visible;
-  position: relative;
-  padding: 0px 0px 10px 0px;
-  box-shadow: 0px 0px 10px -7px #00000090;
-  transition: all 0.1s ease-in;
-  margin: 0 !important;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 5px;
-  background: #e9e9e9;
-  &:hover {
-    .details {
-      bottom: -100px;
-    }
-  }
-  .details {
-    transition: 0.2s;
-    padding: 10px;
-    // position: absolute;
-    z-index: 8;
-    bottom: 0;
-    left: 0;
-    background: #e9e9e9;
-  }
-  .title {
-    padding: 0px 10px;
-    font-size: 1em !important;
-    line-height: 16px;
-    font-weight: 400 !important;
-    color: #333;
-    margin-bottom: 0px;
-    text-transform: uppercase;
-    text-align: left;
-    @media (max-width: 767px) {
-      font-size: 0.8em !important;
-      line-height: 16px;
-    }
-  }
+	transition: 0.2s;
+	opacity: 1;
+	visibility: visible;
+	position: relative;
+	padding: 0px;
+	box-shadow: 0px 0px 10px -7px #00000090;
+	transition: all 0.1s ease-in;
+	margin: 0 !important;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-radius: 5px;
+	background: #e9e9e9;
+	&:hover {
+		.details {
+			bottom: -100px;
+		}
+	}
+	.details {
+		transition: 0.2s;
+		// position: absolute;
+		z-index: 8;
+		bottom: 0;
+		left: 0;
+		border-radius: 5px;
+		background: #e9e9e9;
+		.buyBtn {
+			display: flex;
+			align-items: center !important;
+			justify-content: center !important;
+			padding: 8px 0px;
+			background: #7a7a7a;
+			&:hover {
+				background: #ff7700;
+			}
+			p {
+				color: #fff;
+				margin: 0 5px;
+				font-weight: 600;
+				font-size: 1.2em;
+			}
+		}
+	}
+	.title {
+		text-align: center !important;
+		padding: 0px 10px 0px 0px;
+		font-size: 1em !important;
+		line-height: 16px;
+		font-weight: 550 !important;
+		color: #333;
+		margin-bottom: 10px;
+		text-transform: uppercase;
+		text-align: left;
+		@media (max-width: 767px) {
+			font-size: 0.8em !important;
+			line-height: 16px;
+		}
+	}
 
-  img {
-    height: 330px;
-    width: 100%;
-    margin: 0;
-    object-fit: cover;
-  }
-  &:hover {
-    box-shadow: 0px 0px 10px -3px #00000090;
-  }
-  .buy {
-    display: flex;
-    margin-top: 10px;
-    justify-content: space-evenly;
-    align-items: flex-end;
-    @media (max-width: 767px) {
-      // flex-direction: column;
-      margin-top: 0px;
-      button {
-        padding: 5px 10px;
-        font-size: 0.9em;
-      }
-    }
+	img {
+		height: 330px;
+		width: 100%;
+		margin: 0;
+		object-fit: cover;
+	}
+	&:hover {
+		box-shadow: 0px 0px 10px -3px #00000090;
+	}
+	.buy {
+		width: 100%;
+		// display: flex;
+		margin-top: 10px;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		@media (max-width: 767px) {
+			margin-top: 0px;
+			button {
+				padding: 5px 10px;
+				font-size: 0.9em;
+			}
+		}
 
-    .price {
-      display: grid;
-      h6 {
-        display: inline-block;
-        color: #ff7700;
-        font-size: 1.1em;
-        font-weight: 600;
-        text-shadow: 0px 0px 1px yellow;
-        span {
-          color:rgb(71, 71, 71)!important;
-          text-shadow: none;
-        }
-        span.s{
-          text-decoration: line-through!important;
-        }
-      }
-
-
-     
-    }
-  }
+		// .price {
+		// 	display: grid;
+		// 	text-align: center !important;
+		// 	h6 {
+		// 		display: inline-block;
+		// 		color: #ff7700;
+		// 		font-size: 1.1em;
+		// 		font-weight: 600;
+		// 		text-shadow: 0px 0px 1px yellow;
+		// 		span {
+		// 			color: rgb(71, 71, 71) !important;
+		// 			text-shadow: none;
+		// 		}
+		// 		span.s {
+		// 			text-decoration: line-through !important;
+		// 		}
+		// 	}
+		// }
+	}
 }
 .wrapper {
-  margin-top: 10px;
-  padding: 0px 5px !important;
-  position: relative;
+	margin-top: 10px;
+	padding: 0px 5px !important;
+	position: relative;
 }
 .hide {
-  opacity: 0;
-  visibility: hidden;
+	opacity: 0;
+	visibility: hidden;
 }
 .overlay {
-  transition: 0.2s;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  background: orangered;
-  border-radius: 5px;
+	transition: 0.2s;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background: orangered;
+	border-radius: 5px;
 }
 .show {
-  z-index: 10;
+	z-index: 10;
 }
 .imgLink {
-  height: 330px;
-  width: 100%;
-  img {
-    height: 100%;
-    width: 100%;
-  }
+	height: 330px;
+	width: 100%;
+	img {
+		height: 100%;
+		width: 100%;
+	}
 }
