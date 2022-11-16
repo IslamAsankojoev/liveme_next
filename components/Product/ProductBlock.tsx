@@ -15,6 +15,7 @@ import { RootSate } from '../../redux/store'
 import { WishButton } from '../index'
 
 import style from './ProductBlock.module.scss'
+import imageLoader from '@/helper/imageLoader.js'
 import { text } from '@/public/locales/texts.js'
 
 interface ProductBlockProps extends productTypes {
@@ -91,6 +92,8 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 					<a className={style.imgLink}>
 						<span className="next-img">
 							<Image
+								// @ts-ignore
+								loader={imageLoader}
 								src={image}
 								alt="Picture of the author"
 								width={330}

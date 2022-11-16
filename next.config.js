@@ -6,6 +6,8 @@ const nextConfig = {
 	images: {
 		domains: ['localhost', 'livemeshop.com'],
 		formats: ['image/avif', 'image/webp'],
+		loader: 'custom',
+		loaderFile: './helper/imageLoader.js',
 	},
 	devIndicators: {
 		buildActivity: false,
