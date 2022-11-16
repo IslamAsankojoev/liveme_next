@@ -1,3 +1,3 @@
 export default function myImageLoader({ src, width, quality }) {
-	return `${src}`
+	return `${src.replace('http://', 'https://')}`
 }
