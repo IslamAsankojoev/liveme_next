@@ -119,27 +119,6 @@ export default function Header() {
 							</a>
 						</Link>
 						<div className="header-right">
-							{data?.country ? null : (
-								<Select
-									className="header-select currency orange"
-									size="small"
-									value={defaultCurrency}
-									onChange={onChangeCurrency}
-									defaultValue={defaultCurrency}
-								>
-									{currencies.map(({ name, currency, flag, code }, id) => {
-										return (
-											<MenuItem key={id} value={code}>
-												<img
-													src={`https://flagcdn.com/${flag}.svg`}
-													width="53px"
-												/>
-											</MenuItem>
-										)
-									})}
-								</Select>
-							)}
-
 							<Select
 								ref={langRef}
 								className="header-select orange"
@@ -188,6 +167,26 @@ export default function Header() {
 								})}
 								id="navbarSupportedContent"
 							>
+								{data?.country ? null : (
+									<Select
+										className="header-select currency orange"
+										size="small"
+										value={defaultCurrency}
+										onChange={onChangeCurrency}
+										defaultValue={defaultCurrency}
+									>
+										{currencies.map(({ name, currency, flag, code }, id) => {
+											return (
+												<MenuItem key={id} value={code}>
+													<img
+														src={`https://flagcdn.com/${flag}.svg`}
+														width="53px"
+													/>
+												</MenuItem>
+											)
+										})}
+									</Select>
+								)}
 								<ul className="nav navbar-nav menu_nav ml-auto">
 									{text.header?.menu?.map((item, id) => {
 										{
