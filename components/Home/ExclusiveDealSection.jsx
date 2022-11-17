@@ -7,15 +7,13 @@ import { addItem } from '@/slices/cartSlice'
 
 export default function ExclusiveDealSection() {
 	const lang = useSelector((state) => state.lang.lang)
-	const { currency } = useSelector((state) => state.country)
+	const { currency, code } = useSelector((state) => state.country)
 	const dispatch = useDispatch()
 	const items = useSelector((state) => state.products.items)
-	const saleItem = items.find(
-		(item) => item.title_ru.toLowerCase() === 'ЛИЛИЯ'.toLowerCase()
-	)
+
 	return (
 		<section className="exclusive-deal-area">
-			<div className="container-fluid">
+			<div className="">
 				<div className="row justify-content-center align-items-center">
 					<div className="col-lg-6 no-padding exclusive-left">
 						<div className="row clock_sec clockdiv" id="clockdiv">
@@ -23,28 +21,13 @@ export default function ExclusiveDealSection() {
 								<h1>{home.exclusiveArea.title[lang]}!</h1>
 								<p>{home.exclusiveArea.subtitle[lang]}.</p>
 							</div>
-							{/*<div className="col-lg-12">*/}
-							{/*  <div className="row clock-wrap">*/}
-							{/*    <div className="col clockinner1 clockinner">*/}
-							{/*      <h1 className="days">150</h1>*/}
-							{/*      <span className="smalltext">Days</span>*/}
-							{/*    </div>*/}
-							{/*    <div className="col clockinner clockinner1">*/}
-							{/*      <h1 className="hours">23</h1>*/}
-							{/*      <span className="smalltext">Hours</span>*/}
-							{/*    </div>*/}
-							{/*    <div className="col clockinner clockinner1">*/}
-							{/*      <h1 className="minutes">47</h1>*/}
-							{/*      <span className="smalltext">Mins</span>*/}
-							{/*    </div>*/}
-							{/*    <div className="col clockinner clockinner1">*/}
-							{/*      <h1 className="seconds">59</h1>*/}
-							{/*      <span className="smalltext">Secs</span>*/}
-							{/*    </div>*/}
-							{/*  </div>*/}
-							{/*</div>*/}
 						</div>
-						<a href="" className="primary-btn">
+						<a
+							className="primary-btn "
+							style={{
+								color: 'white',
+							}}
+						>
 							{home.exclusiveArea.shopNow[lang]}
 						</a>
 					</div>
@@ -54,27 +37,29 @@ export default function ExclusiveDealSection() {
 							<div className="single-exclusive-slider">
 								<img
 									className="img-fluid"
-									src={items[5]?.image}
+									src={items[0]?.image}
 									width="100%"
 									alt=""
 								/>
 								<div className="product-details">
 									<div className="price">
-										<h6>{items[5]?.price + currency}</h6>
-										<h6 className="l-through">210.00</h6>
+										<h6>{items[0] && items[0][`price_${code}`] + currency}</h6>
 									</div>
-									<h4>{items[5]?.title}</h4>
+									<h4>{items[0]?.title}</h4>
 									<div
 										style={{ cursor: 'pointer' }}
 										onClick={() => {
-											dispatch(
-												addItem({
-													id: items[0]?.id,
-													title: items[0]?.title,
-													image: items[0]?.image,
-													price: items[0]?.price,
-												})
-											)
+											if (items[0])
+												[
+													dispatch(
+														addItem({
+															id: items[0].id,
+															title: items[0].title,
+															image: items[0].image,
+															price: items[0][`price_${code}`],
+														})
+													),
+												]
 										}}
 										className="add-bag d-flex align-items-center justify-content-center simple-btn"
 									>

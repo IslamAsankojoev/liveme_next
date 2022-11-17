@@ -2,6 +2,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	env: {
 		SERVER: process.env.SERVER,
+		ADMIN: process.env.ADMIN,
 	},
 	images: {
 		domains: ['localhost', 'livemeshop.com'],

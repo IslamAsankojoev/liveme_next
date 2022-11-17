@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
 import CircularProgress from '@mui/material/CircularProgress'
 import LinearProgress from '@mui/material/LinearProgress'
 import axios from 'axios'
@@ -367,20 +368,47 @@ export default function Checkout() {
 											</div>
 											<p>{checkoutText.details.additional[lang]} </p>
 										</div>
-										<div className="creat_account">
-											<input
-												type="checkbox"
-												defaultChecked
-												id="f-option4"
-												name="selector"
-											/>
-											<label htmlFor="f-option4">
-												{checkoutText.details.terms[lang]}{' '}
-											</label>
-											<Link href="/agreement">
-												<a> terms & conditions*</a>
-											</Link>
+										<div className="payment_item">
+											<div className="checkbox">
+												<label
+													htmlFor="agreement"
+													style={{
+														display: 'flex',
+														alignItems: 'center',
+														justifyContent: 'left',
+														height: '20px',
+													}}
+												>
+													<input
+														type="checkbox"
+														id="agreement"
+														name="selector"
+														defaultChecked
+														{...register('agreement', {
+															required: true,
+														})}
+														style={{
+															marginRight: '10px',
+															border: '1px solid red',
+															width: '18px',
+														}}
+													/>
+													{checkoutText.details.terms[lang]}
+													<Link href="/agreement">
+														<a
+															style={{
+																marginLeft: '5px',
+															}}
+															target={'_blank'}
+														>
+															terms
+														</a>
+													</Link>
+												</label>
+											</div>
 										</div>
+										<br />
+										<br />
 										<Button
 											sx={{
 												position: 'relative',
