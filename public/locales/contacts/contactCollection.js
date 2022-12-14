@@ -20,6 +20,20 @@ export const contactText = {
 			en: 'Mevki, Altın tepsi mah. Ferhat paşa çiftliği, Gar Sk. No:2 /34035, 34035 Bayrampaşa/İstanbul',
 			kg: 'Mevki, Altın tepsi mah. Ferhat paşa çiftliği, Gar Sk. No:2 /34035, 34035 Bayrampaşa/İstanbul',
 		},
+		country2: {
+			ru: 'Кыргызстан, Бишкек',
+			en: 'Kyrgyzstan, Bishkek',
+			kg: 'Кыргызстан, Бишкек',
+			tr: 'Kırgızistan, Bişkek',
+			pl: 'Kirgistan, Bishkek',
+		},
+		region2: {
+			ru: 'Первомайский район, ул. Чуй, 219',
+			en: 'Pervomayskiy district, Chui street, 219',
+			kg: 'Первомайский район, ул. Чуй, 219',
+			tr: 'Pervomays District, Chui Street, 219',
+			pl: 'Pervomayskiy district, Chui street, 219',
+		},
 		phone: '+90 549 675 10 12',
 		schedule: {
 			ru: 'Пн-Пт: 9:00-18:00',

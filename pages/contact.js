@@ -44,6 +44,11 @@ function Contact() {
 									<p>{contactText.info.region[lang]}</p>
 								</div>
 								<div className="info_item">
+									<i className="lnr lnr-home"></i>
+									<h6>{contactText.info.country2[lang]}</h6>
+									<p>{contactText.info.region2[lang]}</p>
+								</div>
+								<div className="info_item">
 									<i className="lnr lnr-phone-handset"></i>
 									<h6>
 										<a href="#">{contactText.info.phone}</a>
