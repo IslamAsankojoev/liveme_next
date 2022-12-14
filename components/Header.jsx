@@ -21,6 +21,7 @@ import { parseCookies, setCookie } from 'nookies'
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { isNull } from 'util'
 
 import { Search } from '../components/index'
 import Diamond from '../public/diamond.webp'
@@ -195,7 +196,7 @@ export default function Header() {
 													<li
 														key={id}
 														className={`nav-item ${
-															asPath === item.link && 'active'
+															asPath === item.link ? 'active' : ''
 														}`}
 													>
 														<Link href={item.link}>
@@ -211,7 +212,7 @@ export default function Header() {
 													<li
 														key={id}
 														className={`nav-item ${
-															asPath === item.link && 'active'
+															asPath === item.link ? 'active' : ''
 														}`}
 													>
 														<Link href={item.link}>
@@ -240,7 +241,7 @@ export default function Header() {
 													<li
 														key={id}
 														className={`nav-item ${
-															asPath === item.link && 'active'
+															asPath === item.link ? 'active' : ''
 														}`}
 													>
 														<Link href={item.link}>
