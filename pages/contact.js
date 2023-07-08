@@ -33,12 +33,73 @@ function Contact() {
 			</section>
 
 			<br />
+
 			<section className="contact_area section_gap_bottom">
 				<div className="container">
 					<div className="row">
 						<div className="col-lg-3">
 							<div className="contact_info">
 								<div className="info_item">
+									<i className="lnr lnr-home"></i>
+									<h6>Türkiye</h6>
+									<p>{contactText.info.region[lang]}</p>
+									<strong>{contactText.info.phone}</strong>
+									<hr />
+								</div>
+							</div>
+						</div>
+						<div className="col-lg-3">
+							<div className="contact_info">
+								<div className="info_item">
+									<i className="lnr lnr-home"></i>
+									<h6>Кыргызстан</h6>
+									<p>Бишкек, Первомайский район, ул. Чуй, 219</p>
+									<strong>+996 708 022 101</strong>
+									<hr />
+									<p>Ош, ул. А. Масалиева, 5</p>
+									<strong>+996 551 016 202</strong>
+								</div>
+							</div>
+						</div>
+						<div className="col-lg-3">
+							<div className="contact_info">
+								<div className="info_item">
+									<i className="lnr lnr-home"></i>
+									<h6>Germany</h6>
+									<p>
+										Deutschland GmstrongH strongahnhofstr, 38 3 89423
+										Gundelfingen a.d Donau
+									</p>
+									<strong>+49 9073 977 54 97</strong>
+									<hr />
+								</div>
+							</div>
+						</div>
+						<div className="col-lg-3">
+							<div className="contact_info">
+								<div className="info_item">
+									<i className="lnr lnr-home"></i>
+									<h6>Қазақстан</h6>
+									<p>
+										г. Алматы, Турксибский район
+										<strongr />
+										пр. Сейфуллина, дом 230
+									</p>
+									<strong>+7 707 861 03 02</strong>
+									<hr />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section className="contact_area section_gap_bottom">
+				<div className="container">
+					<div className="row">
+						<div className="col-lg-3">
+							<div className="contact_info">
+								{/* <div className="info_item">
 									<i className="lnr lnr-home"></i>
 									<h6>{contactText.info.country[lang]}</h6>
 									<p>{contactText.info.region[lang]}</p>
@@ -47,12 +108,10 @@ function Contact() {
 									<i className="lnr lnr-home"></i>
 									<h6>{contactText.info.country2[lang]}</h6>
 									<p>{contactText.info.region2[lang]}</p>
-								</div>
+								</div> */}
 								<div className="info_item">
 									<i className="lnr lnr-phone-handset"></i>
-									<h6>
-										<a href="#">{contactText.info.phone}</a>
-									</h6>
+
 									<p>{contactText.info.schedule[lang]}</p>
 								</div>
 								<div className="info_item">

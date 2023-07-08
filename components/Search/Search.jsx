@@ -28,7 +28,7 @@ export default function Search({ setSearchOpen, searchOpen, searchRef }) {
 
 	React.useEffect(() => {
 		const handleOutsideClick = (e) => {
-			if (!e.path.includes(searchRef.current)) {
+			if (!e?.path?.includes(searchRef.current)) {
 				setSearchOpen((prev) => false)
 			}
 		}
