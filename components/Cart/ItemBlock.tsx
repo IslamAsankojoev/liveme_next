@@ -21,6 +21,7 @@ const ItemBlock: FC<cartItemProps> = ({
 	category,
 	slug,
 	count,
+	stock,
 }) => {
 	const [removing, setRemoving] = React.useState(false)
 	const [removed, setRemoved] = React.useState(false)
@@ -80,6 +81,7 @@ const ItemBlock: FC<cartItemProps> = ({
 										category,
 										slug,
 										count,
+										stock,
 									})
 								)
 							}}
@@ -113,6 +115,7 @@ const ItemBlock: FC<cartItemProps> = ({
 										category,
 										slug,
 										count,
+										stock,
 									})
 								)
 							}}

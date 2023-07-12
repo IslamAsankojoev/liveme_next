@@ -216,8 +216,8 @@ export default function Checkout() {
 				},
 			})
 			if (data.payment_method === 'Cash') {
-				// dispatch(clearCart())
-				// router.push('/shop')
+				dispatch(clearCart())
+				router.push('/shop')
 			}
 		} catch (err) {
 			console.log(err)
