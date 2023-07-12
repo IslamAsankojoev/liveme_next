@@ -22,6 +22,7 @@ type productProps = {
 	is_published: boolean
 	category: number
 	slug: string
+	stock: number
 }
 
 export type productTypes = {

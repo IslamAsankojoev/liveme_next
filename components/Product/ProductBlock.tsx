@@ -28,6 +28,7 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 		id,
 		title,
 		image,
+		stock,
 		price_en,
 		price_ru,
 		price_tr,
@@ -66,6 +67,7 @@ const ProductBlock: FC<ProductBlockProps> = (props) => {
 				image,
 				price: parseInt(price),
 				count: 1,
+				stock,
 			})
 		)
 	}

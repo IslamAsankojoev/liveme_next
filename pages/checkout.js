@@ -1,7 +1,12 @@
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import CircularProgress from '@mui/material/CircularProgress'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
 import LinearProgress from '@mui/material/LinearProgress'
+import MenuItem from '@mui/material/MenuItem'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router.js'
@@ -32,12 +37,17 @@ export default function Checkout() {
 	const {
 		register,
 		handleSubmit,
-		control,
 		reset,
 		formState: { errors },
+		setValue,
+		trigger,
+		getValues,
 	} = useForm({
 		defaultValues: React.useMemo(() => {
-			return user.data
+			return {
+				...user.data,
+				country: user.data?.country || 'ru',
+			}
 		}, [user]),
 	})
 
@@ -118,12 +128,31 @@ export default function Checkout() {
 						: null
 				)
 				.then((res) => {
-					items.forEach((el) => {
-						axios.post(`${process.env.SERVER}/api/orders/item/`, {
-							order: res.data.id,
-							product: el.id,
-							product_count: el.count,
-						})
+					items.forEach(async (el) => {
+						try {
+							const orderItem = await axios.post(
+								`${process.env.SERVER}/api/orders/item/`,
+								{
+									order: res.data.id,
+									product: el.id,
+									product_count: el.count,
+								}
+							)
+
+							const item = {}
+							console.log(el)
+							const newStock = el.stock - el.count
+							item[`stock_${data.country}`] = newStock < 0 ? 0 : newStock
+
+							const updateProductRes = await axios.patch(
+								`${process.env.SERVER}/api/products/${el?.id}/`,
+								{
+									...item,
+								}
+							)
+						} catch (error) {
+							console.error(error)
+						}
 					})
 				})
 
@@ -187,8 +216,8 @@ export default function Checkout() {
 				},
 			})
 			if (data.payment_method === 'Cash') {
-				dispatch(clearCart())
-				router.push('/shop')
+				// dispatch(clearCart())
+				// router.push('/shop')
 			}
 		} catch (err) {
 			console.log(err)
@@ -269,6 +298,31 @@ export default function Checkout() {
 											inputMode="tel"
 											placeholder={checkoutText.form.phone[lang]}
 										/>
+									</div>
+									<div className="col-md-12 form-group p_star">
+										<FormControl fullWidth>
+											<InputLabel id="country-label">Country</InputLabel>
+											<Select
+												variant="outlined"
+												labelId="country-label"
+												id="country"
+												value={
+													getValues('country') || user.data?.country || 'kg'
+												}
+												label="Age"
+												onChange={(e) => {
+													setValue('country', e.target.value)
+													trigger('country')
+												}}
+											>
+												<MenuItem value="kg">Кыргызстан</MenuItem>
+												<MenuItem value="tr">Türkiye</MenuItem>
+												<MenuItem value="ru">Россия</MenuItem>
+												<MenuItem value="kz">Қазақстан</MenuItem>
+												<MenuItem value="pl">Polska</MenuItem>
+												<MenuItem value="en">USA</MenuItem>
+											</Select>
+										</FormControl>
 									</div>
 									<div className="col-md-12 form-group p_star">
 										<input

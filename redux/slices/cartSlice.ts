@@ -10,6 +10,7 @@ export type cartItemProps = {
 	category: number
 	slug: string
 	count: number
+	stock: number
 }
 
 type cartItemTypes = {

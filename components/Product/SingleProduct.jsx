@@ -11,7 +11,7 @@ import { BannerArea, WishButton } from '../index'
 import ProductCorusel from './ProductCorusel'
 
 export default function SingleProduct(props) {
-	const { id, title, description, image, images, category } = props
+	const { id, title, description, image, images, category, stock } = props
 
 	const inWishtList = useSelector((state) =>
 		state.wish?.items?.find((item) => item.id === id)
@@ -24,7 +24,7 @@ export default function SingleProduct(props) {
 	const price = props[`price_${code}`]
 
 	const addToCart = () => {
-		dispatch(addItem({ id, title, image, price, count }))
+		dispatch(addItem({ id, title, image, price, count, stock }))
 		setCount(1)
 	}
 	const toggleWish = () => {
