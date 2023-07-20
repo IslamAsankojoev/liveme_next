@@ -171,7 +171,7 @@ export default function Checkout() {
 							locale: 'en',
 							price: totalPrice,
 							paidPrice: totalPrice,
-							callbackUrl: '/checkout?status=success',
+							callbackUrl: process.env.SERVER + '/checkout?status=success',
 							buyer: {
 								id: user.data?.id || '00000',
 								name: data.username,
