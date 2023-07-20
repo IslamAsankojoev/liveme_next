@@ -49,22 +49,22 @@ export default function Header() {
 	const { totalItems } = useSelector((state) => state.cart)
 	const totalWishes = useSelector((state) => state.wish?.totalItems)
 	const [searchOpen, setSearchOpen] = React.useState(false)
-	const [mobileMeniOpen, setMobileMeniOpen] = React.useState(false)
+	const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 	const searchRef = React.useRef()
-	const { replace, pathname, push, asPath } = useRouter()
+	const { replace, pathname, push, asPath, query } = useRouter()
 	const dispatch = useDispatch()
 	const { loggedIn, data } = useSelector((state) => state.user)
 	const defaultLang = lang
 	const defaultCurrency = useSelector((state) => state.country.code)
 
 	const toggleMenu = () => {
-		setMobileMeniOpen((prev) => !prev)
+		setMobileMenuOpen((prev) => !prev)
 		setSearchOpen(false)
 	}
 
 	const onClickSearch = () => {
 		setSearchOpen((prev) => !prev)
-		setMobileMeniOpen((prev) => !prev)
+		setMobileMenuOpen((prev) => !prev)
 	}
 
 	const onChangeLang = (e) => {
@@ -86,7 +86,7 @@ export default function Header() {
 	}
 
 	React.useEffect(() => {
-		setMobileMeniOpen(false)
+		setMobileMenuOpen(false)
 		if (parseCookies().access_token) {
 			axios
 				.get(`${process.env.SERVER}/api/users/me/`, {
@@ -104,10 +104,22 @@ export default function Header() {
 		langRef.current.value = lang
 	}, [lang])
 
+	React.useEffect(() => {
+		// if (!query.status) {
+		// 	localStorage.removeItem('orderData')
+		// 	localStorage.removeItem('teletext')
+		// }
+	}, [query])
+
 	return (
 		<header ref={searchRef} className="header_area sticky-header">
 			<div className="main_menu">
-				<nav className="navbar navbar-expand-lg navbar-light main_box">
+				<nav
+					className="navbar navbar-expand-lg navbar-light main_box"
+					style={{
+						maxWidth: '100%',
+					}}
+				>
 					<div className="container">
 						<Link href="/">
 							<a className="navbar-brand logo_h">
@@ -151,7 +163,7 @@ export default function Header() {
 									padding: '2px',
 								}}
 							>
-								{!mobileMeniOpen ? (
+								{!mobileMenuOpen ? (
 									<MenuIcon
 										sx={{ color: 'black', width: '33px', height: '33px' }}
 									/>
@@ -164,7 +176,7 @@ export default function Header() {
 							<div
 								className={classNames({
 									'collapse navbar-collapse offset m-menu': true,
-									showMobileMenu: mobileMeniOpen,
+									showMobileMenu: mobileMenuOpen,
 								})}
 								id="navbarSupportedContent"
 							>

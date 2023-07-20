@@ -34,6 +34,6 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"components/MobileNavigate/index.jsx"
-	],
+, "pages/contact.js"	],
 	"exclude": ["node_modules"]
 }

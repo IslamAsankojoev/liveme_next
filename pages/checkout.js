@@ -99,6 +99,12 @@ export default function Checkout() {
 
 	const onSend = async (data) => {
 		setLoadingPayment(true)
+
+		localStorage.setItem(
+			'orderData',
+			JSON.stringify({ ...data, totalItems, totalPrice, items })
+		)
+
 		const teletext = `Имя - ${data?.username}\n\nНомер телефона - ${
 			data?.phone
 		}\nПочта - ${data?.email}\nАдрес - ${data?.address}\nМетод оплаты - ${
@@ -106,55 +112,57 @@ export default function Checkout() {
 		}\n\nТовары${itemsText}\n\nСумма: ${
 			totalPrice + delivery_price
 		} ${currency}`
+
+		localStorage.setItem('teletext', JSON.stringify(teletext))
 		try {
-			axios
-				.post(
-					`${process.env.SERVER}/api/orders/`,
-					{
-						client_name: data.username,
-						client_address: data.address,
-						client_phone: data.phone,
-						client_email: data.email,
-						payment_method: data.payment_method,
-						user: user.data?.id || null,
-						order_status: 'pending',
-					},
-					user.loggedIn
-						? {
-								headers: {
-									Authorization: `Bearer ${parseCookies().access_token}`,
-								},
-						  }
-						: null
-				)
-				.then((res) => {
-					items.forEach(async (el) => {
-						try {
-							const orderItem = await axios.post(
-								`${process.env.SERVER}/api/orders/item/`,
-								{
-									order: res.data.id,
-									product: el.id,
-									product_count: el.count,
-								}
-							)
+			// axios
+			// 	.post(
+			// 		`${process.env.SERVER}/api/orders/`,
+			// 		{
+			// 			client_name: data.username,
+			// 			client_address: data.address,
+			// 			client_phone: data.phone,
+			// 			client_email: data.email,
+			// 			payment_method: data.payment_method,
+			// 			user: user.data?.id || null,
+			// 			order_status: 'pending',
+			// 		},
+			// 		user.loggedIn
+			// 			? {
+			// 					headers: {
+			// 						Authorization: `Bearer ${parseCookies().access_token}`,
+			// 					},
+			// 			  }
+			// 			: null
+			// 	)
+			// 	.then((res) => {
+			// 		items.forEach(async (el) => {
+			// 			try {
+			// 				const orderItem = await axios.post(
+			// 					`${process.env.SERVER}/api/orders/item/`,
+			// 					{
+			// 						order: res.data.id,
+			// 						product: el.id,
+			// 						product_count: el.count,
+			// 					}
+			// 				)
 
-							const item = {}
-							console.log(el)
-							const newStock = el.stock - el.count
-							item[`stock_${data.country}`] = newStock < 0 ? 0 : newStock
+			// 				const item = {}
+			// 				console.log(el)
+			// 				const newStock = el.stock - el.count
+			// 				item[`stock_${data.country}`] = newStock < 0 ? 0 : newStock
 
-							const updateProductRes = await axios.patch(
-								`${process.env.SERVER}/api/products/${el?.id}/`,
-								{
-									...item,
-								}
-							)
-						} catch (error) {
-							console.error(error)
-						}
-					})
-				})
+			// 				const updateProductRes = await axios.patch(
+			// 					`${process.env.SERVER}/api/products/${el?.id}/`,
+			// 					{
+			// 						...item,
+			// 					}
+			// 				)
+			// 			} catch (error) {
+			// 				console.error(error)
+			// 			}
+			// 		})
+			// 	})
 
 			if (data.payment_method === 'Card') {
 				try {
@@ -163,7 +171,7 @@ export default function Checkout() {
 							locale: 'en',
 							price: totalPrice,
 							paidPrice: totalPrice,
-							callbackUrl: process.env.SERVER,
+							callbackUrl: '/checkout?status=success',
 							buyer: {
 								id: user.data?.id || '00000',
 								name: data.username,
@@ -207,14 +215,7 @@ export default function Checkout() {
 					console.log(error, 'error payment')
 				}
 			}
-			enqueueSnackbar(text.notifications.successOrder[lang], {
-				variant: 'success',
-				autoHideDuration: 3000,
-				anchorOrigin: {
-					vertical: 'bottom',
-					horizontal: 'right',
-				},
-			})
+
 			if (data.payment_method === 'Cash') {
 				dispatch(clearCart())
 				router.push('/shop')
@@ -223,7 +224,6 @@ export default function Checkout() {
 			console.log(err)
 		}
 		try {
-			sendMessage(teletext)
 		} catch (error) {
 			console.log(error, 'telegram send text error')
 		}
@@ -232,6 +232,74 @@ export default function Checkout() {
 	React.useEffect(() => {
 		reset(user.data)
 	}, [user])
+
+	React.useEffect(() => {
+		if (router.query.status === 'success') {
+			enqueueSnackbar(text.notifications.successOrder[lang], {
+				variant: 'success',
+				autoHideDuration: 3000,
+				anchorOrigin: {
+					vertical: 'bottom',
+					horizontal: 'right',
+				},
+			})
+			const orderData = JSON.parse(localStorage.getItem('orderData'))
+			const teletext = localStorage.getItem('teletext')
+
+			axios
+				.post(
+					`${process.env.SERVER}/api/orders/`,
+					{
+						client_name: orderData.username,
+						client_address: orderData.address,
+						client_phone: orderData.phone,
+						client_email: orderData.email,
+						payment_method: orderData.payment_method,
+						user: user.data?.id || null,
+						order_status: 'pending',
+					},
+					user.loggedIn
+						? {
+								headers: {
+									Authorization: `Bearer ${parseCookies().access_token}`,
+								},
+						  }
+						: null
+				)
+				.then((res) => {
+					orderData.items.forEach(async (el) => {
+						try {
+							const orderItem = await axios.post(
+								`${process.env.SERVER}/api/orders/item/`,
+								{
+									order: res.data.id,
+									product: el.id,
+									product_count: el.count,
+								}
+							)
+
+							const item = {}
+							const newStock = el.stock - el.count
+							item[`stock_${orderData.country}`] = newStock < 0 ? 0 : newStock
+
+							const updateProductRes = await axios.patch(
+								`${process.env.SERVER}/api/products/${el?.id}/`,
+								{
+									...item,
+								}
+							)
+						} catch (error) {
+							console.error(error)
+						}
+					})
+				})
+				.then(() => {
+					sendMessage(teletext)
+					dispatch(clearCart())
+					router.push('/shop')
+				})
+		}
+	}, [router.query.status])
 
 	return (
 		<>
