@@ -16,6 +16,8 @@ const currencies: currenciesTypes = {
 	en: '$',
 	tr: '₺',
 	pl: 'zł',
+	kz: '₸',
+	de: '€',
 }
 
 const initialState: countrySliceProps = {

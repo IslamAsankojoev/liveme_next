@@ -1,3 +1,5 @@
+// ignore all the ts-ignore
+// @ts-nocheck
 import CloseIcon from '@mui/icons-material/Close'
 import {
 	Box,
@@ -110,9 +112,7 @@ const OrderBlock: FC<orderProps> = (props) => {
 						items
 							.reduce(
 								(totalPrice: number, item: orderItemProps) =>
-									// @ts-ignore
 									totalPrice +
-									// @ts-ignore
 									item.product[`price_${code}`] * item.product_count,
 								0
 							)

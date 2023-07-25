@@ -171,7 +171,7 @@ export default function Checkout() {
 							locale: 'en',
 							price: totalPrice,
 							paidPrice: totalPrice,
-							callbackUrl: process.env.SERVER + '/checkout?status=success',
+							callbackUrl: process.env.SERVER + '/checkout',
 							buyer: {
 								id: user.data?.id || '00000',
 								name: data.username,
@@ -389,6 +389,7 @@ export default function Checkout() {
 												<MenuItem value="kz">Қазақстан</MenuItem>
 												<MenuItem value="pl">Polska</MenuItem>
 												<MenuItem value="en">USA</MenuItem>
+												<MenuItem value="de">Germany</MenuItem>
 											</Select>
 										</FormControl>
 									</div>

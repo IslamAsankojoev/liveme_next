@@ -33,13 +33,15 @@ import { setLang } from '../redux/slices/langSlice'
 import { setLoggedIn } from '../redux/slices/userSlice'
 import countries from '../utils/countries'
 
-const languages = ['ru', 'en', 'kg', 'tr', 'pl']
+const languages = ['ru', 'en', 'kg', 'tr', 'pl', 'de', 'kz']
 
 const currencies = [
 	{ currency: 'с', name: 'KGS', code: 'kg', flag: 'kg' },
 	{ currency: '$', name: 'USD', code: 'en', flag: 'us' },
 	{ currency: '₺', name: 'TRY', code: 'tr', flag: 'tr' },
 	{ currency: 'zł', name: 'PLN', code: 'pl', flag: 'pl' },
+	{ currency: '₸', name: 'KZT', code: 'kz', flag: 'kz' },
+	{ currency: '€', name: 'EUR', code: 'de', flag: 'de' },
 ]
 
 export default function Header() {
@@ -103,13 +105,6 @@ export default function Header() {
 	React.useEffect(() => {
 		langRef.current.value = lang
 	}, [lang])
-
-	React.useEffect(() => {
-		// if (!query.status) {
-		// 	localStorage.removeItem('orderData')
-		// 	localStorage.removeItem('teletext')
-		// }
-	}, [query])
 
 	return (
 		<header ref={searchRef} className="header_area sticky-header">
